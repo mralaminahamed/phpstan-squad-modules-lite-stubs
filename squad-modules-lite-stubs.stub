@@ -6549,15 +6549,17 @@ namespace DiviSquad\Core {
          */
         private $required_version;
         /**
-         * Get Divi installation status.
+         * Check if all Divi requirements are fulfilled.
          *
-         * Checks if the Divi theme or Extra theme is active, or if the Divi Builder plugin is active.
+         * Performs a comprehensive check of:
+         * 1. Divi/Extra theme or Divi Builder plugin installation and activation
+         * 2. Version compatibility for Divi/Extra theme or Divi Builder plugin
          *
-         * @since 3.2.0
-         *
-         * @return bool True if Divi or Extra theme is active, or Divi Builder plugin is active, false otherwise.
+         * @since  3.2.0
+         * @access public
+         * @return bool True if all requirements are met, false otherwise.
          */
-        public function did_fulfilled() : bool
+        public function is_fulfilled() : bool
         {
         }
         /**
@@ -6601,13 +6603,25 @@ namespace DiviSquad\Core {
         {
         }
         /**
+         * Add badges to the requirements page.
+         *
+         * @since 3.2.3
+         *
+         * @param string $plugin_life_type The plugin life type.
+         *
+         * @return void
+         */
+        public function add_badges(string $plugin_life_type) : void
+        {
+        }
+        /**
          * Get notice content based on Divi status
          *
          * @since 3.2.0
          *
          * @return string
          */
-        private function get_notice_content() : string
+        protected function get_notice_content() : string
         {
         }
     }
