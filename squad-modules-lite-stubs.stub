@@ -9666,7 +9666,7 @@ namespace {
         private function get_products()
         {
         }
-        private function get_products_to_clean()
+        private function get_filtered_products()
         {
         }
         /**
@@ -11982,6 +11982,10 @@ namespace {
          * @var bool Is featured plan.
          */
         public $is_featured;
+        /**
+         * @var bool Is hidden plan.
+         */
+        public $is_hidden;
         #endregion Properties
         /**
          * @param object|bool $plan
@@ -12326,6 +12330,7 @@ namespace {
     /**
      * @property int $blog_id
      */
+    #[\AllowDynamicProperties]
     class FS_Site extends \FS_Scope_Entity
     {
         /**
@@ -15404,6 +15409,7 @@ namespace {
         }
         /**
          * Find all plans that have trial.
+         * Since 2.6.2 call get_filtered_plan
          *
          * @author Vova Feldman (@svovaf)
          * @since  1.0.9
@@ -15413,6 +15419,36 @@ namespace {
          * @return FS_Plugin_Plan[]
          */
         function get_trial_plans($plans)
+        {
+        }
+        /**
+         * Find all plans that are not hidden and have trial.
+         *
+         * @author Daniele Alessandra (@danielealessandra)
+         *
+         * @param FS_Plugin_Plan[] $plans
+         *
+         * @return FS_Plugin_Plan[]
+         * @since  2.6.3
+         *
+         */
+        function get_visible_trial_plans($plans)
+        {
+        }
+        /**
+         * Find all plans filtered by trial or visibility.
+         *
+         * @author Daniele Alessandra (@danielealessandra)
+         *
+         * @param FS_Plugin_Plan[] $plans
+         * @param boolean          $should_have_trials
+         * @param boolean          $should_be_visible
+         *
+         * @return FS_Plugin_Plan[]
+         * @since  2.6.3
+         *
+         */
+        function get_filtered_plans($plans, $should_have_trials = \false, $should_be_visible = \false)
         {
         }
         /**
@@ -16138,12 +16174,6 @@ namespace DiviSquad\Base\Factories\AdminNotice {
          */
         public function can_render_it();
         /**
-         * Show Notice.
-         *
-         * @return bool
-         */
-        public function show_admin_notice();
-        /**
          * Add the CSS classes for the body tag in the admin.
          *
          * @return string
@@ -16164,14 +16194,6 @@ namespace DiviSquad\Base\Factories\AdminNotice {
          * @return string
          */
         public abstract function get_template();
-        /**
-         * Show Notice.
-         *
-         * @return void
-         */
-        public function show_admin_notice()
-        {
-        }
     }
 }
 namespace DiviSquad\Admin\Notices {
@@ -17595,7 +17617,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements {
          *
          * @var array The collection of forms.
          */
-        public static $form_collections = array('cf7' => array('id' => array(), 'title' => array()), 'wpforms' => array('id' => array(), 'title' => array()), 'fluetforms' => array('id' => array(), 'title' => array()), 'ninjaforms' => array('id' => array(), 'title' => array()), 'gravityforms' => array('id' => array(), 'title' => array()));
+        public static $form_collections = array('cf7' => array('id' => array(), 'title' => array()), 'wpforms' => array('id' => array(), 'title' => array()), 'fluent_forms' => array('id' => array(), 'title' => array()), 'ninja_forms' => array('id' => array(), 'title' => array()), 'gravity_forms' => array('id' => array(), 'title' => array()));
         /**
          * Declare allowed fields for the module.
          *
@@ -18907,7 +18929,7 @@ namespace DiviSquad\Integrations {
         {
         }
         /**
-         * Remove all notices from the account page.
+         * Remove all notices from the squad template pages.
          *
          * @return void
          */
@@ -18922,6 +18944,34 @@ namespace DiviSquad\Integrations {
          * @return void
          */
         public function wp_hook_enqueue_scripts($hook_suffix)
+        {
+        }
+        /**
+         * Remove all third party dependencies from the squad template pages.
+         *
+         * @return void
+         */
+        public function wp_hook_clean_third_party_deps()
+        {
+        }
+        /**
+         * Get the dependencies of the squad scripts.
+         *
+         * @param \_WP_Dependency[] $registered The registered scripts.
+         *
+         * @return array
+         */
+        public function get_squad_dependencies($registered)
+        {
+        }
+        /**
+         * Remove unnecessary styles from the current page.
+         *
+         * @param \WP_Scripts|\WP_Styles $root The Core class of dependencies.
+         *
+         * @return void
+         */
+        public function remove_unnecessary_dependencies($root)
         {
         }
     }
@@ -20935,11 +20985,17 @@ namespace DiviSquad\Modules\FormStylerWPForms {
     class FormStylerWPForms extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
     {
         /**
+         * The css selector for the form container.
+         *
+         * @var string
+         */
+        private $form_container = '';
+        /**
          * Initiate Module.
          * Set the module name on init.
          *
          * @return void
-         * @since 1.2.0
+         * @since 2.1.1
          */
         public function init()
         {
@@ -20995,14 +21051,6 @@ namespace DiviSquad\Modules\FormStylerWPForms {
         {
         }
         /**
-         * Get the stylesheet selector for form tag to use in hover.
-         *
-         * @return string
-         */
-        protected function get_form_selector_hover()
-        {
-        }
-        /**
          * Get the stylesheet selector for form fields.
          *
          * @return string
@@ -21048,6 +21096,14 @@ namespace DiviSquad\Modules\FormStylerWPForms {
          * @return string
          */
         protected function get_success_message_selector_hover()
+        {
+        }
+        /**
+         * Get the stylesheet selector for form tag to use in hover.
+         *
+         * @return string
+         */
+        protected function get_form_selector_hover()
         {
         }
         /**
@@ -22867,6 +22923,46 @@ namespace DiviSquad\Utils {
     class WP
     {
         /**
+         * Determines whether the plugin is active for the entire network.
+         *
+         * Only plugins installed in the plugins/ folder can be active.
+         *
+         * Plugins in the mu-plugins/ folder can't be "activated," so this function will
+         * return false for those plugins.
+         *
+         * For more information on this and similar theme functions, check out
+         * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+         * Conditional Tags} article in the Theme Developer Handbook.
+         *
+         * @param string $plugin Path to the plugin file relative to the plugins' directory.
+         *
+         * @return bool True if active for the network, otherwise false.
+         * @since 3.0.0
+         */
+        public static function is_plugin_active_for_network($plugin)
+        {
+        }
+        /**
+         * Determines whether a plugin is active.
+         *
+         * Only plugins installed in the plugins/ folder can be active.
+         *
+         * Plugins in the mu-plugins/ folder can't be "activated," so this function will
+         * return false for those plugins.
+         *
+         * For more information on this and similar theme functions, check out
+         * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+         * Conditional Tags} article in the Theme Developer Handbook.
+         *
+         * @param string $plugin Path to the plugin file relative to the plugins' directory.
+         *
+         * @return bool True, if in the active plugins list. False, not in the list.
+         * @since 2.5.0
+         */
+        public static function is_plugin_active($plugin)
+        {
+        }
+        /**
          * Get the active plugins name and versions.
          *
          * @return array
@@ -22894,6 +22990,20 @@ namespace DiviSquad\Utils {
          * @return bool True if the text domain was successfully localized, false otherwise.
          */
         public static function set_script_translations($handle, $domain = 'default', $path = '')
+        {
+        }
+        /**
+         * Localizes a script.
+         *
+         * Works only if the script has already been registered.
+         *
+         * @param string $handle      The Script handle the data will be attached to.
+         * @param string $object_name Name for the JavaScript object. Passed directly, so it should be qualified JS variable.
+         * @param array  $l10n        The data itself. The data can be either a single or multidimensional array.
+         *
+         * @return bool True if the script was successfully localized, false otherwise.
+         */
+        public static function localize_script($handle, $object_name, $l10n)
         {
         }
     }
@@ -22975,7 +23085,7 @@ namespace {
     function fs_enqueue_local_style($handle, $path, $deps = array(), $ver = \false, $media = 'all')
     {
     }
-    function fs_enqueue_local_script($handle, $path, $deps = array(), $ver = \false, $in_footer = 'all')
+    function fs_enqueue_local_script($handle, $path, $deps = array(), $ver = \false, $in_footer = \true)
     {
     }
     function fs_img_url($path, $img_dir = \WP_FS__DIR_IMG)
