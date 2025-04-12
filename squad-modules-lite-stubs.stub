@@ -1258,17 +1258,10 @@ trait Fields
 }
 namespace DiviSquad\Base\BuilderModule\Traits\Elements;
 
-trait Mask_Shape
+trait Breadcrumbs
 {
-    /**
-     * Get the Mask Shape according the shape type and its secondary_shape type
-     *
-     * @param string $type   The shape type.
-     * @param string $secondary_shape The shape secondary_shape type.
-     *
-     * @return string The shape
-     */
-    protected function disq_get_mask_shape($type = 'shape-01', $secondary_shape = 'off')
+    // Function that generates the HTML from breadcrumbs
+    protected function disq_get_hansel_and_gretel_breadcrumbs($_home_text = 'Home', $_before_text = '', $_delimiter = '&#x39;')
     {
     }
 }
@@ -1306,6 +1299,20 @@ trait Divider
     {
     }
 }
+trait Mask_Shape
+{
+    /**
+     * Get the Mask Shape according the shape type and its secondary_shape type
+     *
+     * @param string $type   The shape type.
+     * @param string $secondary_shape The shape secondary_shape type.
+     *
+     * @return string The shape
+     */
+    protected function disq_get_mask_shape($type = 'shape-01', $secondary_shape = 'off')
+    {
+    }
+}
 namespace DiviSquad\Base\BuilderModule;
 
 /**
@@ -1324,8 +1331,9 @@ abstract class DISQ_Builder_Module extends \ET_Builder_Module
     use \DiviSquad\Base\BuilderModule\Traits\Field_Definition;
     use \DiviSquad\Base\BuilderModule\Traits\Field_Processor;
     use \DiviSquad\Base\BuilderModule\Traits\Fields;
-    use \DiviSquad\Base\BuilderModule\Traits\Elements\Mask_Shape;
+    use \DiviSquad\Base\BuilderModule\Traits\Elements\Breadcrumbs;
     use \DiviSquad\Base\BuilderModule\Traits\Elements\Divider;
+    use \DiviSquad\Base\BuilderModule\Traits\Elements\Mask_Shape;
     /**
      * Module credits.
      *
@@ -2724,6 +2732,62 @@ class BeforeAfterImageSlider extends \DiviSquad\Base\BuilderModule\DISQ_Builder_
     {
     }
 }
+namespace DiviSquad\Modules\Breadcrumbs;
+
+/**
+ * Breadcrumbs Module Class.
+ *
+ * @since           1.4.0
+ * @package         squad-modules-for-divi
+ */
+class Breadcrumbs extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+{
+    /**
+     * Initiate Module.
+     * Set the module name on init.
+     *
+     * @return void
+     * @since 1.4.0
+     */
+    public function init()
+    {
+    }
+    public function get_fields()
+    {
+    }
+    /**
+     * Get CSS fields transition.
+     *
+     * Add form field options group and background image on the field list.
+     *
+     * @since 1.4.0
+     */
+    public function get_transition_fields_css_props()
+    {
+    }
+    /**
+     * Renders the module output.
+     *
+     * @param array  $attrs       List of attributes.
+     * @param string $content     Content being processed.
+     * @param string $render_slug Slug of module that is used for rendering output.
+     *
+     * @return string
+     */
+    public function render($attrs, $content, $render_slug)
+    {
+    }
+    /**
+     * Renders additional styles for the module output.
+     *
+     * @param array $attrs List of attributes.
+     *
+     * @return void
+     */
+    private function generate_additional_styles($attrs)
+    {
+    }
+}
 namespace DiviSquad\Modules\BusinessHours;
 
 /**
@@ -3016,6 +3080,62 @@ class Divider extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
      * @return null|string
      */
     private function disq_render_divider_icon_lottie($multi_view)
+    {
+    }
+}
+namespace DiviSquad\Modules\DropCap;
+
+/**
+ * The Drop Cap Module Class.
+ *
+ * @since       1.4.0
+ * @package     squad-modules-for-divi
+ */
+class DropCapText extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+{
+    /**
+     * Initiate Module.
+     * Set the module name on init.
+     *
+     * @return void
+     * @since 1.4.0
+     */
+    public function init()
+    {
+    }
+    public function get_fields()
+    {
+    }
+    /**
+     * Get CSS fields transition.
+     *
+     * Add form field options group and background image on the fields list.
+     *
+     * @since 1.0.0
+     */
+    public function get_transition_fields_css_props()
+    {
+    }
+    /**
+     * Renders the module output.
+     *
+     * @param array  $attrs       List of attributes.
+     * @param string $content     Content being processed.
+     * @param string $render_slug Slug of module that is used for rendering output.
+     *
+     * @return string
+     */
+    public function render($attrs, $content, $render_slug)
+    {
+    }
+    /**
+     * Renders additional styles for the module output.
+     *
+     * @param array $attrs List of attributes.
+     *
+     * @return void
+     */
+    private function generate_additional_styles($attrs)
     {
     }
 }
@@ -4573,6 +4693,78 @@ class ScrollingText extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
      * @return string
      */
     public function render($attrs, $content, $render_slug)
+    {
+    }
+}
+namespace DiviSquad\Modules\StarRating;
+
+/**
+ * Star Rating Module Class.
+ *
+ * @since           1.4.0
+ * @package         squad-modules-for-divi
+ */
+class StarRating extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+{
+    /**
+     * Initiate Module.
+     * Set the module name on init.
+     *
+     * @return void
+     * @since 1.4.0
+     */
+    public function init()
+    {
+    }
+    /**
+     * Declare general fields for the module
+     *
+     * @return array[]
+     * @since 1.4.0
+     */
+    public function get_fields()
+    {
+    }
+    /**
+     * Get CSS fields transition.
+     *
+     * Add form field options group and background image on the field list.
+     *
+     * @since 1.4.0
+     */
+    public function get_transition_fields_css_props()
+    {
+    }
+    /**
+     * Renders the module output.
+     *
+     * @param array  $attrs       List of attributes.
+     * @param string $content     Content being processed.
+     * @param string $render_slug Slug of module that is used for rendering output.
+     *
+     * @return string
+     */
+    public function render($attrs, $content, $render_slug)
+    {
+    }
+    /**
+     * Renders additional styles for the module output.
+     *
+     * @param array $attrs List of attributes.
+     *
+     * @return void
+     */
+    private function generate_additional_styles($attrs)
+    {
+    }
+    /**
+     * Generate html markup for stars.
+     *
+     * @param array $args List of attributes.
+     *
+     * @return string
+     */
+    public static function get_star_rating($args = array())
     {
     }
 }
