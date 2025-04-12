@@ -566,7 +566,7 @@ abstract class Asset implements \DiviSquad\Base\Factories\BrandAsset\AssetInterf
  *
  * @package DiviSquad
  * @since   3.0.0
- * @deprecated 3.1.4
+ * @deprecated 3.1.7
  */
 abstract class BrandAsset extends \DiviSquad\Base\Factories\BrandAsset\Asset
 {
@@ -576,7 +576,7 @@ abstract class BrandAsset extends \DiviSquad\Base\Factories\BrandAsset\Asset
  *
  * @package DiviSquad
  * @since   3.0.0
- * @deprecated 3.1.4
+ * @deprecated 3.1.7
  */
 interface BrandAssetInterface
 {
@@ -624,7 +624,7 @@ abstract class Asset implements \DiviSquad\Base\Factories\PluginAsset\AssetInter
  *
  * @package DiviSquad
  * @since   3.0.0
- * @deprecated 3.1.4
+ * @deprecated 3.1.7
  */
 abstract class PluginAsset extends \DiviSquad\Base\Factories\PluginAsset\Asset
 {
@@ -634,7 +634,7 @@ abstract class PluginAsset extends \DiviSquad\Base\Factories\PluginAsset\Asset
  *
  * @package DiviSquad
  * @since   3.0.0
- * @deprecated 3.1.4
+ * @deprecated 3.1.7
  */
 interface PluginAssetInterface
 {
@@ -4604,25 +4604,6 @@ final class BrandAsset extends \DiviSquad\Base\Factories\FactoryBase\Factory
  * Factory for creating migration instances.
  *
  * @package DiviSquad\Settings
- * @since   3.1.2
- */
-class Migration
-{
-    /**
-     * Creates a migration instance based on the migration name.
-     *
-     * @param string $class_name The name of the migration class to instantiate.
-     * @return AbstractMigration The migration instance.
-     * @throws InvalidArgumentException If the class does not exist or is not an instance of AbstractMigration.
-     */
-    public function create($class_name)
-    {
-    }
-}
-/**
- * Factory for creating migration instances.
- *
- * @package DiviSquad\Settings
  * @since   3.0.0
  */
 class ModuleMigration
@@ -4927,27 +4908,6 @@ abstract class Route implements \DiviSquad\Base\Factories\RestRoute\RouteInterfa
      * @return array
      */
     public function get_routes()
-    {
-    }
-}
-namespace DiviSquad\Base\Factories;
-
-/**
- * Factory for creating migration instances.
- *
- * @package DiviSquad\Settings
- * @since   3.0.0
- */
-class SettingsMigration
-{
-    /**
-     * Creates a migration instance based on the migration name.
-     *
-     * @param string $class_name The name of the migration class to instantiate. The class must exist and be an instance of AbstractMigration.
-     * @return AbstractMigration The migration instance.
-     * @throws InvalidArgumentException If the class does not exist or is not an instance of AbstractMigration.
-     */
-    public function create($class_name)
     {
     }
 }
@@ -6288,6 +6248,241 @@ class PluginRowActions extends \DiviSquad\Base\Factories\BrandAsset\Asset
     {
     }
 }
+namespace DiviSquad\Managers\Emails;
+
+/**
+ * Class ErrorReport
+ *
+ * Handles the creation and sending of error report emails for the Divi Squad Pro plugin.
+ *
+ * This class provides functionality to generate and send detailed error reports
+ * via email. It includes information about the error, stack trace, and system
+ * environment to aid in debugging and issue resolution.
+ *
+ * @package DiviSquad
+ * @since   3.1.7
+ */
+class ErrorReport
+{
+    /**
+     * Support email address
+     *
+     * @var string
+     */
+    private $to = 'support@squadmodules.com';
+    /**
+     * Data to be sent in the email.
+     *
+     * @var array
+     */
+    private $data = array();
+    /**
+     * Errors object.
+     *
+     * @var WP_Error
+     */
+    private $errors;
+    /**
+     * Result of the email sending.
+     *
+     * @var bool
+     */
+    private $result = false;
+    /**
+     * ErrorReport constructor
+     *
+     * Initializes a new instance of the ErrorReport class with the provided error data.
+     *
+     * @param array $data Error data to be sent in the email.
+     *
+     * @since 3.1.7
+     *
+     */
+    public function __construct(array $data)
+    {
+    }
+    /**
+     * Send error report email.
+     *
+     * Validates the error data, adds necessary email filters, sends the email,
+     * and then removes the filters. It also handles any errors that occur during
+     * the process.
+     *
+     * @return bool True if the email was sent successfully, false otherwise.
+     * @since 3.1.7
+     *
+     */
+    public function send()
+    {
+    }
+    /**
+     * Validate the error report data.
+     *
+     * Checks if all required fields are present in the error data.
+     *
+     * @return bool True if all required fields are present, false otherwise.
+     * @since 3.1.7
+     *
+     */
+    private function validate_data()
+    {
+    }
+    /**
+     * Add email-related filters.
+     *
+     * Adds filters for handling email failures and setting the content type.
+     *
+     * @since 3.1.7
+     */
+    private function add_email_filters()
+    {
+    }
+    /**
+     * Remove email-related filters.
+     *
+     * Removes the filters that were added for handling email failures and setting the content type.
+     *
+     * @since 3.1.7
+     */
+    private function remove_email_filters()
+    {
+    }
+    /**
+     * Get the email subject.
+     *
+     * Generates a subject line for the error report email based on the error code and message.
+     *
+     * @return string The generated email subject.
+     * @since 3.1.7
+     *
+     */
+    private function get_email_subject()
+    {
+    }
+    /**
+     * Get the email headers.
+     *
+     * Generates the headers for the error report email.
+     *
+     * @return array An array of email headers.
+     * @since 3.1.7
+     *
+     */
+    private function get_email_headers()
+    {
+    }
+    /**
+     * Get the HTML-prepared message for email.
+     *
+     * Loads the error report email template and populates it with the error data.
+     *
+     * @return string The HTML content of the email message.
+     * @since 3.1.7
+     *
+     */
+    private function get_email_message_html()
+    {
+    }
+    /**
+     * Set the HTML content type for the email.
+     *
+     * @return string The HTML content type.
+     * @since 3.1.7
+     *
+     */
+    public function set_html_content_type()
+    {
+    }
+    /**
+     * Collect the PHPMailer\PHPMailer\Exception on sending the email.
+     *
+     * Merges any errors that occurred during the email sending process into the errors object.
+     *
+     * @param WP_Error $error A WP_Error object with the PHPMailer\PHPMailer\Exception message.
+     *
+     * @since 3.1.7
+     *
+     */
+    public function set_failure_errors($error)
+    {
+    }
+    /**
+     * Get the errors object.
+     *
+     * @return WP_Error The errors object containing any errors that occurred during the process.
+     * @since 3.1.7
+     *
+     */
+    public function get_errors()
+    {
+    }
+    /**
+     * Get the result of the email sending.
+     *
+     * @return bool True if the email was sent successfully, false otherwise.
+     * @since 3.1.7
+     *
+     */
+    public function get_result()
+    {
+    }
+    /**
+     * Log an error message.
+     *
+     * @since 1.0.0
+     *
+     * @param string $message The error message to log.
+     */
+    private function log_error($message)
+    {
+    }
+    /**
+     * Log a success message.
+     *
+     * @since 1.0.0
+     *
+     * @param string $message The success message to log.
+     */
+    private function log_success($message)
+    {
+    }
+    /**
+     * Static helper method to quickly send an error report.
+     *
+     * This method simplifies the process of sending an error report by
+     * automatically creating an ErrorReport instance and sending the email.
+     *
+     * @param Exception $exception       The caught exception.
+     * @param array     $additional_data Additional data to include in the report.
+     *
+     * @return bool Whether the email was sent successfully.
+     * @since 3.1.7
+     *
+     */
+    public static function quick_send(\Exception $exception, array $additional_data = array())
+    {
+    }
+    /**
+     * Get active plugins
+     *
+     * @return string
+     */
+    private static function get_active_plugins()
+    {
+    }
+    /**
+     * Get the debug log.
+     *
+     * Retrieves the last 50 lines of the WordPress debug log file.
+     *
+     * @return string The last 50 lines of the debug log or an empty string if the log is not accessible.
+     * @since 3.1.7
+     *
+     */
+    private static function get_debug_log()
+    {
+    }
+}
 namespace DiviSquad\Managers;
 
 /**
@@ -6581,24 +6776,6 @@ class Review extends \DiviSquad\Base\Factories\AdminNotice\Notice
 namespace DiviSquad\Managers;
 
 /**
- * Assets Class
- *
- * @package DiviSquad
- * @since   1.0.0
- * @since   3.0.0 Updated class name.
- */
-class PluginAssets
-{
-    /**
-     * Load all the branding.
-     *
-     * @return void
-     */
-    public static function load()
-    {
-    }
-}
-/**
  * Rest API Routes
  *
  * @package DiviSquad
@@ -6612,304 +6789,6 @@ class RestRoutes
      * @return void
      */
     public static function load()
-    {
-    }
-}
-namespace DiviSquad\Managers\RestRoutes\V1;
-
-/**
- * Rest API Routes for Extension
- *
- * @package DiviSquad
- * @since   1.0.0
- */
-class Extensions extends \DiviSquad\Base\Factories\RestRoute\Route
-{
-    /**
-     * Get registered extensions list.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function get_available_extensions()
-    {
-    }
-    /**
-     * Get active extensions list from database
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function get_active_extensions()
-    {
-    }
-    /**
-     * Get inactive extensions list from database.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function get_inactive_extensions()
-    {
-    }
-    /**
-     * Get update extensions list from database
-     *
-     * @param WP_REST_Request $request The wp rest api request.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function update_active_extensions($request)
-    {
-    }
-    /**
-     * We register our routes for our endpoints.
-     *
-     * @return array
-     */
-    public function get_routes()
-    {
-    }
-}
-namespace DiviSquad\Managers\RestRoutes\V1\Extensions;
-
-/**
- * Extension (Copy) Rest API class
- *
- * @package DiviSquad
- * @since   SQUAD_MODULES_VERSION
- */
-class Copy extends \DiviSquad\Base\Factories\RestRoute\Route
-{
-    /**
-     * Get available posts
-     *
-     * @param WP_REST_Request $request The wp rest api request.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function get_available_posts($request)
-    {
-    }
-    /**
-     * We register our routes for our endpoints.
-     *
-     * @return array
-     */
-    public function get_routes()
-    {
-    }
-}
-namespace DiviSquad\Managers\RestRoutes\V1;
-
-/**
- * Rest API Routes for Modules
- *
- * @package DiviSquad
- * @since   1.0.0
- */
-class Modules extends \DiviSquad\Base\Factories\RestRoute\Route
-{
-    /**
-     * Get registered modules list.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function get_available_modules()
-    {
-    }
-    /**
-     * Get active modules list from database.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function get_active_modules()
-    {
-    }
-    /**
-     * Get inactive modules list from database.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function get_inactive_modules()
-    {
-    }
-    /**
-     * Get update active modules list from database.
-     *
-     * @param WP_REST_Request $request The wp rest api request.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function update_active_modules($request)
-    {
-    }
-    /**
-     * We register our routes for our endpoints.
-     *
-     * @return array
-     */
-    public function get_routes()
-    {
-    }
-}
-namespace DiviSquad\Managers\RestRoutes\V1\Modules;
-
-/**
- * Post Grid Load More Rest API class
- *
- * @package DiviSquad
- * @since   SQUAD_MODULES_VERSION
- */
-class PostGrid extends \DiviSquad\Base\Factories\RestRoute\Route
-{
-    /**
-     * Get available posts
-     *
-     * @param WP_REST_Request $request The wp rest api request.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function get_available_posts($request)
-    {
-    }
-    /**
-     * We register our routes for our endpoints.
-     *
-     * @return array
-     */
-    public function get_routes()
-    {
-    }
-}
-namespace DiviSquad\Managers\RestRoutes\V1\Notices;
-
-/**
- * Welcome 60% Discount Notice class
- *
- * @package DiviSquad
- * @since   3.0.0
- */
-class Discount extends \DiviSquad\Base\Factories\RestRoute\Route
-{
-    /**
-     * Update the database when the user submits a review for the plugin.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function make_it_done()
-    {
-    }
-    /**
-     * We register our routes for our endpoints.
-     *
-     * @return array
-     */
-    public function get_routes()
-    {
-    }
-}
-/**
- * Plugin Activation Notice class.
- *
- * @package DiviSquad
- * @since   2.0.0
- */
-class ProActivation extends \DiviSquad\Base\Factories\RestRoute\Route
-{
-    /**
-     * Count how many times the user closes the review notice.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function activation_notice_close()
-    {
-    }
-    /**
-     * We register our routes for our endpoints.
-     *
-     * @return array
-     */
-    public function get_routes()
-    {
-    }
-}
-/**
- * Plugin Review Notice class
- *
- * @package DiviSquad
- * @since   1.0.0
- */
-class Review extends \DiviSquad\Base\Factories\RestRoute\Route
-{
-    /**
-     * How Long timeout after first banner shown.
-     *
-     * @var int
-     */
-    private $another_time_show = 7;
-    /**
-     * Update the database when the user submits a review for the plugin.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function make_it_done()
-    {
-    }
-    /**
-     * Remind the user for review the plugin.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function remind_me_at_next_week()
-    {
-    }
-    /**
-     * Count how many times the user closes the review notice.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function count_review_closing()
-    {
-    }
-    /**
-     * Count how many times the user asks for support from the review notice.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function ask_for_support()
-    {
-    }
-    /**
-     * We register our routes for our endpoints.
-     *
-     * @return array
-     */
-    public function get_routes()
-    {
-    }
-}
-namespace DiviSquad\Managers\RestRoutes\V1\WhatsNew;
-
-/**
- * Rest API Routes for What's New
- *
- * @package DiviSquad
- * @since   1.0.0
- */
-class Changelog extends \DiviSquad\Base\Factories\RestRoute\Route
-{
-    /**
-     * Remind the user for review the plugin.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function get_readme_file_data()
-    {
-    }
-    /**
-     * We register our routes for our endpoints.
-     *
-     * @return array
-     */
-    public function get_routes()
     {
     }
 }
