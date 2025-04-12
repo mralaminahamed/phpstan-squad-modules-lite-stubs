@@ -1,0 +1,96 @@
+{
+    "name": "mralaminahamed/squad-modules-lite-stubs",
+    "description": "Squad Modules for Divi function and class declaration stubs for static analysis.",
+    "type": "library",
+    "version": "1.0.0",
+    "keywords": [
+        "squad-modules",
+        "divi",
+        "wordpress",
+        "static analysis",
+        "phpstan",
+        "stubs",
+        "wordpress-plugin"
+    ],
+    "homepage": "https://github.com/mralaminahamed/phpstan-squad-modules-lite-stubs",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Al Amin Ahamed",
+            "homepage": "https://github.com/mralaminahamed"
+        }
+    ],
+    "require": {
+        "php-stubs/wordpress-stubs": "^5.3 || ^6.0"
+    },
+    "require-dev": {
+        "php": "~7.1 || ~8.0",
+        "php-stubs/generator": "^0.8.0",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
+        "squizlabs/php_codesniffer": "^3.7"
+    },
+    "suggest": {
+        "szepeviktor/phpstan-wordpress": "WordPress extensions for PHPStan",
+        "symfony/polyfill-php73": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload-dev": {
+        "psr-4": {
+            "SquadModulesStubs\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "php-stubs/generator": true
+        },
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "preferred-install": "dist"
+    },
+    "scripts": {
+        "analyze": "phpstan analyze",
+        "check": [
+            "@cs",
+            "@test",
+            "@analyze"
+        ],
+        "cleanup": [
+            "git status --short --ignored | sed -n -e 's#^!! ##p' | xargs -r rm -vrf"
+        ],
+        "cs": "phpcs",
+        "cs-fix": "phpcbf",
+        "generate": "bash bin/generate.sh",
+        "release-latest": "bash bin/release-latest-versions.sh",
+        "release-all": "bash bin/release-all-versions.sh",
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-html coverage",
+        "validate-all": [
+            "@composer validate --strict",
+            "@check"
+        ],
+        "prepare-release": [
+            "@validate-all",
+            "@generate"
+        ]
+    },
+    "scripts-descriptions": {
+        "analyze": "Run static analysis using PHPStan",
+        "check": "Run all checks (coding standards, tests, and static analysis)",
+        "cleanup": "Remove all ignored files",
+        "cs": "Check coding standards",
+        "cs-fix": "Fix coding standards automatically",
+        "generate": "Generate Squad Modules for Divi stubs from source files",
+        "release-latest": "Generate stubs for the latest versions of Squad Modules for Divi",
+        "release-all": "Generate stubs for all available versions of Squad Modules for Divi",
+        "test": "Run unit tests",
+        "test-coverage": "Run unit tests with code coverage report",
+        "validate-all": "Validate composer.json and run all checks",
+        "prepare-release": "Prepare for a new release by validating and generating stubs"
+    },
+    "support": {
+        "issues": "https://github.com/mralaminahamed/phpstan-squad-modules-lite-stubs/issues",
+        "source": "https://github.com/mralaminahamed/phpstan-squad-modules-lite-stubs"
+    }
+} 

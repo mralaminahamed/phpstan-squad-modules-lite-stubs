@@ -1,0 +1,10 @@
+{
+    "name": "squad-modules/source",
+    "description": "Source files for generating Squad Modules for Divi stubs",
+    "type": "project",
+    "require": {
+        "squad-modules/squad-modules-lite": "^1.0"
+    },
+    "license": "MIT",
+    "minimum-stability": "stable"
+} 
