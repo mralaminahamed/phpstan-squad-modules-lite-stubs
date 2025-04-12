@@ -7434,7 +7434,7 @@ namespace {
          *
          * @return bool|FS_Plugin_Tag
          */
-        function get_update($plugin_id = \false, $flush = \true, $expiration = \WP_FS__TIME_24_HOURS_IN_SEC, $newer_than = \false)
+        function get_update($plugin_id = \false, $flush = \true, $expiration = \FS_Plugin_Updater::UPDATES_CHECK_CACHE_EXPIRATION, $newer_than = \false)
         {
         }
         /**
@@ -7821,7 +7821,7 @@ namespace {
          * @param int         $expiration Since 1.2.2.7
          * @param bool|string $newer_than Since 2.2.1
          */
-        private function check_updates($background = \false, $plugin_id = \false, $flush = \true, $expiration = \WP_FS__TIME_24_HOURS_IN_SEC, $newer_than = \false)
+        private function check_updates($background = \false, $plugin_id = \false, $flush = \true, $expiration = \FS_Plugin_Updater::UPDATES_CHECK_CACHE_EXPIRATION, $newer_than = \false)
         {
         }
         /**
@@ -10263,6 +10263,7 @@ namespace {
          */
         private $_translation_updates;
         private static $_upgrade_basename = \null;
+        const UPDATES_CHECK_CACHE_EXPIRATION = \WP_FS__TIME_24_HOURS_IN_SEC / 24;
         #--------------------------------------------------------------------------------
         #region Singleton
         #--------------------------------------------------------------------------------
@@ -16918,6 +16919,12 @@ namespace DiviSquad\Base\DiviBuilder {
         {
         }
         /**
+         * Performs initialization tasks.
+         *
+         * @since 1.0.0
+         */
+        public abstract function initialize();
+        /**
          * Get the plugin version number
          *
          * @return string
@@ -16939,7 +16946,7 @@ namespace DiviSquad\Base\DiviBuilder {
         /**
          * Performs initialization tasks.
          */
-        protected function initialize()
+        public function initialize()
         {
         }
         /**
@@ -19204,7 +19211,7 @@ namespace DiviSquad\Managers {
         {
         }
         /**
-         * Load the module class.
+         * Load the module class from path.
          *
          * @param string      $path            The module class path.
          * @param string      $module          The module name.
@@ -19216,13 +19223,39 @@ namespace DiviSquad\Managers {
         {
         }
         /**
-         * Load enabled modules for Divi Builder from defined directory.
+         * Load the module class.
          *
-         * @param string $path The defined directory.
+         * @param string      $module_key      The module specification key.
+         * @param array       $module          The module.
+         * @param \ET\Builder\Framework\DependencyManagement\DependencyTree|null $dependency_tree `DependencyTree` class is used as a utility to manage loading classes in a meaningful manner.
+         *
+         * @return void
+         * @since 2.1.2
+         */
+        protected function require_module_class($module_key = 'name', $module = array(), $dependency_tree = null)
+        {
+        }
+        /**
+         * Verify the requirements of the module.
+         *
+         * @param array $activated_module       The module.
+         * @param object|null $dependency_tree `DependencyTree` class is used as a utility to manage loading classes in a meaningful manner.
+         * @param string $module_key            The module name key.
          *
          * @return void
          */
-        public function load_divi_builder_4_modules($path)
+        private function load_module_if_exists($activated_module, $dependency_tree, $module_key)
+        {
+        }
+        /**
+         * Load enabled modules for Divi Builder from defined directory.
+         *
+         * @param string $path            The defined directory.
+         * @param object $dependency_tree `DependencyTree` class is used as a utility to manage loading classes in a meaningful manner.
+         *
+         * @return void
+         */
+        public function load_modules($path, $dependency_tree = null)
         {
         }
         /**
@@ -19924,7 +19957,7 @@ namespace DiviSquad\Modules\Divider {
         }
     }
 }
-namespace DiviSquad\Modules\DropCap {
+namespace DiviSquad\Modules\DropCapText {
     /**
      * The Drop Cap Module Class.
      *
@@ -20282,7 +20315,7 @@ namespace DiviSquad\Modules\FormStylerContactForm7 {
      * @since       1.2.0
      * @package     squad-modules-for-divi
      */
-    class FormStylerContactForm7 extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
+    class ContactForm7 extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
     {
         /**
          * Initiate Module.
@@ -20443,7 +20476,7 @@ namespace DiviSquad\Modules\FormStylerFluentForms {
      * @since       1.4.7
      * @package     squad-modules-for-divi
      */
-    class FormStylerFluentForms extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
+    class FluentForms extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
     {
         /**
          * Initiate Module.
@@ -20633,7 +20666,7 @@ namespace DiviSquad\Modules\FormStylerGravityForms {
      * @since       1.2.0
      * @package     squad-modules-for-divi
      */
-    class FormStylerGravityForms extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
+    class GravityForms extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
     {
         /**
          * Initiate Module.
@@ -20792,7 +20825,7 @@ namespace DiviSquad\Modules\FormStylerNinjaForms {
      * @since       1.4.7
      * @package     squad-modules-for-divi
      */
-    class FormStylerNinjaForms extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
+    class NinjaForms extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
     {
         /**
          * Initiate Module.
@@ -20982,7 +21015,7 @@ namespace DiviSquad\Modules\FormStylerWPForms {
      * @since       1.2.0
      * @package     squad-modules-for-divi
      */
-    class FormStylerWPForms extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
+    class WPForms extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
     {
         /**
          * The css selector for the form container.
@@ -21007,6 +21040,15 @@ namespace DiviSquad\Modules\FormStylerWPForms {
          * @since 1.0.0
          */
         public function get_fields()
+        {
+        }
+        /**
+         * Additional new fields for current form styler.
+         *
+         * @return array[]
+         * @since 1.4.7
+         */
+        public function get_form_styler_additional_custom_fields()
         {
         }
         /**
@@ -21040,6 +21082,26 @@ namespace DiviSquad\Modules\FormStylerWPForms {
          * @since 1.0.0
          */
         public static function disq_form_styler__get_form_html($attrs, $content = null)
+        {
+        }
+        /**
+         * Get the stylesheet configuration for generating styles.
+         *
+         * @param array $attrs List of unprocessed attributes.
+         *
+         * @return array
+         */
+        protected function squad_get_module_stylesheet_selectors($attrs)
+        {
+        }
+        /**
+         * Generate styles.
+         *
+         * @param array $attrs List of unprocessed attributes.
+         *
+         * @return void
+         */
+        protected function squad_generate_all_styles($attrs)
         {
         }
         /**
@@ -21481,6 +21543,14 @@ namespace DiviSquad\Modules\PostGrid {
          * @since 1.0.0
          */
         public function init()
+        {
+        }
+        /**
+         * Add custom hooks
+         *
+         * @return void
+         */
+        public function squad_init_custom_hooks()
         {
         }
         /**
@@ -22716,6 +22786,30 @@ namespace DiviSquad\Utils {
      */
     class Divi
     {
+        /**
+         * Check if Divi visual builder is enabled.
+         *
+         * @return boolean
+         */
+        public static function is_fb_enabled()
+        {
+        }
+        /**
+         * Check if Divi theme builder is enabled.
+         *
+         * @return boolean
+         */
+        public static function is_bfb_enabled()
+        {
+        }
+        /**
+         * Check if Divi Builder 5 is enabled.
+         *
+         * @return boolean
+         */
+        public static function is_d5_enabled()
+        {
+        }
         /**
          * Get unicode icon data
          *
