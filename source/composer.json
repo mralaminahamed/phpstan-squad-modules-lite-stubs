@@ -1,7 +1,0 @@
-{
-    "name": "thewpsquad/squad-modules-for-divi",
-    "description": "Source files for generating Squad Modules for Divi stubs",
-    "type": "project",
-    "license": "MIT",
-    "minimum-stability": "stable"
-}
