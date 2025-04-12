@@ -232,6 +232,19 @@ abstract class Core
     public function wp_hook_enqueue_localize_data()
     {
     }
+    /**
+     * Localizes a script.
+     *
+     * Works only if the script has already been registered.
+     *
+     * @param string $object_name Name for the JavaScript object. Passed directly, so it should be qualified JS variable.
+     * @param array  $l10n        The data itself. The data can be either a single or multi-dimensional array.
+     *
+     * @return string Localizes a script.
+     */
+    public function localize_script($object_name, $l10n)
+    {
+    }
 }
 namespace DiviSquad\Integration;
 
@@ -651,6 +664,14 @@ class Plugin_Review
      * @since 1.2.5
      */
     public function admin_classes($classes)
+    {
+    }
+    /**
+     * Get the template path.
+     *
+     * @return string
+     */
+    public function get_template()
     {
     }
     /**
@@ -1295,13 +1316,29 @@ trait Divider
      *
      * @var array
      */
-    protected $defaults = array();
+    protected $divider_defaults = array('divider_style' => 'solid', 'divider_position' => 'bottom', 'divider_weight' => '2px');
     /**
      * The show options for divider.
      *
      * @var array
      */
-    protected $show_divider_options = array();
+    protected $show_divider_options = array('off' => 'No', 'on' => 'Yes');
+    /**
+     * Get the default data.
+     *
+     * @return array
+     */
+    public function disq_get_divider_defaults()
+    {
+    }
+    /**
+     * Get show options for divider.
+     *
+     * @return array
+     */
+    public function disq_get_show_divider_options()
+    {
+    }
     /**
      * Get the default data for initiate.
      *
@@ -1314,7 +1351,7 @@ trait Divider
      * Get the field for divider element
      *
      * @param string $toggle_slug The toggle slug for the general and advanced tabs.
-     * @param array  $options The options for divider element fields.
+     * @param array  $options     The options for divider element fields.
      *
      * @return array the field
      */
@@ -1384,13 +1421,21 @@ abstract class Squad_Divi_Builder_Module extends \ET_Builder_Module
      * @var string
      * @since 1.0.0
      */
-    protected $folder_name = 'et_pb_divi_squad_modules';
+    public $folder_name = 'et_pb_divi_squad_modules';
     /**
      * Get default selectors for main and hover in divi module.
      *
      * @return array[]
      */
     protected function disq_get_module_default_selectors()
+    {
+    }
+    /**
+     * Clean order class name from the class list for current module.
+     *
+     * @return string[]
+     */
+    public function disq_clean_order_class()
     {
     }
 }
@@ -1405,6 +1450,18 @@ abstract class Squad_Divi_Builder_Module extends \ET_Builder_Module
  */
 abstract class Squad_Form_Styler_Module extends \DiviSquad\Base\BuilderModule\Squad_Divi_Builder_Module
 {
+    /**
+     * Get default value for form id.
+     *
+     * @var string
+     */
+    protected static $default_form_id = 'cfcd208495d565ef66e7dff9f98764da';
+    /**
+     * Store all forms and remove redundancy.
+     *
+     * @var array The collection of forms.
+     */
+    public static $forms_collection = array('id' => array(), 'title' => array());
     /**
      * Get the stylesheet selector for form tag.
      *
@@ -1496,6 +1553,22 @@ abstract class Squad_Form_Styler_Module extends \DiviSquad\Base\BuilderModule\Sq
     {
     }
     /**
+     * Declare custom css fields for the module
+     *
+     * @return array[]
+     */
+    public function disq_remove_pre_assigned_fields($fields, $removals)
+    {
+    }
+    /**
+     * Declare custom css fields for the module
+     *
+     * @return array[]
+     */
+    public function get_custom_css_fields_config()
+    {
+    }
+    /**
      * Get CSS fields transition.
      *
      * Add form field options group and background image on the field list.
@@ -1513,6 +1586,27 @@ abstract class Squad_Form_Styler_Module extends \DiviSquad\Base\BuilderModule\Sq
      * @return void
      */
     protected function disq_generate_all_styles($attrs)
+    {
+    }
+    /**
+     * Get the stylesheet configuration for generating styles.
+     *
+     * @param array $attrs List of unprocessed attributes.
+     *
+     * @return array
+     */
+    protected function disq_get_module_stylesheet_selectors($attrs)
+    {
+    }
+    /**
+     * Generate styles.
+     *
+     * @param array $attrs   List of unprocessed attributes.
+     * @param array $options Control attributes.
+     *
+     * @return void
+     */
+    protected function form_styler_generate_module_styles($attrs, $options)
     {
     }
     /**
@@ -3358,7 +3452,7 @@ class FormStylerContactForm7 extends \DiviSquad\Base\BuilderModule\Squad_Form_St
      *
      * Add form field options group and background image on the field list.
      *
-     * @since 1.0.0
+     * @since 1.4.7
      */
     public function get_transition_fields_css_props()
     {
@@ -3374,6 +3468,17 @@ class FormStylerContactForm7 extends \DiviSquad\Base\BuilderModule\Squad_Form_St
      * @since 1.0.0
      */
     public function render($attrs, $content, $render_slug)
+    {
+    }
+    /**
+     * Collect all from the database.
+     *
+     * @param string $type The value type.
+     *
+     * @return array the html output.
+     * @since 1.4.7
+     */
+    public static function get_form_styler_forms_collection($type = 'id')
     {
     }
     /**
@@ -3407,11 +3512,27 @@ class FormStylerContactForm7 extends \DiviSquad\Base\BuilderModule\Squad_Form_St
     {
     }
     /**
+     * Get the stylesheet selector for form fields.
+     *
+     * @return string
+     */
+    protected function get_field_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form fields to use in hover.
+     *
+     * @return string
+     */
+    protected function get_field_selector_hover()
+    {
+    }
+    /**
      * Get the stylesheet selector for form tag.
      *
      * @return string
      */
-    public function get_form_selector_default()
+    protected function get_form_selector_default()
     {
     }
     /**
@@ -3419,7 +3540,7 @@ class FormStylerContactForm7 extends \DiviSquad\Base\BuilderModule\Squad_Form_St
      *
      * @return string
      */
-    public function get_form_selector_hover()
+    protected function get_form_selector_hover()
     {
     }
     /**
@@ -3470,12 +3591,141 @@ class FormStylerContactForm7 extends \DiviSquad\Base\BuilderModule\Squad_Form_St
     protected function get_submit_button_selector_hover()
     {
     }
+}
+namespace DiviSquad\Modules\FormStylerFluentForms;
+
+/**
+ * The Form Styler: Fluent Forms Module Class.
+ *
+ * @since       1.4.7
+ * @package     squad-modules-for-divi
+ */
+class FormStylerFluentForms extends \DiviSquad\Base\BuilderModule\Squad_Form_Styler_Module
+{
+    /**
+     * Initiate Module.
+     * Set the module name on init.
+     *
+     * @return void
+     * @since 1.4.7
+     */
+    public function init()
+    {
+    }
+    /**
+     * Declare general fields for the module.
+     *
+     * @return array[]
+     * @since 1.4.7
+     */
+    public function get_fields()
+    {
+    }
+    /**
+     * Additional new fields for current form styler.
+     *
+     * @return array[]
+     * @since 1.4.7
+     */
+    public function get_form_styler_additional_custom_fields()
+    {
+    }
+    /**
+     * Declare advanced fields for the module
+     *
+     * @return array[]
+     */
+    public function get_advanced_fields_config()
+    {
+    }
+    /**
+     * Declare custom css fields for the module
+     *
+     * @return array[]
+     */
+    public function get_custom_css_fields_config()
+    {
+    }
+    /**
+     * Get CSS fields transition.
+     *
+     * Add form field options group and background image on the field list.
+     *
+     * @since 1.4.7
+     */
+    public function get_transition_fields_css_props()
+    {
+    }
+    /**
+     * Render module output.
+     *
+     * @param array  $attrs       List of unprocessed attributes.
+     * @param string $content     Content being processed.
+     * @param string $render_slug Slug of module that is used for rendering output.
+     *
+     * @return string module's rendered output.
+     * @since 1.4.7
+     */
+    public function render($attrs, $content, $render_slug)
+    {
+    }
+    /**
+     * Collect all from the database.
+     *
+     * @param string $type The value type.
+     *
+     * @return array the html output.
+     * @since 1.4.7
+     */
+    public static function get_form_styler_forms_collection($type = 'id')
+    {
+    }
+    /**
+     * Collect all contact form from the database.
+     *
+     * @return array
+     */
+    public function disq_form_styler__get_all_forms()
+    {
+    }
+    /**
+     * Show form in the frontend
+     *
+     * @param array  $attrs   List of unprocessed attributes.
+     * @param string $content Content being processed.
+     *
+     * @return string the html output.
+     * @since 1.4.7
+     */
+    public static function disq_form_styler__get_form_html($attrs, $content = null)
+    {
+    }
+    /**
+     * Get the stylesheet configuration for generating styles.
+     *
+     * @param array $attrs List of unprocessed attributes.
+     *
+     * @return array
+     */
+    protected function disq_get_module_stylesheet_selectors($attrs)
+    {
+    }
+    /**
+     * Generate styles.
+     *
+     * @param array $attrs List of unprocessed attributes.
+     *
+     * @return void
+     */
+    protected function disq_generate_all_styles($attrs)
+    {
+    }
     /**
      * Get the stylesheet selector for form fields.
      *
      * @return string
      */
-    public function get_field_selector_default()
+    protected function get_field_selector_default()
     {
     }
     /**
@@ -3483,7 +3733,71 @@ class FormStylerContactForm7 extends \DiviSquad\Base\BuilderModule\Squad_Form_St
      *
      * @return string
      */
-    public function get_field_selector_hover()
+    protected function get_field_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form tag.
+     *
+     * @return string
+     */
+    protected function get_form_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form tag to use in hover.
+     *
+     * @return string
+     */
+    protected function get_form_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the error message.
+     *
+     * @return string
+     */
+    protected function get_error_message_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the error message to use in hover.
+     *
+     * @return string
+     */
+    protected function get_error_message_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the success message.
+     *
+     * @return string
+     */
+    protected function get_success_message_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the success message to use in hover.
+     *
+     * @return string
+     */
+    protected function get_success_message_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form submit button.
+     *
+     * @return string
+     */
+    protected function get_submit_button_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form submit button to use in hover.
+     *
+     * @return string
+     */
+    protected function get_submit_button_selector_hover()
     {
     }
 }
@@ -3531,11 +3845,13 @@ class FormStylerGravityForms extends \DiviSquad\Base\BuilderModule\Squad_Form_St
     {
     }
     /**
-     * Declare custom css fields for the module
+     * Get CSS fields transition.
      *
-     * @return array[]
+     * Add form field options group and background image on the field list.
+     *
+     * @since 1.4.7
      */
-    public function get_custom_css_fields_config()
+    public function get_transition_fields_css_props()
     {
     }
     /**
@@ -3549,6 +3865,17 @@ class FormStylerGravityForms extends \DiviSquad\Base\BuilderModule\Squad_Form_St
      * @since 1.0.0
      */
     public function render($attrs, $content, $render_slug)
+    {
+    }
+    /**
+     * Collect all from the database.
+     *
+     * @param string $type The value type.
+     *
+     * @return array the html output.
+     * @since 1.4.7
+     */
+    public static function get_form_styler_forms_collection($type = 'id')
     {
     }
     /**
@@ -3572,27 +3899,11 @@ class FormStylerGravityForms extends \DiviSquad\Base\BuilderModule\Squad_Form_St
     {
     }
     /**
-     * Get the stylesheet selector for form tag.
-     *
-     * @return string
-     */
-    public function get_form_selector_default()
-    {
-    }
-    /**
-     * Get the stylesheet selector for form tag to use in hover.
-     *
-     * @return string
-     */
-    public function get_form_selector_hover()
-    {
-    }
-    /**
      * Get the stylesheet selector for form fields.
      *
      * @return string
      */
-    public function get_field_selector_default()
+    protected function get_field_selector_default()
     {
     }
     /**
@@ -3600,7 +3911,232 @@ class FormStylerGravityForms extends \DiviSquad\Base\BuilderModule\Squad_Form_St
      *
      * @return string
      */
-    public function get_field_selector_hover()
+    protected function get_field_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form tag.
+     *
+     * @return string
+     */
+    protected function get_form_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form tag to use in hover.
+     *
+     * @return string
+     */
+    protected function get_form_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the error message.
+     *
+     * @return string
+     */
+    protected function get_error_message_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the error message to use in hover.
+     *
+     * @return string
+     */
+    protected function get_error_message_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the success message.
+     *
+     * @return string
+     */
+    protected function get_success_message_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the success message to use in hover.
+     *
+     * @return string
+     */
+    protected function get_success_message_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form submit button.
+     *
+     * @return string
+     */
+    protected function get_submit_button_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form submit button to use in hover.
+     *
+     * @return string
+     */
+    protected function get_submit_button_selector_hover()
+    {
+    }
+}
+namespace DiviSquad\Modules\FormStylerNinjaForms;
+
+/**
+ * The Form Styler: WP Forms Module Class.
+ *
+ * @since       1.4.7
+ * @package     squad-modules-for-divi
+ */
+class FormStylerNinjaForms extends \DiviSquad\Base\BuilderModule\Squad_Form_Styler_Module
+{
+    /**
+     * Initiate Module.
+     * Set the module name on init.
+     *
+     * @return void
+     * @since 1.4.7
+     */
+    public function init()
+    {
+    }
+    /**
+     * Declare general fields for the module.
+     *
+     * @return array[]
+     * @since 1.4.7
+     */
+    public function get_fields()
+    {
+    }
+    /**
+     * Additional new fields for current form styler.
+     *
+     * @return array[]
+     * @since 1.4.7
+     */
+    public function get_form_styler_additional_custom_fields()
+    {
+    }
+    /**
+     * Declare advanced fields for the module
+     *
+     * @return array[]
+     */
+    public function get_advanced_fields_config()
+    {
+    }
+    /**
+     * Declare custom css fields for the module
+     *
+     * @return array[]
+     */
+    public function get_custom_css_fields_config()
+    {
+    }
+    /**
+     * Get CSS fields transition.
+     *
+     * Add form field options group and background image on the field list.
+     *
+     * @since 1.4.7
+     */
+    public function get_transition_fields_css_props()
+    {
+    }
+    /**
+     * Render module output.
+     *
+     * @param array  $attrs       List of unprocessed attributes.
+     * @param string $content     Content being processed.
+     * @param string $render_slug Slug of module that is used for rendering output.
+     *
+     * @return string module's rendered output.
+     * @since 1.4.7
+     */
+    public function render($attrs, $content, $render_slug)
+    {
+    }
+    /**
+     * Collect all from the database.
+     *
+     * @param string $type The value type.
+     *
+     * @return array the html output.
+     * @since 1.4.7
+     */
+    public static function get_form_styler_forms_collection($type = 'id')
+    {
+    }
+    /**
+     * Collect all wp form from the database.
+     *
+     * @return array
+     */
+    public function disq_form_styler__get_all_forms()
+    {
+    }
+    /**
+     * Show form in the frontend
+     *
+     * @param array  $attrs   List of unprocessed attributes.
+     * @param string $content Content being processed.
+     *
+     * @return string the html output.
+     * @since 1.4.7
+     */
+    public static function disq_form_styler__get_form_html($attrs, $content = null)
+    {
+    }
+    /**
+     * Get the stylesheet configuration for generating styles.
+     *
+     * @param array $attrs List of unprocessed attributes.
+     *
+     * @return array
+     */
+    protected function disq_get_module_stylesheet_selectors($attrs)
+    {
+    }
+    /**
+     * Generate styles.
+     *
+     * @param array $attrs List of unprocessed attributes.
+     *
+     * @return void
+     */
+    protected function disq_generate_all_styles($attrs)
+    {
+    }
+    /**
+     * Get the stylesheet selector for form tag.
+     *
+     * @return string
+     */
+    protected function get_form_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form tag to use in hover.
+     *
+     * @return string
+     */
+    protected function get_form_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form fields.
+     *
+     * @return string
+     */
+    protected function get_field_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form fields to use in hover.
+     *
+     * @return string
+     */
+    protected function get_field_selector_hover()
     {
     }
     /**
@@ -3690,14 +4226,6 @@ class FormStylerWPForms extends \DiviSquad\Base\BuilderModule\Squad_Form_Styler_
     {
     }
     /**
-     * Declare custom css fields for the module
-     *
-     * @return array[]
-     */
-    public function get_custom_css_fields_config()
-    {
-    }
-    /**
      * Render module output.
      *
      * @param array  $attrs       List of unprocessed attributes.
@@ -3708,6 +4236,17 @@ class FormStylerWPForms extends \DiviSquad\Base\BuilderModule\Squad_Form_Styler_
      * @since 1.0.0
      */
     public function render($attrs, $content, $render_slug)
+    {
+    }
+    /**
+     * Collect all from the database.
+     *
+     * @param string $type The value type.
+     *
+     * @return array the html output.
+     * @since 1.4.7
+     */
+    public static function get_form_styler_forms_collection($type = 'id')
     {
     }
     /**
@@ -3735,7 +4274,7 @@ class FormStylerWPForms extends \DiviSquad\Base\BuilderModule\Squad_Form_Styler_
      *
      * @return string
      */
-    public function get_form_selector_default()
+    protected function get_form_selector_default()
     {
     }
     /**
@@ -3743,7 +4282,7 @@ class FormStylerWPForms extends \DiviSquad\Base\BuilderModule\Squad_Form_Styler_
      *
      * @return string
      */
-    public function get_form_selector_hover()
+    protected function get_form_selector_hover()
     {
     }
     /**
@@ -3751,7 +4290,7 @@ class FormStylerWPForms extends \DiviSquad\Base\BuilderModule\Squad_Form_Styler_
      *
      * @return string
      */
-    public function get_field_selector_default()
+    protected function get_field_selector_default()
     {
     }
     /**
@@ -3759,7 +4298,7 @@ class FormStylerWPForms extends \DiviSquad\Base\BuilderModule\Squad_Form_Styler_
      *
      * @return string
      */
-    public function get_field_selector_hover()
+    protected function get_field_selector_hover()
     {
     }
     /**
@@ -3868,6 +4407,48 @@ class GlitchText extends \DiviSquad\Base\BuilderModule\Squad_Divi_Builder_Module
      * @param array $attrs List of attributes.
      */
     private function disq_generate_additional_styles($attrs)
+    {
+    }
+}
+namespace DiviSquad\Modules\GoogleMap;
+
+/**
+ * Google Map Module Class.
+ *
+ * @since   1.4.7
+ * @package squad-modules-for-divi
+ */
+class GoogleMap extends \DiviSquad\Base\BuilderModule\Squad_Divi_Builder_Module
+{
+    /**
+     * Initiate Module.
+     * Set the module name on init.
+     *
+     * @return void
+     * @since 1.4.7
+     */
+    public function init()
+    {
+    }
+    /**
+     * Declare general fields for the module
+     *
+     * @return array[]
+     * @since 1.4.7
+     */
+    public function get_fields()
+    {
+    }
+    /**
+     * Renders the module output.
+     *
+     * @param array  $attrs       List of attributes.
+     * @param string $content     Content being processed.
+     * @param string $render_slug Slug of module that is used for rendering output.
+     *
+     * @return string
+     */
+    public function render($attrs, $content, $render_slug)
     {
     }
 }
@@ -5283,7 +5864,7 @@ class WP
  * Plugin Name:         Squad Modules Lite
  * Plugin URI:          https://squadmodules.com/
  * Description:         The Advanced Divi plugin you install after Divi or Extra Theme!
- * Version:             1.4.6
+ * Version:             1.4.7
  * Requires at least:   5.0.0
  * Requires PHP:        5.6.40
  * Author:              WP Squad
