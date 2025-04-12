@@ -442,7 +442,8 @@ namespace DiviSquad\Base\BuilderModule\Traits;
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
- * @author      WP Squad <support@thewpsquad.com>
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  */
 trait Field_Compatibility
@@ -491,7 +492,8 @@ trait Field_Compatibility
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
- * @author      WP Squad <support@thewpsquad.com>
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  */
 trait Field_Definition
@@ -622,7 +624,8 @@ trait Field_Definition
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
- * @author      WP Squad <support@thewpsquad.com>
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  */
 trait Field_Processor
@@ -753,7 +756,8 @@ trait Field_Processor
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
- * @author      WP Squad <support@thewpsquad.com>
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  */
 trait Fields
@@ -899,9 +903,11 @@ namespace DiviSquad\Base\BuilderModule;
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
- * @author      WP Squad <support@thewpsquad.com>
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  */
+#[\AllowDynamicProperties]
 abstract class DISQ_Builder_Module extends \ET_Builder_Module
 {
     use \DiviSquad\Base\BuilderModule\Traits\Field_Compatibility;
@@ -1009,7 +1015,8 @@ namespace DiviSquad\Base;
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
- * @author      WP Squad <support@thewpsquad.com>
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  */
 abstract class Core
@@ -1166,7 +1173,8 @@ abstract class Core
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
- * @author      WP Squad <support@thewpsquad.com>
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  */
 class Memory
@@ -1484,7 +1492,8 @@ namespace DiviSquad\Manager;
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
- * @author      WP Squad <support@thewpsquad.com>
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  */
 class Assets
@@ -1548,7 +1557,8 @@ class Assets
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
- * @author      WP Squad <support@thewpsquad.com>
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  */
 class Modules
@@ -1633,7 +1643,8 @@ class Modules
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
- * @author      WP Squad <support@thewpsquad.com>
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  */
 class Rest_API_Routes
@@ -1694,7 +1705,8 @@ namespace DiviSquad\Manager\Rest_API_Routes;
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
- * @author      WP Squad <support@thewpsquad.com>
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  */
 class Modules
@@ -2805,7 +2817,7 @@ class PostGridChild extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
     /**
      * Generate styles.
      *
-     * @param array $attrs  List of unprocessed attributes.
+     * @param array $attrs List of unprocessed attributes.
      *
      * @return void
      */
@@ -2815,7 +2827,7 @@ class PostGridChild extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
     /**
      * Render post name icon.
      *
-     * @param array $attrs  List of attributes.
+     * @param array $attrs List of attributes.
      *
      * @return void
      */
@@ -2825,7 +2837,7 @@ class PostGridChild extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
     /**
      * Render all styles for icon.
      *
-     * @param array $attrs  List of attributes.
+     * @param array $attrs List of attributes.
      *
      * @return void
      */
@@ -3167,22 +3179,23 @@ final class SquadModules extends \DiviSquad\Integration\Core
  * Squad Modules for Divi Builder
  *
  * @package     divi-squad
- * @author      WP Squad <support@thewpsquad.com>
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  *
  * @wordpress-plugin
  * Plugin Name:         Squad Modules for Divi Builder
  * Plugin URI:          https://squadmodules.com/
  * Description:         Enhance your Divi-powered websites with an elegant collection of Divi modules.
+ * Version:             1.1.0
  * Requires at least:   5.8
  * Requires PHP:        5.6
- * Version:             1.0.5
  * Author:              WP Squad
- * Author URI:          https://thewpsquad.com/
- * Text Domain:         squad-modules-for-divi
- * Domain Path:         /languages
+ * Author URI:          https://squadmodules.com/
  * License:             GPL-3.0-only
  * License URI:         https://www.gnu.org/licenses/gpl-3.0.en.html
+ * Text Domain:         squad-modules-for-divi
+ * Domain Path:         /languages
  */
 namespace DiviSquad;
 
