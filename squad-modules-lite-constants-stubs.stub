@@ -5,5 +5,4 @@
  * @see https://github.com/mralaminahamed/phpstan-squad-modules-lite-stubs
  */
 
-// Define the core constants.
-\define('DIVI_SQUAD__FILE__', __FILE__);
+\define('DIVI_SQUAD_PLUGIN_FILE', __FILE__);
