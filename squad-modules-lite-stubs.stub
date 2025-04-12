@@ -885,7 +885,7 @@ trait Field_Definition
      *
      * @return array[]
      */
-    protected function disq_add_range_fields($label, $properties = array(), $conditions = array())
+    protected function disq_add_range_field($label, $properties = array(), $conditions = array())
     {
     }
     /**
@@ -4857,6 +4857,71 @@ class TypingText extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
      * @return void
      */
     private function generate_additional_styles($attrs)
+    {
+    }
+}
+namespace DiviSquad\Modules\VideoPopup;
+
+/**
+ * The Drop Cap Module Class.
+ *
+ * @since       1.4.1
+ * @package     squad-modules-for-divi
+ */
+class VideoPopup extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+{
+    /**
+     * Initiate Module.
+     * Set the module name on init.
+     *
+     * @return void
+     * @since 1.4.1
+     */
+    public function init()
+    {
+    }
+    /**
+     * Declare general fields for the module
+     *
+     * @return array[]
+     * @since 1.4.1
+     */
+    public function get_fields()
+    {
+    }
+    /**
+     * Get CSS fields transition.
+     *
+     * Add form field options group and background image on the field list.
+     *
+     * @since 1.4.1
+     */
+    public function get_transition_fields_css_props()
+    {
+    }
+    /**
+     * Renders the module output.
+     *
+     * @param array  $attrs       List of attributes.
+     * @param string $content     Content being processed.
+     * @param string $render_slug Slug of module that is used for rendering output.
+     *
+     * @return string
+     */
+    public function render($attrs, $content, $render_slug)
+    {
+    }
+    /**
+     * Renders additional styles for the module output.
+     *
+     * @param array $attrs List of attributes.
+     *
+     * @return void
+     */
+    private function generate_additional_styles($attrs)
+    {
+    }
+    protected function render_trigger($icon)
     {
     }
 }
