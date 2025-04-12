@@ -7510,7 +7510,7 @@ namespace DiviSquad\Builder\Utils\Elements\Custom_Fields {
         /**
          * Get the excluded prefixes.
          *
-         * @return string[] Array of excluded prefixes.
+         * @return array<string, array<string>> Array of excluded prefixes.
          */
         protected function get_excluded_prefixes() : array
         {
@@ -7524,6 +7524,449 @@ namespace DiviSquad\Builder\Utils\Elements\Custom_Fields {
         {
         }
     }
+}
+namespace DiviSquad\Builder\Utils\Elements\Custom_Fields\Collections {
+    /**
+     * Advanced Custom Fields Processor Class
+     *
+     * Implements custom field collection for ACF fields with specialized handling
+     * for different field types (text, image, url, etc).
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    class Advanced extends \DiviSquad\Builder\Utils\Elements\Custom_Fields\Collection
+    {
+        /**
+         * Supported post types.
+         *
+         * @var array<string>
+         */
+        protected array $post_types = array('post');
+        /**
+         * Blacklisted keys that should be excluded from custom fields.
+         *
+         * @var array<string>
+         */
+        protected array $blacklisted_keys = array();
+        /**
+         * Suffixes that should be excluded from custom fields.
+         *
+         * @var array<string>
+         */
+        protected array $excluded_suffixes = array();
+        /**
+         * Prefixes that should be excluded from custom fields.
+         *
+         * @var array<string>
+         */
+        protected array $excluded_prefixes = array();
+        /**
+         * Supported fields types from advanced custom fields.
+         *
+         * @var array<string>
+         */
+        protected array $supported_field_types = array('text', 'number', 'textarea', 'range', 'email', 'url', 'image', 'select', 'date_picker', 'wysiwyg', 'file', 'gallery', 'color_picker', 'checkbox', 'radio');
+        /**
+         * Available ACF field groups organized by post type.
+         *
+         * @var array<string, array>
+         */
+        protected array $field_groups = array();
+        /**
+         * Available ACF field data organized by group key.
+         *
+         * @var array<string, array>
+         */
+        protected array $fields_data = array();
+        /**
+         * Available custom field values organized by post ID.
+         *
+         * @var array<int, array>
+         */
+        protected array $field_values = array();
+        /**
+         * Initialize the collection.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        protected function init() : void
+        {
+        }
+        /**
+         * Inform that the processor is eligible or not.
+         *
+         * @since 3.1.0
+         *
+         * @return bool Whether ACF plugin is available.
+         */
+        public function is_eligible() : bool
+        {
+        }
+        /**
+         * Collect available custom field values from the postmeta table for specific post.
+         *
+         * @since 3.1.0
+         *
+         * @param int $post_id The ID of the post.
+         *
+         * @return array<object> An array of custom field value objects.
+         */
+        public function get_available_field_values(int $post_id) : array
+        {
+        }
+        /**
+         * Get post meta values for given keys.
+         *
+         * @since 3.1.0
+         *
+         * @param int           $post_id        The ID of the post.
+         * @param array<string> $acf_field_keys Array of ACF field keys to retrieve.
+         * @param int           $limit          Maximum number of results to return.
+         *
+         * @return array<object> An array of post meta value objects.
+         */
+        private function get_post_meta_values(int $post_id, array $acf_field_keys, int $limit) : array
+        {
+        }
+        /**
+         * Process a field value based on its type.
+         *
+         * @since 3.1.0
+         *
+         * @param mixed $value        The field value.
+         * @param string $field_type  The field type.
+         * @param array  $field_object The complete field object (optional).
+         * @return mixed The processed value.
+         */
+        private function process_field_value($value, string $field_type, array $field_object = array())
+        {
+        }
+        /**
+         * Collect custom fields and generate a formatted array.
+         *
+         * @since 3.1.0
+         *
+         * @return array<string, array<string, string>> Array of formatted fields by post type.
+         */
+        public function get_formatted_fields() : array
+        {
+        }
+        /**
+         * Collect custom fields types and generate a formatted array.
+         *
+         * @since 3.1.0
+         *
+         * @return array<string, string> Associative array of field type IDs and labels.
+         */
+        public function get_formatted_fields_types() : array
+        {
+        }
+        /**
+         * Get all custom fields for a specific post.
+         *
+         * @since 3.1.0
+         *
+         * @param int $post_id The ID of the post.
+         *
+         * @return array<string, mixed> An array of custom fields with their values.
+         */
+        public function get_fields(int $post_id) : array
+        {
+        }
+        /**
+         * Check if a post has a specific custom field.
+         *
+         * @since 3.1.0
+         *
+         * @param int    $post_id   The ID of the post to check.
+         * @param string $field_key The key of the custom field to check for.
+         *
+         * @return bool True if the custom field exists, false otherwise.
+         */
+        public function has_field(int $post_id, string $field_key) : bool
+        {
+        }
+        /**
+         * Get a specific custom field by post ID and field key.
+         *
+         * @since 3.1.0
+         *
+         * @param int    $post_id       The ID of the post to retrieve the custom field for.
+         * @param string $field_key     The key of the custom field to retrieve.
+         * @param mixed  $default_value The default value to return if the field is not found.
+         *
+         * @return mixed The value of the custom field, or the default value if not found.
+         */
+        public function get_field_value(int $post_id, string $field_key, $default_value = null)
+        {
+        }
+        /**
+         * Get supported field types.
+         *
+         * @since 3.1.0
+         *
+         * @return array<string> Array of supported field types.
+         */
+        protected function get_supported_field_types() : array
+        {
+        }
+        /**
+         * Check if a field should be included based on various criteria.
+         *
+         * @since 3.1.0
+         *
+         * @param string $field_key The field key to check.
+         * @return bool Whether the field should be included.
+         */
+        protected function should_include_field(string $field_key) : bool
+        {
+        }
+        /**
+         * Get the blacklisted keys.
+         *
+         * @since 3.1.0
+         *
+         * @return array<string> Array of blacklisted keys.
+         */
+        protected function get_blacklisted_keys() : array
+        {
+        }
+        /**
+         * Get the excluded suffixes.
+         *
+         * @since 3.1.0
+         *
+         * @return array<string> Array of excluded suffixes.
+         */
+        protected function get_excluded_suffixes() : array
+        {
+        }
+        /**
+         * Get the excluded prefixes.
+         *
+         * @since 3.1.0
+         *
+         * @return array<string, array<string>> Array of excluded prefixes.
+         */
+        protected function get_excluded_prefixes() : array
+        {
+        }
+        /**
+         * Clear the cache for this collection.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        public function clear_cache() : void
+        {
+        }
+    }
+    /**
+     * WordPress Custom Fields Processor Class
+     *
+     * Implements custom field collection for standard WordPress post meta fields
+     * with filtering capabilities to exclude system and plugin fields.
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    class WordPress extends \DiviSquad\Builder\Utils\Elements\Custom_Fields\Collection
+    {
+        /**
+         * Supported post types.
+         *
+         * @var array<string>
+         */
+        protected array $post_types = array('post');
+        /**
+         * Blacklisted keys that should be excluded from custom fields.
+         *
+         * @var array<string>
+         */
+        protected array $blacklisted_keys = array('_edit_lock', '_edit_last', '_thumbnail_id', '_wp_page_template', '_wp_old_slug', '_wp_trash_meta_time', '_wp_trash_meta_status');
+        /**
+         * Suffixes that should be excluded from custom fields.
+         *
+         * @var array<string>
+         */
+        protected array $excluded_suffixes = array('active', 'enabled', 'disabled', 'hidden', 'flag');
+        /**
+         * Prefixes that should be excluded from custom fields.
+         *
+         * @var array<string, array<string>>
+         */
+        protected array $excluded_prefixes = array('wp' => array('_wp_', 'wp_', '_oembed_'), 'divi' => array('et_'), 'yoast' => array('_yoast_', 'yoast_', '_wpseo_'), 'others' => array('_aioseop_', '_elementor_', 'rank_math_', '_acf_', '_wc_', '_transient_', '_site_transient_', '_menu_item_'));
+        /**
+         * Available custom formatted fields by post type.
+         *
+         * @var array<string, array<string, string>>
+         */
+        protected array $formatted_fields = array();
+        /**
+         * Available custom field values by post ID.
+         *
+         * @var array<int, array<object>>
+         */
+        protected array $field_values = array();
+        /**
+         * Initialize the collection.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        protected function init() : void
+        {
+        }
+        /**
+         * Inform that the processor is eligible or not.
+         *
+         * WordPress custom fields are always eligible as they are part of core.
+         *
+         * @since 3.1.0
+         *
+         * @return bool Always returns true for WordPress custom fields.
+         */
+        public function is_eligible() : bool
+        {
+        }
+        /**
+         * Collect custom fields and generate a formatted array.
+         *
+         * @since 3.1.0
+         *
+         * @return array<string, array<string, string>> An array where keys are post types and values are arrays
+         *                                              where keys are field identifiers and values are human-readable names.
+         */
+        public function get_formatted_fields() : array
+        {
+        }
+        /**
+         * Get all custom fields for a specific post.
+         *
+         * @since 3.1.0
+         *
+         * @param int $post_id The ID of the post.
+         *
+         * @return array<string, mixed> An array of custom fields, where keys are field names and values are field values.
+         */
+        public function get_fields(int $post_id) : array
+        {
+        }
+        /**
+         * Check if a post has a specific custom field.
+         *
+         * @since 3.1.0
+         *
+         * @param int    $post_id   The ID of the post to check.
+         * @param string $field_key The key of the custom field to check for.
+         *
+         * @return bool True if the custom field exists, false otherwise.
+         */
+        public function has_field(int $post_id, string $field_key) : bool
+        {
+        }
+        /**
+         * Get a specific custom field by post ID and field key.
+         *
+         * @since 3.1.0
+         *
+         * @param int    $post_id       The ID of the post to retrieve the custom field for.
+         * @param string $field_key     The key of the custom field to retrieve.
+         * @param mixed  $default_value The default value to return if the field is not found.
+         *
+         * @return mixed The value of the custom field, or the default value if not found.
+         */
+        public function get_field_value(int $post_id, string $field_key, $default_value = null)
+        {
+        }
+        /**
+         * Check if a field should be included based on various criteria.
+         *
+         * @since 3.1.0
+         *
+         * @param string $field_key The field key to check.
+         * @return bool Whether the field should be included.
+         */
+        protected function should_include_field(string $field_key) : bool
+        {
+        }
+        /**
+         * Collect available custom fields from the postmeta table.
+         *
+         * @since 3.1.0
+         *
+         * @return array<string, array<string>> An array of custom field keys by post type.
+         */
+        protected function get_available_fields() : array
+        {
+        }
+        /**
+         * Collect available custom field values from the postmeta table for specific post.
+         *
+         * @since 3.1.0
+         *
+         * @param int $post_id The ID of the post.
+         *
+         * @return array<object> An array of custom field value objects.
+         */
+        protected function get_available_field_values(int $post_id) : array
+        {
+        }
+        /**
+         * Get post meta values for given keys.
+         *
+         * @since 3.1.0
+         *
+         * @param int           $post_id   The ID of the post.
+         * @param array<string> $meta_keys Array of meta keys to retrieve.
+         * @param int           $limit     Maximum number of results to return.
+         *
+         * @return array<object> An array of post meta value objects.
+         */
+        private function get_post_meta_values(int $post_id, array $meta_keys, int $limit) : array
+        {
+        }
+        /**
+         * Format a field value based on its type or key pattern.
+         *
+         * @since 3.1.0
+         *
+         * @param mixed  $value     The field value to format.
+         * @param string $field_key The field key.
+         * @return mixed The formatted value.
+         */
+        protected function format_field_value($value, string $field_key)
+        {
+        }
+        /**
+         * Clear cache for a specific post ID.
+         *
+         * @since 3.1.0
+         *
+         * @param int $post_id The post ID to clear cache for.
+         * @return void
+         */
+        public function clear_post_cache(int $post_id) : void
+        {
+        }
+        /**
+         * Clear the cache for all WordPress custom fields.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        public function clear_cache() : void
+        {
+        }
+    }
+}
+namespace DiviSquad\Builder\Utils\Elements\Custom_Fields {
     /**
      * Interface for defining custom field operations.
      *
@@ -8752,447 +9195,6 @@ namespace DiviSquad\Builder\Utils\Elements\Custom_Fields\Managers {
          * @return bool True if a lock was released, false if none existed.
          */
         public function force_release_lock() : bool
-        {
-        }
-    }
-}
-namespace DiviSquad\Builder\Utils\Elements\Custom_Fields\Processors {
-    /**
-     * Advanced Custom Fields Processor Class
-     *
-     * Implements custom field collection for ACF fields with specialized handling
-     * for different field types (text, image, url, etc).
-     *
-     * @package DiviSquad
-     * @since   3.1.0
-     */
-    class Advanced extends \DiviSquad\Builder\Utils\Elements\Custom_Fields\Collection
-    {
-        /**
-         * Supported post types.
-         *
-         * @var array<string>
-         */
-        protected array $post_types = array('post');
-        /**
-         * Blacklisted keys that should be excluded from custom fields.
-         *
-         * @var array<string>
-         */
-        protected array $blacklisted_keys = array();
-        /**
-         * Suffixes that should be excluded from custom fields.
-         *
-         * @var array<string>
-         */
-        protected array $excluded_suffixes = array();
-        /**
-         * Prefixes that should be excluded from custom fields.
-         *
-         * @var array<string>
-         */
-        protected array $excluded_prefixes = array();
-        /**
-         * Supported fields types from advanced custom fields.
-         *
-         * @var array<string>
-         */
-        protected array $supported_field_types = array('text', 'number', 'textarea', 'range', 'email', 'url', 'image', 'select', 'date_picker', 'wysiwyg', 'file', 'gallery', 'color_picker', 'checkbox', 'radio');
-        /**
-         * Available ACF field groups organized by post type.
-         *
-         * @var array<string, array>
-         */
-        protected array $field_groups = array();
-        /**
-         * Available ACF field data organized by group key.
-         *
-         * @var array<string, array>
-         */
-        protected array $fields_data = array();
-        /**
-         * Available custom field values organized by post ID.
-         *
-         * @var array<int, array>
-         */
-        protected array $field_values = array();
-        /**
-         * Initialize the collection.
-         *
-         * @since 3.1.0
-         *
-         * @return void
-         */
-        protected function init() : void
-        {
-        }
-        /**
-         * Inform that the processor is eligible or not.
-         *
-         * @since 3.1.0
-         *
-         * @return bool Whether ACF plugin is available.
-         */
-        public function is_eligible() : bool
-        {
-        }
-        /**
-         * Collect available custom field values from the postmeta table for specific post.
-         *
-         * @since 3.1.0
-         *
-         * @param int $post_id The ID of the post.
-         *
-         * @return array<object> An array of custom field value objects.
-         */
-        public function get_available_field_values(int $post_id) : array
-        {
-        }
-        /**
-         * Get post meta values for given keys.
-         *
-         * @since 3.1.0
-         *
-         * @param int           $post_id        The ID of the post.
-         * @param array<string> $acf_field_keys Array of ACF field keys to retrieve.
-         * @param int           $limit          Maximum number of results to return.
-         *
-         * @return array<object> An array of post meta value objects.
-         */
-        private function get_post_meta_values(int $post_id, array $acf_field_keys, int $limit) : array
-        {
-        }
-        /**
-         * Process a field value based on its type.
-         *
-         * @since 3.1.0
-         *
-         * @param mixed $value        The field value.
-         * @param string $field_type  The field type.
-         * @param array  $field_object The complete field object (optional).
-         * @return mixed The processed value.
-         */
-        private function process_field_value($value, string $field_type, array $field_object = array())
-        {
-        }
-        /**
-         * Collect custom fields and generate a formatted array.
-         *
-         * @since 3.1.0
-         *
-         * @return array<string, array<string, string>> Array of formatted fields by post type.
-         */
-        public function get_formatted_fields() : array
-        {
-        }
-        /**
-         * Collect custom fields types and generate a formatted array.
-         *
-         * @since 3.1.0
-         *
-         * @return array<string, string> Associative array of field type IDs and labels.
-         */
-        public function get_formatted_fields_types() : array
-        {
-        }
-        /**
-         * Get all custom fields for a specific post.
-         *
-         * @since 3.1.0
-         *
-         * @param int $post_id The ID of the post.
-         *
-         * @return array<string, mixed> An array of custom fields with their values.
-         */
-        public function get_fields(int $post_id) : array
-        {
-        }
-        /**
-         * Check if a post has a specific custom field.
-         *
-         * @since 3.1.0
-         *
-         * @param int    $post_id   The ID of the post to check.
-         * @param string $field_key The key of the custom field to check for.
-         *
-         * @return bool True if the custom field exists, false otherwise.
-         */
-        public function has_field(int $post_id, string $field_key) : bool
-        {
-        }
-        /**
-         * Get a specific custom field by post ID and field key.
-         *
-         * @since 3.1.0
-         *
-         * @param int    $post_id       The ID of the post to retrieve the custom field for.
-         * @param string $field_key     The key of the custom field to retrieve.
-         * @param mixed  $default_value The default value to return if the field is not found.
-         *
-         * @return mixed The value of the custom field, or the default value if not found.
-         */
-        public function get_field_value(int $post_id, string $field_key, $default_value = null)
-        {
-        }
-        /**
-         * Get supported field types.
-         *
-         * @since 3.1.0
-         *
-         * @return array<string> Array of supported field types.
-         */
-        protected function get_supported_field_types() : array
-        {
-        }
-        /**
-         * Check if a field should be included based on various criteria.
-         *
-         * @since 3.1.0
-         *
-         * @param string $field_key The field key to check.
-         * @return bool Whether the field should be included.
-         */
-        protected function should_include_field(string $field_key) : bool
-        {
-        }
-        /**
-         * Get the blacklisted keys.
-         *
-         * @since 3.1.0
-         *
-         * @return array<string> Array of blacklisted keys.
-         */
-        protected function get_blacklisted_keys() : array
-        {
-        }
-        /**
-         * Get the excluded suffixes.
-         *
-         * @since 3.1.0
-         *
-         * @return array<string> Array of excluded suffixes.
-         */
-        protected function get_excluded_suffixes() : array
-        {
-        }
-        /**
-         * Get the excluded prefixes.
-         *
-         * @since 3.1.0
-         *
-         * @return array<string> Array of excluded prefixes.
-         */
-        protected function get_excluded_prefixes() : array
-        {
-        }
-        /**
-         * Clear the cache for this collection.
-         *
-         * @since 3.1.0
-         *
-         * @return void
-         */
-        public function clear_cache() : void
-        {
-        }
-    }
-    /**
-     * WordPress Custom Fields Processor Class
-     *
-     * Implements custom field collection for standard WordPress post meta fields
-     * with filtering capabilities to exclude system and plugin fields.
-     *
-     * @package DiviSquad
-     * @since   3.1.0
-     */
-    class WordPress extends \DiviSquad\Builder\Utils\Elements\Custom_Fields\Collection
-    {
-        /**
-         * Supported post types.
-         *
-         * @var array<string>
-         */
-        protected array $post_types = array('post');
-        /**
-         * Blacklisted keys that should be excluded from custom fields.
-         *
-         * @var array<string>
-         */
-        protected array $blacklisted_keys = array('_edit_lock', '_edit_last', '_thumbnail_id', '_wp_page_template', '_wp_old_slug', '_wp_trash_meta_time', '_wp_trash_meta_status');
-        /**
-         * Suffixes that should be excluded from custom fields.
-         *
-         * @var array<string>
-         */
-        protected array $excluded_suffixes = array('active', 'enabled', 'disabled', 'hidden', 'flag');
-        /**
-         * Prefixes that should be excluded from custom fields.
-         *
-         * @var array<string, array<string>>
-         */
-        protected array $excluded_prefixes = array('wp' => array('_wp_', 'wp_', '_oembed_'), 'divi' => array('et_'), 'yoast' => array('_yoast_', 'yoast_', '_wpseo_'), 'others' => array('_aioseop_', '_elementor_', 'rank_math_', '_acf_', '_wc_', '_transient_', '_site_transient_', '_menu_item_'));
-        /**
-         * Available custom formatted fields by post type.
-         *
-         * @var array<string, array<string, string>>
-         */
-        protected array $formatted_fields = array();
-        /**
-         * Available custom field values by post ID.
-         *
-         * @var array<int, array<object>>
-         */
-        protected array $field_values = array();
-        /**
-         * Initialize the collection.
-         *
-         * @since 3.1.0
-         *
-         * @return void
-         */
-        protected function init() : void
-        {
-        }
-        /**
-         * Inform that the processor is eligible or not.
-         *
-         * WordPress custom fields are always eligible as they are part of core.
-         *
-         * @since 3.1.0
-         *
-         * @return bool Always returns true for WordPress custom fields.
-         */
-        public function is_eligible() : bool
-        {
-        }
-        /**
-         * Collect custom fields and generate a formatted array.
-         *
-         * @since 3.1.0
-         *
-         * @return array<string, array<string, string>> An array where keys are post types and values are arrays
-         *                                              where keys are field identifiers and values are human-readable names.
-         */
-        public function get_formatted_fields() : array
-        {
-        }
-        /**
-         * Get all custom fields for a specific post.
-         *
-         * @since 3.1.0
-         *
-         * @param int $post_id The ID of the post.
-         *
-         * @return array<string, mixed> An array of custom fields, where keys are field names and values are field values.
-         */
-        public function get_fields(int $post_id) : array
-        {
-        }
-        /**
-         * Check if a post has a specific custom field.
-         *
-         * @since 3.1.0
-         *
-         * @param int    $post_id   The ID of the post to check.
-         * @param string $field_key The key of the custom field to check for.
-         *
-         * @return bool True if the custom field exists, false otherwise.
-         */
-        public function has_field(int $post_id, string $field_key) : bool
-        {
-        }
-        /**
-         * Get a specific custom field by post ID and field key.
-         *
-         * @since 3.1.0
-         *
-         * @param int    $post_id       The ID of the post to retrieve the custom field for.
-         * @param string $field_key     The key of the custom field to retrieve.
-         * @param mixed  $default_value The default value to return if the field is not found.
-         *
-         * @return mixed The value of the custom field, or the default value if not found.
-         */
-        public function get_field_value(int $post_id, string $field_key, $default_value = null)
-        {
-        }
-        /**
-         * Check if a field should be included based on various criteria.
-         *
-         * @since 3.1.0
-         *
-         * @param string $field_key The field key to check.
-         * @return bool Whether the field should be included.
-         */
-        protected function should_include_field(string $field_key) : bool
-        {
-        }
-        /**
-         * Collect available custom fields from the postmeta table.
-         *
-         * @since 3.1.0
-         *
-         * @return array<string, array<string>> An array of custom field keys by post type.
-         */
-        protected function get_available_fields() : array
-        {
-        }
-        /**
-         * Collect available custom field values from the postmeta table for specific post.
-         *
-         * @since 3.1.0
-         *
-         * @param int $post_id The ID of the post.
-         *
-         * @return array<object> An array of custom field value objects.
-         */
-        protected function get_available_field_values(int $post_id) : array
-        {
-        }
-        /**
-         * Get post meta values for given keys.
-         *
-         * @since 3.1.0
-         *
-         * @param int           $post_id   The ID of the post.
-         * @param array<string> $meta_keys Array of meta keys to retrieve.
-         * @param int           $limit     Maximum number of results to return.
-         *
-         * @return array<object> An array of post meta value objects.
-         */
-        private function get_post_meta_values(int $post_id, array $meta_keys, int $limit) : array
-        {
-        }
-        /**
-         * Format a field value based on its type or key pattern.
-         *
-         * @since 3.1.0
-         *
-         * @param mixed  $value     The field value to format.
-         * @param string $field_key The field key.
-         * @return mixed The formatted value.
-         */
-        protected function format_field_value($value, string $field_key)
-        {
-        }
-        /**
-         * Clear cache for a specific post ID.
-         *
-         * @since 3.1.0
-         *
-         * @param int $post_id The post ID to clear cache for.
-         * @return void
-         */
-        public function clear_post_cache(int $post_id) : void
-        {
-        }
-        /**
-         * Clear the cache for all WordPress custom fields.
-         *
-         * @since 3.1.0
-         *
-         * @return void
-         */
-        public function clear_cache() : void
         {
         }
     }
@@ -19421,7 +19423,7 @@ namespace Composer\Autoload {
     {
         public static $prefixLengthsPsr4 = array('D' => array('DiviSquad\\' => 10));
         public static $prefixDirsPsr4 = array('DiviSquad\\' => array(0 => __DIR__ . '/../..' . '/includes'));
-        public static $classMap = array('Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php', 'DiviSquad\\Base\\DiviBuilder\\Module' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Module.php', 'DiviSquad\\Base\\DiviBuilder\\Module\\FormStyler' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Module/FormStyler.php', 'DiviSquad\\Base\\DiviBuilder\\Placeholder' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Placeholder.php', 'DiviSquad\\Base\\DiviBuilder\\Utils' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Base' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Base.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\CommonTrait' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/CommonTrait.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\DeprecationsTrait' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/DeprecationsTrait.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Breadcrumbs' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Breadcrumbs.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Divider' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Divider.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Form' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Form.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\FormInterface' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/FormInterface.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Processors\\ContactForm7' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Processors/ContactForm7.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Processors\\FluentForms' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Processors/FluentForms.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Processors\\Formidable' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Processors/Formidable.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Processors\\Forminator' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Processors/Forminator.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Processors\\GravityForms' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Processors/GravityForms.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Processors\\NinjaForms' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Processors/NinjaForms.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Processors\\WPForms' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Processors/WPForms.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\MaskShape' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/MaskShape.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\FieldsTrait' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/FieldsTrait.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Fields\\CompatibilityTrait' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Fields/CompatibilityTrait.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Fields\\DefinitionTrait' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Fields/DefinitionTrait.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Fields\\ProcessorTrait' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Fields/ProcessorTrait.php', 'DiviSquad\\Base\\Factories\\AdminMenu' => __DIR__ . '/../..' . '/includes/Base/Factories/AdminMenu.php', 'DiviSquad\\Base\\Factories\\AdminMenu\\Menu' => __DIR__ . '/../..' . '/includes/Base/Factories/AdminMenu/Menu.php', 'DiviSquad\\Base\\Factories\\AdminMenu\\MenuInterface' => __DIR__ . '/../..' . '/includes/Base/Factories/AdminMenu/MenuInterface.php', 'DiviSquad\\Base\\Factories\\AdminNotice' => __DIR__ . '/../..' . '/includes/Base/Factories/AdminNotice.php', 'DiviSquad\\Base\\Factories\\AdminNotice\\Notice' => __DIR__ . '/../..' . '/includes/Base/Factories/AdminNotice/Notice.php', 'DiviSquad\\Base\\Factories\\AdminNotice\\NoticeInterface' => __DIR__ . '/../..' . '/includes/Base/Factories/AdminNotice/NoticeInterface.php', 'DiviSquad\\Base\\Factories\\BrandAsset' => __DIR__ . '/../..' . '/includes/Base/Factories/BrandAsset.php', 'DiviSquad\\Base\\Factories\\BrandAsset\\Asset' => __DIR__ . '/../..' . '/includes/Base/Factories/BrandAsset/Asset.php', 'DiviSquad\\Base\\Factories\\BrandAsset\\AssetInterface' => __DIR__ . '/../..' . '/includes/Base/Factories/BrandAsset/AssetInterface.php', 'DiviSquad\\Base\\Factories\\FactoryBase\\Factory' => __DIR__ . '/../..' . '/includes/Base/Factories/FactoryBase/Factory.php', 'DiviSquad\\Base\\Factories\\FactoryBase\\FactoryInterface' => __DIR__ . '/../..' . '/includes/Base/Factories/FactoryBase/FactoryInterface.php', 'DiviSquad\\Builder\\Utils\\Database\\Database_Utils' => __DIR__ . '/../..' . '/includes/Builder/Utils/Database/Database_Utils.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Collection' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collection.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\CollectionInterface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/CollectionInterface.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Definition' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definition.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\DefinitionInterface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/DefinitionInterface.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Definitions\\Advanced' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definitions/Advanced.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Definitions\\WordPress' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definitions/WordPress.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Manager' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Manager.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\ManagerInterface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/ManagerInterface.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Managers\\Fields' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Managers/Fields.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Managers\\Upgrades' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Managers/Upgrades.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Processors\\Advanced' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Processors/Advanced.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Processors\\WordPress' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Processors/WordPress.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Traits\\Table_Population_Trait' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Traits/Table_Population_Trait.php', 'DiviSquad\\Core\\Assets' => __DIR__ . '/../..' . '/includes/Core/Assets.php', 'DiviSquad\\Core\\Assets\\Admin' => __DIR__ . '/../..' . '/includes/Core/Assets/Admin.php', 'DiviSquad\\Core\\Assets\\Modules' => __DIR__ . '/../..' . '/includes/Core/Assets/Modules.php', 'DiviSquad\\Core\\Cache' => __DIR__ . '/../..' . '/includes/Core/Cache.php', 'DiviSquad\\Core\\Distribution' => __DIR__ . '/../..' . '/includes/Core/Distribution.php', 'DiviSquad\\Core\\Extensions' => __DIR__ . '/../..' . '/includes/Core/Extensions.php', 'DiviSquad\\Core\\Memory' => __DIR__ . '/../..' . '/includes/Core/Memory.php', 'DiviSquad\\Core\\Modules' => __DIR__ . '/../..' . '/includes/Core/Modules.php', 'DiviSquad\\Core\\Requirements' => __DIR__ . '/../..' . '/includes/Core/Requirements.php', 'DiviSquad\\Core\\RestRoutes' => __DIR__ . '/../..' . '/includes/Core/RestRoutes.php', 'DiviSquad\\Core\\Supports\\Links' => __DIR__ . '/../..' . '/includes/Core/Supports/Links.php', 'DiviSquad\\Core\\Supports\\Media\\Image' => __DIR__ . '/../..' . '/includes/Core/Supports/Media/Image.php', 'DiviSquad\\Core\\Supports\\Media\\Mask_Shape' => __DIR__ . '/../..' . '/includes/Core/Supports/Media/Mask_Shape.php', 'DiviSquad\\Core\\Supports\\Polyfills\\Arr' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Arr.php', 'DiviSquad\\Core\\Supports\\Polyfills\\Constant' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Constant.php', 'DiviSquad\\Core\\Supports\\Polyfills\\Str' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Str.php', 'DiviSquad\\Core\\Supports\\Site_Health' => __DIR__ . '/../..' . '/includes/Core/Supports/Site_Health.php', 'DiviSquad\\Core\\Supports\\Utils\\Date_Time' => __DIR__ . '/../..' . '/includes/Core/Supports/Utils/Date_Time.php', 'DiviSquad\\Core\\Traits\\Assets\\Assets_Core' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Assets_Core.php', 'DiviSquad\\Core\\Traits\\Assets\\Body_Classes' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Body_Classes.php', 'DiviSquad\\Core\\Traits\\Assets\\Brand_Assets' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Brand_Assets.php', 'DiviSquad\\Core\\Traits\\Assets\\Localization' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Localization.php', 'DiviSquad\\Core\\Traits\\Assets\\Management' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Management.php', 'DiviSquad\\Core\\Traits\\Assets\\Registration' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Registration.php', 'DiviSquad\\Core\\Traits\\Chainable_Container' => __DIR__ . '/../..' . '/includes/Core/Traits/Chainable_Container.php', 'DiviSquad\\Core\\Traits\\Deprecations\\Deprecated_Class_Loader' => __DIR__ . '/../..' . '/includes/Core/Traits/Deprecations/Deprecated_Class_Loader.php', 'DiviSquad\\Core\\Traits\\Plugin\\Detect_Plugin_Life' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Detect_Plugin_Life.php', 'DiviSquad\\Core\\Traits\\Plugin\\Logger' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Logger.php', 'DiviSquad\\Core\\Traits\\Singleton' => __DIR__ . '/../..' . '/includes/Core/Traits/Singleton.php', 'DiviSquad\\Core\\Traits\\WP\\Use_WP_Filesystem' => __DIR__ . '/../..' . '/includes/Core/Traits/WP/Use_WP_Filesystem.php', 'DiviSquad\\Emails\\ErrorReport' => __DIR__ . '/../..' . '/includes/Emails/ErrorReport.php', 'DiviSquad\\Extensions\\Copy' => __DIR__ . '/../..' . '/includes/Extensions/Copy.php', 'DiviSquad\\Extensions\\Divi_Layout_Shortcode' => __DIR__ . '/../..' . '/includes/Extensions/Divi_Layout_Shortcode.php', 'DiviSquad\\Extensions\\Extension' => __DIR__ . '/../..' . '/includes/Extensions/Extension.php', 'DiviSquad\\Extensions\\Font_Upload' => __DIR__ . '/../..' . '/includes/Extensions/Font_Upload.php', 'DiviSquad\\Extensions\\JSON' => __DIR__ . '/../..' . '/includes/Extensions/JSON.php', 'DiviSquad\\Extensions\\SVG' => __DIR__ . '/../..' . '/includes/Extensions/SVG.php', 'DiviSquad\\Integrations\\DiviBuilder' => __DIR__ . '/../..' . '/includes/Integrations/DiviBuilder.php', 'DiviSquad\\Integrations\\DiviBuilderPlaceholders' => __DIR__ . '/../..' . '/includes/Integrations/DiviBuilderPlaceholders.php', 'DiviSquad\\Integrations\\Extensions' => __DIR__ . '/../..' . '/includes/Integrations/Extensions.php', 'DiviSquad\\Managers\\Branding' => __DIR__ . '/../..' . '/includes/Managers/Branding.php', 'DiviSquad\\Managers\\Branding\\AdminFooterText' => __DIR__ . '/../..' . '/includes/Managers/Branding/AdminFooterText.php', 'DiviSquad\\Managers\\Branding\\PluginActionLinks' => __DIR__ . '/../..' . '/includes/Managers/Branding/PluginActionLinks.php', 'DiviSquad\\Managers\\Branding\\PluginRowActions' => __DIR__ . '/../..' . '/includes/Managers/Branding/PluginRowActions.php', 'DiviSquad\\Managers\\Menus' => __DIR__ . '/../..' . '/includes/Managers/Menus.php', 'DiviSquad\\Managers\\Menus\\AdminMenu' => __DIR__ . '/../..' . '/includes/Managers/Menus/AdminMenu.php', 'DiviSquad\\Managers\\Notices' => __DIR__ . '/../..' . '/includes/Managers/Notices.php', 'DiviSquad\\Managers\\Notices\\Discount' => __DIR__ . '/../..' . '/includes/Managers/Notices/Discount.php', 'DiviSquad\\Managers\\Notices\\ProActivation' => __DIR__ . '/../..' . '/includes/Managers/Notices/ProActivation.php', 'DiviSquad\\Managers\\Notices\\Review' => __DIR__ . '/../..' . '/includes/Managers/Notices/Review.php', 'DiviSquad\\Modules\\Content\\BusinessHours' => __DIR__ . '/../..' . '/includes/Modules/Content/BusinessHours.php', 'DiviSquad\\Modules\\Content\\BusinessHoursChild' => __DIR__ . '/../..' . '/includes/Modules/Content/BusinessHoursChild.php', 'DiviSquad\\Modules\\Content\\FlipBox' => __DIR__ . '/../..' . '/includes/Modules/Content/FlipBox.php', 'DiviSquad\\Modules\\Creative\\Breadcrumbs' => __DIR__ . '/../..' . '/includes/Modules/Creative/Breadcrumbs.php', 'DiviSquad\\Modules\\Creative\\Divider' => __DIR__ . '/../..' . '/includes/Modules/Creative/Divider.php', 'DiviSquad\\Modules\\Creative\\DropCapText' => __DIR__ . '/../..' . '/includes/Modules/Creative/DropCapText.php', 'DiviSquad\\Modules\\Creative\\DualButton' => __DIR__ . '/../..' . '/includes/Modules/Creative/DualButton.php', 'DiviSquad\\Modules\\Creative\\GlitchText' => __DIR__ . '/../..' . '/includes/Modules/Creative/GlitchText.php', 'DiviSquad\\Modules\\Creative\\GradientText' => __DIR__ . '/../..' . '/includes/Modules/Creative/GradientText.php', 'DiviSquad\\Modules\\Creative\\ScrollingText' => __DIR__ . '/../..' . '/includes/Modules/Creative/ScrollingText.php', 'DiviSquad\\Modules\\Creative\\StarRating' => __DIR__ . '/../..' . '/includes/Modules/Creative/StarRating.php', 'DiviSquad\\Modules\\Creative\\TypingText' => __DIR__ . '/../..' . '/includes/Modules/Creative/TypingText.php', 'DiviSquad\\Modules\\Forms\\ContactForm7' => __DIR__ . '/../..' . '/includes/Modules/Forms/ContactForm7.php', 'DiviSquad\\Modules\\Forms\\FluentForms' => __DIR__ . '/../..' . '/includes/Modules/Forms/FluentForms.php', 'DiviSquad\\Modules\\Forms\\Forminator' => __DIR__ . '/../..' . '/includes/Modules/Forms/Forminator.php', 'DiviSquad\\Modules\\Forms\\GravityForms' => __DIR__ . '/../..' . '/includes/Modules/Forms/GravityForms.php', 'DiviSquad\\Modules\\Forms\\NinjaForms' => __DIR__ . '/../..' . '/includes/Modules/Forms/NinjaForms.php', 'DiviSquad\\Modules\\Forms\\WPForms' => __DIR__ . '/../..' . '/includes/Modules/Forms/WPForms.php', 'DiviSquad\\Modules\\Maps\\GoogleMap' => __DIR__ . '/../..' . '/includes/Modules/Maps/GoogleMap.php', 'DiviSquad\\Modules\\Media\\BeforeAfterImageSlider' => __DIR__ . '/../..' . '/includes/Modules/Media/BeforeAfterImageSlider.php', 'DiviSquad\\Modules\\Media\\ImageGallery' => __DIR__ . '/../..' . '/includes/Modules/Media/ImageGallery.php', 'DiviSquad\\Modules\\Media\\ImageMask' => __DIR__ . '/../..' . '/includes/Modules/Media/ImageMask.php', 'DiviSquad\\Modules\\Media\\Lottie' => __DIR__ . '/../..' . '/includes/Modules/Media/Lottie.php', 'DiviSquad\\Modules\\Media\\VideoPopup' => __DIR__ . '/../..' . '/includes/Modules/Media/VideoPopup.php', 'DiviSquad\\Modules\\PostGrid' => __DIR__ . '/../..' . '/includes/Modules/PostGrid.php', 'DiviSquad\\Modules\\PostGridChild' => __DIR__ . '/../..' . '/includes/Modules/PostGridChild.php', 'DiviSquad\\Modules\\PostReadingTime' => __DIR__ . '/../..' . '/includes/Modules/PostReadingTime.php', 'DiviSquad\\Rest_API_Routes\\Base_Route' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Base_Route.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Extensions' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Extensions.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Extensions\\Copy' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Extensions/Copy.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Modules' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Modules.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Modules\\PostGrid' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Modules/PostGrid.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Notices\\Discount' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Notices/Discount.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Notices\\ProActivation' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Notices/ProActivation.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Notices\\Review' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Notices/Review.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Whats_New\\Changelog' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Whats_New/Changelog.php', 'DiviSquad\\Rest_API_Routes\\Version2\\Extensions' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version2/Extensions.php', 'DiviSquad\\Rest_API_Routes\\Version2\\Modules' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version2/Modules.php', 'DiviSquad\\Settings\\Migration' => __DIR__ . '/../..' . '/includes/Settings/Migration.php', 'DiviSquad\\Settings\\MigrationInterface' => __DIR__ . '/../..' . '/includes/Settings/MigrationInterface.php', 'DiviSquad\\Settings\\Migration\\PostElement' => __DIR__ . '/../..' . '/includes/Settings/Migration/PostElement.php', 'DiviSquad\\SquadModules' => __DIR__ . '/../..' . '/includes/SquadModules.php', 'DiviSquad\\Utils\\Divi' => __DIR__ . '/../..' . '/includes/Utils/Divi.php', 'DiviSquad\\Utils\\Helper' => __DIR__ . '/../..' . '/includes/Utils/Helper.php', 'DiviSquad\\Utils\\Http' => __DIR__ . '/../..' . '/includes/Utils/Http.php', 'DiviSquad\\Utils\\LRCart' => __DIR__ . '/../..' . '/includes/Utils/LRCart.php', 'DiviSquad\\Utils\\Sanitization' => __DIR__ . '/../..' . '/includes/Utils/Sanitization.php', 'DiviSquad\\Utils\\WP' => __DIR__ . '/../..' . '/includes/Utils/WP.php');
+        public static $classMap = array('Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php', 'DiviSquad\\Base\\DiviBuilder\\Module' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Module.php', 'DiviSquad\\Base\\DiviBuilder\\Module\\FormStyler' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Module/FormStyler.php', 'DiviSquad\\Base\\DiviBuilder\\Placeholder' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Placeholder.php', 'DiviSquad\\Base\\DiviBuilder\\Utils' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Base' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Base.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\CommonTrait' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/CommonTrait.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\DeprecationsTrait' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/DeprecationsTrait.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Breadcrumbs' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Breadcrumbs.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Divider' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Divider.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Form' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Form.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\FormInterface' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/FormInterface.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Processors\\ContactForm7' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Processors/ContactForm7.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Processors\\FluentForms' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Processors/FluentForms.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Processors\\Formidable' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Processors/Formidable.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Processors\\Forminator' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Processors/Forminator.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Processors\\GravityForms' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Processors/GravityForms.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Processors\\NinjaForms' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Processors/NinjaForms.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\Forms\\Processors\\WPForms' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/Forms/Processors/WPForms.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Elements\\MaskShape' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Elements/MaskShape.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\FieldsTrait' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/FieldsTrait.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Fields\\CompatibilityTrait' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Fields/CompatibilityTrait.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Fields\\DefinitionTrait' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Fields/DefinitionTrait.php', 'DiviSquad\\Base\\DiviBuilder\\Utils\\Fields\\ProcessorTrait' => __DIR__ . '/../..' . '/includes/Base/DiviBuilder/Utils/Fields/ProcessorTrait.php', 'DiviSquad\\Base\\Factories\\AdminMenu' => __DIR__ . '/../..' . '/includes/Base/Factories/AdminMenu.php', 'DiviSquad\\Base\\Factories\\AdminMenu\\Menu' => __DIR__ . '/../..' . '/includes/Base/Factories/AdminMenu/Menu.php', 'DiviSquad\\Base\\Factories\\AdminMenu\\MenuInterface' => __DIR__ . '/../..' . '/includes/Base/Factories/AdminMenu/MenuInterface.php', 'DiviSquad\\Base\\Factories\\AdminNotice' => __DIR__ . '/../..' . '/includes/Base/Factories/AdminNotice.php', 'DiviSquad\\Base\\Factories\\AdminNotice\\Notice' => __DIR__ . '/../..' . '/includes/Base/Factories/AdminNotice/Notice.php', 'DiviSquad\\Base\\Factories\\AdminNotice\\NoticeInterface' => __DIR__ . '/../..' . '/includes/Base/Factories/AdminNotice/NoticeInterface.php', 'DiviSquad\\Base\\Factories\\BrandAsset' => __DIR__ . '/../..' . '/includes/Base/Factories/BrandAsset.php', 'DiviSquad\\Base\\Factories\\BrandAsset\\Asset' => __DIR__ . '/../..' . '/includes/Base/Factories/BrandAsset/Asset.php', 'DiviSquad\\Base\\Factories\\BrandAsset\\AssetInterface' => __DIR__ . '/../..' . '/includes/Base/Factories/BrandAsset/AssetInterface.php', 'DiviSquad\\Base\\Factories\\FactoryBase\\Factory' => __DIR__ . '/../..' . '/includes/Base/Factories/FactoryBase/Factory.php', 'DiviSquad\\Base\\Factories\\FactoryBase\\FactoryInterface' => __DIR__ . '/../..' . '/includes/Base/Factories/FactoryBase/FactoryInterface.php', 'DiviSquad\\Builder\\Utils\\Database\\Database_Utils' => __DIR__ . '/../..' . '/includes/Builder/Utils/Database/Database_Utils.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Collection' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collection.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\CollectionInterface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/CollectionInterface.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Collections\\Advanced' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collections/Advanced.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Collections\\WordPress' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collections/WordPress.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Definition' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definition.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\DefinitionInterface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/DefinitionInterface.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Definitions\\Advanced' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definitions/Advanced.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Definitions\\WordPress' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definitions/WordPress.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Manager' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Manager.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\ManagerInterface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/ManagerInterface.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Managers\\Fields' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Managers/Fields.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Managers\\Upgrades' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Managers/Upgrades.php', 'DiviSquad\\Builder\\Utils\\Elements\\Custom_Fields\\Traits\\Table_Population_Trait' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Traits/Table_Population_Trait.php', 'DiviSquad\\Core\\Assets' => __DIR__ . '/../..' . '/includes/Core/Assets.php', 'DiviSquad\\Core\\Assets\\Admin' => __DIR__ . '/../..' . '/includes/Core/Assets/Admin.php', 'DiviSquad\\Core\\Assets\\Modules' => __DIR__ . '/../..' . '/includes/Core/Assets/Modules.php', 'DiviSquad\\Core\\Cache' => __DIR__ . '/../..' . '/includes/Core/Cache.php', 'DiviSquad\\Core\\Distribution' => __DIR__ . '/../..' . '/includes/Core/Distribution.php', 'DiviSquad\\Core\\Extensions' => __DIR__ . '/../..' . '/includes/Core/Extensions.php', 'DiviSquad\\Core\\Memory' => __DIR__ . '/../..' . '/includes/Core/Memory.php', 'DiviSquad\\Core\\Modules' => __DIR__ . '/../..' . '/includes/Core/Modules.php', 'DiviSquad\\Core\\Requirements' => __DIR__ . '/../..' . '/includes/Core/Requirements.php', 'DiviSquad\\Core\\RestRoutes' => __DIR__ . '/../..' . '/includes/Core/RestRoutes.php', 'DiviSquad\\Core\\Supports\\Links' => __DIR__ . '/../..' . '/includes/Core/Supports/Links.php', 'DiviSquad\\Core\\Supports\\Media\\Image' => __DIR__ . '/../..' . '/includes/Core/Supports/Media/Image.php', 'DiviSquad\\Core\\Supports\\Media\\Mask_Shape' => __DIR__ . '/../..' . '/includes/Core/Supports/Media/Mask_Shape.php', 'DiviSquad\\Core\\Supports\\Polyfills\\Arr' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Arr.php', 'DiviSquad\\Core\\Supports\\Polyfills\\Constant' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Constant.php', 'DiviSquad\\Core\\Supports\\Polyfills\\Str' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Str.php', 'DiviSquad\\Core\\Supports\\Site_Health' => __DIR__ . '/../..' . '/includes/Core/Supports/Site_Health.php', 'DiviSquad\\Core\\Supports\\Utils\\Date_Time' => __DIR__ . '/../..' . '/includes/Core/Supports/Utils/Date_Time.php', 'DiviSquad\\Core\\Traits\\Assets\\Assets_Core' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Assets_Core.php', 'DiviSquad\\Core\\Traits\\Assets\\Body_Classes' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Body_Classes.php', 'DiviSquad\\Core\\Traits\\Assets\\Brand_Assets' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Brand_Assets.php', 'DiviSquad\\Core\\Traits\\Assets\\Localization' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Localization.php', 'DiviSquad\\Core\\Traits\\Assets\\Management' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Management.php', 'DiviSquad\\Core\\Traits\\Assets\\Registration' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Registration.php', 'DiviSquad\\Core\\Traits\\Chainable_Container' => __DIR__ . '/../..' . '/includes/Core/Traits/Chainable_Container.php', 'DiviSquad\\Core\\Traits\\Deprecations\\Deprecated_Class_Loader' => __DIR__ . '/../..' . '/includes/Core/Traits/Deprecations/Deprecated_Class_Loader.php', 'DiviSquad\\Core\\Traits\\Plugin\\Detect_Plugin_Life' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Detect_Plugin_Life.php', 'DiviSquad\\Core\\Traits\\Plugin\\Logger' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Logger.php', 'DiviSquad\\Core\\Traits\\Singleton' => __DIR__ . '/../..' . '/includes/Core/Traits/Singleton.php', 'DiviSquad\\Core\\Traits\\WP\\Use_WP_Filesystem' => __DIR__ . '/../..' . '/includes/Core/Traits/WP/Use_WP_Filesystem.php', 'DiviSquad\\Emails\\ErrorReport' => __DIR__ . '/../..' . '/includes/Emails/ErrorReport.php', 'DiviSquad\\Extensions\\Copy' => __DIR__ . '/../..' . '/includes/Extensions/Copy.php', 'DiviSquad\\Extensions\\Divi_Layout_Shortcode' => __DIR__ . '/../..' . '/includes/Extensions/Divi_Layout_Shortcode.php', 'DiviSquad\\Extensions\\Extension' => __DIR__ . '/../..' . '/includes/Extensions/Extension.php', 'DiviSquad\\Extensions\\Font_Upload' => __DIR__ . '/../..' . '/includes/Extensions/Font_Upload.php', 'DiviSquad\\Extensions\\JSON' => __DIR__ . '/../..' . '/includes/Extensions/JSON.php', 'DiviSquad\\Extensions\\SVG' => __DIR__ . '/../..' . '/includes/Extensions/SVG.php', 'DiviSquad\\Integrations\\DiviBuilder' => __DIR__ . '/../..' . '/includes/Integrations/DiviBuilder.php', 'DiviSquad\\Integrations\\DiviBuilderPlaceholders' => __DIR__ . '/../..' . '/includes/Integrations/DiviBuilderPlaceholders.php', 'DiviSquad\\Integrations\\Extensions' => __DIR__ . '/../..' . '/includes/Integrations/Extensions.php', 'DiviSquad\\Managers\\Branding' => __DIR__ . '/../..' . '/includes/Managers/Branding.php', 'DiviSquad\\Managers\\Branding\\AdminFooterText' => __DIR__ . '/../..' . '/includes/Managers/Branding/AdminFooterText.php', 'DiviSquad\\Managers\\Branding\\PluginActionLinks' => __DIR__ . '/../..' . '/includes/Managers/Branding/PluginActionLinks.php', 'DiviSquad\\Managers\\Branding\\PluginRowActions' => __DIR__ . '/../..' . '/includes/Managers/Branding/PluginRowActions.php', 'DiviSquad\\Managers\\Menus' => __DIR__ . '/../..' . '/includes/Managers/Menus.php', 'DiviSquad\\Managers\\Menus\\AdminMenu' => __DIR__ . '/../..' . '/includes/Managers/Menus/AdminMenu.php', 'DiviSquad\\Managers\\Notices' => __DIR__ . '/../..' . '/includes/Managers/Notices.php', 'DiviSquad\\Managers\\Notices\\Discount' => __DIR__ . '/../..' . '/includes/Managers/Notices/Discount.php', 'DiviSquad\\Managers\\Notices\\ProActivation' => __DIR__ . '/../..' . '/includes/Managers/Notices/ProActivation.php', 'DiviSquad\\Managers\\Notices\\Review' => __DIR__ . '/../..' . '/includes/Managers/Notices/Review.php', 'DiviSquad\\Modules\\Content\\BusinessHours' => __DIR__ . '/../..' . '/includes/Modules/Content/BusinessHours.php', 'DiviSquad\\Modules\\Content\\BusinessHoursChild' => __DIR__ . '/../..' . '/includes/Modules/Content/BusinessHoursChild.php', 'DiviSquad\\Modules\\Content\\FlipBox' => __DIR__ . '/../..' . '/includes/Modules/Content/FlipBox.php', 'DiviSquad\\Modules\\Creative\\Breadcrumbs' => __DIR__ . '/../..' . '/includes/Modules/Creative/Breadcrumbs.php', 'DiviSquad\\Modules\\Creative\\Divider' => __DIR__ . '/../..' . '/includes/Modules/Creative/Divider.php', 'DiviSquad\\Modules\\Creative\\DropCapText' => __DIR__ . '/../..' . '/includes/Modules/Creative/DropCapText.php', 'DiviSquad\\Modules\\Creative\\DualButton' => __DIR__ . '/../..' . '/includes/Modules/Creative/DualButton.php', 'DiviSquad\\Modules\\Creative\\GlitchText' => __DIR__ . '/../..' . '/includes/Modules/Creative/GlitchText.php', 'DiviSquad\\Modules\\Creative\\GradientText' => __DIR__ . '/../..' . '/includes/Modules/Creative/GradientText.php', 'DiviSquad\\Modules\\Creative\\ScrollingText' => __DIR__ . '/../..' . '/includes/Modules/Creative/ScrollingText.php', 'DiviSquad\\Modules\\Creative\\StarRating' => __DIR__ . '/../..' . '/includes/Modules/Creative/StarRating.php', 'DiviSquad\\Modules\\Creative\\TypingText' => __DIR__ . '/../..' . '/includes/Modules/Creative/TypingText.php', 'DiviSquad\\Modules\\Forms\\ContactForm7' => __DIR__ . '/../..' . '/includes/Modules/Forms/ContactForm7.php', 'DiviSquad\\Modules\\Forms\\FluentForms' => __DIR__ . '/../..' . '/includes/Modules/Forms/FluentForms.php', 'DiviSquad\\Modules\\Forms\\Forminator' => __DIR__ . '/../..' . '/includes/Modules/Forms/Forminator.php', 'DiviSquad\\Modules\\Forms\\GravityForms' => __DIR__ . '/../..' . '/includes/Modules/Forms/GravityForms.php', 'DiviSquad\\Modules\\Forms\\NinjaForms' => __DIR__ . '/../..' . '/includes/Modules/Forms/NinjaForms.php', 'DiviSquad\\Modules\\Forms\\WPForms' => __DIR__ . '/../..' . '/includes/Modules/Forms/WPForms.php', 'DiviSquad\\Modules\\Maps\\GoogleMap' => __DIR__ . '/../..' . '/includes/Modules/Maps/GoogleMap.php', 'DiviSquad\\Modules\\Media\\BeforeAfterImageSlider' => __DIR__ . '/../..' . '/includes/Modules/Media/BeforeAfterImageSlider.php', 'DiviSquad\\Modules\\Media\\ImageGallery' => __DIR__ . '/../..' . '/includes/Modules/Media/ImageGallery.php', 'DiviSquad\\Modules\\Media\\ImageMask' => __DIR__ . '/../..' . '/includes/Modules/Media/ImageMask.php', 'DiviSquad\\Modules\\Media\\Lottie' => __DIR__ . '/../..' . '/includes/Modules/Media/Lottie.php', 'DiviSquad\\Modules\\Media\\VideoPopup' => __DIR__ . '/../..' . '/includes/Modules/Media/VideoPopup.php', 'DiviSquad\\Modules\\PostGrid' => __DIR__ . '/../..' . '/includes/Modules/PostGrid.php', 'DiviSquad\\Modules\\PostGridChild' => __DIR__ . '/../..' . '/includes/Modules/PostGridChild.php', 'DiviSquad\\Modules\\PostReadingTime' => __DIR__ . '/../..' . '/includes/Modules/PostReadingTime.php', 'DiviSquad\\Rest_API_Routes\\Base_Route' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Base_Route.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Extensions' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Extensions.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Extensions\\Copy' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Extensions/Copy.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Modules' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Modules.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Modules\\PostGrid' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Modules/PostGrid.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Notices\\Discount' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Notices/Discount.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Notices\\ProActivation' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Notices/ProActivation.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Notices\\Review' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Notices/Review.php', 'DiviSquad\\Rest_API_Routes\\Version1\\Whats_New\\Changelog' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Whats_New/Changelog.php', 'DiviSquad\\Rest_API_Routes\\Version2\\Extensions' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version2/Extensions.php', 'DiviSquad\\Rest_API_Routes\\Version2\\Modules' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version2/Modules.php', 'DiviSquad\\Settings\\Migration' => __DIR__ . '/../..' . '/includes/Settings/Migration.php', 'DiviSquad\\Settings\\MigrationInterface' => __DIR__ . '/../..' . '/includes/Settings/MigrationInterface.php', 'DiviSquad\\Settings\\Migration\\PostElement' => __DIR__ . '/../..' . '/includes/Settings/Migration/PostElement.php', 'DiviSquad\\SquadModules' => __DIR__ . '/../..' . '/includes/SquadModules.php', 'DiviSquad\\Utils\\Divi' => __DIR__ . '/../..' . '/includes/Utils/Divi.php', 'DiviSquad\\Utils\\Helper' => __DIR__ . '/../..' . '/includes/Utils/Helper.php', 'DiviSquad\\Utils\\Http' => __DIR__ . '/../..' . '/includes/Utils/Http.php', 'DiviSquad\\Utils\\LRCart' => __DIR__ . '/../..' . '/includes/Utils/LRCart.php', 'DiviSquad\\Utils\\Sanitization' => __DIR__ . '/../..' . '/includes/Utils/Sanitization.php', 'DiviSquad\\Utils\\WP' => __DIR__ . '/../..' . '/includes/Utils/WP.php');
         public static function getInitializer(\Composer\Autoload\ClassLoader $loader)
         {
         }
