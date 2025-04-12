@@ -5,6 +5,424 @@
  * @see https://github.com/mralaminahamed/phpstan-squad-modules-lite-stubs
  */
 
+namespace DiviSquad\Base;
+
+/**
+ * The Base class for Core
+ *
+ * @since       1.0.0
+ * @package     squad-modules-for-divi
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
+ * @license     GPL-3.0-only
+ */
+abstract class Core
+{
+    /** The instance of the modules class.
+     *
+     * @var \DiviSquad\Manager\Modules
+     */
+    protected $modules;
+    /** The instance of the extensions class.
+     *
+     * @var \DiviSquad\Manager\Extensions
+     */
+    protected $extensions;
+    /** The instance of the modules class for rest API Routes.
+     *
+     * @var \DiviSquad\Manager\Rest_API_Routes\Modules
+     */
+    protected $modules_rest_api_routes;
+    /** The instance of the extensions class for rest API Routes.
+     *
+     * @var \DiviSquad\Manager\Rest_API_Routes\Extensions
+     */
+    protected $extensions_rest_api_routes;
+    /**
+     * The Plugin name.
+     *
+     * @since 1.0.0
+     *
+     * @var string
+     */
+    protected $name;
+    /**
+     * The plugin option prefix
+     *
+     * @since 1.0.0
+     *
+     * @var string
+     */
+    protected $option_prefix;
+    /**
+     * Plugin version
+     *
+     * @var string
+     */
+    protected $version;
+    /**
+     * Minimum version of Divi Theme
+     *
+     * @var string
+     */
+    protected $min_version_divi;
+    /**
+     * Minimum version of PHP
+     *
+     * @var string
+     */
+    protected $min_version_php;
+    /**
+     * Minimum version of WordPress
+     *
+     * @var string
+     */
+    protected $min_version_wp;
+    /**
+     * The Script handle the text domain will be attached to.
+     *
+     * @var string
+     */
+    protected $localize_handle;
+    /**
+     * The full file path to the directory containing translation files.
+     *
+     * @var string
+     */
+    protected $localize_path;
+    /**
+     * Initialize the plugin with required components.
+     *
+     * @param array $options Options.
+     *
+     * @return void
+     */
+    protected abstract function init($options = array());
+    /**
+     * Load all core components.
+     *
+     * @return void
+     */
+    protected abstract function load_core_components();
+    /**
+     * Register all rest api routes.
+     *
+     * @return void
+     */
+    protected abstract function register_ajax_rest_api_routes();
+    /**
+     * Load all extensions.
+     *
+     * @return void
+     */
+    protected abstract function load_all_extensions();
+    /**
+     * Load all divi modules.
+     *
+     * @return void
+     */
+    protected abstract function load_divi_modules_for_builder();
+    /**
+     * Get the instance of memory.
+     *
+     * @return \DiviSquad\Base\Memory
+     */
+    public abstract function get_memory();
+    /**
+     * Set the instance of memory.
+     *
+     * @param string $prefix The prefix name for the plugin settings option.
+     *
+     * @return \DiviSquad\Base\Memory
+     */
+    public abstract function set_memory($prefix);
+    /**
+     * Get the plugin name.
+     *
+     * @return string
+     */
+    public function get_name()
+    {
+    }
+    /**
+     * The full file path to the directory containing translation files.
+     *
+     * @return string
+     */
+    public function get_localize_path()
+    {
+    }
+    /**
+     * Get the plugin option prefix.
+     *
+     * @return string
+     */
+    public function get_option_prefix()
+    {
+    }
+    /**
+     * Define the general constants for the plugin
+     *
+     * @return void
+     */
+    protected function define_general_constants()
+    {
+    }
+    /**
+     * Get the instance of modules.
+     *
+     * @return \DiviSquad\Manager\Modules
+     */
+    public function get_modules()
+    {
+    }
+    /**
+     * Get the instance of extensions.
+     *
+     * @return \DiviSquad\Manager\Extensions
+     */
+    public function get_extensions()
+    {
+    }
+    /**
+     * The instance of the modules class for rest API Routes.
+     *
+     * @return \DiviSquad\Manager\Rest_API_Routes\Modules
+     */
+    public function get_modules_rest_api_routes()
+    {
+    }
+    /**
+     * The instance of the extensions class for rest API Routes.
+     *
+     * @return \DiviSquad\Manager\Rest_API_Routes\Extensions
+     */
+    public function get_extensions_rest_api_routes()
+    {
+    }
+    /**
+     * Load the local text domain.
+     *
+     * @return void
+     */
+    public function load_text_domain()
+    {
+    }
+    /**
+     * Set the deactivation hook.
+     *
+     * @return void
+     */
+    public function hook_deactivation()
+    {
+    }
+    /**
+     * The admin interface asset and others.
+     *
+     * @return void
+     */
+    protected function load_global_assets()
+    {
+    }
+    /**
+     * Load css variables in the admin panel.
+     *
+     * @return void
+     */
+    public function wp_hook_enqueue_admin_scripts()
+    {
+    }
+    /**
+     * Load css variables in the frontend.
+     *
+     * @return void
+     */
+    public function wp_hook_enqueue_scripts()
+    {
+    }
+    /**
+     * Set the localize data.
+     *
+     * @return array
+     */
+    public function localize_scripts_data()
+    {
+    }
+    /**
+     * Load the localized data in the frontend and admin panel.
+     *
+     * @return void
+     */
+    public function wp_hook_enqueue_localize_data()
+    {
+    }
+}
+namespace DiviSquad\Integration;
+
+/**
+ * Divi Squad Core Class.
+ *
+ * @since       1.0.0
+ * @package     squad-modules-for-divi
+ */
+abstract class Core extends \DiviSquad\Base\Core
+{
+    /**
+     * Load all core components.
+     *
+     * @return void
+     */
+    protected function load_core_components()
+    {
+    }
+    /**
+     * Initialize the plugin with required components.
+     *
+     * @param array $options Options data.
+     *
+     * @return void
+     */
+    protected function init($options = array())
+    {
+    }
+    /**
+     * Set the activation hook.
+     *
+     * @return void
+     */
+    public function hook_activation()
+    {
+    }
+    /**
+     * The admin interface asset and others.
+     *
+     * @return void
+     */
+    protected function load_admin_interface()
+    {
+    }
+    /**
+     * Register all rest api routes.
+     *
+     * @return void
+     */
+    protected function register_ajax_rest_api_routes()
+    {
+    }
+    /**
+     * Load all extensions.
+     *
+     * @return void
+     */
+    public function load_all_extensions()
+    {
+    }
+    /**
+     * Load the divi custom modules for the divi builder.
+     *
+     * @return void
+     */
+    protected function load_divi_modules_for_builder()
+    {
+    }
+    /**
+     *  Load the extensions.
+     *
+     * @return void
+     */
+    public function initialize_divi_extension()
+    {
+    }
+    /**
+     * Used to update the content of the cached definitions js file.
+     *
+     * @return void
+     */
+    public function initialize_divi_asset_definitions()
+    {
+    }
+}
+namespace DiviSquad;
+
+/**
+ * Free Plugin Load class.
+ *
+ * @since           1.0.0
+ * @package         squad-modules-for-divi
+ * @author          WP Squad <support@thewpsquad.com>
+ * @license         GPL-3.0-only
+ */
+final class SquadModules extends \DiviSquad\Integration\Core
+{
+    /**
+     * The instance of current class.
+     *
+     * @var self
+     */
+    private static $instance;
+    /**
+     * The instance of Memory class.
+     *
+     * @var \DiviSquad\Base\Memory
+     */
+    protected $plugin_memory;
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+    }
+    /**
+     * Define the core constants.
+     *
+     * @return void
+     */
+    private function define_core_constants()
+    {
+    }
+    /**
+     * Get the plugin version number
+     *
+     * @return string
+     */
+    public function get_version()
+    {
+    }
+    /**
+     * Get the plugin version number
+     *
+     * @param string $prefix The prefix name for the plugin settings option.
+     *
+     * @return \DiviSquad\Base\Memory
+     */
+    public function set_memory($prefix)
+    {
+    }
+    /**
+     * Get the plugin version number
+     *
+     * @return \DiviSquad\Base\Memory
+     */
+    public function get_memory()
+    {
+    }
+    /**
+     *  The instance of current class.
+     *
+     * @return self
+     */
+    public static function get_instance()
+    {
+    }
+    /**
+     * Get the plugin name for the pro-version
+     *
+     * @return bool
+     */
+    public static function is_the_pro_plugin_active()
+    {
+    }
+}
 namespace DiviSquad\Admin;
 
 /**
@@ -15,23 +433,42 @@ namespace DiviSquad\Admin;
  */
 class Assets
 {
-    /** The instance of the current class.
-     *
-     * @var self
-     */
-    private static $instance;
     /**
-     * Get the instance of self-class
+     * Get the lis of admin asset allowed page for the plugin.
      *
-     * @return self
+     * @return array
+     * @since 1.2.0
      */
-    public static function get_instance()
+    protected static function get_plugin_asset_allowed_pages()
     {
     }
     /**
-     * Enqueue scripts and styles files in the WordPress admin area.
+     * Get the lis of admin extra asset allowed page for the plugin.
+     *
+     * @return array
+     * @since 1.2.0
      */
-    public function wp_hook_enqueue_admin_asset()
+    protected static function get_plugin_extra_asset_allowed_pages()
+    {
+    }
+    /**
+     * Enqueue the plugin's scripts and styles files in the WordPress admin area.
+     *
+     * @param string $hook_suffix Hook suffix for the current admin page.
+     *
+     * @return void
+     */
+    public function wp_hook_enqueue_plugin_admin_asset($hook_suffix)
+    {
+    }
+    /**
+     * Enqueue extra scripts and styles files in the WordPress admin area.
+     *
+     * @param string $hook_suffix Hook suffix for the current admin page.
+     *
+     * @return void
+     */
+    public function wp_hook_enqueue_extra_admin_asset($hook_suffix)
     {
     }
     /**
@@ -39,7 +476,7 @@ class Assets
      *
      * @return array
      */
-    public static function wp_localize_script_data()
+    public function wp_localize_script_data()
     {
     }
 }
@@ -63,16 +500,6 @@ class Utils
     {
     }
     /**
-     * Validate the relative path.
-     *
-     * @param string $relative_path The path string for validation.
-     *
-     * @return string
-     */
-    public static function validate_relative_path($relative_path)
-    {
-    }
-    /**
      * Resolve the resource root path.
      *
      * @return string
@@ -86,6 +513,16 @@ class Utils
      * @return string
      */
     public static function root_path_uri()
+    {
+    }
+    /**
+     * Validate the relative path.
+     *
+     * @param string $relative_path The path string for validation.
+     *
+     * @return string
+     */
+    public static function validate_relative_path($relative_path)
     {
     }
     /**
@@ -160,15 +597,7 @@ class Menu
      *
      * @var self
      */
-    private static $instance;
-    /**
-     * Get the instance of self-class.
-     *
-     * @return self
-     */
-    public static function get_instance()
-    {
-    }
+    protected static $instance;
     /**
      * Enqueue scripts and styles files in the WordPress admin area.
      */
@@ -227,17 +656,12 @@ class Menu
  */
 class Plugin_Action_Links
 {
-    /** The instance
-     *
-     * @var self
-     */
-    private static $instance;
     /**
      * Get the instance of self-class
      *
-     * @return self
+     * @return string
      */
-    public static function get_instance()
+    public function get_plugin_base()
     {
     }
     /**
@@ -259,17 +683,12 @@ class Plugin_Action_Links
  */
 class Plugin_Row_Meta
 {
-    /** The instance
-     *
-     * @var self
-     */
-    private static $instance;
     /**
      * Get the instance of self-class
      *
-     * @return self
+     * @return string
      */
-    public static function get_instance()
+    public static function get_plugin_base()
     {
     }
     /**
@@ -350,7 +769,7 @@ abstract class BuilderIntegrationAPI
      *
      * @var string
      */
-    public $name;
+    public $name = '';
     /**
      * Absolute path to the plugin's directory.
      *
@@ -358,7 +777,7 @@ abstract class BuilderIntegrationAPI
      *
      * @var string
      */
-    public $plugin_dir;
+    public $plugin_dir = '';
     /**
      * The plugin's directory URL.
      *
@@ -366,7 +785,7 @@ abstract class BuilderIntegrationAPI
      *
      * @var string
      */
-    public $plugin_dir_url;
+    public $plugin_dir_url = '';
     /**
      * The plugin's version
      *
@@ -374,7 +793,7 @@ abstract class BuilderIntegrationAPI
      *
      * @var string The plugin's version
      */
-    public $version = DISQ_VERSION;
+    public $version = '';
     /**
      * The asset build for the plugin
      *
@@ -382,7 +801,7 @@ abstract class BuilderIntegrationAPI
      *
      * @var string The plugin's version
      */
-    public $build_path;
+    public $build_path = '';
     /**
      * Dependencies for the plugin's JavaScript bundles.
      *
@@ -407,6 +826,16 @@ abstract class BuilderIntegrationAPI
     {
     }
     /**
+     * Get the plugin version number
+     *
+     * @return string
+     */
+    public abstract function get_version();
+    /**
+     * Loads custom modules when the builder is ready.
+     */
+    public abstract function hook_et_builder_ready();
+    /**
      * Performs initialization tasks.
      */
     protected function initialize()
@@ -430,10 +859,6 @@ abstract class BuilderIntegrationAPI
     public function wp_hook_enqueue_scripts()
     {
     }
-    /**
-     * Loads custom modules when the builder is ready.
-     */
-    public abstract function hook_et_builder_ready();
 }
 namespace DiviSquad\Base\BuilderModule\Traits;
 
@@ -677,7 +1102,7 @@ trait Field_Processor
     /**
      * Collect icon prop width event if responsive mode.
      *
-     * @param array $props          List of attributes.
+     * @param array $props   List of attributes.
      * @param array $options Options of current width.
      *
      * @return array
@@ -689,7 +1114,7 @@ trait Field_Processor
     /**
      * Collect the value of any props for Icon on hover effect.
      *
-     * @param array $props          List of attributes.
+     * @param array $props   List of attributes.
      * @param array $options Options of current width.
      *
      * @return string
@@ -701,7 +1126,7 @@ trait Field_Processor
     /**
      * Collect any props value from mapping values.
      *
-     * @param array  $options The option array data.
+     * @param array  $options       The option array data.
      * @param string $current_value The current field value.
      *
      * @return mixed
@@ -1008,163 +1433,202 @@ abstract class DISQ_Builder_Module extends \ET_Builder_Module
     {
     }
 }
-namespace DiviSquad\Base;
-
 /**
- * The Base class for Core
+ * Builder Module Helper Class which help to the all module class
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
- * @author      WP Squad <wp@thewpsquad.com>
+ * @author      WP Squad <support@thewpsquad.com>
  * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  */
-abstract class Core
+abstract class DISQ_Form_Styler_Module extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
 {
     /**
-     * The instance of Memory class.
+     * Get the stylesheet selector for form tag.
+     *
+     * @return string
+     */
+    protected abstract function get_form_selector_default();
+    /**
+     * Get the stylesheet selector for form tag to use in hover.
+     *
+     * @return string
+     */
+    protected abstract function get_form_selector_hover();
+    /**
+     * Get the stylesheet selector for the error message.
+     *
+     * @return string
+     */
+    protected abstract function get_error_message_selector_default();
+    /**
+     * Get the stylesheet selector for the error message to use in hover.
+     *
+     * @return string
+     */
+    protected abstract function get_error_message_selector_hover();
+    /**
+     * Get the stylesheet selector for the success message.
+     *
+     * @return string
+     */
+    protected abstract function get_success_message_selector_default();
+    /**
+     * Get the stylesheet selector for the success message to use in hover.
+     *
+     * @return string
+     */
+    protected abstract function get_success_message_selector_hover();
+    /**
+     * Get the stylesheet selector for form fields.
+     *
+     * @return string
+     */
+    protected abstract function get_field_selector_default();
+    /**
+     * Get the stylesheet selector for form fields to use in hover.
+     *
+     * @return string
+     */
+    protected abstract function get_field_selector_hover();
+    /**
+     * Get the stylesheet selector for form submit button.
+     *
+     * @return string
+     */
+    protected abstract function get_submit_button_selector_default();
+    /**
+     * Get the stylesheet selector for form submit button to use in hover.
+     *
+     * @return string
+     */
+    protected abstract function get_submit_button_selector_hover();
+    /**
+     * Declare allowed fields for the module.
+     *
+     * @return array
+     */
+    public function disq_get_allowed_form_fields()
+    {
+    }
+    /**
+     * Declare all prefixes for custom spacing fields for the module.
+     *
+     * @return array
+     */
+    protected function disq_get_custom_spacing_prefixes()
+    {
+    }
+    /**
+     * Get toggles for the module's settings modal.
+     */
+    public function get_settings_modal_toggles()
+    {
+    }
+    /**
+     * Declare general fields for the module.
+     *
+     * @return array[]
+     */
+    public function get_fields()
+    {
+    }
+    /**
+     * Get CSS fields transition.
+     *
+     * Add form field options group and background image on the field list.
+     *
+     * @since 1.0.0
+     */
+    public function get_transition_fields_css_props()
+    {
+    }
+    /**
+     * Generate styles.
+     *
+     * @param array $attrs List of unprocessed attributes.
+     *
+     * @return void
+     */
+    protected function disq_generate_all_styles($attrs)
+    {
+    }
+    /**
+     * Collect all forms from the database.
+     *
+     * @return array
+     */
+    protected function disq_form_styler__get_all_forms()
+    {
+    }
+    /**
+     * Collect all posts from the database.
+     *
+     * @param array  $attrs   List of unprocessed attributes.
+     * @param string $content Content being processed.
+     *
+     * @return string the html output.
+     */
+    public static function disq_form_styler__get_form_html($attrs, $content = null)
+    {
+    }
+}
+namespace DiviSquad\Base;
+
+/**
+ * Extensions class.
+ *
+ * @since       1.2.0
+ * @package     squad-modules-for-divi
+ */
+abstract class Extensions
+{
+    /** The instance of memory.
      *
      * @var Memory
      */
     protected $memory;
     /**
-     * The Plugin name.
+     * The list of inactive extensions.
      *
-     * @since 1.0.0
-     *
-     * @var string
+     * @var array
      */
-    protected $name;
+    protected $inactivates;
     /**
-     * The plugin option prefix
+     * The name list of extensions.
      *
-     * @since 1.0.0
-     *
-     * @var string
+     * @var array
      */
-    protected $option_prefix;
+    protected $name_lists;
     /**
-     * Plugin version
-     *
-     * @var string
+     * The constructor class.
      */
-    protected $version;
+    public function __construct()
+    {
+    }
     /**
-     * Minimum version of Divi Theme
-     *
-     * @var string
-     */
-    protected $min_version_divi;
-    /**
-     * Minimum version of PHP
-     *
-     * @var string
-     */
-    protected $min_version_php;
-    /**
-     * Minimum version of WordPress
-     *
-     * @var string
-     */
-    protected $min_version_wp;
-    /**
-     * The Script handle the text domain will be attached to.
-     *
-     * @var string
-     */
-    protected $localize_handle;
-    /**
-     * The full file path to the directory containing translation files.
-     *
-     * @var string
-     */
-    protected $localize_path;
-    /**
-     * Get the plugin name.
+     * Get the plugin version number
      *
      * @return string
      */
-    public function get_name()
+    public function get_version()
     {
     }
     /**
-     * Get the plugin option prefix.
+     * Get the plugin asset build path
      *
      * @return string
      */
-    public function get_option_prefix()
+    public function get_build_path()
     {
     }
     /**
-     * Get the instance of memory.
+     * Get the plugin asset build url
      *
-     * @return Memory
+     * @return string
      */
-    public function get_memory()
-    {
-    }
-    /**
-     * Define the general constants for the plugin
-     *
-     * @return void
-     */
-    protected function define_general_constants()
-    {
-    }
-    /**
-     * Load the memory instance.
-     *
-     * @return void
-     */
-    protected function load_memory()
-    {
-    }
-    /**
-     * Load the local text domain.
-     *
-     * @return void
-     */
-    public function load_text_domain()
-    {
-    }
-    /**
-     * Set the deactivation hook.
-     *
-     * @return void
-     */
-    public function hook_deactivation()
-    {
-    }
-    /**
-     * The admin interface asset and others.
-     *
-     * @return void
-     */
-    protected function load_global_assets()
-    {
-    }
-    /**
-     * Load css variables in the frontend and admin panel.
-     *
-     * @return void
-     */
-    public function wp_hook_enqueue_scripts()
-    {
-    }
-    /**
-     * Set the localize data.
-     *
-     * @return array
-     */
-    public function localize_scripts_data()
-    {
-    }
-    /**
-     * Load the localize data in the frontend and admin panel.
-     *
-     * @return void
-     */
-    public function wp_hook_enqueue_localize_data()
+    public function get_build_url()
     {
     }
 }
@@ -1180,31 +1644,25 @@ abstract class Core
 class Memory
 {
     /**
-     * The instance of the current class.
-     *
-     * @var self
-     */
-    private static $instance;
-    /**
      * The store of data (Option data).
      *
      * @var array
      */
-    private static $data = array();
+    private $data;
     /**
      * The database option prefix.
      *
      * @var string
      */
-    private $option_prefix = '';
+    private $option_prefix;
     /**
-     * Get the instance of the current class.
+     * The constructor
      *
      * @param string $prefix The prefix name for the plugin settings option.
      *
-     * @return self
+     * @since 1.2.0
      */
-    public static function get_instance($prefix)
+    public function __construct($prefix = 'disq')
     {
     }
     /**
@@ -1212,7 +1670,7 @@ class Memory
      *
      * @return array
      */
-    public static function get_data()
+    public function get_data()
     {
     }
     /**
@@ -1237,11 +1695,11 @@ class Memory
      * Get the field value.
      *
      * @param string                          $field   The field key.
-     * @param array|string|numeric|null|false $default The default value for field.
+     * @param array|string|numeric|null|false $defaults The default value for field.
      *
      * @return array|string|numeric|null|false
      */
-    public function get($field, $default = null)
+    public function get($field, $defaults = null)
     {
     }
     /**
@@ -1295,6 +1753,198 @@ class Memory
     {
     }
 }
+namespace DiviSquad\Extensions;
+
+/**
+ * The Divi Library Shortcode class.
+ *
+ * @since       1.2.0
+ * @package     squad-modules-for-divi
+ * @author      WP Squad <support@thewpsquad.com>
+ * @copyright   2023 WP Squad
+ * @license     GPL-3.0-only
+ */
+class Divi_Library_Shortcode extends \DiviSquad\Base\Extensions
+{
+    /**
+     * The constructor class.
+     */
+    public function __construct()
+    {
+    }
+    /**
+     * Create New Admin Column
+     *
+     * @param array $columns Exists columns array data.
+     *
+     * @return array
+     */
+    public function create_shortcode_column($columns)
+    {
+    }
+    /**
+     * Display Shortcode
+     *
+     * @param string $column The current column name.
+     * @param int    $id     The current post id.
+     *
+     * @return void
+     */
+    public function shortcode_column_content($column, $id)
+    {
+    }
+    /**
+     * Create New Shortcode
+     *
+     * @param array|string|mixed $atts The attributes of the current shortcode.
+     *
+     * @return string
+     */
+    public function shortcode_callback($atts)
+    {
+    }
+    /**
+     * Set a random high module index when rendering in the visual builder to avoid conflicts with other modules on the same page
+     *
+     * @param mixed $value The content of current shortcode.
+     *
+     * @return mixed
+     */
+    public function shortcode_set_ajax_module_index($value)
+    {
+    }
+}
+/**
+ * The Font Upload class.
+ *
+ * @since       1.2.0
+ * @package     squad-modules-for-divi
+ * @author      WP Squad <support@thewpsquad.com>
+ * @copyright   2023 WP Squad
+ * @license     GPL-3.0-only
+ */
+class Font_Upload extends \DiviSquad\Base\Extensions
+{
+    /**
+     * The constructor class.
+     */
+    public function __construct()
+    {
+    }
+    /**
+     * All mime lists with newly appended mimes.
+     *
+     * @return array
+     */
+    public function get_available_mime_types()
+    {
+    }
+    /**
+     * Allow extra mime type file upload in the current installation.
+     *
+     * @param array $existing_mimes The existing mime lists.
+     *
+     * @return array All mime lists with newly appended mimes.
+     */
+    public function hook_add_extra_mime_types($existing_mimes)
+    {
+    }
+}
+/**
+ * The JSON class.
+ *
+ * @since       1.2.0
+ * @package     squad-modules-for-divi
+ * @author      WP Squad <support@thewpsquad.com>
+ * @copyright   2023 WP Squad
+ * @license     GPL-3.0-only
+ */
+class JSON extends \DiviSquad\Base\Extensions
+{
+    /**
+     * The constructor class.
+     */
+    public function __construct()
+    {
+    }
+    /**
+     * All mime lists with newly appended mimes.
+     *
+     * @return array
+     */
+    public function get_available_mime_types()
+    {
+    }
+    /**
+     * Allow extra mime type file upload in the current installation.
+     *
+     * @param array $existing_mimes The existing mime lists.
+     *
+     * @return array All mime lists with newly appended mimes.
+     * @since 1.0.0
+     */
+    public function hook_add_extra_mime_types($existing_mimes)
+    {
+    }
+    /**
+     * Filters the "real" file type of the given file.
+     *
+     * @param array  $wp_checked Values for the extension, mime type, and corrected filename.
+     * @param string $file       Full path to the file.
+     * @param string $filename   The name of the file.
+     */
+    public function hook_wp_check_filetype_and_ext($wp_checked, $file, $filename)
+    {
+    }
+}
+/**
+ * The SVG class.
+ *
+ * @since       1.2.0
+ * @package     squad-modules-for-divi
+ * @author      WP Squad <support@thewpsquad.com>
+ * @copyright   2023 WP Squad
+ * @license     GPL-3.0-only
+ */
+class SVG extends \DiviSquad\Base\Extensions
+{
+    /**
+     * The constructor class.
+     */
+    public function __construct()
+    {
+    }
+    /**
+     * All mime lists with newly appended mimes.
+     *
+     * @return array
+     */
+    public function get_available_mime_types()
+    {
+    }
+    /**
+     * Allow extra mime type file upload in the current installation.
+     *
+     * @param array $existing_mimes The existing mime lists.
+     *
+     * @return array All mime lists with newly appended mimes.
+     * @since 1.0.0
+     */
+    public function hook_add_extra_mime_types($existing_mimes)
+    {
+    }
+    /**
+     * Filters the "real" file type of the given file.
+     *
+     * @param array    $wp_check Values for the extension, mime type, and corrected filename.
+     * @param string   $file     Full path to the file.
+     * @param string   $filename The name of the file.
+     * @param string[] $mimes    Array of mime types keyed by their file extension regex.
+     */
+    public function enable__upload($wp_check, $file, $filename, $mimes)
+    {
+    }
+}
 namespace DiviSquad\Integration;
 
 /**
@@ -1305,82 +1955,118 @@ namespace DiviSquad\Integration;
  */
 class Admin
 {
-    /** The instance of the current class.
-     *
-     * @var self
-     */
-    private static $instance;
     /**
      * Get the instance of the current class.
      *
-     * @return self
+     * @return void
      */
-    public static function get_instance()
+    public static function load()
+    {
+    }
+    /**
+     * Get the dynamic portion of the hook name, `$hook_suffix`, refers to the hook suffix
+     * for the admin page.
+     *
+     * @return string
+     * @since 1.2.0
+     */
+    protected static function get_plugin_hook_suffix()
+    {
+    }
+    /**
+     * Fires when enqueuing scripts for all admin pages.
+     *
+     * @param \DiviSquad\Admin\Assets $admin_asset The instance of Admin asset class.
+     *
+     * @return void
+     * @since 1.2.0
+     */
+    protected static function register_admin_scripts($admin_asset)
+    {
+    }
+    /**
+     * Include all actions links for the plugin.
+     *
+     * @param \DiviSquad\Admin\Plugin_Action_Links $action_links The instance of Plugin action links class.
+     *
+     * @return void
+     * @since 1.2.0
+     */
+    protected static function register_plugin_action_links($action_links)
+    {
+    }
+    /**
+     * Include all row metas for the plugin.
+     *
+     * @param \DiviSquad\Admin\Plugin_Row_Meta $row_meta The instance of Plugin row meta class.
+     *
+     * @return void
+     * @since 1.2.0
+     */
+    protected static function register_plugin_row_meta($row_meta)
     {
     }
 }
 /**
- * Divi Squad Core Class.
+ * Define integration helper functionalities for Divi.
  *
- * @since       1.0.0
- * @package     squad-modules-for-divi
+ * @since      1.0.0
+ * @package    squad-modules-for-divi
  */
-abstract class Core extends \DiviSquad\Base\Core
+class Divi
 {
     /**
-     * Initialize the plugin with required components.
+     * Returns boolean if the Divi Builder Plugin active in the current WordPress installation
      *
-     * @return void
+     * @return boolean
+     * @since 1.0.0
      */
-    protected function init()
+    public static function is_any_divi_theme_installed()
     {
     }
     /**
-     * Set the activation hook.
+     * Returns boolean if the Divi Builder Plugin is installed in the current WordPress installation
      *
-     * @return void
+     * @return boolean
+     * @since 1.0.0
      */
-    public function hook_activation()
+    public static function is_divi_builder_plugin_installed()
     {
     }
     /**
-     * The admin interface asset and others.
+     * Returns boolean if the Dynamic CSS feature is turn on for Divi Builder in the current WordPress installation
      *
-     * @return void
+     * @return boolean
+     * @since 1.0.0
      */
-    protected function load_admin_interface()
+    public static function is_dynamic_css_enable()
     {
     }
     /**
-     * Register all rest api routes.
+     * Returns boolean if the Divi Builder Plugin active in the current WordPress installation
      *
-     * @return void
+     * @return boolean
+     * @since 1.0.0
      */
-    protected function register_ajax_rest_api_routes()
+    public static function is_divi_builder_plugin_active()
     {
     }
     /**
-     * Load the divi custom modules for the divi builder.
+     * Returns boolean if any Divi theme is installed active in the current WordPress installation
      *
-     * @return void
+     * @return boolean
+     * @since 1.0.0
      */
-    protected function load_divi_modules_for_builder()
+    public static function is_allowed_theme_activated()
     {
     }
     /**
-     *  Load the extensions.
+     * Return the allowed theme list for Divi Module support
      *
-     * @return void
+     * @return array
+     * @since 1.0.0
      */
-    public function initialize_extension()
-    {
-    }
-    /**
-     * Used to update the content of the cached definitions js file.
-     *
-     * @return void
-     */
-    public function initialize_divi_asset_definitions()
+    public static function modules_allowed_theme()
     {
     }
 }
@@ -1428,6 +2114,14 @@ namespace DiviSquad\Integration;
 class DiviSquad extends \DiviSquad\Base\BuilderIntegrationAPI
 {
     /**
+     * Get the plugin version number
+     *
+     * @return string
+     */
+    public function get_version()
+    {
+    }
+    /**
      * Loads custom modules when the builder is ready.
      *
      * @since 1.0.0
@@ -1467,6 +2161,17 @@ class WP
     {
     }
     /**
+     * Checks compatibility with the current PHP version.
+     *
+     * @since 1.2.0
+     *
+     * @param string $required Minimum required PHP version.
+     * @return bool True if a required version is compatible or empty, false if not.
+     */
+    public static function is_php_version_compatible($required)
+    {
+    }
+    /**
      * The journey of a thousand miles starts here.
      *
      * @param callable $callback The callback function.
@@ -1498,29 +2203,16 @@ namespace DiviSquad\Manager;
  */
 class Assets
 {
-    /** The instance of the current class.
-     *
-     * @var self
-     */
-    private static $instance;
-    /**
-     * Get the instance of the current class.
-     *
-     * @return self
-     */
-    public static function get_instance()
-    {
-    }
     /**
      * Set the asset path.
      *
-     * @param string $file_name The file name without an extension.
-     * @param string $ext       The file extension, default is js.
-     * @param string $type      The file type, default is module.
+     * @param string $file        The file name.
+     * @param string $ext         The file extension.
+     * @param string $path_prefix The asset file path prefix.
      *
      * @return string
      */
-    private function asset_path($file_name, $ext = 'js', $type = 'module')
+    protected function asset_path($file, $ext = 'js', $path_prefix = 'shortcode/scripts/modules')
     {
     }
     /**
@@ -1532,7 +2224,7 @@ class Assets
      *
      * @return void
      */
-    private function register_scripts($handle, $path, $deps = array())
+    protected function register_scripts($handle, $path, $deps = array())
     {
     }
     /**
@@ -1553,6 +2245,100 @@ class Assets
     }
 }
 /**
+ * Extensions class
+ *
+ * @since       1.0.0
+ * @package     squad-modules-for-divi
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
+ * @license     GPL-3.0-only
+ */
+class Extensions
+{
+    /**
+     * Activate all extensions.
+     */
+    public function activate_extensions()
+    {
+    }
+    /**
+     * Get available extensions.
+     *
+     * @return array[]
+     */
+    public function get_available_extensions()
+    {
+    }
+    /**
+     * Check current extension is an inactive extension.
+     *
+     * @param array $extension The current extension.
+     *
+     * @return array|null
+     */
+    protected function is_inactive_extension($extension)
+    {
+    }
+    /**
+     *  Check current extension is an active extension.
+     *
+     * @param array $extension The current extension.
+     *
+     * @return array|null
+     */
+    protected function is_active_extension($extension)
+    {
+    }
+    /**
+     * Get filtered extensions.
+     *
+     * @param callable $callback   The callback function for filter the current extension.
+     * @param array    $extensions The available extensions.
+     *
+     * @return array
+     */
+    protected function get_filtered_extensions($callback, $extensions)
+    {
+    }
+    /**
+     * Get inactive extensions.
+     *
+     * @return array
+     */
+    protected function get_inactive_extensions()
+    {
+    }
+    /**
+     * Get default active extensions.
+     *
+     * @return array
+     */
+    protected function get_default_active_extensions()
+    {
+    }
+    /**
+     * Load enabled extensions
+     *
+     * @param string $path              The defined directory.
+     * @param array  $current_activates The activated extensions.
+     *
+     * @return void
+     */
+    protected function load_extensions_files($path, $current_activates)
+    {
+    }
+    /**
+     * Load enabled extensions
+     *
+     * @param string $path The defined directory.
+     *
+     * @return void
+     */
+    public function load_extensions($path)
+    {
+    }
+}
+/**
  * Modules class
  *
  * @since       1.0.0
@@ -1563,22 +2349,10 @@ class Assets
  */
 class Modules
 {
-    /** The instance of the current class.
-     *
-     * @var self
-     */
-    private static $instance;
-    /** The instance of the memory class.
-     *
-     * @var Memory
-     */
-    private static $memory;
     /**
-     * Get the instance of the current class.
-     *
-     * @return self
+     * Activate all modules.
      */
-    public static function get_instance()
+    public function active_modules()
     {
     }
     /**
@@ -1590,11 +2364,42 @@ class Modules
     {
     }
     /**
+     * Check the current module is an inactive module.
+     *
+     * @param array $module The array of current module.
+     *
+     * @return array|null
+     */
+    protected function is_inactive_module($module)
+    {
+    }
+    /**
+     *  Check the current module is an active module.
+     *
+     * @param array $module The array of current module.
+     *
+     * @return array|null
+     */
+    protected function is_active_module($module)
+    {
+    }
+    /**
+     * Get filtered modules.
+     *
+     * @param callable $callback The callback function for filter the current module.
+     * @param array    $modules  The available modules.
+     *
+     * @return array
+     */
+    protected function get_filtered_modules($callback, $modules)
+    {
+    }
+    /**
      *  Get inactive modules.
      *
      * @return array
      */
-    public function get_inactive_modules()
+    protected function get_inactive_modules()
     {
     }
     /**
@@ -1602,7 +2407,7 @@ class Modules
      *
      * @return array
      */
-    public function get_default_active_modules()
+    protected function get_default_active_modules()
     {
     }
     /**
@@ -1650,46 +2455,6 @@ class Modules
 class Rest_API_Routes
 {
     /**
-     * The instance of the current class.
-     *
-     * @var self
-     */
-    private static $instance;
-    /**
-     * The product slug.
-     *
-     * @var string
-     */
-    private static $product_slug;
-    /**
-     * The instance of the Memory class.
-     *
-     * @var Memory
-     */
-    private static $memory;
-    /**
-     * The list of routes.
-     *
-     * @var array
-     */
-    private static $routes = array();
-    /**
-     * Get the instance of the current class.
-     *
-     * @return self
-     */
-    public static function get_instance()
-    {
-    }
-    /**
-     * We register our routes for our endpoints.
-     *
-     * @return void
-     */
-    public function register_routes()
-    {
-    }
-    /**
      * Load rest route on init time.
      *
      * @return void
@@ -1697,9 +2462,60 @@ class Rest_API_Routes
     public function register_all()
     {
     }
+    /**
+     * We register our routes for our endpoints.
+     *
+     * @param string $slug   The product slug.
+     * @param array  $routes The list of routes.
+     *
+     * @return void
+     */
+    public function register_routes($slug, $routes)
+    {
+    }
 }
 namespace DiviSquad\Manager\Rest_API_Routes;
 
+/**
+ * Rest_API_Routes
+ *
+ * @since       1.0.0
+ * @package     squad-modules-for-divi
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
+ * @license     GPL-3.0-only
+ */
+class Extensions
+{
+    /**
+     * Get active extensions list from database
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function get_active_extensions()
+    {
+    }
+    /**
+     * Get update extensions list from database
+     *
+     * @param WP_REST_Request $request The wp rest api request.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function update_active_extensions($request)
+    {
+    }
+    /**
+     * We register our routes for our endpoints.
+     *
+     * @param \DiviSquad\Manager\Extensions $extensions The extensions manager object.
+     *
+     * @return array
+     */
+    public function get_routes($extensions)
+    {
+    }
+}
 /**
  * Rest_API_Routes
  *
@@ -1716,34 +2532,17 @@ class Modules
      *
      * @var self
      */
-    private static $instance;
+    protected static $instance;
     /**
      * The instance of the memory class.
      *
      * @var Memory
      */
-    private static $memory;
-    /**
-     * The instance of the Modules class.
-     *
-     * @var \DiviSquad\Manager\Modules
-     */
-    private static $modules;
-    /**
-     * Get the instance of the current class.
-     *
-     * @param Memory                     $memory                        The memory object.
-     * @param \DiviSquad\Manager\Modules $modules   The module manager object.
-     *
-     * @return self
-     */
-    public static function get_instance($memory, $modules)
-    {
-    }
+    protected static $memory;
     /**
      * Get active modules list from database.
      *
-     * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
      */
     public function get_active_modules()
     {
@@ -1753,7 +2552,7 @@ class Modules
      *
      * @param WP_REST_Request $request The wp rest api request.
      *
-     * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
      */
     public function update_active_modules($request)
     {
@@ -1761,9 +2560,11 @@ class Modules
     /**
      * We register our routes for our endpoints.
      *
+     * @param \DiviSquad\Manager\Modules $modules The module manager object.
+     *
      * @return array
      */
-    public function get_routes()
+    public function get_routes($modules)
     {
     }
 }
@@ -2442,6 +3243,581 @@ class FlipBox extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
     {
     }
 }
+namespace DiviSquad\Modules\FormStylerContactForm7;
+
+/**
+ * The Form Styler: Contact Form 7 Module Class.
+ *
+ * @since       1.2.0
+ * @package     squad-modules-for-divi
+ */
+class FormStylerContactForm7 extends \DiviSquad\Base\BuilderModule\DISQ_Form_Styler_Module
+{
+    /**
+     * Initiate Module.
+     * Set the module name on init.
+     *
+     * @return void
+     * @since 1.2.0
+     */
+    public function init()
+    {
+    }
+    /**
+     * Declare general fields for the module.
+     *
+     * @return array[]
+     * @since 1.0.0
+     */
+    public function get_fields()
+    {
+    }
+    /**
+     * Declare advanced fields for the module
+     *
+     * @return array[]
+     */
+    public function get_advanced_fields_config()
+    {
+    }
+    /**
+     * Declare custom css fields for the module
+     *
+     * @return array[]
+     */
+    public function get_custom_css_fields_config()
+    {
+    }
+    /**
+     * Get CSS fields transition.
+     *
+     * Add form field options group and background image on the field list.
+     *
+     * @since 1.0.0
+     */
+    public function get_transition_fields_css_props()
+    {
+    }
+    /**
+     * Render module output.
+     *
+     * @param array  $attrs       List of unprocessed attributes.
+     * @param string $content     Content being processed.
+     * @param string $render_slug Slug of module that is used for rendering output.
+     *
+     * @return string module's rendered output.
+     * @since 1.0.0
+     */
+    public function render($attrs, $content, $render_slug)
+    {
+    }
+    /**
+     * Collect all contact form from the database.
+     *
+     * @return array
+     */
+    public function disq_form_styler__get_all_forms()
+    {
+    }
+    /**
+     * Collect all posts from the database.
+     *
+     * @param array  $attrs   List of unprocessed attributes.
+     * @param string $content Content being processed.
+     *
+     * @return string the html output.
+     * @since 1.0.0
+     */
+    public static function disq_form_styler__get_form_html($attrs, $content = null)
+    {
+    }
+    /**
+     * Generate styles.
+     *
+     * @param array $attrs List of unprocessed attributes.
+     *
+     * @return void
+     */
+    protected function disq_generate_all_styles($attrs)
+    {
+    }
+    /**
+     * Get the stylesheet selector for form tag.
+     *
+     * @return string
+     */
+    public function get_form_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form tag to use in hover.
+     *
+     * @return string
+     */
+    public function get_form_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the error message.
+     *
+     * @return string
+     */
+    protected function get_error_message_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the error message to use in hover.
+     *
+     * @return string
+     */
+    protected function get_error_message_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the success message.
+     *
+     * @return string
+     */
+    protected function get_success_message_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the success message to use in hover.
+     *
+     * @return string
+     */
+    protected function get_success_message_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form submit button.
+     *
+     * @return string
+     */
+    protected function get_submit_button_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form submit button to use in hover.
+     *
+     * @return string
+     */
+    protected function get_submit_button_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form fields.
+     *
+     * @return string
+     */
+    public function get_field_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form fields to use in hover.
+     *
+     * @return string
+     */
+    public function get_field_selector_hover()
+    {
+    }
+}
+namespace DiviSquad\Modules\FormStylerGravityForms;
+
+/**
+ * The Form Styler: Gravity Forms Module Class.
+ *
+ * @since       1.0.0
+ * @package     squad-modules-for-divi
+ */
+class FormStylerGravityForms extends \DiviSquad\Base\BuilderModule\DISQ_Form_Styler_Module
+{
+    /**
+     * Initiate Module.
+     * Set the module name on init.
+     *
+     * @return void
+     * @since 1.0.0
+     */
+    public function init()
+    {
+    }
+    /**
+     * Get toggles for the module's settings modal.
+     */
+    public function get_settings_modal_toggles()
+    {
+    }
+    /**
+     * Declare general fields for the module.
+     *
+     * @return array[]
+     * @since 1.0.0
+     */
+    public function get_fields()
+    {
+    }
+    /**
+     * Declare advanced fields for the module
+     *
+     * @return array[]
+     */
+    public function get_advanced_fields_config()
+    {
+    }
+    /**
+     * Declare custom css fields for the module
+     *
+     * @return array[]
+     */
+    public function get_custom_css_fields_config()
+    {
+    }
+    /**
+     * Render module output.
+     *
+     * @param array  $attrs       List of unprocessed attributes.
+     * @param string $content     Content being processed.
+     * @param string $render_slug Slug of module that is used for rendering output.
+     *
+     * @return string module's rendered output.
+     * @since 1.0.0
+     */
+    public function render($attrs, $content, $render_slug)
+    {
+    }
+    /**
+     * Collect all wp form from the database.
+     *
+     * @return array
+     */
+    public function disq_form_styler__get_all_forms()
+    {
+    }
+    /**
+     * Collect all posts from the database.
+     *
+     * @param array  $attrs   List of unprocessed attributes.
+     * @param string $content Content being processed.
+     *
+     * @return string the html output.
+     * @since 1.0.0
+     */
+    public static function disq_form_styler__get_form_html($attrs, $content = null)
+    {
+    }
+    /**
+     * Get the stylesheet selector for form tag.
+     *
+     * @return string
+     */
+    public function get_form_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form tag to use in hover.
+     *
+     * @return string
+     */
+    public function get_form_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form fields.
+     *
+     * @return string
+     */
+    public function get_field_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form fields to use in hover.
+     *
+     * @return string
+     */
+    public function get_field_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the error message.
+     *
+     * @return string
+     */
+    protected function get_error_message_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the error message to use in hover.
+     *
+     * @return string
+     */
+    protected function get_error_message_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the success message.
+     *
+     * @return string
+     */
+    protected function get_success_message_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the success message to use in hover.
+     *
+     * @return string
+     */
+    protected function get_success_message_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form submit button.
+     *
+     * @return string
+     */
+    protected function get_submit_button_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form submit button to use in hover.
+     *
+     * @return string
+     */
+    protected function get_submit_button_selector_hover()
+    {
+    }
+}
+namespace DiviSquad\Modules\FormStylerWPForms;
+
+/**
+ * The Form Styler: WP Forms Module Class.
+ *
+ * @since       1.2.0
+ * @package     squad-modules-for-divi
+ */
+class FormStylerWPForms extends \DiviSquad\Base\BuilderModule\DISQ_Form_Styler_Module
+{
+    /**
+     * Initiate Module.
+     * Set the module name on init.
+     *
+     * @return void
+     * @since 1.2.0
+     */
+    public function init()
+    {
+    }
+    /**
+     * Declare general fields for the module.
+     *
+     * @return array[]
+     * @since 1.0.0
+     */
+    public function get_fields()
+    {
+    }
+    /**
+     * Declare advanced fields for the module
+     *
+     * @return array[]
+     */
+    public function get_advanced_fields_config()
+    {
+    }
+    /**
+     * Declare custom css fields for the module
+     *
+     * @return array[]
+     */
+    public function get_custom_css_fields_config()
+    {
+    }
+    /**
+     * Render module output.
+     *
+     * @param array  $attrs       List of unprocessed attributes.
+     * @param string $content     Content being processed.
+     * @param string $render_slug Slug of module that is used for rendering output.
+     *
+     * @return string module's rendered output.
+     * @since 1.0.0
+     */
+    public function render($attrs, $content, $render_slug)
+    {
+    }
+    /**
+     * Collect all wp form from the database.
+     *
+     * @return array
+     */
+    public function disq_form_styler__get_all_forms()
+    {
+    }
+    /**
+     * Collect all posts from the database.
+     *
+     * @param array  $attrs   List of unprocessed attributes.
+     * @param string $content Content being processed.
+     *
+     * @return string the html output.
+     * @since 1.0.0
+     */
+    public static function disq_form_styler__get_form_html($attrs, $content = null)
+    {
+    }
+    /**
+     * Get the stylesheet selector for form tag.
+     *
+     * @return string
+     */
+    public function get_form_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form tag to use in hover.
+     *
+     * @return string
+     */
+    public function get_form_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form fields.
+     *
+     * @return string
+     */
+    public function get_field_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form fields to use in hover.
+     *
+     * @return string
+     */
+    public function get_field_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the error message.
+     *
+     * @return string
+     */
+    protected function get_error_message_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the error message to use in hover.
+     *
+     * @return string
+     */
+    protected function get_error_message_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the success message.
+     *
+     * @return string
+     */
+    protected function get_success_message_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for the success message to use in hover.
+     *
+     * @return string
+     */
+    protected function get_success_message_selector_hover()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form submit button.
+     *
+     * @return string
+     */
+    protected function get_submit_button_selector_default()
+    {
+    }
+    /**
+     * Get the stylesheet selector for form submit button to use in hover.
+     *
+     * @return string
+     */
+    protected function get_submit_button_selector_hover()
+    {
+    }
+}
+namespace DiviSquad\Modules\ImageGallery;
+
+/**
+ * Image Gallery Module Class.
+ *
+ * @since           1.0.0
+ * @package         squad-modules-for-divi
+ */
+class ImageGallery extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+{
+    /**
+     * Initiate Module.
+     * Set the module name on init.
+     *
+     * @return void
+     * @since 1.0.0
+     */
+    public function init()
+    {
+    }
+    /**
+     * Declare general fields for the module
+     *
+     * @return array[]
+     * @since 1.0.0
+     */
+    public function get_fields()
+    {
+    }
+    /**
+     * Gets the available intermediate image size names.
+     *
+     * @return array An array of image size names.
+     */
+    public function get_available_image_sizes()
+    {
+    }
+    /**
+     * Renders the module output.
+     *
+     * @param array  $attrs       List of attributes.
+     * @param string $content     Content being processed.
+     * @param string $render_slug Slug of module that is used for rendering output.
+     *
+     * @return string
+     */
+    public function render($attrs, $content, $render_slug)
+    {
+    }
+    /**
+     * Get attachment html data for gallery module
+     *
+     * @param array $args Gallery Options.
+     *
+     * @return string|null Attachments data
+     */
+    public function get_gallery_html($args = array())
+    {
+    }
+    /**
+     * Get attachment data for gallery module
+     *
+     * @param array $args             Gallery Options.
+     * @param array $conditional_tags Additional conditionals tags.
+     * @param array $current_page     Current page.
+     *
+     * @return array|WP_Post[] Attachments data
+     */
+    static function get_gallery($args = array(), $conditional_tags = array(), $current_page = array())
+    {
+    }
+}
 namespace DiviSquad\Modules\ImageMask;
 
 /**
@@ -2648,7 +4024,7 @@ class PostGrid extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
      *
      * @return void
      */
-    public function wp_hook_disq_outside_post_element($post, $attrs, $content)
+    public function wp_hook_disq_current_outside_post_element($post, $attrs, $content)
     {
     }
     /**
@@ -2930,6 +4306,8 @@ class TypingText extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
      * Renders additional styles for the module output.
      *
      * @param array $attrs List of attributes.
+     *
+     * @return void
      */
     private function generate_additional_styles($attrs)
     {
@@ -2953,6 +4331,26 @@ class Divi
      * @return string
      */
     public static function get_icon_type($icon_value)
+    {
+    }
+    /**
+     * Determine icon font weight
+     *
+     * @param string $icon_value Divi formatted value for Icon.
+     *
+     * @return string
+     */
+    public static function get_icon_font_weight($icon_value)
+    {
+    }
+    /**
+     * Get unicode icon data
+     *
+     * @param string $icon_value Icon font value.
+     *
+     * @return string Icon data
+     */
+    public static function get_icon_data_to_unicode($icon_value)
     {
     }
     /**
@@ -3058,11 +4456,11 @@ class Helper
     /**
      * Implode array like html attributes.
      *
-     * @param array $array The associate array data.
+     * @param array $array_data The associate array data.
      *
      * @return string
      */
-    public static function implode_assoc_array($array)
+    public static function implode_assoc_array($array_data)
     {
     }
     /**
@@ -3083,13 +4481,13 @@ class Helper
      * print_r(array_sort($people, 'surname', SORT_ASC)); // Sort by surname
      * </code>
      *
-     * @param array  $array The input array.
+     * @param array  $array_data The input array.
      * @param string $on    The column number.
      * @param int    $order The optional second parameter flags may be used to modify the sorting behavior using these values.
      *
      * @return array
      */
-    public static function array_sort($array, $on, $order = SORT_ASC)
+    public static function array_sort($array_data, $on, $order = SORT_ASC)
     {
     }
     /**
@@ -3104,7 +4502,7 @@ class Helper
      * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
      * Conditional Tags} article in the Theme Developer Handbook.
      *
-     * @param string $plugin Path to the plugin file relative to the plugins directory.
+     * @param string $plugin Path to the plugin file relative to the plugins' directory.
      *
      * @return bool True if active for the network, otherwise false.
      * @since 3.0.0
@@ -3124,53 +4522,12 @@ class Helper
      * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
      * Conditional Tags} article in the Theme Developer Handbook.
      *
-     * @param string $plugin Path to the plugin file relative to the plugins directory.
+     * @param string $plugin Path to the plugin file relative to the plugins' directory.
      *
      * @return bool True, if in the active plugins list. False, not in the list.
      * @since 2.5.0
      */
     public static function is_plugin_active($plugin)
-    {
-    }
-}
-namespace DiviSquad;
-
-/**
- * Free Plugin Load class.
- *
- * @since           1.0.0
- * @package         squad-modules-for-divi
- * @author          WP Squad <support@thewpsquad.com>
- * @license         GPL-3.0-only
- */
-final class SquadModules extends \DiviSquad\Integration\Core
-{
-    /**
-     * The instance of current class.
-     *
-     * @var self
-     */
-    private static $instance;
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-    }
-    /**
-     * Define the core constants.
-     *
-     * @return void
-     */
-    private function define_core_constants()
-    {
-    }
-    /**
-     *  The instance of current class.
-     *
-     * @return self
-     */
-    public static function get_instance()
     {
     }
 }
@@ -3180,14 +4537,13 @@ final class SquadModules extends \DiviSquad\Integration\Core
  *
  * @package     divi-squad
  * @author      WP Squad <wp@thewpsquad.com>
- * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  *
  * @wordpress-plugin
  * Plugin Name:         Squad Modules for Divi Builder
  * Plugin URI:          https://squadmodules.com/
  * Description:         Enhance your Divi-powered websites with an elegant collection of Divi modules.
- * Version:             1.1.0
+ * Version:             1.2.0
  * Requires at least:   5.8
  * Requires PHP:        5.6
  * Author:              WP Squad
