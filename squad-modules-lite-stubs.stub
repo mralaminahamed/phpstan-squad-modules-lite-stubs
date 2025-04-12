@@ -108,7 +108,7 @@ namespace DiviSquad\Admin\Plugin {
          *
          * @return  string
          * @since 1.3.2
-         * @deprecated 3.0.1 marked as deprecated.
+         * @deprecated 3.1.0 marked as deprecated.
          */
         public function add_plugin_footer_text($footer_text)
         {
@@ -120,7 +120,7 @@ namespace DiviSquad\Admin\Plugin {
          *
          * @return  string
          * @since 1.4.8
-         * @deprecated 3.0.1 marked as deprecated.
+         * @deprecated 3.1.0 marked as deprecated.
          */
         public function add_update_footer_text($content)
         {
@@ -134,6 +134,236 @@ namespace DiviSquad\Admin\Plugin {
      * @deprecated 3.0.0 marked as deprecated.
      */
     class RowMeta
+    {
+    }
+}
+namespace DiviSquad\Base\DiviBuilder {
+    /**
+     * Builder Utils class
+     *
+     * @package DiviSquad
+     * @since   1.0.0
+     */
+    #[\AllowDynamicProperties]
+    abstract class Module extends \ET_Builder_Module
+    {
+        /**
+         * Utils folder name.
+         *
+         * @var string
+         * @since 1.0.0
+         */
+        public $folder_name = 'et_pb_divi_squad_modules';
+        /**
+         * Stylesheet selector for tooltip container.
+         *
+         * @var string
+         * @since 1.0.0
+         */
+        public $tooltip_css_element = '';
+        /**
+         * The default options for divider.
+         *
+         * @var array
+         */
+        public $squad_divider_defaults = array('divider_style' => 'solid', 'divider_position' => 'bottom', 'divider_weight' => '2px');
+        /**
+         * The show options for divider.
+         *
+         * @var array
+         */
+        public $squad_divider_show_options = array('off' => 'No', 'on' => 'Yes');
+        /**
+         * The instance of Utils class
+         *
+         * @var Utils\Base
+         */
+        public $squad_utils;
+        /**
+         * Utils credits.
+         *
+         * @var string[]
+         * @since 1.0.0
+         */
+        protected $module_credits = array('module_uri' => '', 'author' => 'Divi Squad', 'author_uri' => \DiviSquad\Managers\Links::HOME_URL . '?utm_campaign=wporg&utm_source=module_modal&utm_medium=module_author_link');
+        /**
+         * The icon for module.
+         *
+         * @var string
+         * @since 1.0.0
+         */
+        protected $icon = '';
+        /**
+         * The icon path for module.
+         *
+         * @var string
+         * @since 1.0.0
+         */
+        protected $icon_path = '';
+        /**
+         * The list of icon eligible element
+         *
+         * @var array
+         */
+        protected $icon_not_eligible_elements = array();
+    }
+    /**
+     * Builder Utils class
+     *
+     * @package DiviSquad
+     * @since   1.0.0
+     * @deprecated 3.1.0 mark as deprecated
+     */
+    #[\AllowDynamicProperties]
+    abstract class DiviSquad_Module extends \DiviSquad\Base\DiviBuilder\Module
+    {
+    }
+    /**
+     * Integration API Base Class.
+     *
+     * @package DiviSquad
+     * @since   1.0.0
+     */
+    abstract class Integration
+    {
+        /**
+         * The plugin name.
+         *
+         * @since 1.0.0
+         *
+         * @var string
+         */
+        protected $name = '';
+        /**
+         * Absolute path to the plugin's directory.
+         *
+         * @since 1.0.0
+         *
+         * @var string
+         */
+        protected $plugin_dir = '';
+        /**
+         * The plugin's directory URL.
+         *
+         * @since 1.0.0
+         *
+         * @var string
+         */
+        protected $plugin_dir_url = '';
+        /**
+         * The plugin's version
+         *
+         * @since 1.0.0
+         *
+         * @var string The plugin's version
+         */
+        protected $version = '';
+        /**
+         * The asset build for the plugin
+         *
+         * @since 1.0.0
+         *
+         * @var string The plugin's version
+         */
+        protected $build_path = 'build/divi-builder-4/';
+        /**
+         * Constructor.
+         *
+         * @param string $name           The plugin's WP Plugin name.
+         * @param string $plugin_dir     Absolute path to the plugin's directory.
+         * @param string $plugin_dir_url The plugin's directory URL.
+         */
+        public function __construct($name, $plugin_dir, $plugin_dir_url)
+        {
+        }
+        /**
+         * Performs initialization tasks.
+         *
+         * @since 1.0.0
+         *
+         * @return void
+         */
+        public abstract function initialize();
+        /**
+         * Get the plugin version number
+         *
+         * @since 1.0.0
+         *
+         * @return string
+         */
+        public abstract function get_version();
+    }
+}
+namespace DiviSquad\Base\DiviBuilder\Integration {
+    /**
+     * Integration API Class.
+     *
+     * @package DiviSquad
+     * @since   1.0.0
+     */
+    abstract class ShortcodeAPI extends \DiviSquad\Base\DiviBuilder\Integration
+    {
+        /**
+         * Loads custom modules when the builder is ready.
+         */
+        public abstract function hook_et_builder_ready();
+        /**
+         * Performs initialization tasks.
+         */
+        public function initialize()
+        {
+        }
+        /**
+         * Enqueues the plugin's scripts and styles for the admin area.
+         */
+        public function admin_hook_enqueue_scripts()
+        {
+        }
+        /**
+         * Enqueues minified (production) or non-minified (hot reloaded) backend styles.
+         */
+        public function enqueue_backend_styles()
+        {
+        }
+        /**
+         * Enqueues the plugin's scripts and styles.
+         */
+        public function wp_hook_enqueue_scripts()
+        {
+        }
+    }
+}
+namespace DiviSquad\Base\DiviBuilder {
+    /**
+     * Integration API Class.
+     *
+     * @package DiviSquad
+     * @since   1.0.0
+     * @deprecated 3.1.0 mark as deprecated
+     */
+    abstract class IntegrationAPI extends \DiviSquad\Base\DiviBuilder\Integration\ShortcodeAPI
+    {
+    }
+    /**
+     * Integration API Base Class.
+     *
+     * @package DiviSquad
+     * @since   1.0.0
+     * @deprecated 3.1.0 mark as deprecated
+     */
+    abstract class IntegrationAPIBase extends \DiviSquad\Base\DiviBuilder\Integration
+    {
+    }
+}
+namespace DiviSquad\Base\DiviBuilder\Utils {
+    /**
+     * Builder Utils Interface
+     *
+     * @package     DiviSquad
+     * @since       1.5.0
+     * @deprecated  3.1.0 marked as deprecated
+     */
+    interface UtilsInterface
     {
     }
 }
@@ -265,7 +495,7 @@ namespace DiviSquad\Integrations {
          * Get the instance of the current class.
          *
          * @return void
-         * @deprecated 3.0.1 marked as deprecated.
+         * @deprecated 3.1.0 marked as deprecated.
          */
         public static function load()
         {
@@ -277,7 +507,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.2.0
-         * @deprecated 3.0.1 marked as deprecated.
+         * @deprecated 3.1.0 marked as deprecated.
          */
         protected static function register_admin_scripts($admin_asset)
         {
@@ -289,7 +519,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.2.0
-         * @deprecated 3.0.1 marked as deprecated.
+         * @deprecated 3.1.0 marked as deprecated.
          */
         protected static function register_plugin_action_links($action_links)
         {
@@ -301,7 +531,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.2.0
-         * @deprecated 3.0.1 marked as deprecated.
+         * @deprecated 3.1.0 marked as deprecated.
          */
         protected static function register_plugin_row_meta($row_meta)
         {
@@ -313,7 +543,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.2.0
-         * @deprecated 3.0.1 marked as deprecated.
+         * @deprecated 3.1.0 marked as deprecated.
          */
         protected static function register_plugin_footer_text($footer_text)
         {
@@ -325,7 +555,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.4.8
-         * @deprecated 3.0.1 marked as deprecated.
+         * @deprecated 3.1.0 marked as deprecated.
          */
         protected static function register_update_footer_text($footer_text)
         {
@@ -346,7 +576,7 @@ namespace DiviSquad\Managers {
          * Enqueue scripts for frontend.
          *
          * @return void
-         * @deprecated 3.0.1 marked as deprecated.
+         * @deprecated 3.1.0 marked as deprecated.
          */
         public function enqueue_scripts()
         {
@@ -355,7 +585,7 @@ namespace DiviSquad\Managers {
          * Enqueue scripts for builder.
          *
          * @return void
-         * @deprecated 3.0.1 marked as deprecated.
+         * @deprecated 3.1.0 marked as deprecated.
          */
         public function enqueue_scripts_vb()
         {
@@ -366,7 +596,7 @@ namespace DiviSquad\Managers {
          * @param string $output Exist output.
          *
          * @return string
-         * @deprecated 3.0.1 marked as deprecated.
+         * @deprecated 3.1.0 marked as deprecated.
          */
         public function wp_localize_script_data($output)
         {
@@ -454,27 +684,6 @@ namespace DiviSquad\Managers\Features {
     class Extensions extends \DiviSquad\Base\Factories\SquadFeatures
     {
         /**
-         * Load enabled extensions
-         *
-         * @param string $path The defined directory.
-         *
-         * @return void
-         */
-        public function load_extensions($path)
-        {
-        }
-        /**
-         * Load enabled extensions
-         *
-         * @param string $path   The defined directory.
-         * @param Memory $memory The instance of Memory class.
-         *
-         * @return void
-         */
-        protected function load_extensions_files($path, $memory)
-        {
-        }
-        /**
          * Get available extensions.
          *
          * @return array[]
@@ -498,6 +707,27 @@ namespace DiviSquad\Managers\Features {
         public function get_inactive_registries()
         {
         }
+        /**
+         * Load enabled extensions
+         *
+         * @param string $path The defined directory.
+         *
+         * @return void
+         */
+        public function load_extensions($path)
+        {
+        }
+        /**
+         * Load enabled extensions
+         *
+         * @param string $path   The defined directory.
+         * @param Memory $memory The instance of Memory class.
+         *
+         * @return void
+         */
+        protected function load_extensions_files($path, $memory)
+        {
+        }
     }
 }
 namespace DiviSquad\Managers {
@@ -506,7 +736,7 @@ namespace DiviSquad\Managers {
      *
      * @package     DiviSquad
      * @since       1.0.0
-     * @deprecated  3.0.1 marked as deprecated.
+     * @deprecated  3.1.0 marked as deprecated.
      */
     class Extensions extends \DiviSquad\Managers\Features\Extensions
     {
@@ -526,7 +756,7 @@ namespace DiviSquad\Managers\Features {
          *
          * @return array[]
          */
-        public function get_modules_with_extra()
+        public function get_all_modules_with_locked()
         {
         }
         /**
@@ -543,6 +773,42 @@ namespace DiviSquad\Managers\Features {
          * @return array
          */
         public function get_inactive_registries()
+        {
+        }
+        /**
+         * Get active modules.
+         *
+         * @return array
+         */
+        public function get_active_registries()
+        {
+        }
+        /**
+         * Get active modules.
+         *
+         * @return array
+         */
+        public function get_active_modules()
+        {
+        }
+        /**
+         * Get default modules.
+         *
+         * @param string $module_name The module name.
+         *
+         * @return bool
+         */
+        public function is_module_active($module_name)
+        {
+        }
+        /**
+         * Check if the module is active by class name.
+         *
+         * @param string $module_classname The module class name.
+         *
+         * @return bool
+         */
+        public function is_module_active_by_classname($module_classname)
         {
         }
         /**
@@ -564,6 +830,16 @@ namespace DiviSquad\Managers\Features {
          * @return void
          */
         protected function load_module_files($path, $memory)
+        {
+        }
+        /**
+         * Filter list of modules with specific keys.
+         *
+         * @param array $input_array Running module configuration.
+         *
+         * @return array
+         */
+        public function custom_array_slice($input_array)
         {
         }
         /**
@@ -626,81 +902,10 @@ namespace DiviSquad\Managers {
      *
      * @package     DiviSquad
      * @since       1.0.0
-     * @deprecated  3.0.1 marked as deprecated.
+     * @deprecated  3.1.0 marked as deprecated.
      */
     class Modules extends \DiviSquad\Managers\Features\Modules
     {
-    }
-}
-namespace DiviSquad\Base\DiviBuilder {
-    /**
-     * Builder Utils class
-     *
-     * @package DiviSquad
-     * @since   1.0.0
-     */
-    #[\AllowDynamicProperties]
-    abstract class DiviSquad_Module extends \ET_Builder_Module
-    {
-        /**
-         * Utils folder name.
-         *
-         * @var string
-         * @since 1.0.0
-         */
-        public $folder_name = 'et_pb_divi_squad_modules';
-        /**
-         * Stylesheet selector for tooltip container.
-         *
-         * @var string
-         * @since 1.0.0
-         */
-        public $tooltip_css_element = '';
-        /**
-         * The default options for divider.
-         *
-         * @var array
-         */
-        public $squad_divider_defaults = array('divider_style' => 'solid', 'divider_position' => 'bottom', 'divider_weight' => '2px');
-        /**
-         * The show options for divider.
-         *
-         * @var array
-         */
-        public $squad_divider_show_options = array('off' => 'No', 'on' => 'Yes');
-        /**
-         * The instance of Utils class
-         *
-         * @var Utils\UtilsInterface
-         */
-        public $squad_utils;
-        /**
-         * Utils credits.
-         *
-         * @var string[]
-         * @since 1.0.0
-         */
-        protected $module_credits = array('module_uri' => '', 'author' => 'Divi Squad', 'author_uri' => \DiviSquad\Managers\Links::HOME_URL . '?utm_campaign=wporg&utm_source=module_modal&utm_medium=module_author_link');
-        /**
-         * The icon for module.
-         *
-         * @var string
-         * @since 1.0.0
-         */
-        protected $icon = '';
-        /**
-         * The icon path for module.
-         *
-         * @var string
-         * @since 1.0.0
-         */
-        protected $icon_path = '';
-        /**
-         * The list of icon eligible element
-         *
-         * @var array
-         */
-        protected $icon_not_eligible_elements;
     }
 }
 namespace DiviSquad\Modules {
@@ -710,14 +915,14 @@ namespace DiviSquad\Modules {
      * @package DiviSquad
      * @since   1.0.0
      */
-    class PostGridChild extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class PostGridChild extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * The list of element types
          *
          * @var array
          */
-        protected $element_types;
+        protected $element_types = array();
         /**
          * Initiate Module.
          * Set the module name on init.
@@ -735,6 +940,15 @@ namespace DiviSquad\Modules {
          * @since 1.0.0
          */
         public function get_fields()
+        {
+        }
+        /**
+         * Declare general fields for the module
+         *
+         * @return array[]
+         * @since 3.1.0
+         */
+        public function get_custom_fields()
         {
         }
         /**
@@ -16756,6 +16970,26 @@ namespace {
         #endregion
     }
 }
+namespace DiviSquad\Utils\Media {
+    /**
+     * The Filesystem class.
+     *
+     * @package DiviSquad
+     * @since   3.0.0
+     */
+    class Filesystem
+    {
+        /**
+         * Get the filesystem.
+         *
+         * @access protected
+         * @return WP_Filesystem_Base
+         */
+        protected function get_wp_filesystem()
+        {
+        }
+    }
+}
 namespace DiviSquad\Base {
     /**
      * The Base class for Core
@@ -16763,7 +16997,7 @@ namespace DiviSquad\Base {
      * @package DiviSquad
      * @since   1.0.0
      */
-    abstract class Core
+    abstract class Core extends \DiviSquad\Utils\Media\Filesystem
     {
         /**
          * The plugin admin menu slug.
@@ -16780,8 +17014,9 @@ namespace DiviSquad\Base {
         /**
          * The Plugin name.
          *
-         * @var string
          * @since 1.0.0
+         *
+         * @var string
          */
         protected $name;
         /**
@@ -16793,15 +17028,17 @@ namespace DiviSquad\Base {
         /**
          * The Plugin Version.
          *
-         * @var string
          * @since 1.4.5
+         *
+         * @var string
          */
         protected $version;
         /**
          * The plugin option prefix
          *
-         * @var string
          * @since 1.0.0
+         *
+         * @var string
          */
         protected $opt_prefix;
         /**
@@ -16857,8 +17094,9 @@ namespace DiviSquad\Base {
         /**
          * Load all assets.
          *
-         * @return void
          * @since 3.0.0
+         *
+         * @return void
          */
         protected function load_assets()
         {
@@ -17020,14 +17258,14 @@ namespace DiviSquad\Base {
         }
     }
 }
-namespace DiviSquad\Base\DiviBuilder {
+namespace DiviSquad\Base\DiviBuilder\Module {
     /**
      * Builder Utils Helper Class which help to the all module class
      *
      * @package DiviSquad
      * @since   1.0.0
      */
-    abstract class DiviSquad_Form_Styler extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    abstract class FormStyler extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Collect all posts from the database.
@@ -17175,118 +17413,8 @@ namespace DiviSquad\Base\DiviBuilder {
         {
         }
     }
-    /**
-     * Divi Squad Class.
-     *
-     * @package DiviSquad
-     * @since   1.0.0
-     */
-    abstract class IntegrationAPIBase
-    {
-        /**
-         * The plugin name.
-         *
-         * @since 1.0.0
-         *
-         * @var string
-         */
-        protected $name = '';
-        /**
-         * Absolute path to the plugin's directory.
-         *
-         * @since 1.0.0
-         *
-         * @var string
-         */
-        protected $plugin_dir = '';
-        /**
-         * The plugin's directory URL.
-         *
-         * @since 1.0.0
-         *
-         * @var string
-         */
-        protected $plugin_dir_url = '';
-        /**
-         * The plugin's version
-         *
-         * @since 1.0.0
-         *
-         * @var string The plugin's version
-         */
-        protected $version = '';
-        /**
-         * The asset build for the plugin
-         *
-         * @since 1.0.0
-         *
-         * @var string The plugin's version
-         */
-        protected $build_path = 'build/divi-builder-4/';
-        /**
-         * Divi Squad constructor.
-         *
-         * @param string $name           The plugin's WP Plugin name.
-         * @param string $plugin_dir     Absolute path to the plugin's directory.
-         * @param string $plugin_dir_url The plugin's directory URL.
-         */
-        public function __construct($name, $plugin_dir, $plugin_dir_url)
-        {
-        }
-        /**
-         * Performs initialization tasks.
-         *
-         * @since 1.0.0
-         *
-         * @return void
-         */
-        public abstract function initialize();
-        /**
-         * Get the plugin version number
-         *
-         * @since 1.0.0
-         *
-         * @return string
-         */
-        public abstract function get_version();
-    }
-    /**
-     * Divi Squad Class.
-     *
-     * @package DiviSquad
-     * @since   1.0.0
-     */
-    abstract class IntegrationAPI extends \DiviSquad\Base\DiviBuilder\IntegrationAPIBase
-    {
-        /**
-         * Loads custom modules when the builder is ready.
-         */
-        public abstract function hook_et_builder_ready();
-        /**
-         * Performs initialization tasks.
-         */
-        public function initialize()
-        {
-        }
-        /**
-         * Enqueues the plugin's scripts and styles for the admin area.
-         */
-        public function admin_hook_enqueue_scripts()
-        {
-        }
-        /**
-         * Enqueues minified (production) or non-minified (hot reloaded) backend styles.
-         */
-        public function enqueue_backend_styles()
-        {
-        }
-        /**
-         * Enqueues the plugin's scripts and styles.
-         */
-        public function wp_hook_enqueue_scripts()
-        {
-        }
-    }
+}
+namespace DiviSquad\Base\DiviBuilder {
     /**
      * Builder DiviBackend Placeholder class.
      *
@@ -17325,29 +17453,12 @@ namespace DiviSquad\Base\DiviBuilder {
 }
 namespace DiviSquad\Base\DiviBuilder\Utils {
     /**
-     * Builder Utils Interface
-     *
-     * @package DiviSquad
-     * @since   1.5.0
-     */
-    interface UtilsInterface
-    {
-        /**
-         * Connect with non-static public functions.
-         *
-         * @param DiviSquad_Module $element The instance of ET Builder Element (Squad Module).
-         *
-         * @return Utils
-         */
-        public static function connect($element);
-    }
-    /**
      * Common trait.
      *
      * @package DiviSquad
      * @since   1.0.0
      */
-    trait Common
+    trait CommonTrait
     {
         /**
          * Decode json data from properties in module.
@@ -17458,7 +17569,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils {
      * @package DiviSquad
      * @since   1.0.0
      */
-    trait Fields
+    trait FieldsTrait
     {
         /**
          * Get HTML tag elements for text item.
@@ -17553,7 +17664,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Fields {
      * @author  WP Squad <support@squadmodules.com>
      * @since   1.0.0
      */
-    trait Compatibility
+    trait CompatibilityTrait
     {
         /**
          * Fix border transition issues.
@@ -17601,7 +17712,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Fields {
      * @author  WP Squad <support@squadmodules.com>
      * @since   1.0.0
      */
-    trait Definition
+    trait DefinitionTrait
     {
         /**
          * Simplifies the creation of filter configurations.
@@ -17795,7 +17906,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Fields {
      * @package DiviSquad
      * @since   1.0.0
      */
-    trait Processor
+    trait ProcessorTrait
     {
         /**
          * Process styles for width fields in the module.
@@ -17909,6 +18020,260 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Fields {
         }
     }
 }
+namespace DiviSquad\Base\DiviBuilder\Utils {
+    /**
+     * Deprecated Methods And Properties Trait
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    trait DeprecationsTrait
+    {
+        /**
+         * The default deprecated version.
+         *
+         * @var string
+         */
+        private $deprecated_version = '3.1.0';
+        /**
+         * Array of deprecated properties.
+         *
+         * @var array
+         */
+        private $deprecated_properties = array('squad_divider_defaults' => array('version' => '3.1.0', 'message' => 'Use the property $divider_defaults instead of.', 'value' => array('divider_style' => 'solid', 'divider_position' => 'bottom', 'divider_weight' => '2px')), 'squad_divider_show_options' => array('version' => '3.1.0', 'message' => 'Use the property $divider_show_options instead of.', 'value' => array('off' => 'No', 'on' => 'Yes')));
+        /**
+         * Array of deprecated methods.
+         *
+         * @var array
+         */
+        private $deprecated_methods = array('get_hansel_and_gretel' => array('version' => '3.1.0', 'message' => 'Use the method $this->squad_utils->breadcrumbs->get_hansel_and_gretel() instead of $this->squad_utils->get_hansel_and_gretel()'), 'get_divider_defaults' => array('version' => '3.1.0', 'message' => 'Use the method $this->squad_utils->divider->get_defaults() instead of $this->squad_utils->get_divider_defaults()'), 'get_divider_default' => array('version' => '3.1.0', 'message' => 'Use the method $this->squad_utils->divider->get_default() instead of $this->squad_utils->get_divider_default()'), 'get_divider_show_options' => array('version' => '3.1.0', 'message' => 'Use the method $this->squad_utils->divider->get_show_options() instead of $this->squad_utils->get_divider_show_options()'), 'initiate_the_divider_element' => array('version' => '3.1.0', 'message' => 'Use the method $this->squad_utils->divider->initiate_element() instead of $this->squad_utils->initiate_the_divider_element()'), 'get_divider_element_fields' => array('version' => '3.1.0', 'message' => 'Use the method $this->squad_utils->divider->get_fields() instead of $this->squad_utils->get_divider_element_fields()'), 'get_divider_field_options' => array('version' => '3.1.0', 'message' => 'Use the method $this->squad_utils->divider->get_field_options() instead of $this->squad_utils->get_divider_field_options()'), 'get_mask_shape' => array('version' => '3.1.0', 'message' => 'Use the method $this->squad_utils->mask_shape->get_shape() instead of $this->squad_utils->get_mask_shape()'));
+        /**
+         * Magic method to handle deprecated property access.
+         *
+         * @param string $name The property name.
+         * @return mixed The value of the deprecated property.
+         * @throws InvalidArgumentException If the property does not exist.
+         */
+        public function __get($name)
+        {
+        }
+        /**
+         * Magic method to handle deprecated method calls.
+         *
+         * @param string $name The method name.
+         * @param array  $arguments The method arguments.
+         * @return mixed The result of the method call.
+         * @throws InvalidArgumentException If the method does not exist.
+         */
+        public function __call($name, $arguments)
+        {
+        }
+        /**
+         * Trigger a deprecated warning.
+         *
+         * @param string $name The name of the deprecated element.
+         * @param string $version The version since deprecation.
+         * @param string $message The deprecation message.
+         * @param string $type The type of the deprecated element ('property' or 'method').
+         */
+        private function trigger_deprecated_warning($name, $version, $message, $type)
+        {
+        }
+        /**
+         * Handle calls to deprecated utility methods.
+         *
+         * @param string $name The name of the deprecated method.
+         * @param array  $arguments The arguments passed to the method.
+         * @return mixed The result of the method call.
+         * @throws BadMethodCallException If the deprecated method is not implemented.
+         */
+        private function handle_deprecated_utility_method($name, $arguments)
+        {
+        }
+        /**
+         * Set the default deprecated version.
+         *
+         * @param string $version The new deprecated version.
+         */
+        public function set_deprecated_version($version)
+        {
+        }
+        /**
+         * Add a new deprecated property.
+         *
+         * @param string $name The property name.
+         * @param string $version The version since deprecation.
+         * @param string $message The deprecation message.
+         * @param mixed  $value The default value of the deprecated property.
+         */
+        public function add_deprecated_property($name, $version, $message, $value)
+        {
+        }
+        /**
+         * Add a new deprecated method.
+         *
+         * @param string $name The method name.
+         * @param string $version The version since deprecation.
+         * @param string $message The deprecation message.
+         */
+        public function add_deprecated_method($name, $version, $message)
+        {
+        }
+    }
+    /**
+     * Utils Base class
+     *
+     * @package DiviSquad
+     * @author  WP Squad <support@squadmodules.com>
+     * @since   2.0.0
+     *
+     * @property-read Utils\Elements\Divider     $divider     Divider Element utility.
+     * @property-read Utils\Elements\Breadcrumbs $breadcrumbs Breadcrumbs Element utility.
+     * @property-read Utils\Elements\MaskShape   $mask_shape  Mask Shape Element utility.
+     */
+    abstract class Base
+    {
+        use \DiviSquad\Base\DiviBuilder\Utils\CommonTrait;
+        use \DiviSquad\Base\DiviBuilder\Utils\FieldsTrait;
+        use \DiviSquad\Base\DiviBuilder\Utils\Fields\CompatibilityTrait;
+        use \DiviSquad\Base\DiviBuilder\Utils\Fields\DefinitionTrait;
+        use \DiviSquad\Base\DiviBuilder\Utils\Fields\ProcessorTrait;
+        use \DiviSquad\Base\DiviBuilder\Utils\DeprecationsTrait;
+        /**
+         * The instance of Squad Module.
+         *
+         * @var Module
+         */
+        protected $element;
+        /**
+         * Container for dynamic properties.
+         *
+         * @var array
+         */
+        protected $container = array();
+        /**
+         * Utility class mapping.
+         *
+         * @var array
+         */
+        protected $utility_class_map = array('divider' => \DiviSquad\Base\DiviBuilder\Utils\Elements\Divider::class, 'breadcrumbs' => \DiviSquad\Base\DiviBuilder\Utils\Elements\Breadcrumbs::class, 'mask_shape' => \DiviSquad\Base\DiviBuilder\Utils\Elements\MaskShape::class);
+        /**
+         * Initialize the Utils class.
+         *
+         * @param Module $element The module instance.
+         */
+        public function __construct($element = null)
+        {
+        }
+        /**
+         * Lazy load a utility.
+         *
+         * @param string $name The utility name.
+         * @return mixed The utility instance.
+         */
+        protected function lazy_load_utility($name)
+        {
+        }
+        /**
+         * Get the dynamic property value.
+         *
+         * @param string $name The property name.
+         * @return mixed
+         */
+        public function __get($name)
+        {
+        }
+        /**
+         * Set the dynamic property value.
+         *
+         * @param string $name The property name.
+         * @param mixed  $value The property value.
+         */
+        public function __set($name, $value)
+        {
+        }
+        /**
+         * Check if a dynamic property exists.
+         *
+         * @param string $name The property name.
+         * @return bool
+         */
+        public function __isset($name)
+        {
+        }
+        /**
+         * Unset a dynamic property.
+         *
+         * @param string $name The property name.
+         */
+        public function __unset($name)
+        {
+        }
+        /**
+         * Get the module instance.
+         *
+         * @return Module
+         */
+        public function get_element()
+        {
+        }
+        /**
+         * Add a new utility to the class map.
+         *
+         * @param string $name The name of the utility.
+         * @param string $utility_class The full class name of the utility.
+         */
+        protected function add_utility_to_class_map($name, $utility_class)
+        {
+        }
+        /**
+         * Remove a utility from the class map and container.
+         *
+         * @param string $name The name of the utility.
+         */
+        protected function remove_utility($name)
+        {
+        }
+        /**
+         * Check if a utility exists in the class map.
+         *
+         * @param string $name The name of the utility.
+         * @return bool
+         */
+        public function has_utility($name)
+        {
+        }
+        /**
+         * Get all utility names.
+         *
+         * @return array
+         */
+        public function get_all_utility_names()
+        {
+        }
+    }
+}
+namespace DiviSquad\Base\DiviBuilder {
+    /**
+     * Builder Utils Class
+     *
+     * @package DiviSquad
+     * @since   1.5.0
+     */
+    final class Utils extends \DiviSquad\Base\DiviBuilder\Utils\Base
+    {
+        /**
+         * Connect with non-static public functions.
+         *
+         * @param Module $element The instance of ET Builder Element (Squad Module).
+         *
+         * @return Utils
+         */
+        public static function connect($element)
+        {
+        }
+    }
+}
 namespace DiviSquad\Base\DiviBuilder\Utils\Elements {
     /**
      * Breadcrumbs Utils Helper Class
@@ -17916,7 +18281,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements {
      * @package DiviSquad
      * @since   1.5.0
      */
-    trait Breadcrumbs
+    class Breadcrumbs
     {
         /**
          * Function that generates the HTML from breadcrumbs.
@@ -17927,42 +18292,1200 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements {
          *
          * @return string
          */
-        public static function get_hansel_and_gretel_breadcrumbs($_home_text = 'Home', $_before_text = '', $_delimiter = '&#x39;')
+        public function get_hansel_and_gretel($_home_text = 'Home', $_before_text = '', $_delimiter = '&#x39;')
         {
         }
     }
+    /**
+     * Custom Fields Utils Helper Class
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    class CustomFields
+    {
+        /**
+         * Supported post types.
+         *
+         * @var array Supported post types.
+         */
+        protected static $post_types = array('post');
+        /**
+         * Supported field types with their corresponding processor classes.
+         *
+         * @var array<string, array<string, class-string>>
+         */
+        protected static $processors = array('collections' => array('custom_fields' => \DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Processors\WordPress::class, 'acf_fields' => \DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Processors\Advanced::class), 'definitions' => array('custom_fields' => \DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Definitions\WordPress::class, 'acf_fields' => \DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Definitions\Advanced::class));
+        /**
+         * Runtime data storage.
+         *
+         * @var array<string, array>
+         */
+        protected static $storage = array('instances' => array(), 'options' => array(), 'definitions' => array());
+        /**
+         * Field Manager Instance
+         *
+         * @var CustomFields\Managers\Fields
+         */
+        private static $fields_manager;
+        /**
+         * Initialize the CustomFields class.
+         *
+         * @return void
+         * @throws \Exception If the manager class does not exist or is not instantiable.
+         */
+        public static function init()
+        {
+        }
+        /**
+         * Get all fields of a specific type.
+         *
+         * @param string $field_type The field type (acf, WordPress, etc.).
+         * @param int    $post_id    The current post id.
+         *
+         * @return array<string, string>
+         * @throws InvalidArgumentException If the field type is not supported.
+         */
+        public static function get_fields($field_type, $post_id)
+        {
+        }
+        /**
+         * Get module definitions for module usages
+         *
+         * @param string $field_type The field type (acf, WordPress, etc.).
+         *
+         * @return array<string, mixed>
+         * @throws InvalidArgumentException If the field type is not supported.
+         */
+        public static function get_definitions($field_type)
+        {
+        }
+        /**
+         * Get the CustomFieldsManager instance.
+         *
+         * @return CustomFields\Managers\Fields
+         * @throws InvalidArgumentException If the manager is not supported.
+         * @throws \Exception If the manager class does not exist or is not instantiable.
+         */
+        public static function get_fields_manager()
+        {
+        }
+        /**
+         * Get supported post types.
+         *
+         * @return array|string[]
+         */
+        public static function get_supported_post_types()
+        {
+        }
+        /**
+         * Fetch fields of a specific type.
+         *
+         * @param string $field_type The field type (acf, WordPress, etc.).
+         * @param string $storage    The storage type (collections, definitions.).
+         *
+         * @return CustomFields\Definition|CustomFields\Processor
+         * @throws InvalidArgumentException If the field type is not supported.
+         */
+        public static function get($field_type, $storage = 'collections')
+        {
+        }
+        /**
+         * Get current field processor class name
+         *
+         * @param string $field_type The field type (acf_fields, custom_fields, etc.).
+         * @param string $storage    The storage type (collections, definitions.).
+         *
+         * @return class-string
+         */
+        protected static function get_class($field_type, $storage = 'collections')
+        {
+        }
+    }
+}
+namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields {
+    /**
+     * Interface for defining custom field operations.
+     *
+     * This interface provides methods for retrieving various types of custom fields
+     * and their associated properties.
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    interface DefinitionInterface
+    {
+        /**
+         * Get common fields that are applicable across different post types.
+         *
+         * This method should return an array of custom fields that are commonly used
+         * and applicable to multiple or all post types.
+         *
+         * @return array An array of common custom field definitions.
+         */
+        public function get_common_fields();
+        /**
+         * Get an array of empty fields.
+         *
+         * This method should return an array of custom fields that are considered "empty"
+         * or have no default value.
+         *
+         * @return array An array of empty custom field definitions.
+         */
+        public function get_empty_fields();
+        /**
+         * Get default fields for a specific post type.
+         *
+         * This method should return an array of default custom fields for the given post type,
+         * taking into account any provided options.
+         *
+         * @param string $post_type The post type for which to retrieve default fields.
+         * @param array  $options   Additional options to customize the returned fields.
+         *
+         * @return array An array of default custom field definitions for the specified post type.
+         */
+        public function get_default_fields($post_type, $options);
+        /**
+         * Get associated fields.
+         *
+         * This method should return an array of custom fields that are associated
+         * with the current context or implementation.
+         *
+         * @param array $fields_types Collect custom fields types.
+         *
+         * @return array An array of associated custom field definitions.
+         */
+        public function get_associated_fields($fields_types = array());
+        /**
+         * Get fields that are not eligible.
+         *
+         * This method should return an array of custom fields that are considered
+         * not eligible for use in the current context or implementation.
+         *
+         * @return array An array of custom field definitions that are not eligible.
+         */
+        public function get_not_eligible_fields();
+    }
+    /**
+     * Class Definition
+     *
+     * Provides a base implementation for definition classes in the DiviSquad plugin.
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    abstract class Definition implements \DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\DefinitionInterface
+    {
+    }
+}
+namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Definitions {
+    /**
+     * Advanced Custom Field Definitions Class
+     *
+     * Implements advanced custom field definitions with support for complex field types
+     * and sophisticated filtering options.
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    class Advanced extends \DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Definition
+    {
+        /**
+         * Get common fields that are applicable across different post types.
+         *
+         * This method returns an array of advanced custom fields that are commonly used
+         * and applicable to multiple or all post types, including more complex field types.
+         *
+         * @return array An array of common custom field definitions.
+         */
+        public function get_common_fields()
+        {
+        }
+        /**
+         * Get an array of empty fields.
+         *
+         * This method returns an array of custom fields that are considered "empty"
+         * or have no default value, potentially including complex field types.
+         *
+         * @return array An array of empty custom field definitions.
+         */
+        public function get_empty_fields()
+        {
+        }
+        /**
+         * Get default fields for a specific post type.
+         *
+         * This method returns an array of default custom fields for the given post type,
+         * taking into account any provided options and potentially including advanced field types.
+         *
+         * @param string $post_type The post type for which to retrieve default fields.
+         * @param array  $options   Additional options to customize the returned fields.
+         *
+         * @return array An array of default custom field definitions for the specified post type.
+         */
+        public function get_default_fields($post_type, $options)
+        {
+        }
+        /**
+         * Get associated fields.
+         *
+         * This method returns an array of custom fields that are associated
+         * with the current context or implementation, potentially including
+         * fields with advanced functionality or relationships.
+         *
+         * @param array $fields_types Collect custom fields types.
+         *
+         * @return array An array of associated custom field definitions.
+         */
+        public function get_associated_fields($fields_types = array())
+        {
+        }
+        /**
+         * Get fields that are not eligible.
+         *
+         * This method returns an array of custom fields that are considered
+         * not eligible for use in the current context or implementation,
+         * potentially based on advanced criteria or user roles.
+         *
+         * @return array An array of custom field definitions that are not eligible.
+         */
+        public function get_not_eligible_fields()
+        {
+        }
+    }
+    /**
+     * WordPress Custom Field Definitions Class
+     *
+     * Implements WordPress-specific custom field definitions for use with Divi Builder.
+     *
+     * @package DiviSquad
+     * @since 3.1.0
+     */
+    class WordPress extends \DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Definition
+    {
+        /**
+         * Get common fields that are applicable across different post types.
+         *
+         * This method returns an array of custom fields that are commonly used
+         * and applicable to multiple or all post types in WordPress.
+         *
+         * @return array An array of common custom field definitions.
+         */
+        public function get_common_fields()
+        {
+        }
+        /**
+         * Get an array of empty fields.
+         *
+         * This method returns an array of custom fields that are considered "empty"
+         * or have no default value, specifically for WordPress integration.
+         *
+         * @return array An array of empty custom field definitions.
+         */
+        public function get_empty_fields()
+        {
+        }
+        /**
+         * Get default fields for a specific post type.
+         *
+         * This method returns an array of default custom fields for the given post type,
+         * taking into account any provided options.
+         *
+         * @param string $post_type The post type for which to retrieve default fields.
+         * @param array  $options   Additional options to customize the returned fields.
+         *
+         * @return array An array of default custom field definitions for the specified post type.
+         */
+        public function get_default_fields($post_type, $options)
+        {
+        }
+        /**
+         * Get associated fields.
+         *
+         * This method returns an array of custom fields that are associated
+         * with the current context or implementation in WordPress.
+         *
+         * @param array $fields_types Collect custom fields types.
+         *
+         * @return array An array of associated custom field definitions.
+         */
+        public function get_associated_fields($fields_types = array())
+        {
+        }
+        /**
+         * Get fields when custom fields are not eligible.
+         *
+         * This method returns an array of custom fields that are considered
+         * not eligible for use in the current WordPress context or implementation.
+         *
+         * @return array An array of custom field definitions when custom fields are not eligible.
+         */
+        public function get_not_eligible_fields()
+        {
+        }
+    }
+}
+namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields {
+    /**
+     * Interface ManagerInterface
+     *
+     * Defines the contract for manager classes in the DiviSquad plugin.
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    interface ManagerInterface
+    {
+        /**
+         * Initialize the manager.
+         *
+         * This method should set up any necessary hooks or initial configurations.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        public function init();
+        /**
+         * Get data from the manager.
+         *
+         * This method should retrieve the main data that the manager is responsible for.
+         *
+         * @since 3.1.0
+         *
+         * @param array $args Optional. Arguments to modify the query.
+         * @return array The retrieved data.
+         */
+        public function get_data($args = array());
+        /**
+         * Clear the cache for this manager.
+         *
+         * This method should clear any cached data that the manager maintains.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        public function clear_cache();
+    }
+    /**
+     * Class Manager
+     *
+     * Provides a base implementation for manager classes in the DiviSquad plugin.
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    abstract class Manager implements \DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\ManagerInterface
+    {
+        /**
+         * Cache group for this manager.
+         *
+         * @var string
+         */
+        protected $cache_group;
+        /**
+         * Cache key prefix for this manager.
+         *
+         * @var string
+         */
+        protected $cache_key_prefix;
+        /**
+         * Constructor.
+         *
+         * @since 3.1.0
+         *
+         * @param string $cache_group The cache group for this manager.
+         * @param string $cache_key_prefix The cache key prefix for this manager.
+         */
+        public function __construct($cache_group, $cache_key_prefix)
+        {
+        }
+        /**
+         * Get data from the cache or generate it if not cached.
+         *
+         * @since 3.1.0
+         *
+         * @param string   $key        The cache key.
+         * @param callable $callback   The function to generate the data if not cached.
+         * @param int      $expiration Optional. The expiration time of the cached data in seconds. Default 3600.
+         * @return mixed The cached or generated data.
+         */
+        protected function get_cached_data($key, $callback, $expiration = 3600)
+        {
+        }
+        /**
+         * Clear the cache for this manager.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        public function clear_cache()
+        {
+        }
+    }
+}
+namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
+    /**
+     * Fields Class
+     *
+     * Manages custom fields across different post types in WordPress.
+     * This class handles the creation and maintenance of a summary table
+     * for custom fields, provides methods for updating and retrieving
+     * custom field information, and integrates with a separate upgrader
+     * for database structure management.
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    class Fields extends \DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Manager
+    {
+        /**
+         * The name of the summary table in the database.
+         *
+         * @var string
+         */
+        private $table_name;
+        /**
+         * Array of post types to track custom fields for.
+         *
+         * @var array
+         */
+        private $tracked_post_types;
+        /**
+         * Instance of the CustomFieldsUpgrader class.
+         *
+         * @var Upgraders
+         */
+        private $upgrader;
+        /**
+         * Version of the current table structure.
+         *
+         * @var string
+         */
+        private $table_version = '1.0';
+        /**
+         * Constructor.
+         *
+         * Initializes the Fields class with specified post types to track.
+         *
+         * @since 3.1.0
+         *
+         * @param array $post_types Array of post types to track custom fields for.
+         */
+        public function __construct($post_types = array('post'))
+        {
+        }
+        /**
+         * Initialize the manager
+         *
+         * Sets up action hooks for various WordPress events related to custom fields.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        public function init()
+        {
+        }
+        /**
+         * Get data from the manager.
+         *
+         * @since 3.1.0
+         *
+         * @param array $args Optional. Arguments to modify the query.
+         * @return array The retrieved data.
+         */
+        public function get_data($args = array())
+        {
+        }
+        /**
+         * Clear the custom fields cache.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        public function clear_cache()
+        {
+        }
+        /**
+         * Run database upgrades using the Upgrader.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        public function run_upgrades()
+        {
+        }
+        /**
+         * Check if the table needs to be created or updated.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        public function check_table_version()
+        {
+        }
+        /**
+         * Create the summary table in the database.
+         *
+         * This method creates the custom fields summary table if it doesn't exist.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        public function create_summary_table()
+        {
+        }
+        /**
+         * Populate the summary table with initial data.
+         *
+         * This method populates the summary table with existing custom field data.
+         * It uses caching to prevent unnecessary database queries on each page load.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        public function populate_summary_table()
+        {
+        }
+        /**
+         * Update the summary table when postmeta is added or updated.
+         *
+         * This method checks for the existence of an underscore version of the meta key
+         * and updates the summary table accordingly. It uses caching to reduce database queries.
+         *
+         * @since 3.1.0
+         *
+         * @param int    $meta_id    ID of the metadata field.
+         * @param int    $object_id  ID of the object metadata is for.
+         * @param string $meta_key   Metadata key.
+         * @return void
+         */
+        public function update_summary($meta_id, $object_id, $meta_key)
+        {
+        }
+        /**
+         * Update the summary table when postmeta is deleted.
+         *
+         * This method removes the corresponding entry from the summary table
+         * when a post meta is deleted.
+         *
+         * @since 3.1.0
+         *
+         * @param string[] $meta_ids  An array of metadata entry IDs to delete.
+         * @param int      $object_id ID of the object metadata is for.
+         * @param string   $meta_key  Metadata key.
+         * @return void
+         */
+        public function delete_from_summary($meta_ids, $object_id, $meta_key)
+        {
+        }
+        /**
+         * Get custom field keys, optionally filtered by post type.
+         *
+         * This method retrieves custom field keys from the database, filtered by post type
+         * and limited to a specified number of results. It uses caching to improve performance.
+         *
+         * @since 3.1.0
+         *
+         * @param string $post_type Optional. Post type to filter by. Default 'post'.
+         * @param int    $limit     Optional. Number of results to return. Default 30.
+         * @return array            Array of custom field keys.
+         */
+        private function get_custom_field_keys($post_type = 'post', $limit = 30)
+        {
+        }
+    }
+    /**
+     * Upgrader Class
+     *
+     * Manages database upgrades for the custom fields summary table.
+     * This class handles version tracking and applies necessary database
+     * structure changes when upgrading from older versions.
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    class Upgraders
+    {
+        /**
+         * The name of the summary table in the database.
+         *
+         * @since 3.1.0
+         * @var string
+         */
+        private $summary_table_name;
+        /**
+         * The option name used to store the current version in the database.
+         *
+         * @since 3.1.0
+         * @var string
+         */
+        private $version_option_name = 'custom_fields_summary_version';
+        /**
+         * The current version of the database structure.
+         *
+         * @since 3.1.0
+         * @var string
+         */
+        private $current_version = '1.0';
+        /**
+         * Constructor.
+         *
+         * @since 3.1.0
+         *
+         * @param string $summary_table_name The name of the summary table in the database.
+         */
+        public function __construct($summary_table_name)
+        {
+        }
+        /**
+         * Run necessary database upgrades.
+         *
+         * Checks the installed version against the current version and
+         * performs any necessary upgrade procedures.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        public function run_upgrades()
+        {
+        }
+        /**
+         * Perform specific upgrade procedures.
+         *
+         * This method contains the logic for upgrading the database
+         * structure from one version to another.
+         *
+         * @since 3.1.0
+         *
+         * @param string $from_version The version to upgrade from.
+         * @return void
+         */
+        private function perform_upgrades($from_version)
+        {
+        }
+        /**
+         * @return string
+         */
+        public function get_summary_table_name()
+        {
+        }
+        /**
+         * Get the current version of the database structure.
+         *
+         * @since 3.1.0
+         *
+         * @return string The current version.
+         */
+        public function get_current_version()
+        {
+        }
+        /**
+         * Set the current version of the database structure.
+         *
+         * This method is primarily used for testing purposes or manual version management.
+         *
+         * @since 3.1.0
+         *
+         * @param string $version The version to set.
+         * @return void
+         */
+        public function set_current_version($version)
+        {
+        }
+        /**
+         * Check if an upgrade is needed.
+         *
+         * Compares the installed version with the current version to determine
+         * if an upgrade is necessary.
+         *
+         * @since 3.1.0
+         *
+         * @return bool True if an upgrade is needed, false otherwise.
+         */
+        public function is_upgrade_needed()
+        {
+        }
+        /**
+         * Get the installed version of the database structure.
+         *
+         * @since 3.1.0
+         *
+         * @return string The installed version.
+         */
+        public function get_installed_version()
+        {
+        }
+    }
+}
+namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields {
+    /**
+     * Custom Field interface
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    interface ProcessorInterface
+    {
+        /**
+         * Inform that the processor is eligible or not.
+         *
+         * @return bool
+         */
+        public function is_eligible();
+        /**
+         * Collect custom fields and generate a formatted array.
+         *
+         * @return array An array where keys are original field names and values are formatted field names.
+         */
+        public function get_formatted_fields();
+        /**
+         * Get all custom fields for a specific post.
+         *
+         * @param int $post_id The ID of the post.
+         * @return array An array of custom fields, where keys are field names and values are field values.
+         */
+        public function get_fields($post_id);
+        /**
+         * Check if a post has a specific custom field.
+         *
+         * @param int    $post_id The ID of the post to check.
+         * @param string $field_key The key of the custom field to check for.
+         * @return bool True if the custom field exists, false otherwise.
+         */
+        public function has_field($post_id, $field_key);
+        /**
+         * Get a specific custom field by post ID and field key.
+         *
+         * @param int    $post_id The ID of the post to retrieve the custom field for.
+         * @param string $field_key The key of the custom field to retrieve.
+         * @param mixed  $default_value The default value to return if the field is not found.
+         * @return mixed The value of the custom field, or the default value if not found.
+         */
+        public function get_field_value($post_id, $field_key, $default_value = null);
+        /**
+         * Get the value of a selected post meta key for a specific post, with additional options.
+         *
+         * @param int    $post_id The ID of the post.
+         * @param string $meta_key The meta key to retrieve.
+         * @param array  $options Additional options for retrieving the meta value.
+         * @return mixed The meta value if successful, default value if not found.
+         */
+        public function get_field_value_advanced($post_id, $meta_key, array $options = array());
+    }
+    /**
+     * Custom Fields Base Class
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    abstract class Processor implements \DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\ProcessorInterface
+    {
+        /**
+         * Supported post types.
+         *
+         * @var array
+         */
+        protected $post_types = array();
+        /**
+         * Blacklisted keys
+         *
+         * @var array Blacklisted keys that should be excluded from custom fields.
+         */
+        protected $blacklisted_keys = array();
+        /**
+         * Custom fields suffixes
+         *
+         * @var array Suffixes that should be excluded from custom fields.
+         */
+        protected $excluded_suffixes = array();
+        /**
+         * Custom fields prefixes
+         *
+         * @var array Prefixes that should be excluded from custom fields.
+         */
+        protected $excluded_prefixes = array();
+        /**
+         * Available custom fields.
+         *
+         * @var array List of available custom fields.
+         */
+        protected $fields = array();
+        /**
+         * Available custom fields with its value.
+         *
+         * @var array List of available custom fields.
+         */
+        protected $custom_fields = array();
+        /**
+         * Check if a field should be included based on various criteria.
+         *
+         * @param string $field_key The field key to check.
+         * @return bool Whether the field should be included.
+         */
+        protected abstract function should_include_field($field_key);
+        /**
+         * Get the supported post types for the processor.
+         *
+         * @return array|string[]
+         */
+        protected abstract function get_supported_post_types();
+        /**
+         * Format a field name by replacing underscores and hyphens with spaces.
+         *
+         * @param string $field_key The field key to format.
+         * @return string The formatted field name.
+         */
+        protected function format_field_name($field_key)
+        {
+        }
+        /**
+         * Get the value of a selected post meta key for a specific post, with additional options.
+         *
+         * @param int    $post_id The ID of the post.
+         * @param string $meta_key The meta key to retrieve.
+         * @param array  $options Additional options for retrieving the meta value.
+         * @return mixed The meta value if successful, default value if not found.
+         */
+        public function get_field_value_advanced($post_id, $meta_key, array $options = array())
+        {
+        }
+        /**
+         * Collect custom fields types and generate a formatted array.
+         *
+         * @return array
+         */
+        public function get_formatted_fields_types()
+        {
+        }
+    }
+}
+namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Processors {
+    /**
+     * Custom Fields (Advanced Custom Field) element Class
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    class Advanced extends \DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Processor
+    {
+        /**
+         * Supported post types.
+         *
+         * @var array<string>
+         */
+        protected $post_types = array('post');
+        /**
+         * Blacklisted keys that should be excluded from custom fields.
+         *
+         * @var array<string>
+         */
+        protected $blacklisted_keys = array();
+        /**
+         * Suffixes that should be excluded from custom fields.
+         *
+         * @var array<string>
+         */
+        protected $excluded_suffixes = array();
+        /**
+         * Prefixes that should be excluded from custom fields.
+         *
+         * @var array<string>
+         */
+        protected $excluded_prefixes = array();
+        /**
+         * Supported fields types from advanced custom fields.
+         *
+         * @var array<string>
+         */
+        protected $supported_field_types = array('text', 'number', 'textarea', 'range', 'email', 'url', 'image', 'select', 'date_picker', 'wysiwyg');
+        /**
+         * Available custom fields group
+         *
+         * @var array
+         */
+        protected $field_groups = array();
+        /**
+         * Available custom fields
+         *
+         * @var array
+         */
+        protected $fields_data = array();
+        /**
+         * Available custom field values
+         *
+         * @var array
+         */
+        protected $field_values = array();
+        /**
+         * Inform that the processor is eligible or not.
+         *
+         * @return bool
+         */
+        public function is_eligible()
+        {
+        }
+        /**
+         * Collect available custom field values from the postmeta table for specific post.
+         *
+         * @param int $post_id The ID of the post.
+         *
+         * @return array An array of unique custom field values.
+         */
+        public function get_available_field_values($post_id)
+        {
+        }
+        /**
+         * Get post meta values for given keys.
+         *
+         * @param int   $post_id        The ID of the post.
+         * @param array $acf_field_keys Array of ACF field keys to retrieve.
+         * @param int   $limit          Maximum number of results to return.
+         *
+         * @return array An array of post meta values.
+         */
+        private function get_post_meta_values($post_id, $acf_field_keys, $limit)
+        {
+        }
+        /**
+         * Collect custom fields and generate a formatted array.
+         *
+         * @return array
+         */
+        public function get_formatted_fields()
+        {
+        }
+        /**
+         * Collect custom fields types and generate a formatted array.
+         *
+         * @return array
+         */
+        public function get_formatted_fields_types()
+        {
+        }
+        /**
+         * Get all custom fields for a specific post.
+         *
+         * @param int $post_id The ID of the post.
+         * @return array An array of custom fields, where keys are field names and values are field values.
+         */
+        public function get_fields($post_id)
+        {
+        }
+        /**
+         * Check if a post has a specific custom field.
+         *
+         * @param int    $post_id The ID of the post to check.
+         * @param string $field_key The key of the custom field to check for.
+         * @return bool True if the custom field exists, false otherwise.
+         */
+        public function has_field($post_id, $field_key)
+        {
+        }
+        /**
+         * Get a specific custom field by post ID and field key.
+         *
+         * @param int    $post_id The ID of the post to retrieve the custom field for.
+         * @param string $field_key The key of the custom field to retrieve.
+         * @param mixed  $default_value The default value to return if the field is not found.
+         * @return mixed The value of the custom field, or the default value if not found.
+         */
+        public function get_field_value($post_id, $field_key, $default_value = null)
+        {
+        }
+        /**
+         * Get the supported post types for the processor.
+         *
+         * @return array|string[]
+         */
+        protected function get_supported_post_types()
+        {
+        }
+        /**
+         * Get supported field types.
+         *
+         * @return array|string[]
+         */
+        protected function get_supported_field_types()
+        {
+        }
+        /**
+         * Check if a field should be included based on various criteria.
+         *
+         * @param string $field_key The field key to check.
+         * @return bool Whether the field should be included.
+         */
+        protected function should_include_field($field_key)
+        {
+        }
+    }
+    /**
+     * Custom Fields (WordPress) element Class
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    class WordPress extends \DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Processor
+    {
+        /**
+         * Blacklisted keys
+         *
+         * @var array Blacklisted keys that should be excluded from custom fields.
+         */
+        protected $blacklisted_keys = array('_edit_lock', '_edit_last', '_thumbnail_id', '_wp_page_template', '_wp_old_slug', '_wp_trash_meta_time', '_wp_trash_meta_status');
+        /**
+         * Suffixes
+         *
+         * @var array Suffixes that should be excluded from custom fields.
+         */
+        protected $excluded_suffixes = array('active', 'enabled', 'disabled', 'hidden', 'flag');
+        /**
+         * Prefixes
+         *
+         * @var array Prefixes that should be excluded from custom fields.
+         */
+        protected $excluded_prefixes = array('wp' => array('_wp_', 'wp_', '_oembed_'), 'divi' => array('et_'), 'yoast' => array('_yoast_', 'yoast_', '_wpseo_'), 'others' => array('_aioseop_', '_elementor_', 'rank_math_', '_acf_', '_wc_', '_transient_', '_site_transient_', '_menu_item_'));
+        /**
+         * Available custom formated fields
+         *
+         * @var array
+         */
+        protected $formatted_fields = array();
+        /**
+         * Available custom field values
+         *
+         * @var array
+         */
+        protected $field_values = array();
+        /**
+         * Inform that the processor is eligible or not.
+         *
+         * @return bool
+         */
+        public function is_eligible()
+        {
+        }
+        /**
+         * Collect custom fields and generate a formatted array.
+         *
+         * @return array An array where keys are original field names and values are formatted field names.
+         * @throws \Exception If the post type is not supported.
+         */
+        public function get_formatted_fields()
+        {
+        }
+        /**
+         * Get all custom fields for a specific post.
+         *
+         * @param int $post_id The ID of the post.
+         * @return array An array of custom fields, where keys are field names and values are field values.
+         * @throws \Exception If the post type is not supported.
+         */
+        public function get_fields($post_id)
+        {
+        }
+        /**
+         * Check if a post has a specific custom field.
+         *
+         * @param int    $post_id The ID of the post to check.
+         * @param string $field_key The key of the custom field to check for.
+         * @return bool True if the custom field exists, false otherwise.
+         */
+        public function has_field($post_id, $field_key)
+        {
+        }
+        /**
+         * Get a specific custom field by post ID and field key.
+         *
+         * @param int    $post_id The ID of the post to retrieve the custom field for.
+         * @param string $field_key The key of the custom field to retrieve.
+         * @param mixed  $default_value The default value to return if the field is not found.
+         * @return mixed The value of the custom field, or the default value if not found.
+         */
+        public function get_field_value($post_id, $field_key, $default_value = null)
+        {
+        }
+        /**
+         * Get the supported post types for the processor.
+         *
+         * @return array|string[]
+         */
+        protected function get_supported_post_types()
+        {
+        }
+        /**
+         * Check if a field should be included based on various criteria.
+         *
+         * @param string $field_key The field key to check.
+         * @return bool Whether the field should be included.
+         */
+        protected function should_include_field($field_key)
+        {
+        }
+        /**
+         * Collect available custom fields from the postmeta table.
+         *
+         * @return array An array of unique custom field keys.
+         * @throws \Exception If the post type is not supported.
+         */
+        protected function get_available_fields()
+        {
+        }
+        /**
+         * Collect available custom field values from the postmeta table for specific post.
+         *
+         * @param int $post_id The ID of the post.
+         *
+         * @return array An array of unique custom field values.
+         * @throws \Exception If the post type is not supported.
+         */
+        protected function get_available_field_values($post_id)
+        {
+        }
+        /**
+         * Get post meta values for given keys.
+         *
+         * @param int   $post_id   The ID of the post.
+         * @param array $meta_keys Array of meta keys to retrieve.
+         * @param int   $limit     Maximum number of results to return.
+         *
+         * @return array An array of post meta values.
+         */
+        private function get_post_meta_values($post_id, $meta_keys, $limit)
+        {
+        }
+    }
+}
+namespace DiviSquad\Base\DiviBuilder\Utils\Elements {
     /**
      * Divider Utils Helper Class
      *
      * @package DiviSquad
      * @since   1.5.0
      */
-    trait Divider
+    class Divider
     {
         /**
-         * Get the default data.
+         * The instance of ET Builder Element.
          *
-         * @return array
+         * @var object
          */
-        public function get_divider_defaults()
-        {
-        }
+        public $module;
         /**
-         * Get the default data for initiate.
+         * Constructor.
          *
-         * @return void The shape
+         * @param object $module The instance of ET Builder Element.
          */
-        public function initiate_the_divider_element()
-        {
-        }
-        /**
-         * Get the field for divider element
-         *
-         * @param array $options The options for divider element fields.
-         *
-         * @return array the field
-         */
-        public function get_divider_element_fields($options = array())
+        public function __construct($module)
         {
         }
         /**
@@ -17970,7 +19493,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements {
          *
          * @return array
          */
-        public function get_show_divider_options()
+        public function get_show_options()
         {
         }
         /**
@@ -17980,81 +19503,36 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements {
          *
          * @return string
          */
-        public function get_divider_default($field)
+        public function get_default($field)
+        {
+        }
+        /**
+         * Get the default data.
+         *
+         * @return array
+         */
+        public function get_defaults()
+        {
+        }
+        /**
+         * Get the default data for initiate.
+         *
+         * @return void The shape
+         */
+        public function initiate_element()
+        {
+        }
+        /**
+         * Get the field for divider module
+         *
+         * @param array $options The options for divider module fields.
+         *
+         * @return array the field
+         */
+        public function get_fields($options = array())
         {
         }
     }
-    /**
-     * Mask Shape Element class
-     *
-     * @package DiviSquad
-     * @since   1.5.0
-     */
-    trait MaskShape
-    {
-        /**
-         * Get the Mask Shape according the shape type and its secondary_shape type
-         *
-         * @param string $type              The shape type.
-         * @param string $secondary_shape   The shape secondary_shape type.
-         *
-         * @return string The shape
-         */
-        public static function get_mask_shape($type = 'shape-01', $secondary_shape = 'off')
-        {
-        }
-    }
-}
-namespace DiviSquad\Base\DiviBuilder\Utils {
-    /**
-     * Utils Base class
-     *
-     * @package DiviSquad
-     * @author  WP Squad <support@squadmodules.com>
-     * @since   2.0.0
-     */
-    abstract class Base
-    {
-        use \DiviSquad\Base\DiviBuilder\Utils\Common;
-        use \DiviSquad\Base\DiviBuilder\Utils\Fields;
-        use \DiviSquad\Base\DiviBuilder\Utils\Fields\Compatibility;
-        use \DiviSquad\Base\DiviBuilder\Utils\Fields\Definition;
-        use \DiviSquad\Base\DiviBuilder\Utils\Fields\Processor;
-        use \DiviSquad\Base\DiviBuilder\Utils\Elements\Breadcrumbs;
-        use \DiviSquad\Base\DiviBuilder\Utils\Elements\Divider;
-        use \DiviSquad\Base\DiviBuilder\Utils\Elements\MaskShape;
-        /**
-         * The instance of Squad Module.
-         *
-         * @var DiviSquad_Module $element The instance of ET Builder Element (Squad Module).
-         *
-         * @since 1.5.0
-         */
-        public $element;
-    }
-}
-namespace DiviSquad\Base\DiviBuilder {
-    /**
-     * Builder Utils Class
-     *
-     * @package DiviSquad
-     * @since   1.5.0
-     */
-    final class Utils extends \DiviSquad\Base\DiviBuilder\Utils\Base implements \DiviSquad\Base\DiviBuilder\Utils\UtilsInterface
-    {
-        /**
-         * Connect with non-static public functions.
-         *
-         * @param DiviSquad_Module $element The instance of ET Builder Element (Squad Module).
-         *
-         * @return Utils
-         */
-        public static function connect($element)
-        {
-        }
-    }
-}
-namespace DiviSquad\Base\DiviBuilder\Utils\Elements {
     /**
      * Main class for handling various form types.
      *
@@ -18130,7 +19608,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\Forms {
      * Interface for form processors.
      *
      * @package DiviSquad
-     * @since   3.0.1
+     * @since   3.1.0
      */
     interface FormInterface
     {
@@ -18146,20 +19624,10 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\Forms {
      * Abstract class for form processing.
      *
      * @package DiviSquad
-     * @since   3.0.1
+     * @since   3.1.0
      */
     abstract class Form implements \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\FormInterface
     {
-        /**
-         * Process form data into a consistent format.
-         *
-         * @param array  $forms Array of form objects.
-         * @param string $collection Either 'id' or 'title'.
-         * @return array Processed form data
-         */
-        protected function process_form_data($forms, $collection)
-        {
-        }
         /**
          * Get the ID of a form.
          *
@@ -18174,6 +19642,16 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\Forms {
          * @return string Form title
          */
         protected abstract function get_form_title($form);
+        /**
+         * Process form data into a consistent format.
+         *
+         * @param array  $forms Array of form objects.
+         * @param string $collection Either 'id' or 'title'.
+         * @return array Processed form data
+         */
+        protected function process_form_data($forms, $collection)
+        {
+        }
     }
 }
 namespace DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors {
@@ -18181,7 +19659,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors {
      * Class for handling Contact Form 7 forms.
      *
      * @package DiviSquad
-     * @since   3.0.1
+     * @since   3.1.0
      */
     class ContactForm7 extends \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Form
     {
@@ -18219,7 +19697,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors {
      * Handles the retrieval and processing of Fluent Forms.
      *
      * @package DiviSquad\Base\DiviBuilder\Utils\Elements
-     * @since   3.0.1
+     * @since   3.1.0
      */
     class FluentForms extends \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Form
     {
@@ -18257,7 +19735,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors {
      * Handles the retrieval and processing of Formidable Forms.
      *
      * @package DiviSquad
-     * @since   3.0.1
+     * @since   3.1.0
      */
     class Formidable extends \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Form
     {
@@ -18295,7 +19773,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors {
      * Handles the retrieval and processing of Forminator Forms.
      *
      * @package DiviSquad
-     * @since 3.0.1
+     * @since 3.1.0
      */
     class Forminator extends \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Form
     {
@@ -18333,7 +19811,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors {
      * Handles the retrieval and processing of Gravity Forms.
      *
      * @package DiviSquad
-     * @since   3.0.1
+     * @since   3.1.0
      */
     class GravityForms extends \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Form
     {
@@ -18371,7 +19849,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors {
      * Handles the retrieval and processing of Ninja Forms.
      *
      * @package DiviSquad
-     * @since   3.0.1
+     * @since   3.1.0
      */
     class NinjaForms extends \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Form
     {
@@ -18409,7 +19887,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors {
      * Handles the retrieval and processing of WPForms.
      *
      * @package DiviSquad
-     * @since   3.0.1
+     * @since   3.1.0
      */
     class WPForms extends \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Form
     {
@@ -18438,6 +19916,28 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors {
          * @return string The form title.
          */
         protected function get_form_title($form)
+        {
+        }
+    }
+}
+namespace DiviSquad\Base\DiviBuilder\Utils\Elements {
+    /**
+     * Mask Shape Element class
+     *
+     * @package DiviSquad
+     * @since   1.5.0
+     */
+    class MaskShape
+    {
+        /**
+         * Get the Mask Shape according the shape type and its secondary_shape type
+         *
+         * @param string $type              The shape type.
+         * @param string $secondary_shape   The shape secondary_shape type.
+         *
+         * @return string The shape
+         */
+        public function get_shape($type = 'shape-01', $secondary_shape = 'off')
         {
         }
     }
@@ -18701,10 +20201,11 @@ namespace DiviSquad\Base\Factories {
         /**
          * Filters the CSS classes for the body tag in the admin.
          *
+         * @since 1.0.4
+         *
          * @param string $classes Space-separated list of CSS classes.
          *
          * @return string
-         * @since 1.0.4
          */
         public function add_body_classes($classes)
         {
@@ -18979,7 +20480,7 @@ namespace DiviSquad\Base\Factories {
      * Factory for creating migration instances.
      *
      * @package DiviSquad\Settings
-     * @since   3.0.1
+     * @since   3.1.0
      */
     class Migration
     {
@@ -19322,13 +20823,14 @@ namespace DiviSquad\Base\Factories {
 }
 namespace DiviSquad\Base {
     /**
-     * Memory class for managing plugin settings.
+     * Memory class for managing Divi Squad plugin settings.
      *
      * This class provides a caching layer for WordPress options,
-     * improving performance by reducing database queries.
+     * improving performance by reducing database queries and adding
+     * advanced features for option management.
      *
      * @package DiviSquad\Base
-     * @since 1.0.0
+     * @since 2.0.0
      */
     class Memory
     {
@@ -19357,11 +20859,17 @@ namespace DiviSquad\Base {
          */
         private $is_modified = false;
         /**
+         * Batch operation queue.
+         *
+         * @var array
+         */
+        private $batch_queue = array();
+        /**
          * Memory constructor.
          *
          * @param string $prefix The prefix name for the plugin settings option.
          */
-        public function __construct($prefix = 'squad-core')
+        public function __construct($prefix = 'divi-squad')
         {
         }
         /**
@@ -19380,6 +20888,14 @@ namespace DiviSquad\Base {
          * @return mixed The field value or default if not found.
          */
         public function get($field, $default_value = null)
+        {
+        }
+        /**
+         * Get all stored options.
+         *
+         * @return array All stored options.
+         */
+        public function get_all()
         {
         }
         /**
@@ -19412,6 +20928,47 @@ namespace DiviSquad\Base {
         {
         }
         /**
+         * Add a value to an array field.
+         *
+         * @param string $field The field key.
+         * @param mixed  $value The value to add.
+         * @throws \Exception If the field is not an array.
+         * @return void
+         */
+        public function add_to_array($field, $value)
+        {
+        }
+        /**
+         * Remove a value from an array field.
+         *
+         * @param string $field The field key.
+         * @param mixed  $value The value to remove.
+         * @throws \Exception If the field is not an array.
+         * @return bool True if the value was removed, false otherwise.
+         */
+        public function remove_from_array($field, $value)
+        {
+        }
+        /**
+         * Queue a batch operation.
+         *
+         * @param string $operation The operation type ('set', 'update', 'delete').
+         * @param string $field     The field key.
+         * @param mixed  $value     The value (for 'set' and 'update' operations).
+         * @return void
+         */
+        public function queue_batch_operation($operation, $field, $value = null)
+        {
+        }
+        /**
+         * Execute all queued batch operations.
+         *
+         * @return void
+         */
+        public function execute_batch()
+        {
+        }
+        /**
          * Sync modified data to the database and update cache.
          *
          * This method is hooked to the 'shutdown' action.
@@ -19419,6 +20976,119 @@ namespace DiviSquad\Base {
          * @return void
          */
         public function sync_data()
+        {
+        }
+        /**
+         * Clear all stored data.
+         *
+         * @return void
+         */
+        public function clear_all()
+        {
+        }
+        /**
+         * Check if a field exists.
+         *
+         * @param string $field The field key to check.
+         * @return bool True if the field exists, false otherwise.
+         */
+        public function has($field)
+        {
+        }
+        /**
+         * Get the number of stored fields.
+         *
+         * @return int The number of stored fields.
+         */
+        public function count()
+        {
+        }
+    }
+}
+namespace DiviSquad\Base\Traits {
+    /**
+     * Deprecated Classes Trait
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    trait DeprecatedClassLoader
+    {
+        /**
+         * Load deprecated classes after Divi Squad has initialized.
+         *
+         * @since 3.1.0
+         *
+         * @return void
+         */
+        public function load_deprecated_classes()
+        {
+        }
+        /**
+         * Load a deprecated class file.
+         *
+         * @param string $class_name The full class name.
+         * @param array  $config     The configuration array.
+         * @return void
+         */
+        private function load_deprecated_class($class_name, $config = array())
+        {
+        }
+        /**
+         * Get the list of deprecated classes and their configurations.
+         *
+         * @return array
+         */
+        private function get_deprecated_classes_list()
+        {
+        }
+        /**
+         * Get the file path for a deprecated class.
+         *
+         * @param string $class_name The full class name.
+         * @return string
+         */
+        private function get_deprecated_class_path($class_name)
+        {
+        }
+        /**
+         * Log an error when a deprecated class file is not found.
+         *
+         * @param string $valid_path The expected file path.
+         * @return void
+         */
+        private function log_deprecated_class_error($valid_path)
+        {
+        }
+        /**
+         * Execute the before load callback if it exists in the configuration.
+         *
+         * @param array  $config     The configuration array.
+         * @param string $class_name The full class name.
+         * @return void
+         */
+        private function execute_before_load_callback($config, $class_name)
+        {
+        }
+        /**
+         * Add an action to load the deprecated class.
+         *
+         * @param array  $config     The configuration array.
+         * @param string $class_name The full class name.
+         * @param string $valid_path The file path of the deprecated class.
+         * @return void
+         */
+        private function add_deprecated_class_action($config, $class_name, $valid_path)
+        {
+        }
+        /**
+         * Execute the after load callback if it exists in the configuration.
+         *
+         * @param array  $config     The configuration array.
+         * @param string $class_name The full class name.
+         * @return void
+         */
+        private function execute_after_load_callback($config, $class_name)
         {
         }
     }
@@ -19793,9 +21463,9 @@ namespace DiviSquad\Integrations {
      * @package DiviSquad
      * @since   1.0.0
      *
-     * @property SquadBase\Memory                        $memory     Squad memory.
-     * @property \DiviSquad\Managers\Features\Modules    $modules    Squad module manager.
-     * @property \DiviSquad\Managers\Features\Extensions $extensions Squad extension manger.
+     * @property-read \DiviSquad\Base\Memory                  $memory     Squad memory.
+     * @property-read \DiviSquad\Managers\Features\Modules    $modules    Squad module manager.
+     * @property-read \DiviSquad\Managers\Features\Extensions $extensions Squad extension manger.
      */
     abstract class Core extends \DiviSquad\Base\Core
     {
@@ -19888,7 +21558,7 @@ namespace DiviSquad\Integrations {
      * @package DiviSquad
      * @since   1.0.0
      */
-    class DiviBuilder extends \DiviSquad\Base\DiviBuilder\IntegrationAPI
+    class DiviBuilder extends \DiviSquad\Base\DiviBuilder\Integration\ShortcodeAPI
     {
         /**
          * Get the plugin version number
@@ -21076,7 +22746,7 @@ namespace DiviSquad\Managers {
      *
      * @package DiviSquad
      * @author  WP Squad <support@squadmodules.com>
-     * @since   3.0.1
+     * @since   3.1.0
      */
     class SiteHealth
     {
@@ -21084,7 +22754,7 @@ namespace DiviSquad\Managers {
         /**
          * Init Site Health.
          *
-         * @since 3.0.1
+         * @since 3.1.0
          */
         public function load()
         {
@@ -21100,7 +22770,7 @@ namespace DiviSquad\Managers {
         /**
          * Integration hooks.
          *
-         * @since 3.0.1
+         * @since 3.1.0
          */
         protected function hooks()
         {
@@ -21111,7 +22781,7 @@ namespace DiviSquad\Managers {
          * @param array $debug_info Array of all information.
          *
          * @return array Array with added info section.
-         * @since 3.0.1
+         * @since 3.1.0
          */
         public function add_info_section(array $debug_info)
         {
@@ -21159,7 +22829,7 @@ namespace DiviSquad\Modules {
      * @package DiviSquad\Modules\BeforeAfterImageSlider
      * @since   1.0.0
      */
-    class BeforeAfterImageSlider extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class BeforeAfterImageSlider extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -21239,7 +22909,7 @@ namespace DiviSquad\Modules {
      * @package DiviSquad\Modules\Breadcrumbs
      * @since   1.4.0
      */
-    class Breadcrumbs extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class Breadcrumbs extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -21299,7 +22969,7 @@ namespace DiviSquad\Modules {
      * @since           1.0.0
      * @package         squad-modules-for-divi
      */
-    class BusinessHours extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class BusinessHours extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -21382,7 +23052,7 @@ namespace DiviSquad\Modules {
      * @since           1.0.0
      * @package         squad-modules-for-divi
      */
-    class BusinessHoursChild extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class BusinessHoursChild extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -21458,7 +23128,7 @@ namespace DiviSquad\Modules {
      * @since           1.0.0
      * @package         squad-modules-for-divi
      */
-    class Divider extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class Divider extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -21590,7 +23260,7 @@ namespace DiviSquad\Modules {
      * @since       1.4.0
      * @package     squad-modules-for-divi
      */
-    class DropCapText extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class DropCapText extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -21650,7 +23320,7 @@ namespace DiviSquad\Modules {
      * @since           1.0.0
      * @package         squad-modules-for-divi
      */
-    class DualButton extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class DualButton extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -21763,7 +23433,7 @@ namespace DiviSquad\Modules {
      * @since           1.0.0
      * @package         squad-modules-for-divi
      */
-    class FlipBox extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class FlipBox extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -21937,7 +23607,7 @@ namespace DiviSquad\Modules\FormStylers {
      * @package DiviSquad
      * @since   1.2.0
      */
-    class ContactForm7 extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
+    class ContactForm7 extends \DiviSquad\Base\DiviBuilder\Module\FormStyler
     {
         /**
          * Initiate Module.
@@ -22096,7 +23766,7 @@ namespace DiviSquad\Modules\FormStylers {
      * @package DiviSquad
      * @since   1.4.7
      */
-    class FluentForms extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
+    class FluentForms extends \DiviSquad\Base\DiviBuilder\Module\FormStyler
     {
         /**
          * Initiate Module.
@@ -22284,7 +23954,7 @@ namespace DiviSquad\Modules\FormStylers {
      * @package DiviSquad
      * @since   1.2.0
      */
-    class GravityForms extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
+    class GravityForms extends \DiviSquad\Base\DiviBuilder\Module\FormStyler
     {
         /**
          * Initiate Module.
@@ -22441,7 +24111,7 @@ namespace DiviSquad\Modules\FormStylers {
      * @package DiviSquad
      * @since   1.4.7
      */
-    class NinjaForms extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
+    class NinjaForms extends \DiviSquad\Base\DiviBuilder\Module\FormStyler
     {
         /**
          * Initiate Module.
@@ -22629,7 +24299,7 @@ namespace DiviSquad\Modules\FormStylers {
      * @package DiviSquad
      * @since   1.2.0
      */
-    class WPForms extends \DiviSquad\Base\DiviBuilder\DiviSquad_Form_Styler
+    class WPForms extends \DiviSquad\Base\DiviBuilder\Module\FormStyler
     {
         /**
          * The css selector for the form container.
@@ -22807,7 +24477,7 @@ namespace DiviSquad\Modules {
      * @package DiviSquad
      * @since   1.2.2
      */
-    class GlitchText extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class GlitchText extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -22865,7 +24535,7 @@ namespace DiviSquad\Modules {
      * @package DiviSquad
      * @since   1.4.7
      */
-    class GoogleMap extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class GoogleMap extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -22905,7 +24575,7 @@ namespace DiviSquad\Modules {
      * @package DiviSquad
      * @since   1.2.6
      */
-    class GradientText extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class GradientText extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -22963,7 +24633,7 @@ namespace DiviSquad\Modules {
      * @package DiviSquad
      * @since   1.2.0
      */
-    class ImageGallery extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class ImageGallery extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -23045,7 +24715,7 @@ namespace DiviSquad\Modules {
      * @package DiviSquad
      * @since   1.0.0
      */
-    class ImageMask extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class ImageMask extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -23085,7 +24755,7 @@ namespace DiviSquad\Modules {
      * @package DiviSquad
      * @since   1.0.0
      */
-    class Lottie extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class Lottie extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -23145,14 +24815,15 @@ namespace DiviSquad\Modules {
      * @package DiviSquad
      * @since   1.0.0
      */
-    class PostGrid extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class PostGrid extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
          * Set the module name on init.
          *
-         * @return void
          * @since 1.0.0
+         *
+         * @return void
          */
         public function init()
         {
@@ -23176,8 +24847,9 @@ namespace DiviSquad\Modules {
         /**
          * Declare general fields for the module.
          *
-         * @return array[]
          * @since 1.0.0
+         *
+         * @return array[]
          */
         public function get_fields()
         {
@@ -23188,6 +24860,8 @@ namespace DiviSquad\Modules {
          * Add form field options group and background image on the field list.
          *
          * @since 1.0.0
+         *
+         * @return array
          */
         public function get_transition_fields_css_props()
         {
@@ -23195,57 +24869,28 @@ namespace DiviSquad\Modules {
         /**
          * Render module output.
          *
+         * @since 1.0.0
+         *
          * @param array  $attrs       List of unprocessed attributes.
          * @param string $content     Content being processed.
          * @param string $render_slug Slug of module that is used for rendering output.
          *
          * @return string module's rendered output.
-         * @since 1.0.0
          */
         public function render($attrs, $content, $render_slug)
         {
         }
         /**
-         * Generate styles.
+         * Filter multi view value.
          *
-         * @param array $attrs List of unprocessed attributes.
+         * @param mixed $raw_value Props raw value.
+         * @param array $args      Props arguments.
          *
-         * @return void
+         * @return mixed
+         *
+         * @see   ET_Builder_Module_Helper_MultiViewOptions::filter_value
          */
-        private function squad_generate_all_styles($attrs)
-        {
-        }
-        /**
-         * Generate styles.
-         *
-         * @param array $attrs List of unprocessed attributes.
-         *
-         * @return void
-         */
-        private function squad_generate_layout_styles($attrs)
-        {
-        }
-        /**
-         * Collect all posts from the database.
-         *
-         * @param array                                     $attrs      List of unprocessed attributes.
-         * @param string|array|null                         $content    Content being processed.
-         * @param ET_Builder_Module_Helper_MultiViewOptions $multi_view Multiview object instance.
-         *
-         * @return string the html output for the post-grid.
-         * @since 1.0.0
-         */
-        public static function squad_get_posts_html($attrs, $content = null, $multi_view = null)
-        {
-        }
-        /**
-         * Get queried arguments for client side rendering.
-         *
-         * @param array<string, mixed> $attrs List of module attributes.
-         *
-         * @return array<string, mixed>
-         */
-        private static function squad_get_client_query_args($attrs)
+        public function multi_view_filter_value($raw_value, $args)
         {
         }
         /**
@@ -23271,6 +24916,18 @@ namespace DiviSquad\Modules {
         {
         }
         /**
+         * Render a post element based on its properties.
+         *
+         * @param WP_Post $post           The current post.
+         * @param array   $child_prop     The child properties.
+         * @param string  $expected_state The expected state ('on' for outside, 'off' for main).
+         *
+         * @return string
+         */
+        private function squad_render_post_element($post, $child_prop, $expected_state)
+        {
+        }
+        /**
          * Generate content by props with dynamic values.
          *
          * @param WP_Post      $post        The WP POST object.
@@ -23283,13 +24940,161 @@ namespace DiviSquad\Modules {
         {
         }
         /**
+         * Collect all posts from the database.
+         *
+         * @since 1.0.0
+         *
+         * @param array                                     $attrs      List of unprocessed attributes.
+         * @param string|array|null                         $content    Content being processed.
+         * @param ET_Builder_Module_Helper_MultiViewOptions $multi_view Multiview object instance.
+         *
+         * @return string the html output for the post-grid.
+         */
+        public static function squad_get_posts_html($attrs, $content = null, $multi_view = null)
+        {
+        }
+        /**
+         * Build the post query arguments.
+         *
+         * @since 3.1.0
+         *
+         * @param array $attrs   List of unprocessed attributes.
+         * @param mixed $content Content being processed.
+         *
+         * @return array
+         */
+        protected static function squad_build_post_query_args($attrs, $content = null)
+        {
+        }
+        /**
+         * Add query arguments for the current loop.
+         *
+         * @param array $query_args Existing query arguments.
+         * @return array Updated query arguments.
+         */
+        protected static function squad_add_current_loop_args($query_args)
+        {
+        }
+        /**
+         * Add query arguments for related posts.
+         *
+         * @param array   $query_args Existing query arguments.
+         * @param WP_Post $post       Current post object.
+         * @return array Updated query arguments.
+         */
+        protected static function squad_add_related_post_args($query_args, $post)
+        {
+        }
+        /**
+         * Add query arguments for custom display options.
+         *
+         * @param array $query_args Existing query arguments.
+         * @param array $attrs      Module attributes.
+         * @return array Updated query arguments.
+         */
+        protected static function squad_add_custom_display_args($query_args, $attrs)
+        {
+        }
+        /**
+         * Add query arguments for post offset.
+         *
+         * @param array $query_args Existing query arguments.
+         * @param array $attrs      Module attributes.
+         * @param int   $paged      Current page number.
+         * @return array Updated query arguments.
+         */
+        protected static function squad_add_offset_args($query_args, $attrs, $paged)
+        {
+        }
+        /**
+         * Add query arguments for pagination.
+         *
+         * @param array $query_args Existing query arguments.
+         * @param array $attrs      Module attributes.
+         * @param int   $paged      Current page number.
+         * @return array Updated query arguments.
+         */
+        protected static function squad_add_pagination_args($query_args, $attrs, $paged)
+        {
+        }
+        /**
+         * Add query arguments for date archives.
+         *
+         * @param array $query_args Existing query arguments.
+         * @return array Updated query arguments.
+         */
+        protected static function squad_add_date_args($query_args)
+        {
+        }
+        /**
+         * Get queried arguments for client side rendering.
+         *
+         * @param array $attrs List of module attributes.
+         * @return array Filtered query arguments.
+         */
+        protected static function squad_get_client_query_args($attrs)
+        {
+        }
+        /**
+         * Render the current post.
+         *
+         * @since 1.0.0
+         *
+         * @param WP_Post $post    The WP POST object.
+         * @param array   $attrs   The module attributes.
+         * @param mixed   $content The content being processed.
+         *
+         * @return void
+         */
+        protected static function squad_render_current_post($post, $attrs, $content = null)
+        {
+        }
+        /**
+         * Prepare post data for frontend rendering.
+         *
+         * @param WP_Post $post              The WP POST object.
+         * @param WP_User $author            The post author object.
+         * @param string  $date_replacement  The date format string.
+         *
+         * @return array
+         */
+        protected static function squad_prepare_post_data($post, $author, $date_replacement)
+        {
+        }
+        /**
+         * Render the pagination or load more button.
+         *
+         * @param WP_Query                                  $post_query The WP_Query object.
+         * @param array                                     $attrs The module attributes.
+         * @param string|array|null                         $content The content being processed.
+         * @param ET_Builder_Module_Helper_MultiViewOptions $multi_view The multiview object instance.
+         *
+         * @return void
+         */
+        protected static function squad_maybe_render_pagination($post_query, $attrs, $content = null, $multi_view = null)
+        {
+        }
+        /**
+         * Render the pagination or load more button.
+         *
+         * @param WP_Query                                  $post_query The WP_Query object.
+         * @param array                                     $attrs The module attributes.
+         * @param string|array|null                         $content The content being processed.
+         * @param ET_Builder_Module_Helper_MultiViewOptions $multi_view The multiview object instance.
+         *
+         * @return void
+         */
+        protected static function squad_maybe_render_load_more_button($post_query, $attrs, $content = null, $multi_view = null)
+        {
+        }
+        /**
          * Render icon which on is active.
          *
          * @param array $attrs List of attributes.
          *
          * @return string
          */
-        private function squad_render_element_icon($attrs)
+        protected function squad_render_element_icon($attrs)
         {
         }
         /**
@@ -23299,7 +25104,7 @@ namespace DiviSquad\Modules {
          *
          * @return string
          */
-        private function squad_render_element_font_icon($attrs)
+        protected function squad_render_element_font_icon($attrs)
         {
         }
         /**
@@ -23309,7 +25114,7 @@ namespace DiviSquad\Modules {
          *
          * @return string
          */
-        private function squad_render_element_icon_image($attrs)
+        protected function squad_render_element_icon_image($attrs)
         {
         }
         /**
@@ -23319,7 +25124,7 @@ namespace DiviSquad\Modules {
          *
          * @return string
          */
-        private function squad_render_element_icon_text($attrs)
+        protected function squad_render_element_icon_text($attrs)
         {
         }
         /**
@@ -23330,7 +25135,7 @@ namespace DiviSquad\Modules {
          *
          * @return string
          */
-        private function squad_render_post_element_body($attrs, $post)
+        protected function squad_render_post_element_body($attrs, $post)
         {
         }
         /**
@@ -23340,20 +25145,27 @@ namespace DiviSquad\Modules {
          *
          * @return string
          */
-        private function squad_render_post_title_font_icon($attrs)
+        protected function squad_render_post_title_font_icon($attrs)
         {
         }
         /**
-         * Filter multi view value.
+         * Generate styles.
          *
-         * @param mixed $raw_value Props raw value.
-         * @param array $args      Props arguments.
+         * @param array $attrs List of unprocessed attributes.
          *
-         * @return mixed
-         *
-         * @see   ET_Builder_Module_Helper_MultiViewOptions::filter_value
+         * @return void
          */
-        public function multi_view_filter_value($raw_value, $args)
+        protected function squad_generate_all_styles($attrs)
+        {
+        }
+        /**
+         * Generate styles.
+         *
+         * @param array $attrs List of unprocessed attributes.
+         *
+         * @return void
+         */
+        protected function squad_generate_layout_styles($attrs)
         {
         }
     }
@@ -23363,7 +25175,7 @@ namespace DiviSquad\Modules {
      * @package DiviSquad
      * @since   1.2.2
      */
-    class PostReadingTime extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class PostReadingTime extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -23478,7 +25290,7 @@ namespace DiviSquad\Modules {
      * @package DiviSquad
      * @since   1.0.0
      */
-    class ScrollingText extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class ScrollingText extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -23528,7 +25340,7 @@ namespace DiviSquad\Modules {
      * @package DiviSquad
      * @since   1.4.0
      */
-    class StarRating extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class StarRating extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -23598,7 +25410,7 @@ namespace DiviSquad\Modules {
      * @since           1.0.0
      * @package         squad-modules-for-divi
      */
-    class TypingText extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class TypingText extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -23688,7 +25500,7 @@ namespace DiviSquad\Modules {
      * @package DiviSquad
      * @since   1.4.1
      */
-    class VideoPopup extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    class VideoPopup extends \DiviSquad\Base\DiviBuilder\Module
     {
         /**
          * Initiate Module.
@@ -24052,6 +25864,7 @@ namespace DiviSquad {
      */
     final class SquadModules extends \DiviSquad\Integrations\Core
     {
+        use \DiviSquad\Base\Traits\DeprecatedClassLoader;
         use \DiviSquad\Utils\Singleton;
         /**
          * Admin menu slug.
@@ -24070,17 +25883,15 @@ namespace DiviSquad {
         {
         }
         /**
-         * Get the plugin directory path.
+         * Register all necessary hooks.
          *
-         * @param string $path The path to append.
-         *
-         * @return string
+         * @return void
          */
-        public function get_path($path = '')
+        private function register_hooks()
         {
         }
         /**
-         * The plugin options.
+         * Get the plugin options.
          *
          * @return array
          */
@@ -24088,7 +25899,27 @@ namespace DiviSquad {
         {
         }
         /**
-         * Get the plugin version number
+         * Get a specific option value.
+         *
+         * @param  string $key           The option key.
+         * @param  mixed  $default_value The default value if the option doesn't exist.
+         * @return mixed
+         */
+        public function get_option($key, $default_value = null)
+        {
+        }
+        /**
+         * Set a specific option value.
+         *
+         * @param  string $key   The option key.
+         * @param  mixed  $value The option value.
+         * @return void
+         */
+        public function set_option($key, $value)
+        {
+        }
+        /**
+         * Get the plugin version number.
          *
          * @return string
          */
@@ -24096,7 +25927,7 @@ namespace DiviSquad {
         {
         }
         /**
-         * Get the plugin version number (doted)
+         * Get the plugin version number (dotted).
          *
          * @return string
          */
@@ -24104,11 +25935,20 @@ namespace DiviSquad {
         {
         }
         /**
-         * Get the plugin name.
+         * Get the plugin directory path.
+         *
+         * @param  string $path The path to append.
+         * @return string
+         */
+        public function get_path($path = '')
+        {
+        }
+        /**
+         * Get the plugin base name.
          *
          * @return string
          */
-        public function get_base()
+        public function get_basename()
         {
         }
         /**
@@ -24160,7 +26000,7 @@ namespace DiviSquad {
         {
         }
         /**
-         * Retrieve whether the pro-version is installed or not.
+         * Check if the pro version is activated.
          *
          * @return bool
          */
@@ -24173,6 +26013,14 @@ namespace DiviSquad {
          * @return \Freemius
          */
         public static function publisher()
+        {
+        }
+        /**
+         * Initialize the memory.
+         *
+         * @return void
+         */
+        public function init_memory()
         {
         }
         /**
@@ -24200,13 +26048,28 @@ namespace DiviSquad {
         {
         }
         /**
-         * Load deprecated classes after Divi Squad has initialized.
-         *
-         * @since 3.0.1
+         * Load all plugin components.
          *
          * @return void
          */
-        public function load_deprecated_classes()
+        private function load_components()
+        {
+        }
+        /**
+         * Load additional components after the plugin has been initialized.
+         *
+         * @return void
+         * @throws \Exception If the class file is not found.
+         */
+        public function load_additional_components()
+        {
+        }
+        /**
+         * Check if debug mode is enabled.
+         *
+         * @return bool
+         */
+        public function is_debug_mode()
         {
         }
     }
@@ -24223,8 +26086,9 @@ namespace DiviSquad\Utils {
         /**
          * Get the version
          *
-         * @return string
          * @since 1.0.0
+         *
+         * @return string
          */
         public static function get_the_version()
         {
@@ -24249,8 +26113,9 @@ namespace DiviSquad\Utils {
         /**
          * Get current mode is production or not
          *
-         * @return bool
          * @since 1.0.0
+         *
+         * @return bool
          */
         public static function is_production_mode()
         {
@@ -24354,6 +26219,8 @@ namespace DiviSquad\Utils {
         /**
          * Enqueue styles.
          *
+         * @since 1.0.0
+         *
          * @param string $keyword   Name of the stylesheet. Should be unique.
          * @param array  $path      Relative path of the stylesheet with options for the WordPress root directory.
          * @param array  $deps      Optional. An array of registered stylesheet handles this stylesheet depends on. Default empty array.
@@ -24361,8 +26228,7 @@ namespace DiviSquad\Utils {
          * @param bool   $no_prefix Optional. Set the plugin prefix with asset handle name is or not.
          *
          * @return void
-         * @since 1.0.0
-         * @deprecated 3.0.1
+         * @deprecated 3.1.0
          */
         public static function style_enqueue($keyword, $path, $deps = array(), $media = 'all', $no_prefix = false)
         {
@@ -24370,14 +26236,15 @@ namespace DiviSquad\Utils {
         /**
          * Enqueue javascript.
          *
+         * @since 1.0.0
+         *
          * @param string $keyword   Name of the javascript. Should be unique.
          * @param array  $path      Relative path of the javascript with options for the WordPress root directory.
          * @param array  $deps      Optional. An array of registered javascript handles this stylesheet depends on. Default empty array.
          * @param bool   $no_prefix Optional. Set the plugin prefix with asset handle name is or not.
          *
          * @return void
-         * @since 1.0.0
-         * @deprecated 3.0.1
+         * @deprecated 3.1.0
          */
         public static function asset_enqueue($keyword, $path, array $deps = array(), $no_prefix = false)
         {
@@ -24385,19 +26252,22 @@ namespace DiviSquad\Utils {
         /**
          * Enqueue javascript.
          *
+         * @since 1.0.0
+         *
          * @param string $keyword   Name of the javascript. Should be unique.
          * @param array  $path      Relative path of the javascript with options for the WordPress root directory.
          * @param array  $deps      Optional. An array of registered javascript handles this stylesheet depends on. Default empty array.
          * @param bool   $no_prefix Optional. Set the plugin prefix with asset handle name is or not.
          *
          * @return void
-         * @since 1.0.0
          */
         public static function enqueue_script($keyword, $path, array $deps = array(), $no_prefix = false)
         {
         }
         /**
          * Enqueue styles.
+         *
+         * @since 1.0.0
          *
          * @param string $keyword   Name of the stylesheet. Should be unique.
          * @param array  $path      Relative path of the stylesheet with options for the WordPress root directory.
@@ -24406,7 +26276,6 @@ namespace DiviSquad\Utils {
          * @param bool   $no_prefix Optional. Set the plugin prefix with asset handle name is or not.
          *
          * @return void
-         * @since 1.0.0
          */
         public static function enqueue_style($keyword, $path, $deps = array(), $media = 'all', $no_prefix = false)
         {
@@ -24426,13 +26295,14 @@ namespace DiviSquad\Utils {
         /**
          * Enqueue styles.
          *
+         * @since 1.0.0
+         *
          * @param string $keyword Name of the stylesheet. Should be unique.
          * @param array  $path    Relative path of the stylesheet with options for the WordPress root directory.
          * @param array  $deps    Optional. An array of registered stylesheet handles this stylesheet depends on. Default empty array.
          * @param string $media   Optional. The media for which this stylesheet has been defined. Default 'all'.
          *
          * @return void
-         * @since 1.0.0
          */
         public static function register_style($keyword, $path, $deps = array(), $media = 'all')
         {
@@ -24440,11 +26310,12 @@ namespace DiviSquad\Utils {
         /**
          * Get available script enqueue footer arguments.
          *
+         * @since 1.0.0
+         *
          * @param bool $strategy Optional. If provided, may be either 'defer' or 'async'. Default false.
          * @param bool $priority Optional. If provided, may be either 'high' or 'low'. Default 'low'.
          *
          * @return array
-         * @since 1.4.8
          */
         public static function footer_arguments($strategy = false, $priority = false)
         {
@@ -24454,7 +26325,7 @@ namespace DiviSquad\Utils {
      * Helper functions to work with dates, time and timezones.
      *
      * @package DiviSquad
-     * @since 3.0.1
+     * @since 3.1.0
      */
     class DateTime
     {
@@ -24583,26 +26454,252 @@ namespace DiviSquad\Utils {
         {
         }
     }
-}
-namespace DiviSquad\Utils\Media {
     /**
-     * The Filesystem class.
+     * Logger class for DiviSquad plugin.
+     *
+     * Provides comprehensive logging capabilities with different log levels,
+     * file and database logging options, and log rotation.
      *
      * @package DiviSquad
-     * @since   3.0.0
+     * @since   3.1.0
      */
-    class Filesystem
+    class Logger extends \DiviSquad\Utils\Media\Filesystem
     {
         /**
-         * Get the filesystem.
+         * Log levels.
          *
-         * @access protected
-         * @return WP_Filesystem_Base
+         * @var array
          */
-        protected function get_wp_fs()
+        private $log_levels = array('DEBUG' => 100, 'INFO' => 200, 'NOTICE' => 250, 'WARNING' => 300, 'ERROR' => 400, 'CRITICAL' => 500, 'ALERT' => 550, 'EMERGENCY' => 600);
+        /**
+         * Minimum log level to record.
+         *
+         * @var int
+         */
+        private $min_log_level;
+        /**
+         * Log file path.
+         *
+         * @var string
+         */
+        private $log_file_path;
+        /**
+         * Maximum log file size in bytes before rotation.
+         *
+         * @var int
+         */
+        private $max_file_size;
+        /**
+         * Number of log files to keep during rotation.
+         *
+         * @var int
+         */
+        private $max_files;
+        /**
+         * Whether to log to database.
+         *
+         * @var bool
+         */
+        private $log_to_database;
+        /**
+         * Database table name for logs.
+         *
+         * @var string
+         */
+        private $db_table;
+        /**
+         * The WP_Filesystem_Base instance.
+         *
+         * @var WP_Filesystem_Base
+         */
+        private $wp_filesystem;
+        /**
+         * Logger constructor.
+         *
+         * @param array $config Configuration options.
+         * @throws \Exception If configuration is invalid.
+         */
+        public function __construct($config = array())
+        {
+        }
+        /**
+         * Validate logger configuration.
+         *
+         * @throws \Exception If configuration is invalid.
+         */
+        private function validate_config()
+        {
+        }
+        /**
+         * Ensure log directory exists and is writable.
+         *
+         * @throws \Exception If unable to create or write to log directory.
+         */
+        private function ensure_log_directory_exists()
+        {
+        }
+        /**
+         * Log a message.
+         *
+         * @param string $level   Log level.
+         * @param string $message Log message.
+         * @param array  $context Additional context data.
+         */
+        public function log($level, $message, $context = array())
+        {
+        }
+        /**
+         * Format a log entry.
+         *
+         * @param string $level   Log level.
+         * @param string $message Log message.
+         * @param array  $context Additional context data.
+         * @return string Formatted log entry.
+         */
+        private function format_log_entry($level, $message, $context)
+        {
+        }
+        /**
+         * Write log entry to file.
+         *
+         * @param string $log_entry Formatted log entry.
+         */
+        private function write_to_file($log_entry)
+        {
+        }
+        /**
+         * Rotate log files.
+         */
+        private function rotate_log_files()
+        {
+        }
+        /**
+         * Check if database table is ready for logging.
+         *
+         * @return bool
+         */
+        private function is_database_table_ready()
+        {
+        }
+        /**
+         * Write log entry to database.
+         *
+         * @param string $level   Log level.
+         * @param string $message Log message.
+         * @param array  $context Additional context data.
+         */
+        private function write_to_database($level, $message, $context)
+        {
+        }
+        /**
+         * Get all logs from the database.
+         *
+         * @param int $limit  Number of logs to retrieve.
+         * @param int $offset Offset for pagination.
+         * @return array
+         */
+        public function get_logs_from_database($limit = 100, $offset = 0)
+        {
+        }
+        /**
+         * Clear all logs from the database.
+         *
+         * @return int Number of rows affected.
+         */
+        public function clear_database_logs()
+        {
+        }
+        /**
+         * Log a debug message.
+         *
+         * @param string $message Log message.
+         * @param array  $context Additional context data.
+         */
+        public function debug($message, $context = array())
+        {
+        }
+        /**
+         * Log an info message.
+         *
+         * @param string $message Log message.
+         * @param array  $context Additional context data.
+         */
+        public function info($message, $context = array())
+        {
+        }
+        /**
+         * Log a notice message.
+         *
+         * @param string $message Log message.
+         * @param array  $context Additional context data.
+         */
+        public function notice($message, $context = array())
+        {
+        }
+        /**
+         * Log a warning message.
+         *
+         * @param string $message Log message.
+         * @param array  $context Additional context data.
+         */
+        public function warning($message, $context = array())
+        {
+        }
+        /**
+         * Log an error message.
+         *
+         * @param string $message Log message.
+         * @param array  $context Additional context data.
+         */
+        public function error($message, $context = array())
+        {
+        }
+        /**
+         * Log a critical message.
+         *
+         * @param string $message Log message.
+         * @param array  $context Additional context data.
+         */
+        public function critical($message, $context = array())
+        {
+        }
+        /**
+         * Log an alert message.
+         *
+         * @param string $message Log message.
+         * @param array  $context Additional context data.
+         */
+        public function alert($message, $context = array())
+        {
+        }
+        /**
+         * Log an emergency message.
+         *
+         * @param string $message Log message.
+         * @param array  $context Additional context data.
+         */
+        public function emergency($message, $context = array())
+        {
+        }
+        /**
+         * Get current log file content.
+         *
+         * @return string
+         */
+        public function get_log_file_content()
+        {
+        }
+        /**
+         * Clear the current log file.
+         *
+         * @return bool True if the file was successfully cleared, false otherwise.
+         */
+        public function clear_log_file()
         {
         }
     }
+}
+namespace DiviSquad\Utils\Media {
     /**
      * The Image class.
      *
@@ -24748,6 +26845,28 @@ namespace DiviSquad\Utils\Polyfills {
         }
     }
     /**
+     * Constant class.
+     *
+     * @package DiviSquad
+     * @since   3.1.0
+     */
+    class Constant
+    {
+        /**
+         * PHP_INT_MAX constants.
+         *
+         * @var integer
+         */
+        const PHP_INT_MAX = 9223372036854775807;
+        /**
+         * PHP_INT_MIN constants.
+         *
+         * @var integer
+         */
+        const PHP_INT_MIN = -9.223372036854776E+18;
+        // @phpstan-ignore-line
+    }
+    /**
      * String Helper class.
      *
      * @package DiviSquad
@@ -24874,10 +26993,11 @@ namespace DiviSquad\Utils {
          * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
          * Conditional Tags} article in the Theme Developer Handbook.
          *
+         * @since 2.5.0
+         *
          * @param string $plugin Path to the plugin file relative to the plugins' directory.
          *
          * @return bool True, if in the active plugins list. False, not in the list.
-         * @since 2.5.0
          */
         public static function is_plugin_active($plugin)
         {
@@ -24894,10 +27014,11 @@ namespace DiviSquad\Utils {
          * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
          * Conditional Tags} article in the Theme Developer Handbook.
          *
+         * @since 3.0.0
+         *
          * @param string $plugin Path to the plugin file relative to the plugins' directory.
          *
          * @return bool True if active for the network, otherwise false.
-         * @since 3.0.0
          */
         public static function is_plugin_active_for_network($plugin)
         {
