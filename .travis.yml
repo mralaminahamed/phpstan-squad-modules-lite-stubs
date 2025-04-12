@@ -23,12 +23,12 @@ install:
   ## Reinstall sub-packages into /packages/
   #- "composer update --no-interaction"
   - |
-    LATEST="$(jq -r '."require"."squad-modules/squad-modules-lite"' source/composer.json)"
-    wget -P source/ "https://downloads.wordpress.org/plugin/squad-modules-lite.${LATEST}.zip"
-    unzip -q -d source/ "source/squad-modules-lite.${LATEST}.zip"
+    LATEST="$(jq -r '."require"."squad-modules/squad-modules-for-divi"' source/composer.json)"
+    wget -P source/ "https://downloads.wordpress.org/plugin/squad-modules-for-divi.${LATEST}.zip"
+    unzip -q -d source/ "source/squad-modules-for-divi.${LATEST}.zip"
 
 before_script:
-  - "cat ./source/squad-modules-for-divi/squad-modules-lite.php"
+  - "cat ./source/squad-modules-for-divi/squad-modules-for-divi.php"
 
 script:
   - "bash -x ./generate.sh"

@@ -39,7 +39,7 @@ function check_result {
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 OUTPUT_FILE="$ROOT_DIR/squad_modules_versions.txt"
-PLUGIN_NAME="squad-modules-lite"
+PLUGIN_NAME="squad-modules-for-divi"
 PLUGIN_API_URL="https://api.wordpress.org/plugins/info/1.0/$PLUGIN_NAME.json"
 SOURCE_DIR="$ROOT_DIR/source"
 GENERATE_SCRIPT="$SCRIPT_DIR/generate.sh"
