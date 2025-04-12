@@ -16327,14 +16327,6 @@ namespace DiviSquad\Admin\Plugin {
     class AdminFooterText
     {
         /**
-         * Get the plugin screen name.
-         *
-         * @return string[]
-         */
-        public static function get_plugin_screens()
-        {
-        }
-        /**
          * Filters the "Thank you" text displayed in the admin footer.
          *
          * @param string $footer_text The content that will be printed.
@@ -17631,6 +17623,56 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements {
         public static function form_get_all_items($form_type, $collection = 'title')
         {
         }
+        /**
+         * Get all contact form 7 forms.
+         *
+         * @param string $collection The collection type of form data.
+         *
+         * @return array
+         */
+        private static function get_cf7_forms($collection = 'title')
+        {
+        }
+        /**
+         * Get all fluent forms.
+         *
+         * @param string $collection The collection type of form data.
+         *
+         * @return array
+         */
+        private static function get_fluent_forms($collection = 'title')
+        {
+        }
+        /**
+         * Get all gravity forms.
+         *
+         * @param string $collection The collection type of form data.
+         *
+         * @return array
+         */
+        private static function get_gravity_forms($collection = 'title')
+        {
+        }
+        /**
+         * Get all wp forms.
+         *
+         * @param string $collection The collection type of form data.
+         *
+         * @return array
+         */
+        private static function get_ninja_forms($collection = 'title')
+        {
+        }
+        /**
+         * Get all wp forms.
+         *
+         * @param string $collection The collection type of form data.
+         *
+         * @return array
+         */
+        private static function get_wp_forms($collection = 'title')
+        {
+        }
     }
     trait MaskShape
     {
@@ -18776,11 +18818,11 @@ namespace DiviSquad\Integrations {
         {
         }
         /**
-         * Get the Freemius' menu list.
+         * Verify the current screen is a squad page or not.
          *
-         * @return array
+         * @return bool
          */
-        public static function get_menu_lists()
+        public static function is_squad_page($page_id)
         {
         }
         /**
@@ -19078,25 +19120,11 @@ namespace DiviSquad\Managers {
         {
         }
         /**
-         * Load enabled modules for Divi Builder from defined directory.
+         * Get all modules including extra modules.
          *
-         * @param string $path The defined directory.
-         *
-         * @return void
+         * @return array[]
          */
-        public function load_divi_builder_4_modules($path)
-        {
-        }
-        /**
-         * Load the module class.
-         *
-         * @param string      $path            The module class path.
-         * @param Memory      $memory          The instance of Memory class.
-         * @param object|null $dependency_tree `DependencyTree` class is used as a utility to manage loading classes in a meaningful manner.
-         *
-         * @return void
-         */
-        protected function load_module_files($path, $memory, $dependency_tree = null)
+        public function get_modules_with_extra()
         {
         }
         /**
@@ -19135,6 +19163,28 @@ namespace DiviSquad\Managers {
          * @return void
          */
         protected function require_module_path($path, $module, $dependency_tree = null)
+        {
+        }
+        /**
+         * Load enabled modules for Divi Builder from defined directory.
+         *
+         * @param string $path The defined directory.
+         *
+         * @return void
+         */
+        public function load_divi_builder_4_modules($path)
+        {
+        }
+        /**
+         * Load the module class.
+         *
+         * @param string      $path            The module class path.
+         * @param Memory      $memory          The instance of Memory class.
+         * @param object|null $dependency_tree `DependencyTree` class is used as a utility to manage loading classes in a meaningful manner.
+         *
+         * @return void
+         */
+        protected function load_module_files($path, $memory, $dependency_tree = null)
         {
         }
     }
@@ -20252,16 +20302,6 @@ namespace DiviSquad\Modules\FormStylerContactForm7 {
          * @since 1.0.0
          */
         public static function disq_form_styler__get_form_html($attrs, $content = null)
-        {
-        }
-        /**
-         * Generate styles.
-         *
-         * @param array $attrs List of unprocessed attributes.
-         *
-         * @return void
-         */
-        protected function squad_generate_all_styles($attrs)
         {
         }
         /**
