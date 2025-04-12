@@ -108,7 +108,7 @@ namespace DiviSquad\Admin\Plugin {
          *
          * @return  string
          * @since 1.3.2
-         * @deprecated 3.1.0 marked as deprecated.
+         * @deprecated 3.0.0 marked as deprecated.
          */
         public function add_plugin_footer_text($footer_text)
         {
@@ -120,7 +120,7 @@ namespace DiviSquad\Admin\Plugin {
          *
          * @return  string
          * @since 1.4.8
-         * @deprecated 3.1.0 marked as deprecated.
+         * @deprecated 3.0.0 marked as deprecated.
          */
         public function add_update_footer_text($content)
         {
@@ -495,7 +495,7 @@ namespace DiviSquad\Integrations {
          * Get the instance of the current class.
          *
          * @return void
-         * @deprecated 3.1.0 marked as deprecated.
+         * @deprecated 3.0.0 marked as deprecated.
          */
         public static function load()
         {
@@ -507,7 +507,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.2.0
-         * @deprecated 3.1.0 marked as deprecated.
+         * @deprecated 3.0.0 marked as deprecated.
          */
         protected static function register_admin_scripts($admin_asset)
         {
@@ -519,7 +519,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.2.0
-         * @deprecated 3.1.0 marked as deprecated.
+         * @deprecated 3.0.0 marked as deprecated.
          */
         protected static function register_plugin_action_links($action_links)
         {
@@ -531,7 +531,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.2.0
-         * @deprecated 3.1.0 marked as deprecated.
+         * @deprecated 3.0.0 marked as deprecated.
          */
         protected static function register_plugin_row_meta($row_meta)
         {
@@ -543,7 +543,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.2.0
-         * @deprecated 3.1.0 marked as deprecated.
+         * @deprecated 3.0.0 marked as deprecated.
          */
         protected static function register_plugin_footer_text($footer_text)
         {
@@ -555,7 +555,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.4.8
-         * @deprecated 3.1.0 marked as deprecated.
+         * @deprecated 3.0.0 marked as deprecated.
          */
         protected static function register_update_footer_text($footer_text)
         {
@@ -576,7 +576,7 @@ namespace DiviSquad\Managers {
          * Enqueue scripts for frontend.
          *
          * @return void
-         * @deprecated 3.1.0 marked as deprecated.
+         * @deprecated 3.0.0 marked as deprecated.
          */
         public function enqueue_scripts()
         {
@@ -585,7 +585,7 @@ namespace DiviSquad\Managers {
          * Enqueue scripts for builder.
          *
          * @return void
-         * @deprecated 3.1.0 marked as deprecated.
+         * @deprecated 3.0.0 marked as deprecated.
          */
         public function enqueue_scripts_vb()
         {
@@ -596,7 +596,7 @@ namespace DiviSquad\Managers {
          * @param string $output Exist output.
          *
          * @return string
-         * @deprecated 3.1.0 marked as deprecated.
+         * @deprecated 3.0.0 marked as deprecated.
          */
         public function wp_localize_script_data($output)
         {
@@ -736,7 +736,7 @@ namespace DiviSquad\Managers {
      *
      * @package     DiviSquad
      * @since       1.0.0
-     * @deprecated  3.1.0 marked as deprecated.
+     * @deprecated  3.0.0 marked as deprecated.
      */
     class Extensions extends \DiviSquad\Managers\Features\Extensions
     {
@@ -902,7 +902,7 @@ namespace DiviSquad\Managers {
      *
      * @package     DiviSquad
      * @since       1.0.0
-     * @deprecated  3.1.0 marked as deprecated.
+     * @deprecated  3.0.0 marked as deprecated.
      */
     class Modules extends \DiviSquad\Managers\Features\Modules
     {
@@ -18632,7 +18632,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields {
      * Defines the contract for manager classes in the DiviSquad plugin.
      *
      * @package DiviSquad
-     * @since   3.1.0
+     * @since   3.1.1
      */
     interface ManagerInterface
     {
@@ -18641,7 +18641,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields {
          *
          * This method should set up any necessary hooks or initial configurations.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @return void
          */
@@ -18651,7 +18651,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields {
          *
          * This method should retrieve the main data that the manager is responsible for.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @param array $args Optional. Arguments to modify the query.
          * @return array The retrieved data.
@@ -18662,7 +18662,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields {
          *
          * This method should clear any cached data that the manager maintains.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @return void
          */
@@ -18674,7 +18674,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields {
      * Provides a base implementation for manager classes in the DiviSquad plugin.
      *
      * @package DiviSquad
-     * @since   3.1.0
+     * @since   3.1.1
      */
     abstract class Manager implements \DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\ManagerInterface
     {
@@ -18693,7 +18693,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields {
         /**
          * Constructor.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @param string $cache_group The cache group for this manager.
          * @param string $cache_key_prefix The cache key prefix for this manager.
@@ -18704,20 +18704,20 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields {
         /**
          * Get data from the cache or generate it if not cached.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @param string   $key        The cache key.
          * @param callable $callback   The function to generate the data if not cached.
          * @param int      $expiration Optional. The expiration time of the cached data in seconds. Default 3600.
          * @return mixed The cached or generated data.
          */
-        protected function get_cached_data($key, $callback, $expiration = 3600)
+        protected function get_cached_data($key, $callback, $args = array(), $expiration = 3600)
         {
         }
         /**
          * Clear the cache for this manager.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @return void
          */
@@ -18737,7 +18737,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
      * for database structure management.
      *
      * @package DiviSquad
-     * @since   3.1.0
+     * @since   3.1.1
      */
     class Fields extends \DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Manager
     {
@@ -18770,7 +18770,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
          *
          * Initializes the Fields class with specified post types to track.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @param array $post_types Array of post types to track custom fields for.
          */
@@ -18782,7 +18782,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
          *
          * Sets up action hooks for various WordPress events related to custom fields.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @return void
          */
@@ -18792,7 +18792,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
         /**
          * Get data from the manager.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @param array $args Optional. Arguments to modify the query.
          * @return array The retrieved data.
@@ -18803,7 +18803,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
         /**
          * Clear the custom fields cache.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @return void
          */
@@ -18813,7 +18813,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
         /**
          * Run database upgrades using the Upgrader.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @return void
          */
@@ -18823,7 +18823,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
         /**
          * Check if the table needs to be created or updated.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @return void
          */
@@ -18835,7 +18835,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
          *
          * This method creates the custom fields summary table if it doesn't exist.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @return void
          */
@@ -18848,7 +18848,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
          * This method populates the summary table with existing custom field data.
          * It uses caching to prevent unnecessary database queries on each page load.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @return void
          */
@@ -18861,7 +18861,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
          * This method checks for the existence of an underscore version of the meta key
          * and updates the summary table accordingly. It uses caching to reduce database queries.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @param int    $meta_id    ID of the metadata field.
          * @param int    $object_id  ID of the object metadata is for.
@@ -18877,7 +18877,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
          * This method removes the corresponding entry from the summary table
          * when a post meta is deleted.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @param string[] $meta_ids  An array of metadata entry IDs to delete.
          * @param int      $object_id ID of the object metadata is for.
@@ -18893,13 +18893,13 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
          * This method retrieves custom field keys from the database, filtered by post type
          * and limited to a specified number of results. It uses caching to improve performance.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @param string $post_type Optional. Post type to filter by. Default 'post'.
          * @param int    $limit     Optional. Number of results to return. Default 30.
          * @return array            Array of custom field keys.
          */
-        private function get_custom_field_keys($post_type = 'post', $limit = 30)
+        public function get_custom_field_keys($post_type = 'post', $limit = 30)
         {
         }
     }
@@ -18911,35 +18911,35 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
      * structure changes when upgrading from older versions.
      *
      * @package DiviSquad
-     * @since   3.1.0
+     * @since   3.1.1
      */
     class Upgraders
     {
         /**
          * The name of the summary table in the database.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          * @var string
          */
         private $summary_table_name;
         /**
          * The option name used to store the current version in the database.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          * @var string
          */
         private $version_option_name = 'custom_fields_summary_version';
         /**
          * The current version of the database structure.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          * @var string
          */
         private $current_version = '1.0';
         /**
          * Constructor.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @param string $summary_table_name The name of the summary table in the database.
          */
@@ -18952,7 +18952,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
          * Checks the installed version against the current version and
          * performs any necessary upgrade procedures.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @return void
          */
@@ -18965,7 +18965,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
          * This method contains the logic for upgrading the database
          * structure from one version to another.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @param string $from_version The version to upgrade from.
          * @return void
@@ -18982,7 +18982,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
         /**
          * Get the current version of the database structure.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @return string The current version.
          */
@@ -18994,7 +18994,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
          *
          * This method is primarily used for testing purposes or manual version management.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @param string $version The version to set.
          * @return void
@@ -19008,7 +19008,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
          * Compares the installed version with the current version to determine
          * if an upgrade is necessary.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @return bool True if an upgrade is needed, false otherwise.
          */
@@ -19018,7 +19018,7 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers {
         /**
          * Get the installed version of the database structure.
          *
-         * @since 3.1.0
+         * @since 3.1.1
          *
          * @return string The installed version.
          */
@@ -20480,7 +20480,7 @@ namespace DiviSquad\Base\Factories {
      * Factory for creating migration instances.
      *
      * @package DiviSquad\Settings
-     * @since   3.1.0
+     * @since   3.1.1
      */
     class Migration
     {
@@ -20881,6 +20881,31 @@ namespace DiviSquad\Base {
         {
         }
         /**
+         * Get all stored options.
+         *
+         * @return array All stored options.
+         */
+        public function get_all()
+        {
+        }
+        /**
+         * Get the number of stored fields.
+         *
+         * @return int The number of stored fields.
+         */
+        public function count()
+        {
+        }
+        /**
+         * Check if a field exists.
+         *
+         * @param string $field The field key to check.
+         * @return bool True if the field exists, false otherwise.
+         */
+        public function has($field)
+        {
+        }
+        /**
          * Get the value of a field.
          *
          * @param string $field The field key.
@@ -20888,14 +20913,6 @@ namespace DiviSquad\Base {
          * @return mixed The field value or default if not found.
          */
         public function get($field, $default_value = null)
-        {
-        }
-        /**
-         * Get all stored options.
-         *
-         * @return array All stored options.
-         */
-        public function get_all()
         {
         }
         /**
@@ -20986,23 +21003,6 @@ namespace DiviSquad\Base {
         public function clear_all()
         {
         }
-        /**
-         * Check if a field exists.
-         *
-         * @param string $field The field key to check.
-         * @return bool True if the field exists, false otherwise.
-         */
-        public function has($field)
-        {
-        }
-        /**
-         * Get the number of stored fields.
-         *
-         * @return int The number of stored fields.
-         */
-        public function count()
-        {
-        }
     }
 }
 namespace DiviSquad\Base\Traits {
@@ -21010,14 +21010,24 @@ namespace DiviSquad\Base\Traits {
      * Deprecated Classes Trait
      *
      * @package DiviSquad
-     * @since   3.1.0
+     * @since   3.1.1
      */
     trait DeprecatedClassLoader
     {
         /**
          * Load deprecated classes after Divi Squad has initialized.
          *
-         * @since 3.1.0
+         * @since 3.1.1
+         *
+         * @return void
+         */
+        public function load_deprecated_class_compatibility()
+        {
+        }
+        /**
+         * Load deprecated classes after Divi Squad has initialized.
+         *
+         * @since 3.1.1
          *
          * @return void
          */
@@ -21616,19 +21626,18 @@ namespace DiviSquad\Integrations {
      */
     final class Publisher
     {
-        use \DiviSquad\Utils\Singleton;
         /**
          * Store and retrieve the instance of Freemius SDK
          *
          * @var \Freemius The instance of Freemius SDK.
          */
-        private static $fs;
+        private $fs;
         /**
          * Integration Constructor
          *
          * @throws \Freemius_Exception Thrown when an API call returns an exception.
          */
-        private function __construct()
+        public function __construct()
         {
         }
         /**
@@ -21636,7 +21645,7 @@ namespace DiviSquad\Integrations {
          *
          * @return \Freemius The instance of Freemius SDK.
          */
-        public static function get_fs()
+        public function get_fs()
         {
         }
         /**
@@ -22328,6 +22337,7 @@ namespace DiviSquad\Managers\Notices {
         protected $notice_id = 'pro-activation';
         /**
          * Check if we can render notice.
+         * @throws \Exception If the notice can't be rendered.
          */
         public function can_render_it()
         {
@@ -26008,14 +26018,6 @@ namespace DiviSquad {
         {
         }
         /**
-         * Create a helper function for easy SDK access.
-         *
-         * @return \Freemius
-         */
-        public static function publisher()
-        {
-        }
-        /**
          * Initialize the memory.
          *
          * @return void
@@ -26029,14 +26031,6 @@ namespace DiviSquad {
          * @return void
          */
         public function init_plugin()
-        {
-        }
-        /**
-         * Initialize the publisher.
-         *
-         * @return void
-         */
-        public function init_publisher()
         {
         }
         /**
@@ -26461,7 +26455,7 @@ namespace DiviSquad\Utils {
      * file and database logging options, and log rotation.
      *
      * @package DiviSquad
-     * @since   3.1.0
+     * @since   3.1.1
      */
     class Logger extends \DiviSquad\Utils\Media\Filesystem
     {
@@ -26848,7 +26842,7 @@ namespace DiviSquad\Utils\Polyfills {
      * Constant class.
      *
      * @package DiviSquad
-     * @since   3.1.0
+     * @since   3.1.1
      */
     class Constant
     {
@@ -28108,14 +28102,6 @@ namespace {
     {
     }
     function fs_dump_log()
-    {
-    }
-    /**
-     * Helper function to get the Divi Squad Plugin instance.
-     *
-     * @return DiviSquad\SquadModules
-     */
-    function divi_squad()
     {
     }
 }

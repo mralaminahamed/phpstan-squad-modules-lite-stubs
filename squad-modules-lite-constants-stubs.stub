@@ -111,3 +111,5 @@
 \define('FS_API__PROTOCOL', \version_compare($curl_version['version'], '7.37', '>=') ? 'https' : 'http');
 \define('FS_API__ADDRESS', '://api.freemius.com');
 \define('FS_API__SANDBOX_ADDRESS', '://sandbox-api.freemius.com');
+// Define the core constants.
+\define('DIVI_SQUAD__FILE__', __FILE__);
