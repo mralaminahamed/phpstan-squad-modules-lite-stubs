@@ -4604,6 +4604,25 @@ final class BrandAsset extends \DiviSquad\Base\Factories\FactoryBase\Factory
  * Factory for creating migration instances.
  *
  * @package DiviSquad\Settings
+ * @since   3.1.2
+ */
+class Migration
+{
+    /**
+     * Creates a migration instance based on the migration name.
+     *
+     * @param string $class_name The name of the migration class to instantiate.
+     * @return AbstractMigration The migration instance.
+     * @throws InvalidArgumentException If the class does not exist or is not an instance of AbstractMigration.
+     */
+    public function create($class_name)
+    {
+    }
+}
+/**
+ * Factory for creating migration instances.
+ *
+ * @package DiviSquad\Settings
  * @since   3.0.0
  */
 class ModuleMigration
@@ -4908,6 +4927,27 @@ abstract class Route implements \DiviSquad\Base\Factories\RestRoute\RouteInterfa
      * @return array
      */
     public function get_routes()
+    {
+    }
+}
+namespace DiviSquad\Base\Factories;
+
+/**
+ * Factory for creating migration instances.
+ *
+ * @package DiviSquad\Settings
+ * @since   3.0.0
+ */
+class SettingsMigration
+{
+    /**
+     * Creates a migration instance based on the migration name.
+     *
+     * @param string $class_name The name of the migration class to instantiate. The class must exist and be an instance of AbstractMigration.
+     * @return AbstractMigration The migration instance.
+     * @throws InvalidArgumentException If the class does not exist or is not an instance of AbstractMigration.
+     */
+    public function create($class_name)
     {
     }
 }
@@ -6541,6 +6581,24 @@ class Review extends \DiviSquad\Base\Factories\AdminNotice\Notice
 namespace DiviSquad\Managers;
 
 /**
+ * Assets Class
+ *
+ * @package DiviSquad
+ * @since   1.0.0
+ * @since   3.0.0 Updated class name.
+ */
+class PluginAssets
+{
+    /**
+     * Load all the branding.
+     *
+     * @return void
+     */
+    public static function load()
+    {
+    }
+}
+/**
  * Rest API Routes
  *
  * @package DiviSquad
@@ -6554,6 +6612,304 @@ class RestRoutes
      * @return void
      */
     public static function load()
+    {
+    }
+}
+namespace DiviSquad\Managers\RestRoutes\V1;
+
+/**
+ * Rest API Routes for Extension
+ *
+ * @package DiviSquad
+ * @since   1.0.0
+ */
+class Extensions extends \DiviSquad\Base\Factories\RestRoute\Route
+{
+    /**
+     * Get registered extensions list.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function get_available_extensions()
+    {
+    }
+    /**
+     * Get active extensions list from database
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function get_active_extensions()
+    {
+    }
+    /**
+     * Get inactive extensions list from database.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function get_inactive_extensions()
+    {
+    }
+    /**
+     * Get update extensions list from database
+     *
+     * @param WP_REST_Request $request The wp rest api request.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function update_active_extensions($request)
+    {
+    }
+    /**
+     * We register our routes for our endpoints.
+     *
+     * @return array
+     */
+    public function get_routes()
+    {
+    }
+}
+namespace DiviSquad\Managers\RestRoutes\V1\Extensions;
+
+/**
+ * Extension (Copy) Rest API class
+ *
+ * @package DiviSquad
+ * @since   SQUAD_MODULES_VERSION
+ */
+class Copy extends \DiviSquad\Base\Factories\RestRoute\Route
+{
+    /**
+     * Get available posts
+     *
+     * @param WP_REST_Request $request The wp rest api request.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function get_available_posts($request)
+    {
+    }
+    /**
+     * We register our routes for our endpoints.
+     *
+     * @return array
+     */
+    public function get_routes()
+    {
+    }
+}
+namespace DiviSquad\Managers\RestRoutes\V1;
+
+/**
+ * Rest API Routes for Modules
+ *
+ * @package DiviSquad
+ * @since   1.0.0
+ */
+class Modules extends \DiviSquad\Base\Factories\RestRoute\Route
+{
+    /**
+     * Get registered modules list.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function get_available_modules()
+    {
+    }
+    /**
+     * Get active modules list from database.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function get_active_modules()
+    {
+    }
+    /**
+     * Get inactive modules list from database.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function get_inactive_modules()
+    {
+    }
+    /**
+     * Get update active modules list from database.
+     *
+     * @param WP_REST_Request $request The wp rest api request.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function update_active_modules($request)
+    {
+    }
+    /**
+     * We register our routes for our endpoints.
+     *
+     * @return array
+     */
+    public function get_routes()
+    {
+    }
+}
+namespace DiviSquad\Managers\RestRoutes\V1\Modules;
+
+/**
+ * Post Grid Load More Rest API class
+ *
+ * @package DiviSquad
+ * @since   SQUAD_MODULES_VERSION
+ */
+class PostGrid extends \DiviSquad\Base\Factories\RestRoute\Route
+{
+    /**
+     * Get available posts
+     *
+     * @param WP_REST_Request $request The wp rest api request.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function get_available_posts($request)
+    {
+    }
+    /**
+     * We register our routes for our endpoints.
+     *
+     * @return array
+     */
+    public function get_routes()
+    {
+    }
+}
+namespace DiviSquad\Managers\RestRoutes\V1\Notices;
+
+/**
+ * Welcome 60% Discount Notice class
+ *
+ * @package DiviSquad
+ * @since   3.0.0
+ */
+class Discount extends \DiviSquad\Base\Factories\RestRoute\Route
+{
+    /**
+     * Update the database when the user submits a review for the plugin.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function make_it_done()
+    {
+    }
+    /**
+     * We register our routes for our endpoints.
+     *
+     * @return array
+     */
+    public function get_routes()
+    {
+    }
+}
+/**
+ * Plugin Activation Notice class.
+ *
+ * @package DiviSquad
+ * @since   2.0.0
+ */
+class ProActivation extends \DiviSquad\Base\Factories\RestRoute\Route
+{
+    /**
+     * Count how many times the user closes the review notice.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function activation_notice_close()
+    {
+    }
+    /**
+     * We register our routes for our endpoints.
+     *
+     * @return array
+     */
+    public function get_routes()
+    {
+    }
+}
+/**
+ * Plugin Review Notice class
+ *
+ * @package DiviSquad
+ * @since   1.0.0
+ */
+class Review extends \DiviSquad\Base\Factories\RestRoute\Route
+{
+    /**
+     * How Long timeout after first banner shown.
+     *
+     * @var int
+     */
+    private $another_time_show = 7;
+    /**
+     * Update the database when the user submits a review for the plugin.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function make_it_done()
+    {
+    }
+    /**
+     * Remind the user for review the plugin.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function remind_me_at_next_week()
+    {
+    }
+    /**
+     * Count how many times the user closes the review notice.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function count_review_closing()
+    {
+    }
+    /**
+     * Count how many times the user asks for support from the review notice.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function ask_for_support()
+    {
+    }
+    /**
+     * We register our routes for our endpoints.
+     *
+     * @return array
+     */
+    public function get_routes()
+    {
+    }
+}
+namespace DiviSquad\Managers\RestRoutes\V1\WhatsNew;
+
+/**
+ * Rest API Routes for What's New
+ *
+ * @package DiviSquad
+ * @since   1.0.0
+ */
+class Changelog extends \DiviSquad\Base\Factories\RestRoute\Route
+{
+    /**
+     * Remind the user for review the plugin.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function get_readme_file_data()
+    {
+    }
+    /**
+     * We register our routes for our endpoints.
+     *
+     * @return array
+     */
+    public function get_routes()
     {
     }
 }
