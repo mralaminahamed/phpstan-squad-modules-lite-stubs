@@ -219,7 +219,7 @@ abstract class Core
     /**
      * Set the localize data.
      *
-     * @return array
+     * @return void
      */
     public function localize_scripts_data()
     {
@@ -238,7 +238,7 @@ abstract class Core
      * Works only if the script has already been registered.
      *
      * @param string $object_name Name for the JavaScript object. Passed directly, so it should be qualified JS variable.
-     * @param array  $l10n        The data itself. The data can be either a single or multi-dimensional array.
+     * @param array  $l10n        The data itself. The data can be either a single or multidimensional array.
      *
      * @return string Localizes a script.
      */
@@ -488,17 +488,21 @@ class Assets
     /**
      * Set localize data for admin area.
      *
+     * @param array $exists_data Exists extra data.
+     *
      * @return array
      */
-    public function wp_common_localize_script_data()
+    public function wp_common_localize_script_data($exists_data)
     {
     }
     /**
      * Set localize data for admin area.
      *
+     * @param array $exists_data Exists extra data.
+     *
      * @return array
      */
-    public function wp_localize_script_data()
+    public function wp_localize_script_data($exists_data)
     {
     }
 }
@@ -825,19 +829,6 @@ abstract class BuilderIntegrationAPIBase
      * @var string The plugin's version
      */
     protected $build_path = 'build/divi-builder-4/';
-    /**
-     * Dependencies for the plugin's JavaScript bundles.
-     *
-     * @since 1.0.0
-     *
-     * @var array {
-     *                          JavaScript Bundle Dependencies
-     *
-     * @type string[] $builder  Dependencies for the builder bundle
-     * @type string[] $frontend Dependencies for the frontend bundle
-     *                          }
-     */
-    protected $bundle_dependencies = array();
     /**
      * Divi Squad constructor.
      *
@@ -1856,6 +1847,16 @@ class Copy extends \DiviSquad\Base\Extensions
     {
     }
     /**
+     * Set localize data for admin area.
+     *
+     * @param array $exists_data Exists extra data.
+     *
+     * @return array
+     */
+    public function wp_localize_script_data($exists_data)
+    {
+    }
+    /**
      * Add the duplicate link to post, page, and custom actions
      *
      * @param string[] $actions An array of row action links. Defaults are 'Edit', 'Quick Edit', 'Restore', 'Trash', 'Delete Permanently', 'Preview', and 'View'.
@@ -2344,7 +2345,7 @@ class Extensions
     {
     }
     /**
-     * Check current extension is an inactive extension.
+     * Check the current extension is an inactive extension.
      *
      * @param array $extension The current extension.
      *
@@ -2354,7 +2355,7 @@ class Extensions
     {
     }
     /**
-     *  Check current extension is an active extension.
+     *  Check the current extension is an active extension.
      *
      * @param array $extension The current extension.
      *
@@ -2393,12 +2394,12 @@ class Extensions
     /**
      * Load enabled extensions
      *
-     * @param string $path              The defined directory.
-     * @param array  $current_activates The activated extensions.
+     * @param string $path          The defined directory.
+     * @param array  $my_extensions The activated extensions.
      *
      * @return void
      */
-    protected function load_extensions_files($path, $current_activates)
+    protected function load_extensions_files($path, $my_extensions)
     {
     }
     /**
@@ -2435,6 +2436,28 @@ class Modules
      * @return array[]
      */
     public function get_available_modules()
+    {
+    }
+    /**
+     * Check the current module type.
+     *
+     * @param array  $module The array of current module.
+     * @param string $type   The type of Divi Builder module, default is: D4. Available opinions are: D4, D5.
+     *
+     * @return bool
+     */
+    protected function check_module_type($module, $type = 'D4')
+    {
+    }
+    /**
+     * Check the current module is an inactive module.
+     *
+     * @param array  $module The array of current module.
+     * @param string $type   The type of Divi Builder module, default is: D4. Available opinions are: D4, D5.
+     *
+     * @return array|null
+     */
+    protected function is_inactive_module($module, $type = 'D4')
     {
     }
     /**
@@ -2484,12 +2507,13 @@ class Modules
     /**
      * Load the module class.
      *
-     * @param string $path    The module class path.
-     * @param mixed  $modules The available modules list.
+     * @param string      $path            The module class path.
+     * @param mixed       $my_modules      The available modules list.
+     * @param string      $type            The type of Divi Builder module, default is: D4. Available opinions are: D4, D5.
      *
      * @return void
      */
-    protected function load_module_files($path, $modules)
+    protected function load_module_files($path, $my_modules, $type = 'D4')
     {
     }
     /**
@@ -5917,7 +5941,7 @@ class Module
     /**
      * Get background selectors for main and hover
      *
-     * @param string $main_css_element Main css selector of element.
+     * @param string $main_css_element Main css selector of an element.
      *
      * @return array[]
      */
@@ -6065,27 +6089,13 @@ class WP
      *
      * Works only if the script has already been registered.
      *
-     * @param string $handle Script handle the textdomain will be attached to.
+     * @param string $handle The Script handle the textdomain will be attached to.
      * @param string $domain Optional. Text domain. Default 'default'.
      * @param string $path   Optional. The full file path to the directory containing translation files.
      *
      * @return bool True if the text domain was successfully localized, false otherwise.
      */
     public static function set_script_translations($handle, $domain = 'default', $path = '')
-    {
-    }
-    /**
-     * Localizes a script.
-     *
-     * Works only if the script has already been registered.
-     *
-     * @param string $handle      Script handle the data will be attached to.
-     * @param string $object_name Name for the JavaScript object. Passed directly, so it should be qualified JS variable.
-     * @param array  $l10n        The data itself. The data can be either a single or multi-dimensional array.
-     *
-     * @return bool True if the script was successfully localized, false otherwise.
-     */
-    public static function localize_script($handle, $object_name, $l10n)
     {
     }
 }
@@ -6101,7 +6111,7 @@ class WP
  * Plugin Name:         Squad Modules Lite
  * Plugin URI:          https://squadmodules.com/
  * Description:         The Advanced Divi plugin you install after Divi or Extra Theme!
- * Version:             1.4.8
+ * Version:             1.4.9
  * Requires at least:   5.0.0
  * Requires PHP:        5.6.40
  * Author:              WP Squad
