@@ -481,6 +481,164 @@ abstract class Menu implements \DiviSquad\Base\Factories\AdminMenu\MenuInterface
 abstract class MenuCore extends \DiviSquad\Base\Factories\AdminMenu\Menu
 {
 }
+namespace DiviSquad\Base\Factories\BrandAsset;
+
+/**
+ * Branding Asset Interface.
+ *
+ * @package DiviSquad
+ * @since   3.0.0
+ */
+interface AssetInterface
+{
+    /**
+     * The branding asset type.
+     *
+     * @return string
+     */
+    public function get_type();
+    /**
+     * The branding asset position.
+     *
+     * @return string
+     */
+    public function get_position();
+}
+/**
+ * Abstract class representing the Branding.
+ *
+ * @package DiviSquad
+ * @since   3.0.0
+ */
+abstract class Asset implements \DiviSquad\Base\Factories\BrandAsset\AssetInterface
+{
+    /**
+     * The plugin base.
+     *
+     * @return string
+     */
+    public function get_plugin_base()
+    {
+    }
+    /**
+     * The branding asset is allowed in network.
+     *
+     * @return bool
+     */
+    public function is_allow_network()
+    {
+    }
+    /**
+     * The plugin action links.
+     *
+     * @return array
+     */
+    public function get_action_links()
+    {
+    }
+    /**
+     * The plugin row actions.
+     *
+     * @return array
+     */
+    public function get_row_actions()
+    {
+    }
+    /**
+     * The plugin footer text.
+     *
+     * @return string
+     */
+    public function get_plugin_footer_text()
+    {
+    }
+    /**
+     * The plugin update footer text.
+     *
+     * @return string
+     */
+    public function get_update_footer_text()
+    {
+    }
+}
+/**
+ * Abstract class representing the Branding.
+ *
+ * @package DiviSquad
+ * @since   3.0.0
+ * @deprecated 3.1.4
+ */
+abstract class BrandAsset extends \DiviSquad\Base\Factories\BrandAsset\Asset
+{
+}
+/**
+ * Branding Asset Interface.
+ *
+ * @package DiviSquad
+ * @since   3.0.0
+ * @deprecated 3.1.4
+ */
+interface BrandAssetInterface
+{
+}
+namespace DiviSquad\Base\Factories\PluginAsset;
+
+/**
+ * The Asset Interface.
+ *
+ * @package DiviSquad
+ * @since   3.0.0
+ */
+interface AssetInterface
+{
+    /**
+     * Enqueue scripts, styles, and other assets in the WordPress frontend and admin area.
+     *
+     * @param string $type The type of the script. Default is 'frontend'.
+     * @param string $hook_suffix The hook suffix for the current admin page.
+     *
+     * @return void
+     */
+    public function enqueue_scripts($type = 'frontend', $hook_suffix = '');
+    /**
+     * Localize script data.
+     *
+     * @param string       $type The type of the localize data. Default is 'raw'. Accepts 'raw' or 'output'.
+     * @param string|array $data The data to localize.
+     *
+     * @return string|array
+     */
+    public function get_localize_data($type = 'raw', $data = array());
+}
+/**
+ * The Plugin Asset class.
+ *
+ * @package DiviSquad
+ * @since   3.0.0
+ */
+abstract class Asset implements \DiviSquad\Base\Factories\PluginAsset\AssetInterface
+{
+}
+/**
+ * The Plugin Asset class.
+ *
+ * @package DiviSquad
+ * @since   3.0.0
+ * @deprecated 3.1.4
+ */
+abstract class PluginAsset extends \DiviSquad\Base\Factories\PluginAsset\Asset
+{
+}
+/**
+ * The Asset Interface.
+ *
+ * @package DiviSquad
+ * @since   3.0.0
+ * @deprecated 3.1.4
+ */
+interface PluginAssetInterface
+{
+}
 namespace DiviSquad\Integrations;
 
 /**
@@ -4377,7 +4535,7 @@ final class BrandAsset extends \DiviSquad\Base\Factories\FactoryBase\Factory
     /**
      * Store all branding assets.
      *
-     * @var array<string, BrandAsset\BrandAssetInterface[]>
+     * @var array<string, BrandAsset\AssetInterface[]>
      */
     private static $registries = array('plugin_action_links' => array(), 'plugin_row_actions' => array(), 'admin_footer_text' => array());
     /**
@@ -4442,100 +4600,18 @@ final class BrandAsset extends \DiviSquad\Base\Factories\FactoryBase\Factory
     {
     }
 }
-namespace DiviSquad\Base\Factories\BrandAsset;
-
-/**
- * Branding Asset Interface.
- *
- * @package DiviSquad
- * @since   3.0.0
- */
-interface BrandAssetInterface
-{
-    /**
-     * The branding asset type.
-     *
-     * @return string
-     */
-    public function get_type();
-    /**
-     * The branding asset position.
-     *
-     * @return string
-     */
-    public function get_position();
-}
-/**
- * Abstract class representing the Branding.
- *
- * @package DiviSquad
- * @since   3.0.0
- */
-abstract class BrandAsset implements \DiviSquad\Base\Factories\BrandAsset\BrandAssetInterface
-{
-    /**
-     * The plugin base.
-     *
-     * @return string
-     */
-    public function get_plugin_base()
-    {
-    }
-    /**
-     * The branding asset is allowed in network.
-     *
-     * @return bool
-     */
-    public function is_allow_network()
-    {
-    }
-    /**
-     * The plugin action links.
-     *
-     * @return array
-     */
-    public function get_action_links()
-    {
-    }
-    /**
-     * The plugin row actions.
-     *
-     * @return array
-     */
-    public function get_row_actions()
-    {
-    }
-    /**
-     * The plugin footer text.
-     *
-     * @return string
-     */
-    public function get_plugin_footer_text()
-    {
-    }
-    /**
-     * The plugin update footer text.
-     *
-     * @return string
-     */
-    public function get_update_footer_text()
-    {
-    }
-}
-namespace DiviSquad\Base\Factories;
-
 /**
  * Factory for creating migration instances.
  *
  * @package DiviSquad\Settings
- * @since   3.1.2
+ * @since   3.0.0
  */
-class Migration
+class ModuleMigration
 {
     /**
      * Creates a migration instance based on the migration name.
      *
-     * @param string $class_name The name of the migration class to instantiate.
+     * @param string $class_name The name of the migration class to instantiate. The class must exist and be an instance of AbstractMigration.
      * @return AbstractMigration The migration instance.
      * @throws InvalidArgumentException If the class does not exist or is not an instance of AbstractMigration.
      */
@@ -4622,7 +4698,7 @@ final class PluginAsset extends \DiviSquad\Base\Factories\FactoryBase\Factory
     /**
      * The list of registries.
      *
-     * @var PluginAsset\PluginAssetInterface[]
+     * @var PluginAsset\AssetInterface[]
      */
     private static $registries = array();
     /**
@@ -4682,46 +4758,6 @@ final class PluginAsset extends \DiviSquad\Base\Factories\FactoryBase\Factory
     {
     }
 }
-namespace DiviSquad\Base\Factories\PluginAsset;
-
-/**
- * The Asset Interface.
- *
- * @package DiviSquad
- * @since   3.0.0
- */
-interface PluginAssetInterface
-{
-    /**
-     * Enqueue scripts, styles, and other assets in the WordPress frontend and admin area.
-     *
-     * @param string $type The type of the script. Default is 'frontend'.
-     * @param string $hook_suffix The hook suffix for the current admin page.
-     *
-     * @return void
-     */
-    public function enqueue_scripts($type = 'frontend', $hook_suffix = '');
-    /**
-     * Localize script data.
-     *
-     * @param string       $type The type of the localize data. Default is 'raw'. Accepts 'raw' or 'output'.
-     * @param string|array $data The data to localize.
-     *
-     * @return string|array
-     */
-    public function get_localize_data($type = 'raw', $data = array());
-}
-/**
- * The Plugin Asset class.
- *
- * @package DiviSquad
- * @since   3.0.0
- */
-abstract class PluginAsset implements \DiviSquad\Base\Factories\PluginAsset\PluginAssetInterface
-{
-}
-namespace DiviSquad\Base\Factories;
-
 /**
  * Class RestRoute
  *
@@ -4732,9 +4768,9 @@ final class RestRoute extends \DiviSquad\Base\Factories\FactoryBase\Factory
 {
     use \DiviSquad\Utils\Singleton;
     /**
-     * Store all registry
+     * Store all registered routes
      *
-     * @var RestRoute\RouteInterface[]
+     * @var array
      */
     private static $registries = array();
     /**
@@ -4748,25 +4784,23 @@ final class RestRoute extends \DiviSquad\Base\Factories\FactoryBase\Factory
     /**
      * Add a new route to the list of routes.
      *
-     * @param string $route_class The class name of the route to add to the list. The class must implement the RouteInterface.
-     *
-     * @return bool
+     * @param string $class_name The class name of the route to add. Must implement RouteInterface.
+     * @return void
      */
-    public function add($route_class)
+    public function add($class_name)
     {
     }
     /**
-     * Registered all namespace.
+     * Get the namespace for a given product name.
      *
      * @param string $name Current product name.
-     *
      * @return string
      */
     public function get_namespace($name)
     {
     }
     /**
-     * We register our routes for our endpoints.
+     * Register all routes for our endpoints.
      *
      * @return void
      */
@@ -4774,13 +4808,30 @@ final class RestRoute extends \DiviSquad\Base\Factories\FactoryBase\Factory
     {
     }
     /**
-     * Registered all routes.
+     * Ensure each route has a permission callback.
+     *
+     * @param array $args Route arguments.
+     * @return array
+     */
+    private function ensure_permission_callback($args)
+    {
+    }
+    /**
+     * Get all registered routes for a given product name.
      *
      * @param string $name Current product name.
-     *
      * @return array
      */
     public function get_registered_routes($name)
+    {
+    }
+    /**
+     * Format the route name for readability.
+     *
+     * @param string $route Original route string.
+     * @return string
+     */
+    private function format_route_name($route)
     {
     }
 }
@@ -4795,17 +4846,17 @@ namespace DiviSquad\Base\Factories\RestRoute;
 interface RouteInterface
 {
     /**
-     * The route name
-     *
-     * @return string
-     */
-    public function get_name();
-    /**
      * The route namespace
      *
      * @return string
      */
     public function get_namespace();
+    /**
+     * The route name
+     *
+     * @return string
+     */
+    public function get_name();
     /**
      * Available routes for current Rest Route
      *
@@ -4821,7 +4872,12 @@ interface RouteInterface
  */
 abstract class Route implements \DiviSquad\Base\Factories\RestRoute\RouteInterface
 {
-    const VERSION = 'v1';
+    /**
+     * API Version
+     *
+     * @var string
+     */
+    protected $version = 'v1';
     /**
      * The route namespace
      *
@@ -4839,32 +4895,19 @@ abstract class Route implements \DiviSquad\Base\Factories\RestRoute\RouteInterfa
     {
     }
     /**
+     * The route name
+     *
+     * @return string
+     */
+    public function get_version()
+    {
+    }
+    /**
      * Available routes for current Rest Route
      *
      * @return array
      */
     public function get_routes()
-    {
-    }
-}
-namespace DiviSquad\Base\Factories;
-
-/**
- * Factory for creating migration instances.
- *
- * @package DiviSquad\Settings
- * @since   3.0.0
- */
-class SettingsMigration
-{
-    /**
-     * Creates a migration instance based on the migration name.
-     *
-     * @param string $class_name The name of the migration class to instantiate. The class must exist and be an instance of AbstractMigration.
-     * @return AbstractMigration The migration instance.
-     * @throws InvalidArgumentException If the class does not exist or is not an instance of AbstractMigration.
-     */
-    public function create($class_name)
     {
     }
 }
@@ -4921,7 +4964,15 @@ class Memory
     {
     }
     /**
-     * Load data from cache or database.
+     * Migrate legacy options from 'name-settings' to 'name_settings' format.
+     *
+     * @return void
+     */
+    public function migrate_legacy_options()
+    {
+    }
+    /**
+     * Load data from cache or database, including migration check.
      *
      * @return void
      */
@@ -5055,7 +5106,9 @@ class Memory
 namespace DiviSquad\Base\Traits;
 
 /**
- * Deprecated Classes Trait
+ * DeprecatedClassLoader Trait
+ *
+ * Handles the loading of deprecated classes for backwards compatibility.
  *
  * @package DiviSquad
  * @since   3.1.1
@@ -5063,45 +5116,96 @@ namespace DiviSquad\Base\Traits;
 trait DeprecatedClassLoader
 {
     /**
-     * Load deprecated classes after Divi Squad has initialized.
+     * Deprecated classes configuration.
+     *
+     * @var array
+     */
+    private $deprecated_classes;
+    /**
+     * Initialize the deprecated class loader.
      *
      * @since 3.1.1
-     *
-     * @return void
      */
-    public function load_deprecated_class_compatibility()
+    public function init_deprecated_class_loader()
     {
     }
     /**
-     * Load deprecated classes after Divi Squad has initialized.
+     * Load all deprecated classes.
      *
      * @since 3.1.1
-     *
-     * @return void
      */
     public function load_deprecated_classes()
     {
     }
     /**
-     * Load a deprecated class file.
+     * Load deprecated classes if conditions are met.
      *
-     * @param string $class_name The full class name.
-     * @param array  $config     The configuration array.
-     * @return void
+     * @since 3.1.1
      */
-    private function load_deprecated_class($class_name, $config = array())
+    private function maybe_load_deprecated_classes()
     {
     }
     /**
-     * Get the list of deprecated classes and their configurations.
+     * Check if deprecated classes should be loaded.
      *
-     * @return array
+     * @since 3.1.1
+     *
+     * @return bool
      */
-    private function get_deprecated_classes_list()
+    private function should_load_deprecated_classes()
+    {
+    }
+    /**
+     * Load a specific deprecated class.
+     *
+     * @since 3.1.1
+     *
+     * @param string $class_name Full class name.
+     * @param array  $config     Class configuration.
+     */
+    private function load_deprecated_class($class_name, $config)
+    {
+    }
+    /**
+     * Schedule class loading on a specific action.
+     *
+     * @since 3.1.1
+     *
+     * @param array  $config     Class configuration.
+     * @param string $class_name Full class name.
+     * @param string $file_path  Path to the class file.
+     */
+    private function schedule_class_loading($config, $class_name, $file_path)
+    {
+    }
+    /**
+     * Load class if needed based on conditions.
+     *
+     * @since 3.1.1
+     *
+     * @param array  $config     Class configuration.
+     * @param string $class_name Full class name.
+     * @param string $file_path  Path to the class file.
+     */
+    private function load_class_if_needed($config, $class_name, $file_path)
+    {
+    }
+    /**
+     * Execute a callback if it exists in the configuration.
+     *
+     * @since 3.1.1
+     *
+     * @param array  $config     Class configuration.
+     * @param string $type       Callback type ('before' or 'after').
+     * @param string $class_name Full class name.
+     */
+    private function execute_callback($config, $type, $class_name)
     {
     }
     /**
      * Get the file path for a deprecated class.
+     *
+     * @since 3.1.1
      *
      * @param string $class_name The full class name.
      * @return string
@@ -5112,41 +5216,11 @@ trait DeprecatedClassLoader
     /**
      * Log an error when a deprecated class file is not found.
      *
-     * @param string $valid_path The expected file path.
-     * @return void
-     */
-    private function log_deprecated_class_error($valid_path)
-    {
-    }
-    /**
-     * Execute the before load callback if it exists in the configuration.
+     * @since 3.1.1
      *
-     * @param array  $config     The configuration array.
-     * @param string $class_name The full class name.
-     * @return void
+     * @param string $file_path The expected file path.
      */
-    private function execute_before_load_callback($config, $class_name)
-    {
-    }
-    /**
-     * Add an action to load the deprecated class.
-     *
-     * @param array  $config     The configuration array.
-     * @param string $class_name The full class name.
-     * @param string $valid_path The file path of the deprecated class.
-     * @return void
-     */
-    private function add_deprecated_class_action($config, $class_name, $valid_path)
-    {
-    }
-    /**
-     * Execute the after load callback if it exists in the configuration.
-     *
-     * @param array  $config     The configuration array.
-     * @param string $class_name The full class name.
-     * @return void
-     */
-    private function execute_after_load_callback($config, $class_name)
+    private function log_deprecated_class_error($file_path)
     {
     }
 }
@@ -5932,7 +6006,7 @@ namespace DiviSquad\Managers\Assets;
  * @package DiviSquad
  * @since   3.0.0
  */
-class Admin extends \DiviSquad\Base\Factories\PluginAsset\PluginAsset
+class Admin extends \DiviSquad\Base\Factories\PluginAsset\Asset
 {
     /**
      * Enqueue scripts, styles, and other assets in the WordPress frontend and admin area.
@@ -5993,7 +6067,7 @@ class Admin extends \DiviSquad\Base\Factories\PluginAsset\PluginAsset
  * @package DiviSquad
  * @since   3.0.0
  */
-class Modules extends \DiviSquad\Base\Factories\PluginAsset\PluginAsset
+class Modules extends \DiviSquad\Base\Factories\PluginAsset\Asset
 {
     /**
      * Enqueue scripts, styles, and other assets in the WordPress frontend and admin area.
@@ -6061,7 +6135,7 @@ namespace DiviSquad\Managers\Branding;
  * @package DiviSquad
  * @since   1.0.0
  */
-class AdminFooterText extends \DiviSquad\Base\Factories\BrandAsset\BrandAsset
+class AdminFooterText extends \DiviSquad\Base\Factories\BrandAsset\Asset
 {
     /**
      * The branding type.
@@ -6084,6 +6158,7 @@ class AdminFooterText extends \DiviSquad\Base\Factories\BrandAsset\BrandAsset
      *
      * @return  string
      * @since 1.3.2
+     * @throws \Exception When the Freemius SDK is not loaded.
      */
     public function get_plugin_footer_text()
     {
@@ -6093,6 +6168,7 @@ class AdminFooterText extends \DiviSquad\Base\Factories\BrandAsset\BrandAsset
      *
      * @return  string
      * @since 1.4.8
+     * @throws \Exception When the Freemius SDK is not loaded.
      */
     public function get_update_footer_text()
     {
@@ -6104,7 +6180,7 @@ class AdminFooterText extends \DiviSquad\Base\Factories\BrandAsset\BrandAsset
  * @package DiviSquad
  * @since   1.0.0
  */
-class PluginActionLinks extends \DiviSquad\Base\Factories\BrandAsset\BrandAsset
+class PluginActionLinks extends \DiviSquad\Base\Factories\BrandAsset\Asset
 {
     /**
      * The branding type.
@@ -6145,7 +6221,7 @@ class PluginActionLinks extends \DiviSquad\Base\Factories\BrandAsset\BrandAsset
  * @package DiviSquad
  * @since   1.0.0
  */
-class PluginRowActions extends \DiviSquad\Base\Factories\BrandAsset\BrandAsset
+class PluginRowActions extends \DiviSquad\Base\Factories\BrandAsset\Asset
 {
     /**
      * The branding type.
@@ -6465,24 +6541,6 @@ class Review extends \DiviSquad\Base\Factories\AdminNotice\Notice
 namespace DiviSquad\Managers;
 
 /**
- * Assets Class
- *
- * @package DiviSquad
- * @since   1.0.0
- * @since   3.0.0 Updated class name.
- */
-class PluginAssets
-{
-    /**
-     * Load all the branding.
-     *
-     * @return void
-     */
-    public static function load()
-    {
-    }
-}
-/**
  * Rest API Routes
  *
  * @package DiviSquad
@@ -6499,10 +6557,14 @@ class RestRoutes
     {
     }
 }
-namespace DiviSquad\Managers\RestRoutes\V1;
+namespace DiviSquad\Managers\RestRoutes\Version1;
 
 /**
- * Rest API Routes for Extension
+ * Extensions REST API Route Handler
+ *
+ * Manages REST API endpoints for Divi Squad extensions, including
+ * retrieving available, active, and inactive extensions, as well as
+ * updating the list of active extensions.
  *
  * @package DiviSquad
  * @since   1.0.0
@@ -6510,81 +6572,166 @@ namespace DiviSquad\Managers\RestRoutes\V1;
 class Extensions extends \DiviSquad\Base\Factories\RestRoute\Route
 {
     /**
-     * Get registered extensions list.
+     * Key for active extensions in memory.
      *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     * @since 1.0.0
+     * @var string
      */
-    public function get_available_extensions()
+    const ACTIVE_EXTENSIONS_KEY = 'active_extensions';
+    /**
+     * Key for inactive extensions in memory.
+     *
+     * @since 1.0.0
+     * @var string
+     */
+    const INACTIVE_EXTENSIONS_KEY = 'inactive_extensions';
+    /**
+     * Key for active extension version in memory.
+     *
+     * @since 1.0.0
+     * @var string
+     */
+    const ACTIVE_EXTENSION_VERSION_KEY = 'active_extension_version';
+    /**
+     * Get available routes for the Extensions API.
+     *
+     * @since 1.0.0
+     * @return array Available routes for the Extensions API.
+     */
+    public function get_routes()
     {
     }
     /**
-     * Get active extensions list from database
+     * Check if the current user has admin permissions.
      *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     * @since 1.0.0
+     * @param WP_REST_Request $request Full details about the request.
+     * @return bool|WP_Error True if the request has admin access, WP_Error object otherwise.
      */
-    public function get_active_extensions()
+    public function check_admin_permissions($request)
     {
     }
     /**
-     * Get inactive extensions list from database.
+     * Get all registered extensions.
      *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     * @since 1.0.0
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response Response containing all registered extensions.
      */
-    public function get_inactive_extensions()
+    public function get_extensions($request)
     {
     }
     /**
-     * Get update extensions list from database
+     * Get active extensions list.
      *
-     * @param WP_REST_Request $request The wp rest api request.
+     * @since 1.0.0
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response Response containing active extensions.
+     */
+    public function get_active_extensions($request)
+    {
+    }
+    /**
+     * Get inactive extensions list.
      *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     * @since 1.0.0
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response Response containing inactive extensions.
+     */
+    public function get_inactive_extensions($request)
+    {
+    }
+    /**
+     * Get extension names from memory.
+     *
+     * Retrieves either active or inactive extension names from the plugin's memory.
+     *
+     * @since 1.0.0
+     * @param string $key The key to retrieve from memory ('active_extensions' or 'inactive_extensions').
+     * @return array List of extension names.
+     */
+    private function get_extension_names($key)
+    {
+    }
+    /**
+     * Get default extensions based on the provided key.
+     *
+     * @since 1.0.0
+     * @param string $key The key to determine which default extensions to retrieve.
+     * @return array Default extensions.
+     */
+    private function get_default_extensions($key)
+    {
+    }
+    /**
+     * Update active extensions list.
+     *
+     * @since 1.0.0
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response|WP_Error Response on success, WP_Error on failure.
      */
     public function update_active_extensions($request)
     {
     }
     /**
-     * We register our routes for our endpoints.
+     * Update extension memory with active and inactive extensions.
      *
-     * @return array
+     * @since 1.0.0
+     * @param array $active_extensions List of active extensions.
+     * @param array $inactive_extensions List of inactive extensions.
      */
-    public function get_routes()
+    private function update_extension_memory($active_extensions, $inactive_extensions)
     {
     }
 }
-namespace DiviSquad\Managers\RestRoutes\V1\Extensions;
+namespace DiviSquad\Managers\RestRoutes\Version1\Extensions;
 
 /**
- * Extension (Copy) Rest API class
+ * Copy Extension REST API Handler
+ *
+ * Manages REST API endpoints for the Copy extension, including
+ * functionality to duplicate posts.
  *
  * @package DiviSquad
- * @since   SQUAD_MODULES_VERSION
+ * @since   3.0.0
  */
 class Copy extends \DiviSquad\Base\Factories\RestRoute\Route
 {
     /**
-     * Get available posts
+     * Get available routes for the Copy Extension API.
      *
-     * @param WP_REST_Request $request The wp rest api request.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function get_available_posts($request)
-    {
-    }
-    /**
-     * We register our routes for our endpoints.
-     *
-     * @return array
+     * @return array Available routes for the Copy Extension API.
      */
     public function get_routes()
     {
     }
+    /**
+     * Check if the current user has permissions to duplicate posts.
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     * @return bool|WP_Error True if the request has duplication access, WP_Error object otherwise.
+     */
+    public function check_duplicate_permissions($request)
+    {
+    }
+    /**
+     * Duplicate posts based on the provided options.
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+     */
+    public function duplicate_posts($request)
+    {
+    }
 }
-namespace DiviSquad\Managers\RestRoutes\V1;
+namespace DiviSquad\Managers\RestRoutes\Version1;
 
 /**
- * Rest API Routes for Modules
+ * Modules REST API Route Handler
+ *
+ * Manages REST API endpoints for Divi Squad modules, including
+ * retrieving available, active, and inactive modules, as well as
+ * updating the list of active modules.
  *
  * @package DiviSquad
  * @since   1.0.0
@@ -6592,81 +6739,175 @@ namespace DiviSquad\Managers\RestRoutes\V1;
 class Modules extends \DiviSquad\Base\Factories\RestRoute\Route
 {
     /**
-     * Get registered modules list.
+     * Key for active modules in memory.
      *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     * @since 1.0.0
+     * @var string
      */
-    public function get_available_modules()
+    const ACTIVE_MODULES_KEY = 'active_modules';
+    /**
+     * Key for inactive modules in memory.
+     *
+     * @since 1.0.0
+     * @var string
+     */
+    const INACTIVE_MODULES_KEY = 'inactive_modules';
+    /**
+     * Key for active module version in memory.
+     *
+     * @since 1.0.0
+     * @var string
+     */
+    const ACTIVE_MODULE_VERSION_KEY = 'active_module_version';
+    /**
+     * Get available routes for the Modules API.
+     *
+     * @since 1.0.0
+     * @return array Available routes for the Modules API.
+     */
+    public function get_routes()
     {
     }
     /**
-     * Get active modules list from database.
+     * Check if the current user has admin permissions.
      *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     * @since 1.0.0
+     * @param WP_REST_Request $request Full details about the request.
+     * @return bool|WP_Error True if the request has admin access, WP_Error object otherwise.
      */
-    public function get_active_modules()
+    public function check_admin_permissions($request)
     {
     }
     /**
-     * Get inactive modules list from database.
+     * Get all registered modules.
      *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     * @since 1.0.0
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response Response containing all registered modules.
      */
-    public function get_inactive_modules()
+    public function get_modules($request)
     {
     }
     /**
-     * Get update active modules list from database.
+     * Get active modules list.
      *
-     * @param WP_REST_Request $request The wp rest api request.
+     * @since 1.0.0
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response Response containing active modules.
+     */
+    public function get_active_modules($request)
+    {
+    }
+    /**
+     * Get inactive modules list.
      *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     * @since 1.0.0
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response Response containing inactive modules.
+     */
+    public function get_inactive_modules($request)
+    {
+    }
+    /**
+     * Get module names from memory.
+     *
+     * Retrieves either active or inactive module names from the plugin's memory.
+     *
+     * @since 1.0.0
+     * @param string $key The key to retrieve from memory ('active_modules' or 'inactive_modules').
+     * @return array List of module names.
+     */
+    private function get_module_names($key)
+    {
+    }
+    /**
+     * Get default modules based on the provided key.
+     *
+     * @since 1.0.0
+     * @param string $key The key to determine which default modules to retrieve.
+     * @return array Default modules.
+     */
+    private function get_default_modules($key)
+    {
+    }
+    /**
+     * Update active modules list.
+     *
+     * @since 1.0.0
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response|WP_Error Response on success, WP_Error on failure.
      */
     public function update_active_modules($request)
     {
     }
     /**
-     * We register our routes for our endpoints.
+     * Update module memory with active and inactive modules.
      *
-     * @return array
+     * @since 1.0.0
+     * @param array $active_modules List of active modules.
+     * @param array $inactive_modules List of inactive modules.
      */
-    public function get_routes()
+    private function update_module_memory($active_modules, $inactive_modules)
+    {
+    }
+    /**
+     * Format a single module's data.
+     *
+     * @since 1.0.0
+     * @param array $module Raw module data.
+     * @return array Formatted module data.
+     */
+    private function format_module($module)
     {
     }
 }
-namespace DiviSquad\Managers\RestRoutes\V1\Modules;
+namespace DiviSquad\Managers\RestRoutes\Version1\Modules;
 
 /**
- * Post Grid Load More Rest API class
+ * PostGrid REST API Handler
+ *
+ * Manages REST API endpoints for the Post Grid module, including
+ * functionality to load more posts.
  *
  * @package DiviSquad
- * @since   SQUAD_MODULES_VERSION
+ * @since   3.0.0
  */
 class PostGrid extends \DiviSquad\Base\Factories\RestRoute\Route
 {
     /**
-     * Get available posts
+     * Get available routes for the PostGrid Module API.
      *
-     * @param WP_REST_Request $request The wp rest api request.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function get_available_posts($request)
-    {
-    }
-    /**
-     * We register our routes for our endpoints.
-     *
-     * @return array
+     * @return array Available routes for the PostGrid Module API.
      */
     public function get_routes()
     {
     }
+    /**
+     * Load more posts for the Post Grid module.
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+     */
+    public function load_more_posts($request)
+    {
+    }
+    /**
+     * Sanitize and prepare query parameters.
+     *
+     * @param array $query_args Raw query arguments.
+     * @return array Sanitized and prepared query arguments.
+     */
+    private function sanitize_and_prepare_query_params($query_args)
+    {
+    }
 }
-namespace DiviSquad\Managers\RestRoutes\V1\Notices;
+namespace DiviSquad\Managers\RestRoutes\Version1\Notices;
 
 /**
- * Welcome 60% Discount Notice class
+ * Discount Notice REST API Handler
+ *
+ * Manages REST API endpoints for the Welcome 60% Discount Notice,
+ * including functionality to mark the notice as done.
  *
  * @package DiviSquad
  * @since   3.0.0
@@ -6674,24 +6915,37 @@ namespace DiviSquad\Managers\RestRoutes\V1\Notices;
 class Discount extends \DiviSquad\Base\Factories\RestRoute\Route
 {
     /**
-     * Update the database when the user submits a review for the plugin.
+     * Get available routes for the Discount Notice API.
      *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function make_it_done()
-    {
-    }
-    /**
-     * We register our routes for our endpoints.
-     *
-     * @return array
+     * @return array Available routes for the Discount Notice API.
      */
     public function get_routes()
     {
     }
+    /**
+     * Check if the current user has admin permissions.
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     * @return bool|WP_Error True if the request has admin access, WP_Error object otherwise.
+     */
+    public function check_admin_permissions($request)
+    {
+    }
+    /**
+     * Mark the discount notice as done.
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response|WP_Error
+     */
+    public function mark_discount_notice_done($request)
+    {
+    }
 }
 /**
- * Plugin Activation Notice class.
+ * Pro Activation Notice REST API Handler
+ *
+ * Manages REST API endpoints for the Plugin Activation Notice,
+ * including functionality to close the notice.
  *
  * @package DiviSquad
  * @since   2.0.0
@@ -6699,81 +6953,109 @@ class Discount extends \DiviSquad\Base\Factories\RestRoute\Route
 class ProActivation extends \DiviSquad\Base\Factories\RestRoute\Route
 {
     /**
-     * Count how many times the user closes the review notice.
+     * Get available routes for the Pro Activation Notice API.
      *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function activation_notice_close()
-    {
-    }
-    /**
-     * We register our routes for our endpoints.
-     *
-     * @return array
+     * @return array Available routes for the Pro Activation Notice API.
      */
     public function get_routes()
     {
     }
+    /**
+     * Check if the current user has admin permissions.
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     * @return bool|WP_Error True if the request has admin access, WP_Error object otherwise.
+     */
+    public function check_admin_permissions($request)
+    {
+    }
+    /**
+     * Close the activation notice.
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response|WP_Error Response object or WP_Error object.
+     */
+    public function close_activation_notice($request)
+    {
+    }
 }
 /**
- * Plugin Review Notice class
+ * Review Notice REST API Handler
  *
- * @package DiviSquad
+ * Manages REST API endpoints for the Plugin Review Notice,
+ * including functionality to handle various user interactions.
+ *
+ * @package DiviSquad\Managers\RestRoutes\Version1\Notices
  * @since   1.0.0
  */
 class Review extends \DiviSquad\Base\Factories\RestRoute\Route
 {
     /**
-     * How Long timeout after first banner shown.
+     * Number of days to wait before showing the notice again.
      *
      * @var int
      */
-    private $another_time_show = 7;
+    private $reminder_delay = 7;
     /**
-     * Update the database when the user submits a review for the plugin.
+     * Get available routes for the Review Notice API.
      *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function make_it_done()
-    {
-    }
-    /**
-     * Remind the user for review the plugin.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function remind_me_at_next_week()
-    {
-    }
-    /**
-     * Count how many times the user closes the review notice.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function count_review_closing()
-    {
-    }
-    /**
-     * Count how many times the user asks for support from the review notice.
-     *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function ask_for_support()
-    {
-    }
-    /**
-     * We register our routes for our endpoints.
-     *
-     * @return array
+     * @return array Available routes for the Review Notice API.
      */
     public function get_routes()
     {
     }
+    /**
+     * Check if the current user has admin permissions.
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     * @return bool|WP_Error True if the request has admin access, WP_Error object otherwise.
+     */
+    public function check_admin_permissions($request)
+    {
+    }
+    /**
+     * Mark the review as completed.
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response|WP_Error Response object or WP_Error object.
+     */
+    public function mark_review_done($request)
+    {
+    }
+    /**
+     * Set a reminder for the review.
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response|WP_Error Response object or WP_Error object.
+     */
+    public function set_review_reminder($request)
+    {
+    }
+    /**
+     * Increment the count of review notice closures.
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response Response object with the updated count.
+     */
+    public function increment_close_count($request)
+    {
+    }
+    /**
+     * Increment the count of support requests from the review notice.
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response Response object with the updated count.
+     */
+    public function increment_support_request_count($request)
+    {
+    }
 }
-namespace DiviSquad\Managers\RestRoutes\V1\WhatsNew;
+namespace DiviSquad\Managers\RestRoutes\Version1\WhatsNew;
 
 /**
- * Rest API Routes for What's New
+ * Changelog REST API Handler
+ *
+ * Manages REST API endpoints for retrieving changelog information.
  *
  * @package DiviSquad
  * @since   1.0.0
@@ -6781,19 +7063,59 @@ namespace DiviSquad\Managers\RestRoutes\V1\WhatsNew;
 class Changelog extends \DiviSquad\Base\Factories\RestRoute\Route
 {
     /**
-     * Remind the user for review the plugin.
+     * Get available routes for the Changelog API.
      *
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     * @since 1.0.0
+     * @return array Available routes for the Changelog API.
      */
-    public function get_readme_file_data()
+    public function get_routes()
     {
     }
     /**
-     * We register our routes for our endpoints.
+     * Check if the current user has admin permissions.
      *
-     * @return array
+     * @since 3.1.4
+     * @param WP_REST_Request $request Full details about the request.
+     * @return bool|WP_Error True if the request has admin access, WP_Error object otherwise.
      */
-    public function get_routes()
+    public function check_admin_permissions($request)
+    {
+    }
+    /**
+     * Retrieve the changelog file data.
+     *
+     * @since 1.0.0
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response|WP_Error Response object or WP_Error object.
+     */
+    public function get_changelog_data($request)
+    {
+    }
+    /**
+     * Get the changelog content.
+     *
+     * @since 3.1.4
+     * @return string|WP_Error Changelog content or WP_Error on failure.
+     */
+    private function get_changelog_content()
+    {
+    }
+    /**
+     * Initialize the WordPress filesystem.
+     *
+     * @since 3.1.4
+     * @return bool True if filesystem is initialized, false otherwise.
+     */
+    private function initialize_filesystem()
+    {
+    }
+    /**
+     * Get the path to the changelog file.
+     *
+     * @since 1.0.0
+     * @return string Path to the changelog file.
+     */
+    private function get_changelog_file_path()
     {
     }
 }
@@ -6884,7 +7206,7 @@ namespace DiviSquad\Modules;
 /**
  * Before After Image Slider Module Class.
  *
- * @package DiviSquad\Modules\BeforeAfterImageSlider
+ * @package DiviSquad
  * @since   1.0.0
  */
 class BeforeAfterImageSlider extends \DiviSquad\Base\DiviBuilder\Module
@@ -6964,7 +7286,7 @@ class BeforeAfterImageSlider extends \DiviSquad\Base\DiviBuilder\Module
 /**
  * Breadcrumbs Module Class.
  *
- * @package DiviSquad\Modules\Breadcrumbs
+ * @package DiviSquad
  * @since   1.4.0
  */
 class Breadcrumbs extends \DiviSquad\Base\DiviBuilder\Module
@@ -7024,8 +7346,8 @@ class Breadcrumbs extends \DiviSquad\Base\DiviBuilder\Module
 /**
  * Business Hours Module Class.
  *
- * @since           1.0.0
- * @package         squad-modules-for-divi
+ * @package DiviSquad
+ * @since   1.0.0
  */
 class BusinessHours extends \DiviSquad\Base\DiviBuilder\Module
 {
@@ -7107,8 +7429,8 @@ class BusinessHours extends \DiviSquad\Base\DiviBuilder\Module
 /**
  * Business Hours Day Module Class.
  *
- * @since           1.0.0
- * @package         squad-modules-for-divi
+ * @package DiviSquad
+ * @since   1.0.0
  */
 class BusinessHoursChild extends \DiviSquad\Base\DiviBuilder\Module
 {
@@ -7183,8 +7505,8 @@ class BusinessHoursChild extends \DiviSquad\Base\DiviBuilder\Module
 /**
  * Divider Module Class.
  *
- * @since           1.0.0
- * @package         squad-modules-for-divi
+ * @package DiviSquad
+ * @since   1.0.0
  */
 class Divider extends \DiviSquad\Base\DiviBuilder\Module
 {
@@ -7315,8 +7637,8 @@ class Divider extends \DiviSquad\Base\DiviBuilder\Module
 /**
  * The Drop Cap Module Class.
  *
- * @since       1.4.0
- * @package     squad-modules-for-divi
+ * @package DiviSquad
+ * @since   1.4.0
  */
 class DropCapText extends \DiviSquad\Base\DiviBuilder\Module
 {
@@ -7375,8 +7697,8 @@ class DropCapText extends \DiviSquad\Base\DiviBuilder\Module
 /**
  * Dual-Button Module Class.
  *
- * @since           1.0.0
- * @package         squad-modules-for-divi
+ * @package DiviSquad
+ * @since   1.0.0
  */
 class DualButton extends \DiviSquad\Base\DiviBuilder\Module
 {
@@ -7488,8 +7810,8 @@ class DualButton extends \DiviSquad\Base\DiviBuilder\Module
 /**
  * Flip Box Module Class.
  *
- * @since           1.0.0
- * @package         squad-modules-for-divi
+ * @package DiviSquad
+ * @since   1.0.0
  */
 class FlipBox extends \DiviSquad\Base\DiviBuilder\Module
 {
@@ -8974,30 +9296,6 @@ class PostGrid extends \DiviSquad\Base\DiviBuilder\Module
     {
     }
     /**
-     * Render a post element based on its properties.
-     *
-     * @param WP_Post $post           The current post.
-     * @param array   $child_prop     The child properties.
-     * @param string  $expected_state The expected state ('on' for outside, 'off' for main).
-     *
-     * @return string
-     */
-    private function squad_render_post_element($post, $child_prop, $expected_state)
-    {
-    }
-    /**
-     * Generate content by props with dynamic values.
-     *
-     * @param WP_Post      $post        The WP POST object.
-     * @param string|array $content     The parent content.
-     * @param callable     $callback    The render callback.
-     *
-     * @return string
-     */
-    public function squad_generate_props_content($post, $content, $callback)
-    {
-    }
-    /**
      * Collect all posts from the database.
      *
      * @since 1.0.0
@@ -9009,6 +9307,30 @@ class PostGrid extends \DiviSquad\Base\DiviBuilder\Module
      * @return string the html output for the post-grid.
      */
     public static function squad_get_posts_html($attrs, $content = null, $multi_view = null)
+    {
+    }
+    /**
+     * Render a post element based on its properties.
+     *
+     * @param WP_Post $post           The current post.
+     * @param array   $child_prop     The child properties.
+     * @param string  $expected_state The expected state ('on' for outside, 'off' for main).
+     *
+     * @return string
+     */
+    protected function squad_render_post_element($post, $child_prop, $expected_state)
+    {
+    }
+    /**
+     * Generate content by props with dynamic values.
+     *
+     * @param WP_Post      $post        The WP POST object.
+     * @param string|array $content     The parent content.
+     * @param callable     $callback    The render callback.
+     *
+     * @return string
+     */
+    protected function squad_generate_props_content($post, $content, $callback)
     {
     }
     /**
@@ -9188,12 +9510,257 @@ class PostGrid extends \DiviSquad\Base\DiviBuilder\Module
     /**
      * Render element body.
      *
+     * @since 1.0.0
+     *
      * @param array         $attrs List of attributes.
-     * @param false|WP_POST $post  The current post-object.
+     * @param false|WP_Post $post  The current post object.
      *
      * @return string
      */
     protected function squad_render_post_element_body($attrs, $post)
+    {
+    }
+    /**
+     * Render title element.
+     *
+     * @since 1.0.0
+     *
+     * @param array  $attrs      List of attributes.
+     * @param WP_Post $post      The post object.
+     * @param string $class_name The class name for the element.
+     *
+     * @return string
+     */
+    protected function squad_render_title_element($attrs, $post, $class_name)
+    {
+    }
+    /**
+     * Render image element.
+     *
+     * @since 1.0.0
+     *
+     * @param int    $post_id    The post ID.
+     * @param string $class_name The class name for the element.
+     *
+     * @return string
+     */
+    protected function squad_render_image_element($post_id, $class_name)
+    {
+    }
+    /**
+     * Render content element.
+     *
+     * @since 1.0.0
+     *
+     * @param array     $attrs      List of attributes.
+     * @param WP_Post   $post       The post object.
+     * @param string    $class_name The class name for the element.
+     *
+     * @return string
+     */
+    protected function squad_render_content_element($attrs, $post, $class_name)
+    {
+    }
+    /**
+     * Get the expanded character map for content truncation.
+     *
+     * @since 1.0.0
+     *
+     * @return string
+     */
+    protected function squad_get_expanded_character_map()
+    {
+    }
+    /**
+     * Truncate content to a specified number of words, supporting an expanded set of special characters.
+     *
+     * @since 1.0.0
+     *
+     * @param string $content The content to truncate.
+     * @param int    $length  The number of words to keep.
+     *
+     * @return string
+     */
+    protected function squad_truncate_content($content, $length)
+    {
+    }
+    /**
+     * Render author element.
+     *
+     * @since 1.0.0
+     *
+     * @param array     $attrs      List of attributes.
+     * @param WP_Post   $post       The post object.
+     * @param string    $class_name The class name for the element.
+     *
+     * @return string
+     */
+    protected function squad_render_author_element($attrs, $post, $class_name)
+    {
+    }
+    /**
+     * Get author name based on the specified type.
+     *
+     * @since 1.0.0
+     *
+     * @param WP_User $author           The author object.
+     * @param string  $author_name_type The type of author name to return.
+     *
+     * @return string
+     */
+    protected function squad_get_author_name($author, $author_name_type)
+    {
+    }
+    /**
+     * Render gravatar element.
+     *
+     * @since 1.0.0
+     *
+     * @param array     $attrs      List of attributes.
+     * @param WP_Post   $post       The post object.
+     * @param string    $class_name The class name for the element.
+     *
+     * @return string
+     */
+    protected function squad_render_gravatar_element($attrs, $post, $class_name)
+    {
+    }
+    /**
+     * Render date element.
+     *
+     * @since 1.0.0
+     *
+     * @param array     $attrs      List of attributes.
+     * @param WP_Post   $post       The post object.
+     * @param string    $class_name The class name for the element.
+     *
+     * @return string
+     */
+    protected function squad_render_date_element($attrs, $post, $class_name)
+    {
+    }
+    /**
+     * Render read more element.
+     *
+     * @since 1.0.0
+     *
+     * @param array  $attrs      List of attributes.
+     * @param int    $post_id    The post ID.
+     * @param string $class_name The class name for the element.
+     *
+     * @return string
+     */
+    protected function squad_render_read_more_element($attrs, $post_id, $class_name)
+    {
+    }
+    /**
+     * Render comments element.
+     *
+     * @since 1.0.0
+     *
+     * @param array     $attrs      List of attributes.
+     * @param WP_Post   $post       The post object.
+     * @param string    $class_name The class name for the element.
+     *
+     * @return string
+     */
+    protected function squad_render_comments_element($attrs, $post, $class_name)
+    {
+    }
+    /**
+     * Render categories element.
+     *
+     * @since 1.0.0
+     *
+     * @param array  $attrs      List of attributes.
+     * @param int    $post_id    The post ID.
+     * @param string $class_name The class name for the element.
+     *
+     * @return string
+     */
+    protected function squad_render_categories_element($attrs, $post_id, $class_name)
+    {
+    }
+    /**
+     * Render tags element.
+     *
+     * @since 1.0.0
+     *
+     * @param array  $attrs      List of attributes.
+     * @param int    $post_id    The post ID.
+     * @param string $class_name The class name for the element.
+     *
+     * @return string
+     */
+    protected function squad_render_tags_element($attrs, $post_id, $class_name)
+    {
+    }
+    /**
+     * Render divider element.
+     *
+     * @since 1.0.0
+     *
+     * @param array  $attrs      List of attributes.
+     * @param string $class_name The class name for the element.
+     *
+     * @return string
+     */
+    protected function squad_render_divider_element($attrs, $class_name)
+    {
+    }
+    /**
+     * Render custom text element.
+     *
+     * @since 1.0.0
+     *
+     * @param array  $attrs      List of attributes.
+     * @param string $class_name The class name for the element.
+     *
+     * @return string
+     */
+    protected function squad_render_custom_text_element($attrs, $class_name)
+    {
+    }
+    /**
+     * Render custom field element.
+     *
+     * @since 1.0.0
+     *
+     * @param array  $attrs      List of attributes.
+     * @param int    $post_id    The post ID.
+     * @param string $class_name The class name for the element.
+     *
+     * @return string
+     */
+    protected function squad_render_custom_field_element($attrs, $post_id, $class_name)
+    {
+    }
+    /**
+     * Render advanced custom field element.
+     *
+     * @since 1.0.0
+     *
+     * @param array $attrs      List of attributes.
+     * @param int   $post_id    The post ID.
+     * @param string $class_name The class name for the element.
+     *
+     * @return string
+     */
+    protected function squad_render_advanced_custom_field_element($attrs, $post_id, $class_name)
+    {
+    }
+    /**
+     * Format ACF field value based on field type.
+     *
+     * @since 1.0.0
+     *
+     * @param array  $attrs           List of attributes.
+     * @param mixed  $acf_field_value The ACF field value.
+     * @param string $acf_field_type  The ACF field type.
+     *
+     * @return string
+     */
+    protected function squad_format_acf_field_value($attrs, $acf_field_value, $acf_field_type)
     {
     }
     /**
@@ -9465,8 +10032,8 @@ class StarRating extends \DiviSquad\Base\DiviBuilder\Module
 /**
  * Typing Text Module Class.
  *
- * @since           1.0.0
- * @package         squad-modules-for-divi
+ * @package DiviSquad
+ * @since   1.0.0
  */
 class TypingText extends \DiviSquad\Base\DiviBuilder\Module
 {
@@ -9669,6 +10236,8 @@ abstract class Migration implements \DiviSquad\Base\Factories\ModuleMigration\Mi
     public static $migrated = array();
     /**
      * Array of migrations in format( [ 'version' => 'name of migration script' ] ).
+     *
+     * @see Migration\PostElement::class
      *
      * @var string[]
      */
@@ -9993,20 +10562,20 @@ final class SquadModules extends \DiviSquad\Integrations\Core
     {
     }
     /**
+     * Get the plugin base name.
+     *
+     * @return string
+     */
+    public function get_basename()
+    {
+    }
+    /**
      * Get the plugin directory path.
      *
      * @param  string $path The path to append.
      * @return string
      */
     public function get_path($path = '')
-    {
-    }
-    /**
-     * Get the plugin base name.
-     *
-     * @return string
-     */
-    public function get_basename()
     {
     }
     /**
@@ -10107,11 +10676,11 @@ final class SquadModules extends \DiviSquad\Integrations\Core
     {
     }
     /**
-     * Check if debug mode is enabled.
+     * Get the list of deprecated classes and their configurations.
      *
-     * @return bool
+     * @return array
      */
-    public function is_debug_mode()
+    protected function get_deprecated_classes_list()
     {
     }
 }
@@ -10259,7 +10828,7 @@ class Asset
     {
     }
     /**
-     * Enqueue styles.
+     * Enqueue styles (deprecated).
      *
      * @since 1.0.0
      *
@@ -10276,7 +10845,7 @@ class Asset
     {
     }
     /**
-     * Enqueue javascript.
+     * Enqueue javascript (deprecated).
      *
      * @since 1.0.0
      *
@@ -10493,6 +11062,25 @@ class Helper
      * @return bool
      */
     public static function is_squad_page($page_id = '')
+    {
+    }
+}
+/**
+ * Language recognition chart.
+ *
+ * @package DiviSquad
+ * @since 3.1.4
+ */
+class LRCart
+{
+    /**
+     * Get supported language recognition chart.
+     *
+     * @since 3.1.4
+     *
+     * @return string
+     */
+    public static function get_character_map()
     {
     }
 }
