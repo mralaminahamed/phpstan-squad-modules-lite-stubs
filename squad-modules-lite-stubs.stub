@@ -374,6 +374,14 @@ final class SquadModules extends \DiviSquad\Integration\Core
     public static function get_instance()
     {
     }
+    /**
+     * Get the plugin name for the pro-version
+     *
+     * @return bool
+     */
+    public static function is_the_pro_plugin_active()
+    {
+    }
 }
 namespace DiviSquad\Admin;
 
@@ -2062,39 +2070,6 @@ class DiviSquad extends \DiviSquad\Base\BuilderIntegrationAPI
 class WP
 {
     /**
-     * The minimum version for PHP.
-     *
-     * @var string
-     */
-    protected $php_min_version = '';
-    /**
-     * The minimum version for WordPress.
-     *
-     * @var string
-     */
-    protected $wp_min_version = '';
-    /**
-     * The minimum version for Divi Theme.
-     *
-     * @var string
-     */
-    protected $divi_min_version = '';
-    /**
-     * The minimum version for Divi Builder.
-     *
-     * @var string
-     */
-    protected $builder_min_version = '';
-    /**
-     * Set versions.
-     *
-     * @since 1.2.3
-     *
-     */
-    public function assign_all_versions()
-    {
-    }
-    /**
      * Checks compatibility with the current version.
      *
      * @param string $required       Minimum required version.
@@ -2122,7 +2097,7 @@ class WP
      *
      * @return void
      */
-    public function required_php_version_missing_notice()
+    public static function required_php_version_missing_notice()
     {
     }
     /**
@@ -2130,7 +2105,7 @@ class WP
      *
      * @return void
      */
-    public function required_wordpress_version_missing_notice()
+    public static function required_wordpress_version_missing_notice()
     {
     }
 }
