@@ -374,14 +374,6 @@ final class SquadModules extends \DiviSquad\Integration\Core
     public static function get_instance()
     {
     }
-    /**
-     * Get the plugin name for the pro-version
-     *
-     * @return bool
-     */
-    public static function is_the_pro_plugin_active()
-    {
-    }
 }
 namespace DiviSquad\Admin;
 
@@ -400,15 +392,6 @@ class Assets
      * @since 1.2.0
      */
     protected static function get_plugin_asset_allowed_pages()
-    {
-    }
-    /**
-     * Get the lis of admin extra asset allowed page for the plugin.
-     *
-     * @return array
-     * @since 1.2.0
-     */
-    protected static function get_plugin_extra_asset_allowed_pages()
     {
     }
     /**
@@ -666,12 +649,6 @@ abstract class BuilderBackendPlaceholder
      */
     protected static $instance;
     /**
-     * The default data for module.
-     *
-     * @var array
-     */
-    protected $modules_defaults;
-    /**
      *  Get The defaults data for module.
      *
      * @return array
@@ -745,7 +722,7 @@ abstract class BuilderIntegrationAPIBase
      *
      * @var string The plugin's version
      */
-    protected $build_path = '';
+    protected $build_path = 'build/divi4/';
     /**
      * Dependencies for the plugin's JavaScript bundles.
      *
@@ -1150,16 +1127,6 @@ trait Field_Processor
     protected function disq_process_divider($options = array())
     {
     }
-    /**
-     * Process text with url, example: title with url.
-     *
-     * @param array $options The options for text with url.
-     *
-     * @return string
-     */
-    protected function disq_text_with_url($options = array())
-    {
-    }
 }
 /**
  * Fields class.
@@ -1178,17 +1145,6 @@ trait Fields
      * @return \string[][]
      */
     protected function disq_get_html_tag_elements()
-    {
-    }
-    /**
-     * Default fields for Heading toggles.
-     *
-     * @param string   $field_label The heading toggle label name.
-     * @param int|bool $priority    The toggle priority, default is 55.
-     *
-     * @return array
-     */
-    protected function disq_get_heading_toggles($field_label, $priority = 55)
     {
     }
     /**
@@ -1325,7 +1281,7 @@ namespace DiviSquad\Base\BuilderModule;
  * @license     GPL-3.0-only
  */
 #[\AllowDynamicProperties]
-abstract class DISQ_Builder_Module extends \ET_Builder_Module
+abstract class Squad_Builder_Module extends \ET_Builder_Module
 {
     use \DiviSquad\Base\BuilderModule\Traits\Field_Compatibility;
     use \DiviSquad\Base\BuilderModule\Traits\Field_Definition;
@@ -1356,13 +1312,6 @@ abstract class DISQ_Builder_Module extends \ET_Builder_Module
      */
     protected $icon_path = '';
     /**
-     * Stylesheet selector for tooltip container.
-     *
-     * @var string
-     * @since 1.0.0
-     */
-    protected $tooltip_css_element = '';
-    /**
      * Module folder name.
      *
      * @var string
@@ -1370,59 +1319,11 @@ abstract class DISQ_Builder_Module extends \ET_Builder_Module
      */
     protected $folder_name = 'et_pb_divi_squad_modules';
     /**
-     * Collect all modules from Divi Builder.
-     *
-     * @param array $allowed_prefix The allowed prefix list.
-     *
-     * @return array
-     */
-    protected function disq_get_all_modules($allowed_prefix = array())
-    {
-    }
-    /**
-     * Collect actual props from child module with escaping raw html.
-     *
-     * @param string $content The raw content form child element.
-     *
-     * @return string
-     */
-    protected function disq_collect_raw_props($content)
-    {
-    }
-    /**
-     * Collect actual props from child module with escaping raw html.
-     *
-     * @param string $content The raw content form child element.
-     *
-     * @return string
-     */
-    protected function disq_json_format_raw_props($content)
-    {
-    }
-    /**
-     * Collect actual props from child module with escaping raw html.
-     *
-     * @param string $content The raw content form child element.
-     *
-     * @return array
-     */
-    protected function disq_collect_child_json_props($content)
-    {
-    }
-    /**
      * Get default selectors for main and hover in divi module.
      *
      * @return array[]
      */
     protected function disq_get_module_default_selectors()
-    {
-    }
-    /**
-     * Clean order class name from the class list for current module.
-     *
-     * @return string[]
-     */
-    public function disq_clean_order_class()
     {
     }
 }
@@ -1435,7 +1336,7 @@ abstract class DISQ_Builder_Module extends \ET_Builder_Module
  * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  */
-abstract class DISQ_Form_Styler_Module extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+abstract class Squad_Form_Styler_Module extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Get the stylesheet selector for form tag.
@@ -1606,22 +1507,6 @@ abstract class Extensions
      * @return string
      */
     public function get_version()
-    {
-    }
-    /**
-     * Get the plugin asset build path
-     *
-     * @return string
-     */
-    public function get_build_path()
-    {
-    }
-    /**
-     * Get the plugin asset build url
-     *
-     * @return string
-     */
-    public function get_build_url()
     {
     }
 }
@@ -2011,69 +1896,6 @@ class Admin
     {
     }
 }
-/**
- * Define integration helper functionalities for Divi.
- *
- * @since      1.0.0
- * @package    squad-modules-for-divi
- */
-class Divi
-{
-    /**
-     * Returns boolean if the Divi Builder Plugin active in the current WordPress installation
-     *
-     * @return boolean
-     * @since 1.0.0
-     */
-    public static function is_any_divi_theme_installed()
-    {
-    }
-    /**
-     * Returns boolean if the Divi Builder Plugin is installed in the current WordPress installation
-     *
-     * @return boolean
-     * @since 1.0.0
-     */
-    public static function is_divi_builder_plugin_installed()
-    {
-    }
-    /**
-     * Returns boolean if the Dynamic CSS feature is turn on for Divi Builder in the current WordPress installation
-     *
-     * @return boolean
-     * @since 1.0.0
-     */
-    public static function is_dynamic_css_enable()
-    {
-    }
-    /**
-     * Returns boolean if the Divi Builder Plugin active in the current WordPress installation
-     *
-     * @return boolean
-     * @since 1.0.0
-     */
-    public static function is_divi_builder_plugin_active()
-    {
-    }
-    /**
-     * Returns boolean if any Divi theme is installed active in the current WordPress installation
-     *
-     * @return boolean
-     * @since 1.0.0
-     */
-    public static function is_allowed_theme_activated()
-    {
-    }
-    /**
-     * Return the allowed theme list for Divi Module support
-     *
-     * @return array
-     * @since 1.0.0
-     */
-    public static function modules_allowed_theme()
-    {
-    }
-}
 namespace DiviSquad\Integration\Divi;
 
 /**
@@ -2194,18 +2016,6 @@ namespace DiviSquad\Manager;
  */
 class Assets
 {
-    /**
-     * Register scripts for frontend and builder.
-     *
-     * @param string $handle The handle name.
-     * @param array  $path   The script path url with options.
-     * @param array  $deps   The script dependencies.
-     *
-     * @return void
-     */
-    protected function register_scripts($handle, $path, $deps = array())
-    {
-    }
     /**
      * Enqueue scripts for frontend.
      *
@@ -2343,17 +2153,6 @@ class Modules
     {
     }
     /**
-     * Check the current module is an inactive module.
-     *
-     * @param array  $module The array of current module.
-     * @param string $type   The type of Divi Builder module, default is: D4. Available opinions are: D4, D5
-     *
-     * @return array|null
-     */
-    protected function is_inactive_module($module, $type = 'D4')
-    {
-    }
-    /**
      *  Check the current module is an active module.
      *
      * @param array  $module The array of current module.
@@ -2377,16 +2176,6 @@ class Modules
     {
     }
     /**
-     *  Get inactive modules.
-     *
-     * @param string $type The type of Divi Builder module, default is: D4. Available opinions are: D4, D5
-     *
-     * @return array
-     */
-    protected function get_inactive_modules($type = 'D4')
-    {
-    }
-    /**
      *  Get default active modules.
      *
      * @param string $type The type of Divi Builder module, default is: D4. Available opinions are: D4, D5
@@ -2399,27 +2188,23 @@ class Modules
     /**
      * Load the module class.
      *
-     * @param string      $path            The module class path.
-     * @param string      $module          The module name.
-     * @param string      $type            The type of Divi Builder module, default is: D4. Available opinions are: D4, D5
-     * @param object|null $dependency_tree `DependencyTree` class is used as a utility to manage loading classes in a meaningful manner.
+     * @param string $path   The module class path.
+     * @param string $module The module name.
      *
      * @return void
      */
-    protected function require_module_path($path, $module, $type = 'D4', $dependency_tree = null)
+    protected function require_module_path($path, $module)
     {
     }
     /**
      * Load the module class.
      *
-     * @param string      $path            The module class path.
-     * @param mixed       $modules         The available modules list.
-     * @param string      $type            The type of Divi Builder module, default is: D4. Available opinions are: D4, D5
-     * @param object|null $dependency_tree `DependencyTree` class is used as a utility to manage loading classes in a meaningful manner.
+     * @param string $path    The module class path.
+     * @param mixed  $modules The available modules list.
      *
      * @return void
      */
-    protected function load_module_files($path, $modules, $type = 'D4', $dependency_tree = null)
+    protected function load_module_files($path, $modules)
     {
     }
     /**
@@ -2658,7 +2443,7 @@ namespace DiviSquad\Modules\BeforeAfterImageSlider;
  * @since           1.0.0
  * @package         squad-modules-for-divi
  */
-class BeforeAfterImageSlider extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class BeforeAfterImageSlider extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -2740,7 +2525,7 @@ namespace DiviSquad\Modules\Breadcrumbs;
  * @since           1.4.0
  * @package         squad-modules-for-divi
  */
-class Breadcrumbs extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class Breadcrumbs extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -2796,7 +2581,7 @@ namespace DiviSquad\Modules\BusinessHours;
  * @since           1.0.0
  * @package         squad-modules-for-divi
  */
-class BusinessHours extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class BusinessHours extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -2881,7 +2666,7 @@ namespace DiviSquad\Modules\BusinessHoursChild;
  * @since           1.0.0
  * @package         squad-modules-for-divi
  */
-class BusinessHoursChild extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class BusinessHoursChild extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -2957,7 +2742,7 @@ namespace DiviSquad\Modules\Divider;
  * @since           1.0.0
  * @package         squad-modules-for-divi
  */
-class Divider extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class Divider extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -3091,7 +2876,7 @@ namespace DiviSquad\Modules\DropCap;
  * @since       1.4.0
  * @package     squad-modules-for-divi
  */
-class DropCapText extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class DropCapText extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -3147,7 +2932,7 @@ namespace DiviSquad\Modules\DualButton;
  * @since           1.0.0
  * @package         squad-modules-for-divi
  */
-class DualButton extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class DualButton extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -3262,7 +3047,7 @@ namespace DiviSquad\Modules\FlipBox;
  * @since           1.0.0
  * @package         squad-modules-for-divi
  */
-class FlipBox extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class FlipBox extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -3436,7 +3221,7 @@ namespace DiviSquad\Modules\FormStylerContactForm7;
  * @since       1.2.0
  * @package     squad-modules-for-divi
  */
-class FormStylerContactForm7 extends \DiviSquad\Base\BuilderModule\DISQ_Form_Styler_Module
+class FormStylerContactForm7 extends \DiviSquad\Base\BuilderModule\Squad_Form_Styler_Module
 {
     /**
      * Initiate Module.
@@ -3615,7 +3400,7 @@ namespace DiviSquad\Modules\FormStylerGravityForms;
  * @since       1.2.0
  * @package     squad-modules-for-divi
  */
-class FormStylerGravityForms extends \DiviSquad\Base\BuilderModule\DISQ_Form_Styler_Module
+class FormStylerGravityForms extends \DiviSquad\Base\BuilderModule\Squad_Form_Styler_Module
 {
     /**
      * Initiate Module.
@@ -3780,7 +3565,7 @@ namespace DiviSquad\Modules\FormStylerWPForms;
  * @since       1.2.0
  * @package     squad-modules-for-divi
  */
-class FormStylerWPForms extends \DiviSquad\Base\BuilderModule\DISQ_Form_Styler_Module
+class FormStylerWPForms extends \DiviSquad\Base\BuilderModule\Squad_Form_Styler_Module
 {
     /**
      * Initiate Module.
@@ -3939,7 +3724,7 @@ namespace DiviSquad\Modules\GlitchText;
  * @since           1.2.2
  * @package         squad-modules-for-divi
  */
-class GlitchText extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class GlitchText extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -3999,7 +3784,7 @@ namespace DiviSquad\Modules\GradientText;
  * @since           1.2.6
  * @package         squad-modules-for-divi
  */
-class GradientText extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class GradientText extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -4059,7 +3844,7 @@ namespace DiviSquad\Modules\ImageGallery;
  * @since           1.2.0
  * @package         squad-modules-for-divi
  */
-class ImageGallery extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class ImageGallery extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -4131,7 +3916,7 @@ namespace DiviSquad\Modules\ImageMask;
  * @since           1.0.0
  * @package         squad-modules
  */
-class ImageMask extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class ImageMask extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -4173,7 +3958,7 @@ namespace DiviSquad\Modules\Lottie;
  * @since           1.0.0
  * @package         squad-modules-for-divi
  */
-class Lottie extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class Lottie extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -4235,7 +4020,7 @@ namespace DiviSquad\Modules\PostGrid;
  * @since       1.0.0
  * @package     squad-modules-for-divi
  */
-class PostGrid extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class PostGrid extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -4440,7 +4225,7 @@ namespace DiviSquad\Modules\PostGridChild;
  * @since       1.0.0
  * @package     squad-modules-for-divi
  */
-class PostGridChild extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class PostGridChild extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * The list of element types
@@ -4534,7 +4319,7 @@ namespace DiviSquad\Modules\PostReadingTime;
  * @since           1.2.2
  * @package         squad-modules-for-divi
  */
-class PostReadingTime extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class PostReadingTime extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -4652,7 +4437,7 @@ namespace DiviSquad\Modules\ScrollingText;
  * @since           1.0.0
  * @package         squad-modules-for-divi
  */
-class ScrollingText extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class ScrollingText extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -4704,7 +4489,7 @@ namespace DiviSquad\Modules\StarRating;
  * @since           1.4.0
  * @package         squad-modules-for-divi
  */
-class StarRating extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class StarRating extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -4776,7 +4561,7 @@ namespace DiviSquad\Modules\TypingText;
  * @since           1.0.0
  * @package         squad-modules-for-divi
  */
-class TypingText extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class TypingText extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -4868,7 +4653,7 @@ namespace DiviSquad\Modules\VideoPopup;
  * @since       1.4.1
  * @package     squad-modules-for-divi
  */
-class VideoPopup extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+class VideoPopup extends \DiviSquad\Base\BuilderModule\Squad_Builder_Module
 {
     /**
      * Initiate Module.
@@ -4942,6 +4727,15 @@ class Asset
      * @since 1.0.0
      */
     public static function get_the_version()
+    {
+    }
+    /**
+     * Get current mode is production or not
+     *
+     * @return bool
+     * @since 1.0.0
+     */
+    public static function is_production_mode()
     {
     }
     /**
@@ -5039,6 +4833,18 @@ class Asset
     public static function style_enqueue($keyword, $path, $deps = array(), $media = 'all')
     {
     }
+    /**
+     * Register scripts for frontend and builder.
+     *
+     * @param string $handle The handle name.
+     * @param array  $path   The script path url with options.
+     * @param array  $deps   The script dependencies.
+     *
+     * @return void
+     */
+    public static function register_scripts($handle, $path, $deps = array())
+    {
+    }
 }
 /**
  * Divi class.
@@ -5048,26 +4854,6 @@ class Asset
  */
 class Divi
 {
-    /**
-     * Collect icon type from Divi formatted value.
-     *
-     * @param string $icon_value Divi formatted value for Icon.
-     *
-     * @return string
-     */
-    public static function get_icon_type($icon_value)
-    {
-    }
-    /**
-     * Determine icon font weight
-     *
-     * @param string $icon_value Divi formatted value for Icon.
-     *
-     * @return string
-     */
-    public static function get_icon_font_weight($icon_value)
-    {
-    }
     /**
      * Get unicode icon data
      *
@@ -5118,57 +4904,6 @@ class Divi
 class Helper
 {
     /**
-     * Remove quotes from string.
-     *
-     * @param string $value The array value in string format.
-     *
-     * @return array The clean array.
-     */
-    public static function remove_quotes($value)
-    {
-    }
-    /**
-     * Collect shortcode tags from html content.
-     *
-     * @param string $content The HTML content.
-     *
-     * @return array The shortcode tags list.
-     */
-    public static function collect_all_shortcode_tags($content)
-    {
-    }
-    /**
-     * Collect the shortcode list with tag and attributes from content.
-     *
-     * @param string $content The HTML content.
-     *
-     * @return array The shortcode list with tag and attributes.
-     */
-    public static function collect_all_shortcodes($content)
-    {
-    }
-    /**
-     * Show data in debug mode
-     *
-     * @param string|array|false|null $content     content for debugging and showing frontend.
-     * @param bool                    $is_any_time Show content in output anyway, by default is off.
-     *
-     * @return void
-     */
-    public static function debug($content, $is_any_time = false)
-    {
-    }
-    /**
-     * Show data in debug mode
-     *
-     * @param string|array|int|bool|object $content Content for debugging and showing frontend.
-     *
-     * @return void
-     */
-    public static function debug_output($content)
-    {
-    }
-    /**
      * Fix slash issue for Windows os
      *
      * @param string $path Full path for fixing.
@@ -5186,16 +4921,6 @@ class Helper
      * @return string
      */
     public static function implode_assoc_array($array_data)
-    {
-    }
-    /**
-     * Clean all array values.
-     *
-     * @param string $array_values The array values in string format.
-     *
-     * @return array The clean array
-     */
-    public static function clean_array_values($array_values)
     {
     }
     /**
@@ -5225,16 +4950,6 @@ class Helper
     public static function get_second($days)
     {
     }
-    /**
-     * Get days by second.
-     *
-     * @param int $seconds Seconds Number.
-     *
-     * @return int
-     */
-    public static function get_days($seconds)
-    {
-    }
 }
 /**
  * Module class.
@@ -5255,13 +4970,33 @@ class Module
     {
     }
     /**
-     * Collect json data from html content in module.
+     * Collect actual props from child module with escaping raw html.
      *
-     * @param string $html_content Html raw content from module.
+     * @param string $content The raw content form child element.
+     *
+     * @return string
+     */
+    public static function collect_raw_props($content)
+    {
+    }
+    /**
+     * Collect actual props from child module with escaping raw html.
+     *
+     * @param string $content The raw content form child element.
+     *
+     * @return string
+     */
+    public static function json_format_raw_props($content)
+    {
+    }
+    /**
+     * Collect actual props from child module with escaping raw html.
+     *
+     * @param string $content The raw content form child element.
      *
      * @return array
      */
-    public static function collect_json_data($html_content)
+    public static function collect_child_json_props($content)
     {
     }
 }
@@ -5390,46 +5125,6 @@ namespace DiviSquad\Utils;
 class WP
 {
     /**
-     * Determines whether the plugin is active for the entire network.
-     *
-     * Only plugins installed in the plugins/ folder can be active.
-     *
-     * Plugins in the mu-plugins/ folder can't be "activated," so this function will
-     * return false for those plugins.
-     *
-     * For more information on this and similar theme functions, check out
-     * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
-     * Conditional Tags} article in the Theme Developer Handbook.
-     *
-     * @param string $plugin Path to the plugin file relative to the plugins' directory.
-     *
-     * @return bool True if active for the network, otherwise false.
-     * @since 3.0.0
-     */
-    public static function is_plugin_active_for_network($plugin)
-    {
-    }
-    /**
-     * Determines whether a plugin is active.
-     *
-     * Only plugins installed in the plugins/ folder can be active.
-     *
-     * Plugins in the mu-plugins/ folder can't be "activated," so this function will
-     * return false for those plugins.
-     *
-     * For more information on this and similar theme functions, check out
-     * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
-     * Conditional Tags} article in the Theme Developer Handbook.
-     *
-     * @param string $plugin Path to the plugin file relative to the plugins' directory.
-     *
-     * @return bool True, if in the active plugins list. False, not in the list.
-     * @since 2.5.0
-     */
-    public static function is_plugin_active($plugin)
-    {
-    }
-    /**
      * Get the active plugins name and versions.
      *
      * @return array
@@ -5440,7 +5135,7 @@ class WP
     /**
      * Get the active plugins' information.
      *
-     * @return array|WP_Plugins_List_Table
+     * @return array
      */
     public static function get_active_plugins_info()
     {
@@ -5473,4 +5168,36 @@ class WP
     public static function localize_script($handle, $object_name, $l10n)
     {
     }
+}
+// phpcs:ignore WordPress.Files.FileName.InvalidClassFileName, WordPress.Files.FileName.NotHyphenatedLowercase
+/**
+ * Squad Modules Lite
+ *
+ * @package     divi-squad
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @license     GPL-3.0-only
+ *
+ * @wordpress-plugin
+ * Plugin Name:         Squad Modules Lite
+ * Plugin URI:          https://squadmodules.com/
+ * Description:         The Advanced Divi plugin you install after Divi or Extra Theme!
+ * Version:             1.4.4
+ * Requires at least:   5.0.0
+ * Requires PHP:        5.6.40
+ * Author:              WP Squad
+ * Author URI:          https://squadmodules.com/
+ * License:             GPL-3.0-only
+ * License URI:         https://www.gnu.org/licenses/gpl-3.0.en.html
+ * Text Domain:         squad-modules-for-divi
+ * Domain Path:         /languages
+ */
+namespace DiviSquad;
+
+/**
+ * The instance of Divi Squad Plugin (Free).
+ *
+ * @return SquadModules
+ */
+function divi_squad()
+{
 }
