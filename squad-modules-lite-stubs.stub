@@ -47,13 +47,21 @@ abstract class Core
      */
     protected $name;
     /**
+     * The Plugin Version.
+     *
+     * @since 1.4.5
+     *
+     * @var string
+     */
+    protected $version;
+    /**
      * The plugin option prefix
      *
      * @since 1.0.0
      *
      * @var string
      */
-    protected $option_prefix;
+    protected $opt_prefix;
     /**
      * The Script handle the text domain will be attached to.
      *
@@ -264,9 +272,11 @@ abstract class Core extends \DiviSquad\Base\Core
     /**
      * The admin interface asset and others.
      *
+     * @param array $options The plugin options.
+     *
      * @return void
      */
-    protected function load_admin_interface()
+    protected function load_admin_interface($options)
     {
     }
     /**
@@ -335,9 +345,25 @@ final class SquadModules extends \DiviSquad\Integration\Core
      */
     protected $plugin_memory;
     /**
-     * Constructor.
+     * The plugin options.
+     *
+     * @var array
      */
-    public function __construct()
+    protected $options;
+    /**
+     * Constructor.
+     *
+     * @param array $options The plugin options.
+     */
+    public function __construct($options)
+    {
+    }
+    /**
+     * The plugin options.
+     *
+     * @return array
+     */
+    public function get_options()
     {
     }
     /**
@@ -367,11 +393,27 @@ final class SquadModules extends \DiviSquad\Integration\Core
     {
     }
     /**
+     * Cloning is forbidden.
+     *
+     * @access public
+     */
+    public function __clone()
+    {
+    }
+    /**
+     * Unserializing instances of this class is forbidden.
+     *
+     * @access public
+     */
+    public function __wakeup()
+    {
+    }
+    /**
      *  The instance of current class.
      *
      * @return self
      */
-    public static function get_instance()
+    public static function get_instance($options)
     {
     }
 }
@@ -385,6 +427,20 @@ namespace DiviSquad\Admin;
  */
 class Assets
 {
+    /**
+     * The plugin options.
+     *
+     * @var array
+     */
+    protected $options;
+    /**
+     * Constructor.
+     *
+     * @param array $options The options.
+     */
+    public function __construct($options)
+    {
+    }
     /**
      * Get the lis of admin asset allowed page for the plugin.
      *
@@ -565,7 +621,7 @@ class Plugin_Review
      *
      * @var int
      */
-    private $first_time_show = 3;
+    private $first_time_show = 7;
     /**
      * Init constructor.
      */
@@ -1836,9 +1892,11 @@ class Admin
     /**
      * Get the instance of the current class.
      *
+     * @param array $options The plugin options.
+     *
      * @return void
      */
-    public static function load()
+    public static function load($options)
     {
     }
     /**
@@ -1965,6 +2023,20 @@ class DiviSquad extends \DiviSquad\Base\BuilderIntegrationAPI
 class WP
 {
     /**
+     * The plugin options.
+     *
+     * @var array
+     */
+    protected $options;
+    /**
+     * Constructor.
+     *
+     * @param array $options The plugin options.
+     */
+    public function __construct($options)
+    {
+    }
+    /**
      * Checks compatibility with the current version.
      *
      * @param string $required       Minimum required version.
@@ -1991,7 +2063,7 @@ class WP
      *
      * @return void
      */
-    public static function required_php_version_missing_notice()
+    public function required_php_version_missing_notice()
     {
     }
     /**
@@ -1999,7 +2071,7 @@ class WP
      *
      * @return void
      */
-    public static function required_wordpress_version_missing_notice()
+    public function required_wordpress_version_missing_notice()
     {
     }
 }
@@ -5181,7 +5253,7 @@ class WP
  * Plugin Name:         Squad Modules Lite
  * Plugin URI:          https://squadmodules.com/
  * Description:         The Advanced Divi plugin you install after Divi or Extra Theme!
- * Version:             1.4.4
+ * Version:             1.4.5
  * Requires at least:   5.0.0
  * Requires PHP:        5.6.40
  * Author:              WP Squad
