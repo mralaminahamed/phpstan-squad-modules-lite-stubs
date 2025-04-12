@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3c23130a-ed99-46e4-88a3-ecce1a1bbf86" name="Changes" comment="Add PhpCodeSniffer and PhpUnit configurations, update include paths and exclude folders">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/finder.php" beforeDir="false" afterPath="$PROJECT_DIR$/finder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generate.sh" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/squad-modules-lite-stubs.stub" beforeDir="false" afterPath="$PROJECT_DIR$/squad-modules-lite-stubs.stub" afterDir="false" />
