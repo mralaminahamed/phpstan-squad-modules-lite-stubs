@@ -11,7 +11,7 @@ return \StubsGenerator\Finder::create()
             ->depth('< 1')
             ->path('squad-modules-for-divi.php')
     )
-    // ->notPath('customizer')
+     ->notPath('freemius')
     // ->notPath('debug')
     ->sortByName(true)
 ;
