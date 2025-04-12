@@ -108,7 +108,7 @@ namespace DiviSquad\Admin\Plugin {
          *
          * @return  string
          * @since 1.3.2
-         * @deprecated 3.0.0 marked as deprecated.
+         * @deprecated 3.0.1 marked as deprecated.
          */
         public function add_plugin_footer_text($footer_text)
         {
@@ -120,7 +120,7 @@ namespace DiviSquad\Admin\Plugin {
          *
          * @return  string
          * @since 1.4.8
-         * @deprecated 3.0.0 marked as deprecated.
+         * @deprecated 3.0.1 marked as deprecated.
          */
         public function add_update_footer_text($content)
         {
@@ -265,7 +265,7 @@ namespace DiviSquad\Integrations {
          * Get the instance of the current class.
          *
          * @return void
-         * @deprecated 3.0.0 marked as deprecated.
+         * @deprecated 3.0.1 marked as deprecated.
          */
         public static function load()
         {
@@ -277,7 +277,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.2.0
-         * @deprecated 3.0.0 marked as deprecated.
+         * @deprecated 3.0.1 marked as deprecated.
          */
         protected static function register_admin_scripts($admin_asset)
         {
@@ -289,7 +289,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.2.0
-         * @deprecated 3.0.0 marked as deprecated.
+         * @deprecated 3.0.1 marked as deprecated.
          */
         protected static function register_plugin_action_links($action_links)
         {
@@ -301,7 +301,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.2.0
-         * @deprecated 3.0.0 marked as deprecated.
+         * @deprecated 3.0.1 marked as deprecated.
          */
         protected static function register_plugin_row_meta($row_meta)
         {
@@ -313,7 +313,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.2.0
-         * @deprecated 3.0.0 marked as deprecated.
+         * @deprecated 3.0.1 marked as deprecated.
          */
         protected static function register_plugin_footer_text($footer_text)
         {
@@ -325,7 +325,7 @@ namespace DiviSquad\Integrations {
          *
          * @return void
          * @since 1.4.8
-         * @deprecated 3.0.0 marked as deprecated.
+         * @deprecated 3.0.1 marked as deprecated.
          */
         protected static function register_update_footer_text($footer_text)
         {
@@ -346,7 +346,7 @@ namespace DiviSquad\Managers {
          * Enqueue scripts for frontend.
          *
          * @return void
-         * @deprecated 3.0.0 marked as deprecated.
+         * @deprecated 3.0.1 marked as deprecated.
          */
         public function enqueue_scripts()
         {
@@ -355,7 +355,7 @@ namespace DiviSquad\Managers {
          * Enqueue scripts for builder.
          *
          * @return void
-         * @deprecated 3.0.0 marked as deprecated.
+         * @deprecated 3.0.1 marked as deprecated.
          */
         public function enqueue_scripts_vb()
         {
@@ -366,11 +366,441 @@ namespace DiviSquad\Managers {
          * @param string $output Exist output.
          *
          * @return string
-         * @deprecated 3.0.0 marked as deprecated.
+         * @deprecated 3.0.1 marked as deprecated.
          */
         public function wp_localize_script_data($output)
         {
         }
+    }
+}
+namespace DiviSquad\Base\Factories {
+    /**
+     * Feature Management class
+     *
+     * @package DiviSquad
+     * @since   2.0.0
+     */
+    abstract class SquadFeatures
+    {
+        /**
+         * Get the type of Divi Builder, default is: D4. Available opinions are: D4, D5.
+         *
+         * @var string
+         */
+        protected $builder_type = 'D4';
+        /**
+         * Retrieve the list of registered.
+         *
+         * @return array[]
+         */
+        public abstract function get_registered_list();
+        /**
+         * Retrieve the list of inactive registered.
+         *
+         * @return array
+         */
+        public abstract function get_inactive_registries();
+        /**
+         * Retrieve the list of default active registered.
+         *
+         * @return array
+         */
+        public abstract function get_default_registries();
+        /**
+         * Retrieve the filtered list of registered.
+         *
+         * @param array         $registered The list of registered.
+         * @param callable|null $callback   The callback function to filter the current registriy.
+         *
+         * @return array
+         */
+        protected function get_filtered_registries($registered, $callback = null)
+        {
+        }
+        /**
+         * Verify third party plugin requirements for current registry.
+         *
+         * @param array $registry_info  Current registry information.
+         * @param array $active_plugins Active plugin lists from current installation.
+         *
+         * @return bool
+         */
+        protected function verify_requirements($registry_info, $active_plugins)
+        {
+        }
+        /**
+         * Load the module class.
+         *
+         * @param array  $registered The available modules list.
+         * @param array  $defaults   The default activated registries list.
+         * @param mixed  $activate   The user-defined activated registries list.
+         * @param array  $inactivate The user-defined inactivated registries list.
+         * @param string $version    Current version of the plugin.
+         *
+         * @return array
+         */
+        protected function get_verified_registries($registered, $defaults, $activate, $inactivate, $version)
+        {
+        }
+    }
+}
+namespace DiviSquad\Managers\Features {
+    /**
+     * Extension Manager class
+     *
+     * @package DiviSquad
+     * @since   1.0.0
+     */
+    class Extensions extends \DiviSquad\Base\Factories\SquadFeatures
+    {
+        /**
+         * Load enabled extensions
+         *
+         * @param string $path The defined directory.
+         *
+         * @return void
+         */
+        public function load_extensions($path)
+        {
+        }
+        /**
+         * Load enabled extensions
+         *
+         * @param string $path   The defined directory.
+         * @param Memory $memory The instance of Memory class.
+         *
+         * @return void
+         */
+        protected function load_extensions_files($path, $memory)
+        {
+        }
+        /**
+         * Get available extensions.
+         *
+         * @return array[]
+         */
+        public function get_registered_list()
+        {
+        }
+        /**
+         * Get default active extensions.
+         *
+         * @return array
+         */
+        public function get_default_registries()
+        {
+        }
+        /**
+         * Get inactive extensions.
+         *
+         * @return array
+         */
+        public function get_inactive_registries()
+        {
+        }
+    }
+}
+namespace DiviSquad\Managers {
+    /**
+     * Extension Manager class
+     *
+     * @package     DiviSquad
+     * @since       1.0.0
+     * @deprecated  3.0.1 marked as deprecated.
+     */
+    class Extensions extends \DiviSquad\Managers\Features\Extensions
+    {
+    }
+}
+namespace DiviSquad\Managers\Features {
+    /**
+     * Module Manager class
+     *
+     * @package DiviSquad
+     * @since   1.0.0
+     */
+    class Modules extends \DiviSquad\Base\Factories\SquadFeatures
+    {
+        /**
+         * Get all modules including extra modules.
+         *
+         * @return array[]
+         */
+        public function get_modules_with_extra()
+        {
+        }
+        /**
+         *  Get available modules.
+         *
+         * @return array[]
+         */
+        public function get_registered_list()
+        {
+        }
+        /**
+         *  Get inactive modules.
+         *
+         * @return array
+         */
+        public function get_inactive_registries()
+        {
+        }
+        /**
+         * Load enabled modules for Divi Builder from defined directory.
+         *
+         * @param string $path The defined directory.
+         *
+         * @return void
+         */
+        public function load_modules($path)
+        {
+        }
+        /**
+         * Load the module class.
+         *
+         * @param string $path   The module class path.
+         * @param Memory $memory The instance of Memory class.
+         *
+         * @return void
+         */
+        protected function load_module_files($path, $memory)
+        {
+        }
+        /**
+         *  Get default active modules.
+         *
+         * @return array
+         */
+        public function get_default_registries()
+        {
+        }
+        /**
+         * Check the current module type.
+         *
+         * @param array $module The array of current module.
+         *
+         * @return bool
+         */
+        protected function verify_module_type($module)
+        {
+        }
+        /**
+         * Verify the requirements of the module.
+         *
+         * @param array  $activated_module       The module.
+         * @param string $module_key            The module name key.
+         *
+         * @return void
+         */
+        private function load_module_if_exists($activated_module, $module_key)
+        {
+        }
+        /**
+         * Load the module class.
+         *
+         * @param string $module_key    The module specification key.
+         * @param array  $module    The module.
+         *
+         * @return void
+         * @since 2.1.2
+         */
+        protected function require_module_class($module_key = 'name', $module = array())
+        {
+        }
+        /**
+         * Load the module class from path.
+         *
+         * @param string $path   The module class path.
+         * @param string $module The module name.
+         *
+         * @return void
+         */
+        protected function require_module_path($path, $module)
+        {
+        }
+    }
+}
+namespace DiviSquad\Managers {
+    /**
+     * Module Manager class
+     *
+     * @package     DiviSquad
+     * @since       1.0.0
+     * @deprecated  3.0.1 marked as deprecated.
+     */
+    class Modules extends \DiviSquad\Managers\Features\Modules
+    {
+    }
+}
+namespace DiviSquad\Base\DiviBuilder {
+    /**
+     * Builder Utils class
+     *
+     * @package DiviSquad
+     * @since   1.0.0
+     */
+    #[\AllowDynamicProperties]
+    abstract class DiviSquad_Module extends \ET_Builder_Module
+    {
+        /**
+         * Utils folder name.
+         *
+         * @var string
+         * @since 1.0.0
+         */
+        public $folder_name = 'et_pb_divi_squad_modules';
+        /**
+         * Stylesheet selector for tooltip container.
+         *
+         * @var string
+         * @since 1.0.0
+         */
+        public $tooltip_css_element = '';
+        /**
+         * The default options for divider.
+         *
+         * @var array
+         */
+        public $squad_divider_defaults = array('divider_style' => 'solid', 'divider_position' => 'bottom', 'divider_weight' => '2px');
+        /**
+         * The show options for divider.
+         *
+         * @var array
+         */
+        public $squad_divider_show_options = array('off' => 'No', 'on' => 'Yes');
+        /**
+         * The instance of Utils class
+         *
+         * @var Utils\UtilsInterface
+         */
+        public $squad_utils;
+        /**
+         * Utils credits.
+         *
+         * @var string[]
+         * @since 1.0.0
+         */
+        protected $module_credits = array('module_uri' => '', 'author' => 'Divi Squad', 'author_uri' => \DiviSquad\Managers\Links::HOME_URL . '?utm_campaign=wporg&utm_source=module_modal&utm_medium=module_author_link');
+        /**
+         * The icon for module.
+         *
+         * @var string
+         * @since 1.0.0
+         */
+        protected $icon = '';
+        /**
+         * The icon path for module.
+         *
+         * @var string
+         * @since 1.0.0
+         */
+        protected $icon_path = '';
+        /**
+         * The list of icon eligible element
+         *
+         * @var array
+         */
+        protected $icon_not_eligible_elements;
+    }
+}
+namespace DiviSquad\Modules {
+    /**
+     * Post-Grid Child Module Class.
+     *
+     * @package DiviSquad
+     * @since   1.0.0
+     */
+    class PostGridChild extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
+    {
+        /**
+         * The list of element types
+         *
+         * @var array
+         */
+        protected $element_types;
+        /**
+         * Initiate Module.
+         * Set the module name on init.
+         *
+         * @return void
+         * @since 1.0.0
+         */
+        public function init()
+        {
+        }
+        /**
+         * Declare general fields for the module
+         *
+         * @return array[]
+         * @since 1.0.0
+         */
+        public function get_fields()
+        {
+        }
+        /**
+         * Get CSS fields transition.
+         *
+         * Add form field options group and background image on the field list.
+         *
+         * @since 1.0.0
+         */
+        public function get_transition_fields_css_props()
+        {
+        }
+        /**
+         * Renders the module output.
+         *
+         * @param array  $attrs       List of attributes.
+         * @param string $content     Content being processed.
+         * @param string $render_slug Slug of module that is used for rendering output.
+         *
+         * @return string
+         */
+        public function render($attrs, $content, $render_slug)
+        {
+        }
+        /**
+         * Generate styles.
+         *
+         * @param array $attrs List of unprocessed attributes.
+         *
+         * @return void
+         */
+        private function squad_generate_all_styles($attrs)
+        {
+        }
+        /**
+         * Render post name icon.
+         *
+         * @param array $attrs List of attributes.
+         *
+         * @return void
+         */
+        private function squad_generate_element_title_font_icon_styles($attrs)
+        {
+        }
+        /**
+         * Render all styles for icon.
+         *
+         * @param array $attrs List of attributes.
+         *
+         * @return void
+         */
+        private function squad_generate_all_icon_styles($attrs)
+        {
+        }
+    }
+}
+namespace DiviSquad\Modules\PostGridChild {
+    /**
+     * Post-Grid Child Module Class.
+     *
+     * @package DiviSquad
+     * @since   1.0.0
+     * @deprecated 3.0.0 marked as deprecated.
+     */
+    class PostGridChild extends \DiviSquad\Modules\PostGridChild
+    {
     }
 }
 namespace {
@@ -16350,25 +16780,28 @@ namespace DiviSquad\Base {
         /**
          * The Plugin name.
          *
-         * @since 1.0.0
-         *
          * @var string
+         * @since 1.0.0
          */
         protected $name;
         /**
-         * The Plugin Version.
-         *
-         * @since 1.4.5
+         * The Plugin Text Domain.
          *
          * @var string
+         */
+        protected $textdomain;
+        /**
+         * The Plugin Version.
+         *
+         * @var string
+         * @since 1.4.5
          */
         protected $version;
         /**
          * The plugin option prefix
          *
-         * @since 1.0.0
-         *
          * @var string
+         * @since 1.0.0
          */
         protected $opt_prefix;
         /**
@@ -16448,6 +16881,14 @@ namespace DiviSquad\Base {
          * @return string
          */
         public function get_name()
+        {
+        }
+        /**
+         * Get the plugin text domain.
+         *
+         * @return string
+         */
+        public function get_textdomain()
         {
         }
         /**
@@ -16580,75 +17021,6 @@ namespace DiviSquad\Base {
     }
 }
 namespace DiviSquad\Base\DiviBuilder {
-    /**
-     * Builder Utils class
-     *
-     * @package DiviSquad
-     * @since   1.0.0
-     */
-    #[\AllowDynamicProperties]
-    abstract class DiviSquad_Module extends \ET_Builder_Module
-    {
-        /**
-         * Utils folder name.
-         *
-         * @var string
-         * @since 1.0.0
-         */
-        public $folder_name = 'et_pb_divi_squad_modules';
-        /**
-         * Stylesheet selector for tooltip container.
-         *
-         * @var string
-         * @since 1.0.0
-         */
-        public $tooltip_css_element = '';
-        /**
-         * The default options for divider.
-         *
-         * @var array
-         */
-        public $squad_divider_defaults = array('divider_style' => 'solid', 'divider_position' => 'bottom', 'divider_weight' => '2px');
-        /**
-         * The show options for divider.
-         *
-         * @var array
-         */
-        public $squad_divider_show_options = array('off' => 'No', 'on' => 'Yes');
-        /**
-         * The instance of Utils class
-         *
-         * @var Utils\UtilsInterface
-         */
-        public $squad_utils;
-        /**
-         * Utils credits.
-         *
-         * @var string[]
-         * @since 1.0.0
-         */
-        protected $module_credits = array('module_uri' => '', 'author' => 'Divi Squad', 'author_uri' => \DiviSquad\Managers\Links::HOME_URL . '?utm_campaign=wporg&utm_source=module_modal&utm_medium=module_author_link');
-        /**
-         * The icon for module.
-         *
-         * @var string
-         * @since 1.0.0
-         */
-        protected $icon = '';
-        /**
-         * The icon path for module.
-         *
-         * @var string
-         * @since 1.0.0
-         */
-        protected $icon_path = '';
-        /**
-         * The list of icon eligible element
-         *
-         * @var array
-         */
-        protected $icon_not_eligible_elements;
-    }
     /**
      * Builder Utils Helper Class which help to the all module class
      *
@@ -17613,104 +17985,6 @@ namespace DiviSquad\Base\DiviBuilder\Utils\Elements {
         }
     }
     /**
-     * Form Utils Helper Class
-     *
-     * @package DiviSquad
-     * @since   1.5.0
-     */
-    trait Forms
-    {
-        /**
-         * Get default value for form id.
-         *
-         * @var string
-         */
-        public static $default_form_id = 'cfcd208495d565ef66e7dff9f98764da';
-        /**
-         * Store all forms and remove redundancy.
-         *
-         * @var array<string, array<string, array>> The collection of forms.
-         */
-        public static $form_collections = array('cf7' => array('id' => array(), 'title' => array()), 'wpforms' => array('id' => array(), 'title' => array()), 'fluent_forms' => array('id' => array(), 'title' => array()), 'ninja_forms' => array('id' => array(), 'title' => array()), 'gravity_forms' => array('id' => array(), 'title' => array()));
-        /**
-         * Declare allowed fields for the module.
-         *
-         * @return array
-         */
-        public static function form_get_allowed_fields()
-        {
-        }
-        /**
-         * Declare all prefixes for custom spacing fields for the module.
-         *
-         * @return array
-         */
-        public static function form_get_custom_spacing_prefixes()
-        {
-        }
-        /**
-         * Collect all contact form from the database.
-         *
-         * @param string $form_type       The form type, available are cf7, fluetforms, ninjaforms, gravityforms, wpforms.
-         * @param string $collection The collection type of form data.
-         *
-         * @return array
-         */
-        public static function form_get_all_items($form_type, $collection = 'title')
-        {
-        }
-        /**
-         * Get all contact form 7 forms.
-         *
-         * @param string $collection The collection type of form data.
-         *
-         * @return array
-         */
-        private static function get_cf7_forms($collection = 'title')
-        {
-        }
-        /**
-         * Get all fluent forms.
-         *
-         * @param string $collection The collection type of form data.
-         *
-         * @return array
-         */
-        private static function get_fluent_forms($collection = 'title')
-        {
-        }
-        /**
-         * Get all gravity forms.
-         *
-         * @param string $collection The collection type of form data.
-         *
-         * @return array
-         */
-        private static function get_gravity_forms($collection = 'title')
-        {
-        }
-        /**
-         * Get all wp forms.
-         *
-         * @param string $collection The collection type of form data.
-         *
-         * @return array
-         */
-        private static function get_ninja_forms($collection = 'title')
-        {
-        }
-        /**
-         * Get all wp forms.
-         *
-         * @param string $collection The collection type of form data.
-         *
-         * @return array
-         */
-        private static function get_wp_forms($collection = 'title')
-        {
-        }
-    }
-    /**
      * Mask Shape Element class
      *
      * @package DiviSquad
@@ -17748,7 +18022,6 @@ namespace DiviSquad\Base\DiviBuilder\Utils {
         use \DiviSquad\Base\DiviBuilder\Utils\Fields\Processor;
         use \DiviSquad\Base\DiviBuilder\Utils\Elements\Breadcrumbs;
         use \DiviSquad\Base\DiviBuilder\Utils\Elements\Divider;
-        use \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms;
         use \DiviSquad\Base\DiviBuilder\Utils\Elements\MaskShape;
         /**
          * The instance of Squad Module.
@@ -17777,6 +18050,394 @@ namespace DiviSquad\Base\DiviBuilder {
          * @return Utils
          */
         public static function connect($element)
+        {
+        }
+    }
+}
+namespace DiviSquad\Base\DiviBuilder\Utils\Elements {
+    /**
+     * Main class for handling various form types.
+     *
+     * @package DiviSquad
+     * @since 1.5.0
+     */
+    class Forms
+    {
+        const DEFAULT_FORM_ID = 'cfcd208495d565ef66e7dff9f98764da';
+        /**
+         * Supported form types with their corresponding processor classes.
+         *
+         * @var array<string, string>
+         */
+        private static $supported_form_types = array('cf7' => \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors\ContactForm7::class, 'wpforms' => \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors\WPForms::class, 'fluent_forms' => \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors\FluentForms::class, 'ninja_forms' => \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors\NinjaForms::class, 'gravity_forms' => \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors\GravityForms::class, 'forminator' => \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors\Forminator::class, 'formidable' => \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors\Formidable::class);
+        /**
+         * Form collections.
+         *
+         * @var array<string, array<string, string>>
+         */
+        private static $form_collections = array();
+        /**
+         * Form processors.
+         *
+         * @var array<string, Forms\FormInterface>
+         */
+        private static $form_processors = array();
+        /**
+         * Get allowed fields for the module.
+         *
+         * @return array List of allowed field types
+         */
+        public static function get_allowed_fields()
+        {
+        }
+        /**
+         * Get custom spacing prefixes for the module.
+         *
+         * @return array Custom spacing prefixes
+         */
+        public static function get_custom_spacing_prefixes()
+        {
+        }
+        /**
+         * Get all forms of a specific type.
+         *
+         * @param string $form_type The form type (cf7, fluent_forms, etc.).
+         * @param string $collection The collection type (title or id).
+         *
+         * @return array<string, string>
+         * @throws \InvalidArgumentException If the form type is not supported.
+         */
+        public static function get_all_forms($form_type, $collection = 'title')
+        {
+        }
+        /**
+         * Fetch forms of a specific type.
+         *
+         * @param string $form_type The form type (cf7, fluent_forms, etc.).
+         * @param string $collection The collection type (title or id).
+         *
+         * @return array<string, string>
+         */
+        private static function fetch_forms($form_type, $collection)
+        {
+        }
+    }
+}
+namespace DiviSquad\Base\DiviBuilder\Utils\Elements\Forms {
+    /**
+     * Form Interface
+     *
+     * Interface for form processors.
+     *
+     * @package DiviSquad
+     * @since   3.0.1
+     */
+    interface FormInterface
+    {
+        /**
+         * Get forms of a specific type.
+         *
+         * @param string $collection Either 'id' or 'title'.
+         * @return array Associative array of form IDs or titles
+         */
+        public function get_forms($collection);
+    }
+    /**
+     * Abstract class for form processing.
+     *
+     * @package DiviSquad
+     * @since   3.0.1
+     */
+    abstract class Form implements \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\FormInterface
+    {
+        /**
+         * Process form data into a consistent format.
+         *
+         * @param array  $forms Array of form objects.
+         * @param string $collection Either 'id' or 'title'.
+         * @return array Processed form data
+         */
+        protected function process_form_data($forms, $collection)
+        {
+        }
+        /**
+         * Get the ID of a form.
+         *
+         * @param mixed $form Form object.
+         * @return mixed Form ID
+         */
+        protected abstract function get_form_id($form);
+        /**
+         * Get the title of a form.
+         *
+         * @param mixed $form Form object.
+         * @return string Form title
+         */
+        protected abstract function get_form_title($form);
+    }
+}
+namespace DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Processors {
+    /**
+     * Class for handling Contact Form 7 forms.
+     *
+     * @package DiviSquad
+     * @since   3.0.1
+     */
+    class ContactForm7 extends \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Form
+    {
+        /**
+         * Get Contact Form 7 forms.
+         *
+         * @param string $collection Either 'id' or 'title'.
+         * @return array Associative array of CF7 form IDs or titles
+         */
+        public function get_forms($collection)
+        {
+        }
+        /**
+         * Get the ID of a CF7 form.
+         *
+         * @param \WP_Post $form CF7 form object.
+         * @return int Form ID
+         */
+        protected function get_form_id($form)
+        {
+        }
+        /**
+         * Get the title of a CF7 form.
+         *
+         * @param \WP_Post $form CF7 form object.
+         * @return string Form title
+         */
+        protected function get_form_title($form)
+        {
+        }
+    }
+    /**
+     * Fluent Forms Processor
+     *
+     * Handles the retrieval and processing of Fluent Forms.
+     *
+     * @package DiviSquad\Base\DiviBuilder\Utils\Elements
+     * @since   3.0.1
+     */
+    class FluentForms extends \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Form
+    {
+        /**
+         * Get Fluent Forms.
+         *
+         * @param string $collection The type of data to collect ('id' or 'title').
+         * @return array An array of Fluent Forms data.
+         */
+        public function get_forms($collection)
+        {
+        }
+        /**
+         * Get the ID of a Fluent Form.
+         *
+         * @param object $form The form object.
+         * @return int The form ID.
+         */
+        protected function get_form_id($form)
+        {
+        }
+        /**
+         * Get the title of a Fluent Form.
+         *
+         * @param object $form The form object.
+         * @return string The form title.
+         */
+        protected function get_form_title($form)
+        {
+        }
+    }
+    /**
+     * Formidable Forms Processor
+     *
+     * Handles the retrieval and processing of Formidable Forms.
+     *
+     * @package DiviSquad
+     * @since   3.0.1
+     */
+    class Formidable extends \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Form
+    {
+        /**
+         * Get Formidable Forms.
+         *
+         * @param string $collection The type of data to collect ('id' or 'title').
+         * @return array An array of Formidable Forms data.
+         */
+        public function get_forms($collection)
+        {
+        }
+        /**
+         * Get the ID of a Formidable Form.
+         *
+         * @param object $form The form object.
+         * @return int The form ID.
+         */
+        protected function get_form_id($form)
+        {
+        }
+        /**
+         * Get the title of a Formidable Form.
+         *
+         * @param object $form The form object.
+         * @return string The form title.
+         */
+        protected function get_form_title($form)
+        {
+        }
+    }
+    /**
+     * Forminator Forms Processor
+     *
+     * Handles the retrieval and processing of Forminator Forms.
+     *
+     * @package DiviSquad
+     * @since 3.0.1
+     */
+    class Forminator extends \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Form
+    {
+        /**
+         * Get Forminator Forms.
+         *
+         * @param string $collection The type of data to collect ('id' or 'title').
+         * @return array An array of Forminator Forms data.
+         */
+        public function get_forms($collection)
+        {
+        }
+        /**
+         * Get the ID of a Forminator Form.
+         *
+         * @param object $form The form object.
+         * @return int The form ID.
+         */
+        protected function get_form_id($form)
+        {
+        }
+        /**
+         * Get the title of a Forminator Form.
+         *
+         * @param object $form The form object.
+         * @return string The form title.
+         */
+        protected function get_form_title($form)
+        {
+        }
+    }
+    /**
+     * Gravity Forms Processor
+     *
+     * Handles the retrieval and processing of Gravity Forms.
+     *
+     * @package DiviSquad
+     * @since   3.0.1
+     */
+    class GravityForms extends \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Form
+    {
+        /**
+         * Get Gravity Forms.
+         *
+         * @param string $collection The type of data to collect ('id' or 'title').
+         * @return array An array of Gravity Forms data.
+         */
+        public function get_forms($collection)
+        {
+        }
+        /**
+         * Get the ID of a Gravity Form.
+         *
+         * @param object $form The form object.
+         * @return int The form ID.
+         */
+        protected function get_form_id($form)
+        {
+        }
+        /**
+         * Get the title of a Gravity Form.
+         *
+         * @param object $form The form object.
+         * @return string The form title.
+         */
+        protected function get_form_title($form)
+        {
+        }
+    }
+    /**
+     * Ninja Forms Processor
+     *
+     * Handles the retrieval and processing of Ninja Forms.
+     *
+     * @package DiviSquad
+     * @since   3.0.1
+     */
+    class NinjaForms extends \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Form
+    {
+        /**
+         * Get Ninja Forms.
+         *
+         * @param string $collection The type of data to collect ('id' or 'title').
+         * @return array An array of Ninja Forms data.
+         */
+        public function get_forms($collection)
+        {
+        }
+        /**
+         * Get the ID of a Ninja Form.
+         *
+         * @param object $form The form object.
+         * @return int The form ID.
+         */
+        protected function get_form_id($form)
+        {
+        }
+        /**
+         * Get the title of a Ninja Form.
+         *
+         * @param object $form The form object.
+         * @return string The form title.
+         */
+        protected function get_form_title($form)
+        {
+        }
+    }
+    /**
+     * WPForms Processor
+     *
+     * Handles the retrieval and processing of WPForms.
+     *
+     * @package DiviSquad
+     * @since   3.0.1
+     */
+    class WPForms extends \DiviSquad\Base\DiviBuilder\Utils\Elements\Forms\Form
+    {
+        /**
+         * Get WPForms.
+         *
+         * @param string $collection The type of data to collect ('id' or 'title').
+         * @return array An array of WPForms data.
+         */
+        public function get_forms($collection)
+        {
+        }
+        /**
+         * Get the ID of a WPForm.
+         *
+         * @param \WP_Post $form The form post object.
+         * @return int The form ID.
+         */
+        protected function get_form_id($form)
+        {
+        }
+        /**
+         * Get the title of a WPForm.
+         *
+         * @param \WP_Post $form The form post object.
+         * @return string The form title.
+         */
+        protected function get_form_title($form)
         {
         }
     }
@@ -18318,7 +18979,7 @@ namespace DiviSquad\Base\Factories {
      * Factory for creating migration instances.
      *
      * @package DiviSquad\Settings
-     * @since   3.0.0
+     * @since   3.0.1
      */
     class Migration
     {
@@ -18658,82 +19319,16 @@ namespace DiviSquad\Base\Factories {
         {
         }
     }
-    /**
-     * Feature Management class
-     *
-     * @package DiviSquad
-     * @since   2.0.0
-     */
-    abstract class SquadFeatures
-    {
-        /**
-         * Get the type of Divi Builder, default is: D4. Available opinions are: D4, D5.
-         *
-         * @var string
-         */
-        protected $builder_type = 'D4';
-        /**
-         * Retrieve the list of registered.
-         *
-         * @return array[]
-         */
-        public abstract function get_registered_list();
-        /**
-         * Retrieve the list of inactive registered.
-         *
-         * @return array
-         */
-        public abstract function get_inactive_registries();
-        /**
-         * Retrieve the list of default active registered.
-         *
-         * @return array
-         */
-        public abstract function get_default_registries();
-        /**
-         * Retrieve the filtered list of registered.
-         *
-         * @param array         $registered The list of registered.
-         * @param callable|null $callback   The callback function to filter the current registriy.
-         *
-         * @return array
-         */
-        protected function get_filtered_registries($registered, $callback = null)
-        {
-        }
-        /**
-         * Verify third party plugin requirements for current registry.
-         *
-         * @param array $registry_info  Current registry information.
-         * @param array $active_plugins Active plugin lists from current installation.
-         *
-         * @return bool
-         */
-        protected function verify_requirements($registry_info, $active_plugins)
-        {
-        }
-        /**
-         * Load the module class.
-         *
-         * @param array  $registered The available modules list.
-         * @param array  $defaults   The default activated registries list.
-         * @param mixed  $activate   The user-defined activated registries list.
-         * @param array  $inactivate The user-defined inactivated registries list.
-         * @param string $version    Current version of the plugin.
-         *
-         * @return array
-         */
-        protected function get_verified_registries($registered, $defaults, $activate, $inactivate, $version)
-        {
-        }
-    }
 }
 namespace DiviSquad\Base {
     /**
-     * Memory class
+     * Memory class for managing plugin settings.
      *
-     * @package DiviSquad
-     * @since   1.0.0
+     * This class provides a caching layer for WordPress options,
+     * improving performance by reducing database queries.
+     *
+     * @package DiviSquad\Base
+     * @since 1.0.0
      */
     class Memory
     {
@@ -18742,7 +19337,7 @@ namespace DiviSquad\Base {
          *
          * @var array
          */
-        private $data;
+        private $data = array();
         /**
          * The database option name.
          *
@@ -18756,64 +19351,74 @@ namespace DiviSquad\Base {
          */
         private $option_group;
         /**
-         * The constructor
+         * Flag to track if data has been modified.
+         *
+         * @var bool
+         */
+        private $is_modified = false;
+        /**
+         * Memory constructor.
          *
          * @param string $prefix The prefix name for the plugin settings option.
-         *
-         * @since 1.2.0
          */
         public function __construct($prefix = 'squad-core')
         {
         }
         /**
-         * Get the field value.
+         * Load data from cache or database.
          *
-         * @param string                     $field    The field key.
-         * @param array|string|int|null|bool $defaults The default value for field.
-         *
-         * @return array|string|int|null|bool
+         * @return void
          */
-        public function get($field, $defaults = null)
+        private function load_data()
         {
         }
         /**
-         * Set the field value.
+         * Get the value of a field.
          *
-         * @param string                     $field The field key.
-         * @param array|string|int|null|bool $value The value for field.
+         * @param string $field The field key.
+         * @param mixed  $default_value The default value if the field doesn't exist.
+         * @return mixed The field value or default if not found.
+         */
+        public function get($field, $default_value = null)
+        {
+        }
+        /**
+         * Set the value of a field.
          *
-         * @return array|string|int|null|bool
+         * @param string $field The field key.
+         * @param mixed  $value The value to set.
+         * @return void
          */
         public function set($field, $value)
         {
         }
         /**
-         * Update the field value.
+         * Update an existing field's value.
          *
-         * @param string                     $field The field key.
-         * @param array|string|int|null|bool $value The value for field.
-         *
-         * @return array|string|int|null|bool
+         * @param string $field The field key.
+         * @param mixed  $value The new value.
+         * @return bool True if the field was updated, false if it doesn't exist.
          */
         public function update($field, $value)
         {
         }
         /**
-         * Delete the field.
+         * Delete a field.
          *
-         * @param string $field The field key.
-         *
-         * @return bool
+         * @param string $field The field key to delete.
+         * @return bool True if the field was deleted, false if it doesn't exist.
          */
         public function delete($field)
         {
         }
         /**
-         * Update the database option with stored data.
+         * Sync modified data to the database and update cache.
+         *
+         * This method is hooked to the 'shutdown' action.
          *
          * @return void
          */
-        public function sync_all_data()
+        public function sync_data()
         {
         }
     }
@@ -19188,36 +19793,12 @@ namespace DiviSquad\Integrations {
      * @package DiviSquad
      * @since   1.0.0
      *
-     * @property SquadBase\Memory         $memory     Squad memory.
-     * @property SquadManagers\Modules    $modules    Squad module manager.
-     * @property SquadManagers\Extensions $extensions Squad extension manger.
+     * @property SquadBase\Memory                        $memory     Squad memory.
+     * @property \DiviSquad\Managers\Features\Modules    $modules    Squad module manager.
+     * @property \DiviSquad\Managers\Features\Extensions $extensions Squad extension manger.
      */
     abstract class Core extends \DiviSquad\Base\Core
     {
-        /**
-         * Set the activation hook.
-         *
-         * @return void
-         */
-        public function hook_activation()
-        {
-        }
-        /**
-         * Set the deactivation hook.
-         *
-         * @return void
-         */
-        public function hook_deactivation()
-        {
-        }
-        /**
-         *  Load the settings migration.
-         *
-         * @return void
-         */
-        public function hook_migrate_builder_settings()
-        {
-        }
         /**
          * Initialize the plugin with required components.
          *
@@ -19253,6 +19834,38 @@ namespace DiviSquad\Integrations {
         {
         }
         /**
+         * The admin interface asset and others.
+         *
+         * @return void
+         */
+        protected function load_admin()
+        {
+        }
+        /**
+         * Set the activation hook.
+         *
+         * @return void
+         */
+        public function hook_activation()
+        {
+        }
+        /**
+         * Set the deactivation hook.
+         *
+         * @return void
+         */
+        public function hook_deactivation()
+        {
+        }
+        /**
+         *  Load the settings migration.
+         *
+         * @return void
+         */
+        public function hook_migrate_builder_settings()
+        {
+        }
+        /**
          *  Load the extensions.
          *
          * @return void
@@ -19266,14 +19879,6 @@ namespace DiviSquad\Integrations {
          * @return void
          */
         public function hook_initialize_builder_asset_definitions()
-        {
-        }
-        /**
-         * The admin interface asset and others.
-         *
-         * @return void
-         */
-        protected function load_admin()
         {
         }
     }
@@ -19843,60 +20448,6 @@ namespace DiviSquad\Managers\Branding {
 }
 namespace DiviSquad\Managers {
     /**
-     * Extension Manager class
-     *
-     * @package DiviSquad
-     * @since   1.0.0
-     */
-    class Extensions extends \DiviSquad\Base\Factories\SquadFeatures
-    {
-        /**
-         * Load enabled extensions
-         *
-         * @param string $path The defined directory.
-         *
-         * @return void
-         */
-        public function load_extensions($path)
-        {
-        }
-        /**
-         * Load enabled extensions
-         *
-         * @param string $path   The defined directory.
-         * @param Memory $memory The instance of Memory class.
-         *
-         * @return void
-         */
-        protected function load_extensions_files($path, $memory)
-        {
-        }
-        /**
-         * Get available extensions.
-         *
-         * @return array[]
-         */
-        public function get_registered_list()
-        {
-        }
-        /**
-         * Get default active extensions.
-         *
-         * @return array
-         */
-        public function get_default_registries()
-        {
-        }
-        /**
-         * Get inactive extensions.
-         *
-         * @return array
-         */
-        public function get_inactive_registries()
-        {
-        }
-    }
-    /**
      * Link Class
      *
      * @package DiviSquad
@@ -20031,112 +20582,6 @@ namespace DiviSquad\Managers {
          * @since  3.0.0
          */
         public static function init()
-        {
-        }
-    }
-    /**
-     * Module Manager class
-     *
-     * @package DiviSquad
-     * @since   1.0.0
-     */
-    class Modules extends \DiviSquad\Base\Factories\SquadFeatures
-    {
-        /**
-         * Get all modules including extra modules.
-         *
-         * @return array[]
-         */
-        public function get_modules_with_extra()
-        {
-        }
-        /**
-         *  Get available modules.
-         *
-         * @return array[]
-         */
-        public function get_registered_list()
-        {
-        }
-        /**
-         *  Get inactive modules.
-         *
-         * @return array
-         */
-        public function get_inactive_registries()
-        {
-        }
-        /**
-         * Load enabled modules for Divi Builder from defined directory.
-         *
-         * @param string $path The defined directory.
-         *
-         * @return void
-         */
-        public function load_modules($path)
-        {
-        }
-        /**
-         * Load the module class.
-         *
-         * @param string $path   The module class path.
-         * @param Memory $memory The instance of Memory class.
-         *
-         * @return void
-         */
-        protected function load_module_files($path, $memory)
-        {
-        }
-        /**
-         *  Get default active modules.
-         *
-         * @return array
-         */
-        public function get_default_registries()
-        {
-        }
-        /**
-         * Check the current module type.
-         *
-         * @param array $module The array of current module.
-         *
-         * @return bool
-         */
-        protected function verify_module_type($module)
-        {
-        }
-        /**
-         * Verify the requirements of the module.
-         *
-         * @param array  $activated_module       The module.
-         * @param string $module_key            The module name key.
-         *
-         * @return void
-         */
-        private function load_module_if_exists($activated_module, $module_key)
-        {
-        }
-        /**
-         * Load the module class.
-         *
-         * @param string $module_key    The module specification key.
-         * @param array  $module    The module.
-         *
-         * @return void
-         * @since 2.1.2
-         */
-        protected function require_module_class($module_key = 'name', $module = array())
-        {
-        }
-        /**
-         * Load the module class from path.
-         *
-         * @param string $path   The module class path.
-         * @param string $module The module name.
-         *
-         * @return void
-         */
-        protected function require_module_path($path, $module)
         {
         }
     }
@@ -20625,7 +21070,89 @@ namespace DiviSquad\Managers\RestRoutes\V1\WhatsNew {
         }
     }
 }
-namespace DiviSquad\Modules\BeforeAfterImageSlider {
+namespace DiviSquad\Managers {
+    /**
+     * Site Health Info Manager.
+     *
+     * @package DiviSquad
+     * @author  WP Squad <support@squadmodules.com>
+     * @since   3.0.1
+     */
+    class SiteHealth
+    {
+        use \DiviSquad\Utils\Singleton;
+        /**
+         * Init Site Health.
+         *
+         * @since 3.0.1
+         */
+        public function load()
+        {
+        }
+        /**
+         * Check if the current WordPress version is compatible.
+         *
+         * @return bool
+         */
+        private function is_compatible()
+        {
+        }
+        /**
+         * Integration hooks.
+         *
+         * @since 3.0.1
+         */
+        protected function hooks()
+        {
+        }
+        /**
+         * Add section to Info tab.
+         *
+         * @param array $debug_info Array of all information.
+         *
+         * @return array Array with added info section.
+         * @since 3.0.1
+         */
+        public function add_info_section(array $debug_info)
+        {
+        }
+        /**
+         * Get info fields for the Site Health section.
+         *
+         * @return array
+         */
+        private function get_info_fields()
+        {
+        }
+        /**
+         * Get the plugin version.
+         *
+         * @return string
+         */
+        private function get_plugin_version()
+        {
+        }
+        /**
+         * Get the plugin install date.
+         *
+         * @return string|null
+         */
+        private function get_install_date()
+        {
+        }
+        /**
+         * Add additional fields to the info section.
+         *
+         * @param array $fields Existing fields.
+         *
+         * @return array
+         */
+        private function add_additional_fields(array $fields)
+        {
+        }
+    }
+}
+namespace DiviSquad\Modules {
     /**
      * Before After Image Slider Module Class.
      *
@@ -20706,8 +21233,6 @@ namespace DiviSquad\Modules\BeforeAfterImageSlider {
         {
         }
     }
-}
-namespace DiviSquad\Modules\Breadcrumbs {
     /**
      * Breadcrumbs Module Class.
      *
@@ -20768,8 +21293,6 @@ namespace DiviSquad\Modules\Breadcrumbs {
         {
         }
     }
-}
-namespace DiviSquad\Modules\BusinessHours {
     /**
      * Business Hours Module Class.
      *
@@ -20853,8 +21376,6 @@ namespace DiviSquad\Modules\BusinessHours {
         {
         }
     }
-}
-namespace DiviSquad\Modules\BusinessHoursChild {
     /**
      * Business Hours Day Module Class.
      *
@@ -20931,8 +21452,6 @@ namespace DiviSquad\Modules\BusinessHoursChild {
         {
         }
     }
-}
-namespace DiviSquad\Modules\Divider {
     /**
      * Divider Module Class.
      *
@@ -21065,8 +21584,6 @@ namespace DiviSquad\Modules\Divider {
         {
         }
     }
-}
-namespace DiviSquad\Modules\DropCapText {
     /**
      * The Drop Cap Module Class.
      *
@@ -21127,8 +21644,6 @@ namespace DiviSquad\Modules\DropCapText {
         {
         }
     }
-}
-namespace DiviSquad\Modules\DualButton {
     /**
      * Dual-Button Module Class.
      *
@@ -21242,8 +21757,6 @@ namespace DiviSquad\Modules\DualButton {
         {
         }
     }
-}
-namespace DiviSquad\Modules\FlipBox {
     /**
      * Flip Box Module Class.
      *
@@ -21417,7 +21930,7 @@ namespace DiviSquad\Modules\FlipBox {
         }
     }
 }
-namespace DiviSquad\Modules\FormStylerContactForm7 {
+namespace DiviSquad\Modules\FormStylers {
     /**
      * The Form Styler: Contact Form 7 Module Class.
      *
@@ -21577,8 +22090,6 @@ namespace DiviSquad\Modules\FormStylerContactForm7 {
         {
         }
     }
-}
-namespace DiviSquad\Modules\FormStylerFluentForms {
     /**
      * The Form Styler: Fluent Forms Module Class.
      *
@@ -21767,8 +22278,6 @@ namespace DiviSquad\Modules\FormStylerFluentForms {
         {
         }
     }
-}
-namespace DiviSquad\Modules\FormStylerGravityForms {
     /**
      * The Form Styler: Gravity Forms Module Class.
      *
@@ -21926,8 +22435,6 @@ namespace DiviSquad\Modules\FormStylerGravityForms {
         {
         }
     }
-}
-namespace DiviSquad\Modules\FormStylerNinjaForms {
     /**
      * The Form Styler: WP Forms Module Class.
      *
@@ -22116,8 +22623,6 @@ namespace DiviSquad\Modules\FormStylerNinjaForms {
         {
         }
     }
-}
-namespace DiviSquad\Modules\FormStylerWPForms {
     /**
      * The Form Styler: WP Forms Module Class.
      *
@@ -22295,7 +22800,7 @@ namespace DiviSquad\Modules\FormStylerWPForms {
         }
     }
 }
-namespace DiviSquad\Modules\GlitchText {
+namespace DiviSquad\Modules {
     /**
      * Glitch Text Module Class.
      *
@@ -22354,8 +22859,6 @@ namespace DiviSquad\Modules\GlitchText {
         {
         }
     }
-}
-namespace DiviSquad\Modules\GoogleMap {
     /**
      * Google Map Module Class.
      *
@@ -22396,8 +22899,6 @@ namespace DiviSquad\Modules\GoogleMap {
         {
         }
     }
-}
-namespace DiviSquad\Modules\GradientText {
     /**
      * Gradient Text Module Class.
      *
@@ -22456,8 +22957,6 @@ namespace DiviSquad\Modules\GradientText {
         {
         }
     }
-}
-namespace DiviSquad\Modules\ImageGallery {
     /**
      * Image Gallery Module Class.
      *
@@ -22540,8 +23039,6 @@ namespace DiviSquad\Modules\ImageGallery {
         {
         }
     }
-}
-namespace DiviSquad\Modules\ImageMask {
     /**
      * Image Mask Module Class.
      *
@@ -22582,8 +23079,6 @@ namespace DiviSquad\Modules\ImageMask {
         {
         }
     }
-}
-namespace DiviSquad\Modules\Lottie {
     /**
      * Lottie Image Module Class.
      *
@@ -22644,8 +23139,6 @@ namespace DiviSquad\Modules\Lottie {
         {
         }
     }
-}
-namespace DiviSquad\Modules\PostGrid {
     /**
      * The Post-Grid Module Class.
      *
@@ -22864,96 +23357,6 @@ namespace DiviSquad\Modules\PostGrid {
         {
         }
     }
-}
-namespace DiviSquad\Modules\PostGridChild {
-    /**
-     * Post-Grid Child Module Class.
-     *
-     * @package DiviSquad
-     * @since   1.0.0
-     */
-    class PostGridChild extends \DiviSquad\Base\DiviBuilder\DiviSquad_Module
-    {
-        /**
-         * The list of element types
-         *
-         * @var array
-         */
-        protected $element_types;
-        /**
-         * Initiate Module.
-         * Set the module name on init.
-         *
-         * @return void
-         * @since 1.0.0
-         */
-        public function init()
-        {
-        }
-        /**
-         * Declare general fields for the module
-         *
-         * @return array[]
-         * @since 1.0.0
-         */
-        public function get_fields()
-        {
-        }
-        /**
-         * Get CSS fields transition.
-         *
-         * Add form field options group and background image on the field list.
-         *
-         * @since 1.0.0
-         */
-        public function get_transition_fields_css_props()
-        {
-        }
-        /**
-         * Renders the module output.
-         *
-         * @param array  $attrs       List of attributes.
-         * @param string $content     Content being processed.
-         * @param string $render_slug Slug of module that is used for rendering output.
-         *
-         * @return string
-         */
-        public function render($attrs, $content, $render_slug)
-        {
-        }
-        /**
-         * Generate styles.
-         *
-         * @param array $attrs List of unprocessed attributes.
-         *
-         * @return void
-         */
-        private function squad_generate_all_styles($attrs)
-        {
-        }
-        /**
-         * Render post name icon.
-         *
-         * @param array $attrs List of attributes.
-         *
-         * @return void
-         */
-        private function squad_generate_element_title_font_icon_styles($attrs)
-        {
-        }
-        /**
-         * Render all styles for icon.
-         *
-         * @param array $attrs List of attributes.
-         *
-         * @return void
-         */
-        private function squad_generate_all_icon_styles($attrs)
-        {
-        }
-    }
-}
-namespace DiviSquad\Modules\PostReadingTime {
     /**
      * Post-Reading Time Module Class.
      *
@@ -23069,8 +23472,6 @@ namespace DiviSquad\Modules\PostReadingTime {
         {
         }
     }
-}
-namespace DiviSquad\Modules\ScrollingText {
     /**
      * Scrolling Text Module Class.
      *
@@ -23121,8 +23522,6 @@ namespace DiviSquad\Modules\ScrollingText {
         {
         }
     }
-}
-namespace DiviSquad\Modules\StarRating {
     /**
      * Star Rating Module Class.
      *
@@ -23193,8 +23592,6 @@ namespace DiviSquad\Modules\StarRating {
         {
         }
     }
-}
-namespace DiviSquad\Modules\TypingText {
     /**
      * Typing Text Module Class.
      *
@@ -23285,8 +23682,6 @@ namespace DiviSquad\Modules\TypingText {
         {
         }
     }
-}
-namespace DiviSquad\Modules\VideoPopup {
     /**
      * The Drop Cap Module Class.
      *
@@ -23804,6 +24199,16 @@ namespace DiviSquad {
         public function run()
         {
         }
+        /**
+         * Load deprecated classes after Divi Squad has initialized.
+         *
+         * @since 3.0.1
+         *
+         * @return void
+         */
+        public function load_deprecated_classes()
+        {
+        }
     }
 }
 namespace DiviSquad\Utils {
@@ -23957,6 +24362,7 @@ namespace DiviSquad\Utils {
          *
          * @return void
          * @since 1.0.0
+         * @deprecated 3.0.1
          */
         public static function style_enqueue($keyword, $path, $deps = array(), $media = 'all', $no_prefix = false)
         {
@@ -23971,8 +24377,38 @@ namespace DiviSquad\Utils {
          *
          * @return void
          * @since 1.0.0
+         * @deprecated 3.0.1
          */
         public static function asset_enqueue($keyword, $path, array $deps = array(), $no_prefix = false)
+        {
+        }
+        /**
+         * Enqueue javascript.
+         *
+         * @param string $keyword   Name of the javascript. Should be unique.
+         * @param array  $path      Relative path of the javascript with options for the WordPress root directory.
+         * @param array  $deps      Optional. An array of registered javascript handles this stylesheet depends on. Default empty array.
+         * @param bool   $no_prefix Optional. Set the plugin prefix with asset handle name is or not.
+         *
+         * @return void
+         * @since 1.0.0
+         */
+        public static function enqueue_script($keyword, $path, array $deps = array(), $no_prefix = false)
+        {
+        }
+        /**
+         * Enqueue styles.
+         *
+         * @param string $keyword   Name of the stylesheet. Should be unique.
+         * @param array  $path      Relative path of the stylesheet with options for the WordPress root directory.
+         * @param array  $deps      Optional. An array of registered stylesheet handles this stylesheet depends on. Default empty array.
+         * @param string $media     Optional. The media for which this stylesheet has been defined. Default 'all'.
+         * @param bool   $no_prefix Optional. Set the plugin prefix with asset handle name is or not.
+         *
+         * @return void
+         * @since 1.0.0
+         */
+        public static function enqueue_style($keyword, $path, $deps = array(), $media = 'all', $no_prefix = false)
         {
         }
         /**
@@ -24011,6 +24447,29 @@ namespace DiviSquad\Utils {
          * @since 1.4.8
          */
         public static function footer_arguments($strategy = false, $priority = false)
+        {
+        }
+    }
+    /**
+     * Helper functions to work with dates, time and timezones.
+     *
+     * @package DiviSquad
+     * @since 3.0.1
+     */
+    class DateTime
+    {
+        /**
+         * Return date and time formatted as expected.
+         *
+         * @since 1.6.3
+         *
+         * @param string|int $date       Date to format.
+         * @param string     $format     Optional. Format for the date and time.
+         * @param bool       $gmt_offset Optional. GTM offset.
+         *
+         * @return string
+         */
+        public static function datetime_format($date, $format = '', $gmt_offset = false)
         {
         }
     }
