@@ -414,7 +414,7 @@ final class SquadModules extends \DiviSquad\Integration\Core
     {
     }
     /**
-     * Unserializing instances of this class is forbidden.
+     * Serializing instances of this class is forbidden.
      *
      * @access public
      */
@@ -533,6 +533,18 @@ class Menu
     {
     }
     /**
+     * The menu_notice_should_show
+     *
+     * Check two flags status (admin_menu_notice and admin_promotion),
+     * if both true this display menu notice. it'd prevent displaying menu notice multiple time
+     *
+     * @return bool
+     * @since 5.1.0
+     */
+    public function menu_notice_should_show()
+    {
+    }
+    /**
      * Details about the Main Menu.
      *
      * @return  array Details about the Main Menu.
@@ -622,6 +634,17 @@ class Plugin_Admin_Footer_Text
     public function add_plugin_footer_text($footer_text)
     {
     }
+    /**
+     * Filters the version/update text displayed in the admin footer.
+     *
+     * @param string $content The content that will be printed.
+     *
+     * @return  string
+     * @since 1.4.8
+     */
+    public function add_update_footer_text($content)
+    {
+    }
 }
 /**
  * Plugin Review Class
@@ -663,7 +686,7 @@ class Plugin_Review
      * @return string
      * @since 1.2.5
      */
-    public function admin_classes($classes)
+    public function admin_body_class($classes)
     {
     }
     /**
@@ -677,7 +700,7 @@ class Plugin_Review
     /**
      * Show Notice.
      */
-    public function notice()
+    public function admin_notice()
     {
     }
 }
@@ -715,7 +738,7 @@ class Plugin_Row_Meta
 namespace DiviSquad\Base;
 
 /**
- * Builder Backend Placeholder class.
+ * Builder DiviBuilderBackend Placeholder class.
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
@@ -801,7 +824,7 @@ abstract class BuilderIntegrationAPIBase
      *
      * @var string The plugin's version
      */
-    protected $build_path = 'build/divi4/';
+    protected $build_path = 'build/divi-builder-4/';
     /**
      * Dependencies for the plugin's JavaScript bundles.
      *
@@ -1422,22 +1445,6 @@ abstract class Squad_Divi_Builder_Module extends \ET_Builder_Module
      * @since 1.0.0
      */
     public $folder_name = 'et_pb_divi_squad_modules';
-    /**
-     * Get default selectors for main and hover in divi module.
-     *
-     * @return array[]
-     */
-    protected function disq_get_module_default_selectors()
-    {
-    }
-    /**
-     * Clean order class name from the class list for current module.
-     *
-     * @return string[]
-     */
-    public function disq_clean_order_class()
-    {
-    }
 }
 /**
  * Builder Module Helper Class which help to the all module class
@@ -1554,6 +1561,9 @@ abstract class Squad_Form_Styler_Module extends \DiviSquad\Base\BuilderModule\Sq
     }
     /**
      * Declare custom css fields for the module
+     *
+     * @param array $fields   List of fields.
+     * @param array $removals List of removable fields.
      *
      * @return array[]
      */
@@ -1795,6 +1805,87 @@ class Memory
 namespace DiviSquad\Extensions;
 
 /**
+ * The Post Duplicator class.
+ *
+ * @since       1.4.8
+ * @package     squad-modules-for-divi
+ * @author      WP Squad <support@thewpsquad.com>
+ * @copyright   2023 WP Squad
+ * @license     GPL-3.0-only
+ */
+class Copy extends \DiviSquad\Base\Extensions
+{
+    /**
+     * The constructor class.
+     */
+    public function __construct()
+    {
+    }
+    /**
+     * Verify allowed screen.
+     *
+     * @return bool
+     */
+    public function is_ignored_admin_screen()
+    {
+    }
+    /**
+     * Add CSS body class name for the available post or page.
+     *
+     * @param string $classes An array of body class names.
+     *
+     * @return string
+     */
+    public function admin_body_class($classes)
+    {
+    }
+    /**
+     * Enqueuing scripts for all admin pages.
+     *
+     * @return void
+     */
+    public function admin_footer_template()
+    {
+    }
+    /**
+     * Enqueuing scripts for all admin pages.
+     *
+     * @return void
+     */
+    public function admin_enqueue_scripts()
+    {
+    }
+    /**
+     * Add the duplicate link to post, page, and custom actions
+     *
+     * @param string[] $actions An array of row action links. Defaults are 'Edit', 'Quick Edit', 'Restore', 'Trash', 'Delete Permanently', 'Preview', and 'View'.
+     * @param \WP_Post $post    The post-object.
+     *
+     * @return string[] An array of row action links.
+     */
+    public function row_actions($actions, $post)
+    {
+    }
+    /**
+     * Add duplicate action in the bulk actions menu of the list table.
+     *
+     * @param array $actions An array of the available bulk actions.
+     *
+     * @return string[] An array of bulk actions.
+     */
+    public function bulk_actions($actions)
+    {
+    }
+    /**
+     * Duplicate the post.
+     *
+     * @return void
+     */
+    public function duplicate_the_post()
+    {
+    }
+}
+/**
  * The Divi Library Shortcode class.
  *
  * @since       1.2.0
@@ -1803,7 +1894,7 @@ namespace DiviSquad\Extensions;
  * @copyright   2023 WP Squad
  * @license     GPL-3.0-only
  */
-class Divi_Library_Shortcode extends \DiviSquad\Base\Extensions
+class Divi_Layout_Shortcode extends \DiviSquad\Base\Extensions
 {
     /**
      * The constructor class.
@@ -2058,16 +2149,50 @@ class Admin
     protected static function register_plugin_footer_text($footer_text)
     {
     }
+    /**
+     * Include update footer text for the plugin at admin area.
+     *
+     * @param \DiviSquad\Admin\Plugin_Admin_Footer_Text $footer_text The instance of the Plugin row meta.
+     *
+     * @return void
+     * @since 1.4.8
+     */
+    protected static function register_update_footer_text($footer_text)
+    {
+    }
 }
-namespace DiviSquad\Integration\Divi;
-
+/**
+ * Divi Squad Class.
+ *
+ * @since       1.0.0
+ * @package     squad-modules-for-divi
+ */
+class DiviBuilder extends \DiviSquad\Base\BuilderIntegrationAPI
+{
+    /**
+     * Get the plugin version number
+     *
+     * @return string
+     */
+    public function get_version()
+    {
+    }
+    /**
+     * Loads custom modules when the builder is ready.
+     *
+     * @since 1.0.0
+     */
+    public function hook_et_builder_ready()
+    {
+    }
+}
 /**
  * Define integration helper functionalities for this plugin.
  *
  * @since      1.0.0
  * @package    squad-modules-for-divi
  */
-class Backend extends \DiviSquad\Base\BuilderBackendPlaceholder
+class DiviBuilderBackend extends \DiviSquad\Base\BuilderBackendPlaceholder
 {
     /**
      * Filters backend data passed to the Visual Builder.
@@ -2089,33 +2214,6 @@ class Backend extends \DiviSquad\Base\BuilderBackendPlaceholder
      * @return string
      */
     public function asset_definitions($content)
-    {
-    }
-}
-namespace DiviSquad\Integration;
-
-/**
- * Divi Squad Class.
- *
- * @since       1.0.0
- * @package     squad-modules-for-divi
- */
-class DiviSquad extends \DiviSquad\Base\BuilderIntegrationAPI
-{
-    /**
-     * Get the plugin version number
-     *
-     * @return string
-     */
-    public function get_version()
-    {
-    }
-    /**
-     * Loads custom modules when the builder is ready.
-     *
-     * @since 1.0.0
-     */
-    public function hook_et_builder_ready()
     {
     }
 }
@@ -2199,6 +2297,16 @@ class Assets
      * @return void
      */
     public function enqueue_scripts()
+    {
+    }
+    /**
+     * Load requires asset extra in the visual builder by default.
+     *
+     * @param string $output Exist output.
+     *
+     * @return string
+     */
+    public function wp_localize_script_data($output)
     {
     }
     /**
@@ -2391,7 +2499,7 @@ class Modules
      *
      * @return void
      */
-    public function load_divi4_modules($path)
+    public function load_divi_builder_4_modules($path)
     {
     }
 }
@@ -4542,11 +4650,13 @@ class ImageGallery extends \DiviSquad\Base\BuilderModule\Squad_Divi_Builder_Modu
     {
     }
     /**
-     * Gets the available intermediate image size names.
+     * Get CSS fields transition.
      *
-     * @return array An array of image size names.
+     * Add form field options group and background image on the field list.
+     *
+     * @since 1.4.8
      */
-    public function get_available_image_sizes()
+    public function get_transition_fields_css_props()
     {
     }
     /**
@@ -5478,6 +5588,50 @@ class Asset
     {
     }
     /**
+     * Get the admin asset path.
+     *
+     * @param string $file         The file name.
+     * @param array  $file_options The options for current asset file.
+     *
+     * @return array
+     */
+    public static function admin_asset_path($file, $file_options = array())
+    {
+    }
+    /**
+     * Get the modules asset path.
+     *
+     * @param string $file         The file name.
+     * @param array  $file_options The options for current asset file.
+     *
+     * @return array
+     */
+    public static function module_asset_path($file, $file_options = array())
+    {
+    }
+    /**
+     * Get the extensions asset path.
+     *
+     * @param string $file         The file name.
+     * @param array  $file_options The options for current asset file.
+     *
+     * @return array
+     */
+    public static function extension_asset_path($file, $file_options = array())
+    {
+    }
+    /**
+     * Get the vendors asset path.
+     *
+     * @param string $file         The file name.
+     * @param array  $file_options The options for current asset file.
+     *
+     * @return array
+     */
+    public static function vendor_asset_path($file, $file_options = array())
+    {
+    }
+    /**
      * Set the asset path.
      *
      * @param string $file         The file name.
@@ -5505,15 +5659,16 @@ class Asset
     /**
      * Enqueue styles.
      *
-     * @param string $keyword Name of the stylesheet. Should be unique.
-     * @param array  $path    Relative path of the stylesheet with options for the WordPress root directory.
-     * @param array  $deps    Optional. An array of registered stylesheet handles this stylesheet depends on. Default empty array.
-     * @param string $media   Optional. The media for which this stylesheet has been defined. Default 'all'.
+     * @param string $keyword   Name of the stylesheet. Should be unique.
+     * @param array  $path      Relative path of the stylesheet with options for the WordPress root directory.
+     * @param array  $deps      Optional. An array of registered stylesheet handles this stylesheet depends on. Default empty array.
+     * @param string $media     Optional. The media for which this stylesheet has been defined. Default 'all'.
+     * @param bool   $no_prefix Optional. Set the plugin prefix with asset handle name is or not.
      *
      * @return void
      * @since 1.0.0
      */
-    public static function style_enqueue($keyword, $path, $deps = array(), $media = 'all')
+    public static function style_enqueue($keyword, $path, $deps = array(), $media = 'all', $no_prefix = false)
     {
     }
     /**
@@ -5525,7 +5680,32 @@ class Asset
      *
      * @return void
      */
-    public static function register_scripts($handle, $path, $deps = array())
+    public static function register_script($handle, $path, $deps = array())
+    {
+    }
+    /**
+     * Enqueue styles.
+     *
+     * @param string $keyword Name of the stylesheet. Should be unique.
+     * @param array  $path    Relative path of the stylesheet with options for the WordPress root directory.
+     * @param array  $deps    Optional. An array of registered stylesheet handles this stylesheet depends on. Default empty array.
+     * @param string $media   Optional. The media for which this stylesheet has been defined. Default 'all'.
+     *
+     * @return void
+     * @since 1.0.0
+     */
+    public static function register_style($keyword, $path, $deps = array(), $media = 'all')
+    {
+    }
+    /**
+     * Get available script enqueue footer arguments.
+     *
+     * @param bool $add_strategy Optional. If provided, may be either 'defer' or 'async'.
+     *
+     * @return array
+     * @since 1.4.8
+     */
+    public static function footer_arguments($add_strategy = false)
     {
     }
 }
@@ -5682,6 +5862,68 @@ class Module
     public static function collect_child_json_props($content)
     {
     }
+    /**
+     * Collect all modules from Divi Builder.
+     *
+     * @param array $modules_array  All modules array..
+     * @param array $allowed_prefix The allowed prefix list.
+     *
+     * @return array
+     */
+    public static function get_all_modules($modules_array, $allowed_prefix = array())
+    {
+    }
+    /**
+     * Clean order class name from the class list for current module.
+     *
+     * @param array  $classnames All CSS classes name the module has.
+     * @param string $slug       Module slug.
+     *
+     * @return string[]
+     */
+    public static function clean_order_class($classnames, $slug)
+    {
+    }
+    /**
+     * Get default selectors for main and hover
+     *
+     * @param string $main_css_element Main css selector of element.
+     *
+     * @return array[]
+     */
+    public static function selectors_default($main_css_element)
+    {
+    }
+    /**
+     * Get margin and padding selectors for main and hover
+     *
+     * @param string $main_css_element Main css selector of element.
+     *
+     * @return array
+     */
+    public static function selectors_margin_padding($main_css_element)
+    {
+    }
+    /**
+     * Get max_width selectors for main and hover
+     *
+     * @param string $main_css_element Main css selector of element.
+     *
+     * @return array[]
+     */
+    public static function selectors_max_width($main_css_element)
+    {
+    }
+    /**
+     * Get background selectors for main and hover
+     *
+     * @param string $main_css_element Main css selector of element.
+     *
+     * @return array[]
+     */
+    public static function selectors_background($main_css_element)
+    {
+    }
 }
 namespace DiviSquad\Utils\Polyfills;
 
@@ -5783,13 +6025,8 @@ class Str
      * Performs a case-sensitive check indicating if a needle is contained in a haystack.
      *
      * @param string  $string_content The string.
-     * @param int     $format Specify the return value of this function. The current supported values are:.
-     *                        <ul>
-     *                            <li>0: returns the number of words found</li>
-     *                            <li>1: returns an array containing all the words found inside the string</li>
-     *                            <li>2: returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself</li>
-     *                        </ul>
-     * @param ?string $characters   The substring to search for in the `$haystack`.
+     * @param int     $format         Specify the return value of this function, options are: 0, 1, 2.
+     * @param ?string $characters     The substring to search for in the `$haystack`.
      *
      * @return array|int True if `$needle` is in `$haystack`, otherwise false.
      */
@@ -5864,7 +6101,7 @@ class WP
  * Plugin Name:         Squad Modules Lite
  * Plugin URI:          https://squadmodules.com/
  * Description:         The Advanced Divi plugin you install after Divi or Extra Theme!
- * Version:             1.4.7
+ * Version:             1.4.8
  * Requires at least:   5.0.0
  * Requires PHP:        5.6.40
  * Author:              WP Squad
