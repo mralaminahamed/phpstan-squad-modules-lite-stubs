@@ -436,6 +436,14 @@ class Assets
      *
      * @return array
      */
+    public function wp_common_localize_script_data()
+    {
+    }
+    /**
+     * Set localize data for admin area.
+     *
+     * @return array
+     */
     public function wp_localize_script_data()
     {
     }
@@ -448,11 +456,6 @@ class Assets
  */
 class Menu
 {
-    /** The instance.
-     *
-     * @var self
-     */
-    protected static $instance;
     /**
      * Enqueue scripts and styles files in the WordPress admin area.
      */
@@ -465,6 +468,14 @@ class Menu
      * @return string
      */
     public function admin_management_permission()
+    {
+    }
+    /**
+     * Default slug for admin main menu.
+     *
+     * @return string
+     */
+    public function get_admin_main_menu_slug()
     {
     }
     /**
@@ -545,12 +556,6 @@ class Plugin_Review
      */
     private $first_time_show = 3;
     /**
-     * How Long timeout after first banner shown.
-     *
-     * @var int
-     */
-    private $another_time_show = 7;
-    /**
      * Init constructor.
      */
     public function __construct()
@@ -560,40 +565,6 @@ class Plugin_Review
      * Initial Option.
      */
     public function initial_option()
-    {
-    }
-    /**
-     * Get Second by days.
-     *
-     * @param int $days Days Number.
-     *
-     * @return int
-     */
-    public function get_second($days)
-    {
-    }
-    /**
-     * Close Button Clicked.
-     */
-    public function close()
-    {
-    }
-    /**
-     * Review Button Clicked.
-     */
-    public function review()
-    {
-    }
-    /**
-     * Count the close time for notice banner.
-     */
-    public function notice_close_count()
-    {
-    }
-    /**
-     * Count the ask for support time for notice banner.
-     */
-    public function ask_support_count()
     {
     }
     /**
@@ -1560,6 +1531,21 @@ abstract class DISQ_Form_Styler_Module extends \DiviSquad\Base\BuilderModule\DIS
     {
     }
 }
+namespace DiviSquad\Base\BuilderModule\Traits\Elements;
+
+class Breadcrumbs
+{
+    public function init_wp_ajax_hook()
+    {
+    }
+    function disq_get_breadcrumbs()
+    {
+    }
+    //Function that generates the HTML from breadcrumbs
+    function disq_get_hansel_and_gretel_breadcrumbs($_home_text = 'Home', $_before_text = '', $_delimiter = '&#x39;')
+    {
+    }
+}
 namespace DiviSquad\Base;
 
 /**
@@ -2381,9 +2367,9 @@ class Modules
     /**
      * Load the module class.
      *
-     * @param string      $path   The module class path.
-     * @param string      $module The module name.
-     * @param string      $type   The type of Divi Builder module, default is: D4. Available opinions are: D4, D5
+     * @param string      $path            The module class path.
+     * @param string      $module          The module name.
+     * @param string      $type            The type of Divi Builder module, default is: D4. Available opinions are: D4, D5
      * @param object|null $dependency_tree `DependencyTree` class is used as a utility to manage loading classes in a meaningful manner.
      *
      * @return void
@@ -2449,7 +2435,7 @@ class Rest_API_Routes
 namespace DiviSquad\Manager\Rest_API_Routes;
 
 /**
- * Rest_API_Routes
+ * Rest API Routes for Extensions
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
@@ -2489,7 +2475,7 @@ class Extensions
     }
 }
 /**
- * Rest_API_Routes
+ * Rest API Routes for Modules
  *
  * @since       1.0.0
  * @package     squad-modules-for-divi
@@ -2537,6 +2523,98 @@ class Modules
      * @return array
      */
     public function get_routes($modules)
+    {
+    }
+}
+/**
+ * Rest API Routes for Plugin Review
+ *
+ * @since       1.0.0
+ * @package     squad-modules-for-divi
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
+ * @license     GPL-3.0-only
+ */
+class Plugin_Review
+{
+    /**
+     * How Long timeout after first banner shown.
+     *
+     * @var int
+     */
+    private $another_time_show = 7;
+    /**
+     * Remind the user for review the plugin.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function remind_next_week()
+    {
+    }
+    /**
+     * Update the database when the user submits a review for the plugin.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function review_done()
+    {
+    }
+    /**
+     * Count how many times the user closes the review notice.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function review_notice_close_count()
+    {
+    }
+    /**
+     * Count how many times the user asks for support from the review notice.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function ask_support()
+    {
+    }
+    /**
+     * We register our routes for our endpoints.
+     *
+     * @return array
+     */
+    public function get_routes()
+    {
+    }
+}
+/**
+ * Rest API Routes for Plugin Review
+ *
+ * @since       1.0.0
+ * @package     squad-modules-for-divi
+ * @author      WP Squad <wp@thewpsquad.com>
+ * @copyright   2023 WP Squad
+ * @license     GPL-3.0-only
+ */
+class Whats_New
+{
+    /**
+     * How Long timeout after first banner shown.
+     *
+     * @var int
+     */
+    private $another_time_show = 7;
+    /**
+     * Remind the user for review the plugin.
+     *
+     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+     */
+    public function get_readme_file_data()
+    {
+    }
+    /**
+     * We register our routes for our endpoints.
+     *
+     * @return array
+     */
+    public function get_routes()
     {
     }
 }
@@ -4422,6 +4500,58 @@ class PostReadingTime extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
     {
     }
 }
+namespace DiviSquad\Modules\ScrollingText;
+
+/**
+ * Scrolling Text Module Class.
+ *
+ * @since           1.0.0
+ * @package         squad-modules-for-divi
+ */
+class ScrollingText extends \DiviSquad\Base\BuilderModule\DISQ_Builder_Module
+{
+    /**
+     * Initiate Module.
+     * Set the module name on init.
+     *
+     * @return void
+     * @since 1.0.0
+     */
+    public function init()
+    {
+    }
+    /**
+     * Declare general fields for the module
+     *
+     * @return array[]
+     * @since 1.3.0
+     */
+    public function get_fields()
+    {
+    }
+    /**
+     * Get CSS fields transition.
+     *
+     * Add form field options group and background image on the field list.
+     *
+     * @since 1.0.0
+     */
+    public function get_transition_fields_css_props()
+    {
+    }
+    /**
+     * Renders the module output.
+     *
+     * @param array  $attrs       List of attributes.
+     * @param string $content     Content being processed.
+     * @param string $render_slug Slug of module that is used for rendering output.
+     *
+     * @return string
+     */
+    public function render($attrs, $content, $render_slug)
+    {
+    }
+}
 namespace DiviSquad\Modules\TypingText;
 
 /**
@@ -4804,6 +4934,26 @@ class Helper
     public static function array_sort($array_data, $on, $order = SORT_ASC)
     {
     }
+    /**
+     * Get Second by days.
+     *
+     * @param int $days Days Number.
+     *
+     * @return int
+     */
+    public static function get_second($days)
+    {
+    }
+    /**
+     * Get days by second.
+     *
+     * @param int $seconds Seconds Number.
+     *
+     * @return int
+     */
+    public static function get_days($seconds)
+    {
+    }
 }
 /**
  * Module class.
@@ -4849,10 +4999,11 @@ class Arr
      *
      * Get the first key of the given array without affecting the internal array pointer.
      *
-     * @param array $array An array.
+     * @param array $a An array.
+     *
      * @return string|int|null The first key of array if the array is not empty; `null` otherwise.
      */
-    public static function key_first(array $array)
+    public static function key_first(array $a)
     {
     }
     /**
@@ -4860,10 +5011,21 @@ class Arr
      *
      * Get the last key of the given array without affecting the internal array pointer.
      *
-     * @param array $array An array.
+     * @param array $a An array.
+     *
      * @return string|int|null The last key of array if the array is not empty; `null` otherwise.
      */
-    public static function key_last(array $array)
+    public static function key_last(array $a)
+    {
+    }
+    /**
+     * Check current array data is a list
+     *
+     * @param array $a The array data
+     *
+     * @return bool
+     */
+    public static function is_list(array $a)
     {
     }
 }
