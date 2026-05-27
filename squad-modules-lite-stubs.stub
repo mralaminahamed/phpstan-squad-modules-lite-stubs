@@ -5611,7 +5611,7 @@ namespace DiviSquad\Managers\Emails {
          * @since 3.4.0
          * @var Reporter
          */
-        protected \DiviSquad\Core\Error\Reporter $reporter;
+        protected \DiviSquad\Managers\Emails\Reporter $reporter;
         /**
          * Initialize error report
          *
@@ -6346,6 +6346,20 @@ namespace DiviSquad\Core\Traits\WP {
          * @return WP_Filesystem_Base
          */
         public function get_wp_fs(): \WP_Filesystem_Base
+        {
+        }
+        /**
+         * Get the WordPress filesystem instance (static version).
+         *
+         * This static method provides access to the WordPress filesystem API without
+         * requiring an instance of the class. It ensures the filesystem is properly
+         * initialized before returning it.
+         *
+         * @since 3.4.0
+         *
+         * @return WP_Filesystem_Base The WordPress filesystem instance.
+         */
+        public static function get_wp_filesystem(): \WP_Filesystem_Base
         {
         }
     }
@@ -16273,12 +16287,6 @@ namespace DiviSquad\Core\Admin\Notices {
          */
         protected string $notice_id = 'pro-activation';
         /**
-         * Notice scopes.
-         *
-         * @var array<string>
-         */
-        protected array $scopes = array('global');
-        /**
          * Check if the notice can be rendered.
          *
          * @since 3.3.3
@@ -16323,12 +16331,6 @@ namespace DiviSquad\Core\Admin\Notices {
          * @var string
          */
         protected string $notice_id = 'discount';
-        /**
-         * Notice scopes.
-         *
-         * @var array<string>
-         */
-        protected array $scopes = array('global');
         /**
          * Check if the notice can be rendered.
          *
@@ -17408,33 +17410,142 @@ namespace DiviSquad\Core {
 }
 namespace DiviSquad\Core\Error {
     /**
-     * Error Email Sender Class
+     * Duplicate_Filter Class
      *
-     * Handles the creation and sending of error report emails.
+     * Memory-efficient duplicate detection with automatic cleanup.
      *
-     * Features:
-     * - HTML email templates with fallback
-     * - WordPress filter and action hooks for extensibility
-     * - Comprehensive error handling
+     * Time Complexity: O(1) for all operations
+     * Space Complexity: O(n) where n is number of unique errors
      *
      * @since   3.4.0
      * @package DiviSquad
      */
-    class Email_Sender
+    class Duplicate_Filter
     {
         /**
-         * Support email recipient
+         * Storage key for tracked errors
+         */
+        private const STORAGE_KEY = 'divi_squad_tracked_errors';
+        /**
+         * Default tracking duration (7 days)
+         */
+        private const TRACK_DURATION = 604800;
+        // 7 * 24 * 60 * 60
+        /**
+         * Maximum tracked errors before cleanup
+         */
+        private const MAX_TRACKED = 1000;
+        /**
+         * In-memory cache for this request
          *
-         * @since 3.4.0
+         * @var array<string, int>|null
+         */
+        private static ?array $cache = null;
+        /**
+         * Check if error is duplicate
+         *
+         * @param array<string, mixed> $error_data Error data
+         *
+         * @return bool Is duplicate
+         */
+        public function is_duplicate(array $error_data): bool
+        {
+        }
+        /**
+         * Mark error as reported
+         *
+         * @param array<string, mixed> $error_data Error data
+         *
+         * @return bool Success
+         */
+        public function mark_reported(array $error_data): bool
+        {
+        }
+        /**
+         * Generate error signature
+         *
+         * Creates a compact, collision-resistant hash from error characteristics.
+         *
+         * @param array<string, mixed> $error_data Error data
+         *
+         * @return string 16-character hash
+         */
+        private function generate_signature(array $error_data): string
+        {
+        }
+        /**
+         * Get tracked errors (with caching)
+         *
+         * @return array<string, int> Tracked errors
+         */
+        private function get_tracked_errors(): array
+        {
+        }
+        /**
+         * Cleanup expired entries
+         *
+         * @param array<string, int> $tracked Tracked errors
+         *
+         * @return array<string, int> Cleaned errors
+         */
+        private function cleanup_old_entries(array $tracked): array
+        {
+        }
+        /**
+         * Get tracking duration
+         *
+         * @return int Duration in seconds
+         */
+        private function get_track_duration(): int
+        {
+        }
+        /**
+         * Clear all tracked errors
+         *
+         * @return bool Success
+         */
+        public function clear_all(): bool
+        {
+        }
+        /**
+         * Get tracked error count
+         *
+         * @return int Count of tracked errors
+         */
+        public function get_count(): int
+        {
+        }
+        /**
+         * Force clear cache (for testing)
+         */
+        public static function clear_cache(): void
+        {
+        }
+    }
+    /**
+     * Error_Mailer Class
+     *
+     * Optimized email sender for error reports with minimal overhead.
+     *
+     * @since   3.4.0
+     * @package DiviSquad
+     */
+    class Error_Mailer
+    {
+        /**
+         * Support email address
+         *
          * @var string
          */
-        protected string $to = 'support@squadmodules.com';
+        private string $recipient = 'support@squadmodules.com';
         /**
-         * Initialize error email sender
+         * Email headers cache
          *
-         * Sets up the email sender with proper configuration.
-         *
-         * @since 3.4.0
+         * @var array<string>|null
+         */
+        private ?array $headers_cache = null;
+        /**
+         * Initialize mailer
          */
         public function __construct()
         {
@@ -17442,282 +17553,396 @@ namespace DiviSquad\Core\Error {
         /**
          * Send error report email
          *
-         * Creates and sends the error report email.
+         * @param array<string, mixed> $data   Error report data
+         * @param WP_Error             $errors Error collector
          *
-         * @since 3.4.0
-         *
-         * @param array<string, mixed> $data   Error report data.
-         * @param WP_Error             $errors Error object to store any errors.
-         *
-         * @return bool Success status.
+         * @return bool Success status
          */
-        public function send_email(array $data, \WP_Error $errors): bool
+        public function send(array $data, \WP_Error $errors): bool
         {
         }
         /**
-         * Get the recipient email address
+         * Build email subject
          *
-         * @since 3.4.0
+         * @param array<string, mixed> $data Error data
          *
-         * @return string Email recipient.
+         * @return string Subject line
          */
-        protected function get_recipient(): string
+        private function build_subject(array $data): string
         {
         }
         /**
-         * Add email filters
+         * Build email message
          *
-         * Sets up WordPress filters needed for email sending.
+         * @param array<string, mixed> $data Error data
          *
-         * @since 3.4.0
+         * @return string HTML message
          */
-        protected function add_email_filters(): void
+        private function build_message(array $data): string
         {
         }
         /**
-         * Remove email filters
+         * Render email template
          *
-         * Cleans up WordPress filters after email sending.
+         * @param string               $template Template path
+         * @param array<string, mixed> $data     Template data
          *
-         * @since 3.4.0
+         * @return string Rendered HTML
          */
-        protected function remove_email_filters(): void
+        private function render_template(string $template, array $data): string
         {
         }
         /**
-         * Generate email subject
+         * Build fallback message
          *
-         * Creates a descriptive subject line for the error report email.
+         * @param array<string, mixed> $data Error data
          *
-         * @since 3.4.0
-         *
-         * @param array<string, mixed> $data Error report data.
-         *
-         * @return string Email subject.
+         * @return string HTML fallback
          */
-        protected function get_email_subject(array $data): string
+        private function build_fallback_message(array $data): string
         {
         }
         /**
-         * Get email headers
+         * Get email headers (cached)
          *
-         * Builds the headers for the error report email.
-         *
-         * @since 3.4.0
-         *
-         * @return array<string> Email headers.
+         * @return array<string> Headers
          */
-        protected function get_email_headers(): array
+        private function get_headers(): array
         {
         }
         /**
-         * Generate HTML email content
-         *
-         * Creates the HTML content for the error report email by using a template
-         * or falling back to a simple message if the template is not available.
-         *
-         * @since 3.4.0
-         *
-         * @param array<string, mixed> $data Error report data.
-         *
-         * @return string Email HTML content.
+         * Setup mail filters
          */
-        protected function get_email_message_html(array $data): string
+        private function setup_mail_filters(): void
         {
         }
         /**
-         * Generate fallback message when template is missing
-         *
-         * Creates a simple HTML message when the email template is not available.
-         *
-         * @since 3.4.0
-         *
-         * @param array<string, mixed> $data Template data.
-         *
-         * @return string Fallback HTML message.
+         * Cleanup mail filters
          */
-        protected function generate_fallback_message(array $data = array()): string
+        private function cleanup_mail_filters(): void
         {
         }
         /**
          * Set HTML content type
          *
-         * Used as a callback for the wp_mail_content_type filter.
-         *
-         * @since 3.4.0
-         *
-         * @return string Content type.
+         * @return string Content type
          */
         public function set_html_content_type(): string
         {
         }
         /**
-         * Handle mail failures
+         * Handle mail failure
          *
-         * Callback for the wp_mail_failed action to capture mail errors.
-         *
-         * @since 3.4.0
-         *
-         * @param WP_Error $error Mail error.
+         * @param WP_Error $error Mail error
          */
-        public function set_failure_errors(\WP_Error $error): void
+        public function handle_mail_failure(\WP_Error $error): void
         {
         }
     }
     /**
-     * Error Environment Collector Class
+     * Error_Reporter Class
      *
-     * Collects detailed environment information for error reports.
+     * Streamlined error reporting with minimal overhead and maximum reliability.
      *
-     * Features:
-     * - PHP environment details
-     * - WordPress configuration information
-     * - Active plugins and themes
-     * - Divi framework detection and analysis
+     * Processing Pipeline:
+     * 1. Data validation (O(1))
+     * 2. Duplicate detection (O(1))
+     * 3. Rate limiting (O(1))
+     * 4. Email dispatch (O(1))
      *
      * @since   3.4.0
      * @package DiviSquad
      */
-    class Environment_Collector
+    class Error_Reporter
     {
         /**
-         * Get environment information
-         *
-         * Collects information about the WordPress environment for debugging.
-         *
-         * @since 3.4.0
-         *
-         * @return array<string, mixed> Environment information.
+         * Required error data fields
          */
-        public function get_environment_info(): array
+        private const REQUIRED_FIELDS = array('error_message', 'error_file', 'error_line', 'error_code');
+        /**
+         * Component instances
+         */
+        private \DiviSquad\Core\Error\Error_Mailer $mailer;
+        private \DiviSquad\Core\Error\System_Info $system_info;
+        private \DiviSquad\Core\Error\Rate_Limiter $rate_limiter;
+        private \DiviSquad\Core\Error\Duplicate_Filter $duplicate_filter;
+        private \WP_Error $errors;
+        /**
+         * Error data
+         *
+         * @var array<string, mixed>
+         */
+        private array $data;
+        /**
+         * Initialize error reporter
+         *
+         * @param array<string, mixed> $error_data Error data
+         */
+        public function __construct(array $error_data = array())
         {
         }
         /**
-         * Add Divi detection information to environment data
+         * Send error report
          *
-         * Collects detailed information about Divi detection methods,
-         * customizations, and theme status to help with debugging.
+         * Main processing pipeline with fail-fast validation.
          *
-         * @since  3.4.0
-         * @access protected
-         *
-         * @param array<string, mixed> $environment Base environment information.
-         *
-         * @return array<string, mixed> Enhanced environment with Divi detection info.
+         * @return bool Success status
          */
-        protected function add_divi_detection_info(array $environment): array
+        public function send(): bool
         {
         }
         /**
-         * Get active themes
+         * Validate error data
          *
-         * Retrieves a formatted list of active themes for debugging.
-         *
-         * @since 3.4.0
-         * @return string Comma-separated list of active themes.
+         * @return bool Is valid
          */
-        protected function get_installed_themes_list(): string
+        private function validate(): bool
         {
         }
         /**
-         * Get active plugins
+         * Sanitize input data
          *
-         * Retrieves a formatted list of active plugins for debugging.
+         * @param array<string, mixed> $data Raw data
          *
-         * @since 3.4.0
-         * @return string Comma-separated list of active plugins.
+         * @return array<string, mixed> Sanitized data
          */
-        protected function get_active_plugins_list(): string
+        private function sanitize_data(array $data): array
+        {
+        }
+        /**
+         * Process template data
+         *
+         * @param array<string, mixed> $data Raw error data
+         *
+         * @return array<string, mixed> Processed data
+         */
+        private function process_template_data(array $data): array
+        {
+        }
+        /**
+         * Determine error severity
+         *
+         * @param array<string, mixed> $data Error data
+         *
+         * @return string Severity level
+         */
+        private function determine_severity(array $data): string
+        {
+        }
+        /**
+         * Get relative file path
+         *
+         * @param string $file_path Full file path
+         *
+         * @return string Relative path
+         */
+        private function get_relative_path(string $file_path): string
+        {
+        }
+        /**
+         * Get debug log content
+         *
+         * @return string Debug log
+         */
+        private function get_debug_log(): string
+        {
+        }
+        /**
+         * Handle rate limit exceeded
+         *
+         * @return bool Whether to continue
+         */
+        private function handle_rate_limit_exceeded(): bool
+        {
+        }
+        /**
+         * Handle successful send
+         */
+        private function handle_send_success(): void
+        {
+        }
+        /**
+         * Handle send failure
+         */
+        private function handle_send_failure(): void
+        {
+        }
+        /**
+         * Handle send exception
+         *
+         * @param Throwable $e Exception
+         *
+         * @return bool Always false
+         */
+        private function handle_send_exception(\Throwable $e): bool
+        {
+        }
+        /**
+         * Trigger before-send hooks
+         */
+        private function trigger_before_send_hooks(): void
+        {
+        }
+        /**
+         * Log duplicate skip
+         */
+        private function log_duplicate_skip(): void
+        {
+        }
+        /**
+         * Get error messages
+         *
+         * @return array<string> Error messages
+         */
+        private function get_error_messages(): array
+        {
+        }
+        /**
+         * Quick send from throwable
+         *
+         * @param Throwable            $throwable Error/Exception
+         * @param array<string, mixed> $context   Additional context
+         *
+         * @return bool Success
+         */
+        public static function quick_send(\Throwable $throwable, array $context = array()): bool
+        {
+        }
+        /**
+         * Get errors
+         *
+         * @return WP_Error Errors
+         */
+        public function get_errors(): \WP_Error
+        {
+        }
+        // Static utility methods
+        /**
+         * Clear all tracked errors
+         *
+         * @return bool Success
+         */
+        public static function clear_tracked_errors(): bool
+        {
+        }
+        /**
+         * Reset rate limit
+         *
+         * @return bool Success
+         */
+        public static function reset_rate_limit(): bool
+        {
+        }
+        /**
+         * Get error statistics
+         *
+         * @return array<string, mixed> Statistics
+         */
+        public static function get_stats(): array
         {
         }
     }
     /**
-     * Error Log Reader Class
+     * Log_File Class
      *
-     * Provides methods for efficiently reading and processing WordPress debug logs.
-     *
-     * Features:
-     * - Memory-efficient log reading
-     * - Customizable log line count
-     * - Support for different log file paths
+     * Optimized log file operations with O(1) memory usage for large files.
      *
      * @since   3.4.0
      * @package DiviSquad
      */
-    class Log_Reader
+    class Log_File
     {
+        use \DiviSquad\Core\Traits\WP\Use_WP_Filesystem;
         /**
-         * Get the debug log
-         *
-         * Retrieves the last 100 lines of the WordPress debug log file.
-         * Uses a memory efficient approach to avoid loading the entire file.
-         *
-         * @since 3.4.0
-         *
-         * @return string The last 100 lines of the debug log or an empty string if the log is not accessible.
+         * Default chunk size for file reading
          */
-        public static function get_debug_log(): string
+        private const CHUNK_SIZE = 8192;
+        // 8KB chunks
+        /**
+         * Maximum file size to process (5MB)
+         */
+        private const MAX_FILE_SIZE = 5242880;
+        /**
+         * Get debug log content
+         *
+         * @param int $line_count Number of lines to retrieve
+         *
+         * @return string Log content
+         */
+        public static function get_debug_log(int $line_count = 100): string
         {
         }
         /**
-         * Read the last N lines from a file in a memory efficient way
+         * Read last N lines from file (optimized for large files)
          *
-         * @since 3.4.0
+         * @param string $file_path  File path
+         * @param int    $line_count Number of lines
          *
-         * @param string $file_path  Path to the file.
-         * @param int    $line_count Number of lines to read from end of file.
-         *
-         * @return string The last N lines of the file.
+         * @return string File content
          */
-        public static function read_last_lines(string $file_path, int $line_count = 200): string
+        public static function read_tail_lines(string $file_path, int $line_count): string
         {
         }
         /**
-         * Get a specific error log file
+         * Optimized tail reading for large files
          *
-         * Allows reading a specific error log file instead of the default WordPress debug log.
+         * Time Complexity: O(log n) where n is file size
+         * Space Complexity: O(k) where k is chunk size
          *
-         * @since 3.4.0
+         * @param string $file_path  File path
+         * @param int    $file_size  File size
+         * @param int    $line_count Desired line count
          *
-         * @param string $log_path   Path to the log file to read.
-         * @param int    $line_count Number of lines to read from end of file.
-         *
-         * @return string The last N lines of the specified log file.
+         * @return string File content
          */
-        public static function get_specific_log(string $log_path, int $line_count = 200): string
+        private static function read_tail_optimized(string $file_path, int $file_size, int $line_count): string
         {
         }
         /**
-         * Check if debug log exists
+         * Extract last N lines from content
          *
-         * Checks if the WordPress debug log file exists and is readable.
+         * @param string $content    File content
+         * @param int    $line_count Number of lines
          *
-         * @since 3.4.0
-         *
-         * @return bool True if the debug log exists and is readable.
+         * @return string Extracted lines
          */
-        public static function debug_log_exists(): bool
+        private static function extract_last_lines(string $content, int $line_count): string
         {
         }
         /**
-         * Get debug log file.
+         * Get debug log file path
          *
-         * @return string
+         * @return string Log file path
          */
-        public static function get_debug_log_file(): string
+        private static function get_debug_log_path(): string
+        {
+        }
+        /**
+         * Check if file is readable and within size limits
+         *
+         * @param string $file_path File path
+         *
+         * @return bool Is readable
+         */
+        private static function is_readable_file(string $file_path): bool
+        {
+        }
+        /**
+         * Read specific log file
+         *
+         * @param string $log_path   Log file path
+         * @param int    $line_count Number of lines
+         *
+         * @return string Log content
+         */
+        public static function read_specific_log(string $log_path, int $line_count = 100): string
         {
         }
     }
     /**
-     * Error Rate Limiter Class
+     * Rate_Limiter Class
      *
-     * Manages rate limiting for error reports to prevent excessive
-     * error reporting from a single site.
-     *
-     * Features:
-     * - Configurable rate limiting window
-     * - Customizable maximum reports per window
-     * - WordPress hooks for extensibility
+     * Optimized rate limiting with minimal database operations.
      *
      * @since   3.4.0
      * @package DiviSquad
@@ -17725,276 +17950,150 @@ namespace DiviSquad\Core\Error {
     class Rate_Limiter
     {
         /**
-         * Rate limit key prefix
-         *
-         * @since 3.4.0
-         * @var string
+         * Transient key for rate limiting
          */
-        protected const RATE_LIMIT_KEY = 'squad_error_report_';
+        private const RATE_KEY = 'squad_error_rate';
         /**
-         * Rate limit window in seconds (15 minutes)
-         *
-         * @since 3.4.0
-         * @var int
+         * Rate limit window (10 minutes)
          */
-        protected const RATE_LIMIT_WINDOW = 600;
+        private const WINDOW_SECONDS = 600;
         /**
          * Maximum reports per window
-         *
-         * @since 3.4.0
-         * @var int
          */
-        protected const MAX_REPORTS = 10;
+        private const MAX_REPORTS = 5;
         /**
-         * Check if rate limit is exceeded
+         * Site-specific rate key cache
          *
-         * Determines if the current site has exceeded the maximum number of error reports
-         * within the rate limit window.
-         *
-         * @since 3.4.0
-         *
-         * @return bool Whether sending is allowed.
+         * @var string|null
          */
-        public function check_rate_limit(): bool
+        private static ?string $rate_key_cache = null;
+        /**
+         * Check if rate limit allows new report
+         *
+         * Time Complexity: O(1)
+         *
+         * @return bool Can send report
+         */
+        public function can_send(): bool
         {
         }
         /**
          * Increment rate limit counter
          *
-         * Increases the counter for the number of error reports sent within the current window.
-         *
-         * @since 3.4.0
-         *
-         * @return void
+         * Time Complexity: O(1)
          */
-        public function increment_rate_limit(): void
+        public function increment(): void
         {
         }
         /**
-         * Get rate limit key for current site
+         * Get current report count
          *
-         * Generates a unique key for storing the rate limit counter for the current site.
-         *
-         * @since 3.4.0
-         *
-         * @return string Rate limit key.
+         * @return int Current count
          */
-        protected function get_rate_limit_key(): string
+        private function get_current_count(): int
         {
         }
         /**
-         * Reset rate limit counter
+         * Get site-specific rate limiting key
          *
-         * Resets the rate limit counter for the current site.
-         * Useful for testing or manual intervention.
-         *
-         * @since 3.4.0
-         *
-         * @return bool Success status.
+         * @return string Rate key
          */
-        public function reset_rate_limit(): bool
+        private function get_rate_key(): string
         {
         }
         /**
-         * Get current rate limit count
+         * Reset rate limit (admin/testing)
          *
-         * Returns the current count of error reports sent within the window.
-         *
-         * @since 3.4.0
-         *
-         * @return int Current count.
+         * @return bool Success
          */
-        public function get_current_count(): int
+        public function reset(): bool
+        {
+        }
+        /**
+         * Get remaining reports in current window
+         *
+         * @return int Remaining count
+         */
+        public function get_remaining(): int
+        {
+        }
+        /**
+         * Get window expiration time
+         *
+         * @return int Expiration timestamp
+         */
+        public function get_window_expires(): int
         {
         }
     }
     /**
-     * Error Reporter Class
+     * System_Info Class
      *
-     * Main class for error reporting that delegates specific responsibilities
-     * to specialized helper classes.
-     *
-     * Features:
-     * - Centralized error reporting management
-     * - Integration with WordPress error handling
-     * - Exception handling and logging
-     * - QuickSend mechanism for urgent error reports
+     * Optimized system information collection with caching.
      *
      * @since   3.4.0
      * @package DiviSquad
      */
-    class Reporter
+    class System_Info
     {
         /**
-         * Error email sender instance
+         * Cached environment data
          *
-         * @since 3.4.0
-         * @var Email_Sender
+         * @var array<string, mixed>|null
          */
-        protected \DiviSquad\Core\Error\Email_Sender $email_sender;
+        private static ?array $env_cache = null;
         /**
-         * Error rate limiter instance
+         * Get system environment info
          *
-         * @since 3.4.0
-         * @var Rate_Limiter
+         * @return array<string, mixed> Environment data
          */
-        protected \DiviSquad\Core\Error\Rate_Limiter $rate_limiter;
-        /**
-         * Environment collector instance
-         *
-         * @since 3.4.0
-         * @var Environment_Collector
-         */
-        protected \DiviSquad\Core\Error\Environment_Collector $environment_collector;
-        /**
-         * WP_Error instance for error handling
-         *
-         * @since 3.4.0
-         * @var WP_Error
-         */
-        protected \WP_Error $errors;
-        /**
-         * Error report data
-         *
-         * @since 3.4.0
-         * @var array<string, mixed>
-         */
-        protected array $data;
-        /**
-         * Email sending result
-         *
-         * @since 3.4.0
-         * @var bool
-         */
-        protected bool $result = false;
-        /**
-         * Required data fields
-         *
-         * @since 3.4.0
-         * @var array<string>
-         */
-        protected const REQUIRED_FIELDS = array('error_message', 'error_code', 'error_file', 'error_line');
-        /**
-         * Initialize error reporter
-         *
-         * Creates a new error reporter instance with dependencies and sanitized data.
-         *
-         * @since 3.4.0
-         *
-         * @param array<string, mixed> $data Error report data.
-         */
-        public function __construct(array $data = array())
+        public function collect(): array
         {
         }
         /**
-         * Process data for error report template
+         * Build complete environment data
          *
-         * Applies filters and processes data specifically for use in the error report
-         * email template, ensuring all necessary variables are prepared correctly.
-         *
-         * @since 3.4.1
-         *
-         * @param array<string, mixed> $data Raw error data.
-         *
-         * @return array<string, mixed> Processed template data.
+         * @return array<string, mixed> Environment info
          */
-        public function process_template_data(array $data): array
+        private function build_environment_data(): array
         {
         }
         /**
-         * Send error report with rate limiting and validation
+         * Get theme information
          *
-         * Processes the error report data, applies rate limiting, validates the data,
-         * and sends the email if all checks pass.
-         *
-         * @since 3.4.1
-         *
-         * @return bool Success status.
+         * @return array<string, mixed> Theme info
          */
-        public function send(): bool
+        private function get_theme_info(): array
         {
         }
         /**
-         * Validate required data fields
+         * Get plugins summary
          *
-         * Ensures all required fields are present in the error report data.
-         *
-         * @since 3.4.0
-         *
-         * @return bool Validation result.
+         * @return string Formatted plugin list
          */
-        protected function validate_data(): bool
+        private function get_plugins_summary(): string
         {
         }
         /**
-         * Sanitize input data
+         * Get Divi detection information
          *
-         * Recursively sanitizes all string values in the error report data.
-         *
-         * @since 3.4.0
-         *
-         * @param array<string, mixed> $data Raw input data.
-         *
-         * @return array<string, mixed> Sanitized data.
+         * @return array<string, mixed> Divi detection data
          */
-        protected function sanitize_data(array $data): array
+        private function get_divi_detection_info(): array
         {
         }
         /**
-         * Get formatted error messages
+         * Get minimal environment on failure
          *
-         * Collects all error messages from the WP_Error object and formats them.
-         *
-         * @since 3.4.0
-         *
-         * @return array<string> Formatted error messages.
+         * @return array<string, mixed> Minimal env data
          */
-        protected function get_error_messages(): array
+        private function get_minimal_environment(): array
         {
         }
         /**
-         * Get error object
-         *
-         * @since 3.4.0
-         *
-         * @return WP_Error Error object.
+         * Clear environment cache
          */
-        public function get_errors(): \WP_Error
-        {
-        }
-        /**
-         * Get send result
-         *
-         * @since 3.4.0
-         *
-         * @return bool Result.
-         */
-        public function get_result(): bool
-        {
-        }
-        /**
-         * Send error report quickly
-         *
-         * Static helper method to quickly send an error report from an exception.
-         *
-         * @since 3.4.0
-         *
-         * @param Throwable            $throwable       Error/Exception object.
-         * @param array<string, mixed> $additional_data Additional context.
-         *
-         * @return bool Success status.
-         */
-        public static function quick_send(\Throwable $throwable, array $additional_data = array()): bool
-        {
-        }
-        /**
-         * Static helper to reset the error reporting rate limit
-         *
-         * @since 3.4.0
-         *
-         * @return bool Success status
-         */
-        public static function force_reset_rate_limit(): bool
+        public static function clear_cache(): void
         {
         }
     }
@@ -23249,7 +23348,7 @@ namespace DiviSquad {
      * @property Core\Memory                             $memory                     Memory manager.
      * @property Core\Cache                              $cache                      Cache manager.
      * @property Core\Assets                             $assets                     Assets Manager
-     * @property Core\Error\Reporter                     $error_reporter             Error Reporter manager.
+     * @property Core\Error\Error_Reporter               $error_reporter             Error Reporter manager.
      * @property Core\Supports\Site_Health               $site_health                Site health manager.
      * @property Core\Admin\Menu                         $admin_menu                 Admin menu manager.
      * @property Core\Admin\Notice                       $admin_notice               Admin notice manager
@@ -23321,6 +23420,13 @@ namespace DiviSquad {
          * @var bool
          */
         private static bool $is_initializing = false;
+        /**
+         * Cached deprecated classes list.
+         *
+         * @since 3.4.3
+         * @var array<string, array<string, array<string, mixed>>>|null
+         */
+        private ?array $deprecated_classes_cache = null;
         /**
          * Initialize the plugin.
          *
@@ -24349,7 +24455,7 @@ namespace Composer\Autoload {
     {
         public static $prefixLengthsPsr4 = array('D' => array('DiviSquad\\' => 10));
         public static $prefixDirsPsr4 = array('DiviSquad\\' => array(0 => __DIR__ . '/../..' . '/includes'));
-        public static $classMap = array('Composer\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php', 'DiviSquad\Builder\Assets' => __DIR__ . '/../..' . '/includes/Builder/Assets.php', 'DiviSquad\Builder\Utils\Database\Database_Utils' => __DIR__ . '/../..' . '/includes/Builder/Utils/Database/Database_Utils.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Collection' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collection.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\CollectionInterface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/CollectionInterface.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Collections\Advanced' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collections/Advanced.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Collections\WordPress' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collections/WordPress.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Definition' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definition.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\DefinitionInterface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/DefinitionInterface.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Definitions\Advanced' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definitions/Advanced.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Definitions\WordPress' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definitions/WordPress.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Manager' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Manager.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\ManagerInterface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/ManagerInterface.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Managers\Fields' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Managers/Fields.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Managers\Upgrades' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Managers/Upgrades.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Traits\Table_Population_Trait' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Traits/Table_Population_Trait.php', 'DiviSquad\Builder\Utils\Elements\Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collection' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collection.php', 'DiviSquad\Builder\Utils\Elements\Forms\CollectionInterface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/CollectionInterface.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Contact_Form_7' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Contact_Form_7.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Fluent_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Fluent_Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Formidable' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Formidable.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Forminator' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Forminator.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Gravity_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Gravity_Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Ninja_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Ninja_Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\WP_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/WP_Forms.php', 'DiviSquad\Builder\Version4\Abstracts\Module' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module.php', 'DiviSquad\Builder\Version4\Abstracts\Module\Child_Module' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module/Child_Module.php', 'DiviSquad\Builder\Version4\Abstracts\Module\Form_Styler' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module/Form_Styler.php', 'DiviSquad\Builder\Version4\Abstracts\Module_Utility' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module_Utility.php', 'DiviSquad\Builder\Version4\Abstracts\Placeholder' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Placeholder.php', 'DiviSquad\Builder\Version4\Contracts\Module_Interface' => __DIR__ . '/../..' . '/includes/Builder/Version4/Contracts/Module_Interface.php', 'DiviSquad\Builder\Version4\Contracts\Placeholder_Interface' => __DIR__ . '/../..' . '/includes/Builder/Version4/Contracts/Placeholder_Interface.php', 'DiviSquad\Builder\Version4\Modules\Content\Business_Hours' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Business_Hours.php', 'DiviSquad\Builder\Version4\Modules\Content\Business_Hours_Child' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Business_Hours_Child.php', 'DiviSquad\Builder\Version4\Modules\Content\Flip_Box' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Flip_Box.php', 'DiviSquad\Builder\Version4\Modules\Creative\Breadcrumbs' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Breadcrumbs.php', 'DiviSquad\Builder\Version4\Modules\Creative\Divider' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Divider.php', 'DiviSquad\Builder\Version4\Modules\Creative\Drop_Cap_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Drop_Cap_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Dual_Button' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Dual_Button.php', 'DiviSquad\Builder\Version4\Modules\Creative\Glitch_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Glitch_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Gradient_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Gradient_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Scrolling_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Scrolling_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Star_Rating' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Star_Rating.php', 'DiviSquad\Builder\Version4\Modules\Creative\Typing_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Typing_Text.php', 'DiviSquad\Builder\Version4\Modules\Forms\Contact_Form_7' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Contact_Form_7.php', 'DiviSquad\Builder\Version4\Modules\Forms\Fluent_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Fluent_Forms.php', 'DiviSquad\Builder\Version4\Modules\Forms\Forminator' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Forminator.php', 'DiviSquad\Builder\Version4\Modules\Forms\Gravity_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Gravity_Forms.php', 'DiviSquad\Builder\Version4\Modules\Forms\Ninja_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Ninja_Forms.php', 'DiviSquad\Builder\Version4\Modules\Forms\WP_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/WP_Forms.php', 'DiviSquad\Builder\Version4\Modules\Maps\Google_Map' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Maps/Google_Map.php', 'DiviSquad\Builder\Version4\Modules\Media\Before_After_Image_Slider' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Before_After_Image_Slider.php', 'DiviSquad\Builder\Version4\Modules\Media\Image_Gallery' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Image_Gallery.php', 'DiviSquad\Builder\Version4\Modules\Media\Image_Mask' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Image_Mask.php', 'DiviSquad\Builder\Version4\Modules\Media\Lottie' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Lottie.php', 'DiviSquad\Builder\Version4\Modules\Media\Video_Popup' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Video_Popup.php', 'DiviSquad\Builder\Version4\Modules\Post_Grid' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Post_Grid.php', 'DiviSquad\Builder\Version4\Modules\Post_Grid_Child' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Post_Grid_Child.php', 'DiviSquad\Builder\Version4\Modules\Post_Reading_Time' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Post_Reading_Time.php', 'DiviSquad\Builder\Version4\Supports\Collection' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Collection.php', 'DiviSquad\Builder\Version4\Supports\Module_Helper' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helper.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Common_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Common_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Deprecations_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Deprecations_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Fields\Compatibility_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Fields/Compatibility_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Fields\Definition_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Fields/Definition_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Fields_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Fields_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Breadcrumbs' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Breadcrumbs.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Divider' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Divider.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Fields\CSS_Generations' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Fields/CSS_Generations.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Fields\Definitions' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Fields/Definitions.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Mask_Shape' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Mask_Shape.php', 'DiviSquad\Builder\Version4\Supports\Module_Utility' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utility.php', 'DiviSquad\Core\Admin\Assets' => __DIR__ . '/../..' . '/includes/Core/Admin/Assets.php', 'DiviSquad\Core\Admin\Branding' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding.php', 'DiviSquad\Core\Admin\Branding\Brand_Asset_Base' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Brand_Asset_Base.php', 'DiviSquad\Core\Admin\Branding\Brand_Asset_Interface' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Brand_Asset_Interface.php', 'DiviSquad\Core\Admin\Branding\Plugin_Action_Links' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Plugin_Action_Links.php', 'DiviSquad\Core\Admin\Branding\Plugin_Admin_Footer_Text' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Plugin_Admin_Footer_Text.php', 'DiviSquad\Core\Admin\Branding\Plugin_Row_Meta' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Plugin_Row_Meta.php', 'DiviSquad\Core\Admin\Menu' => __DIR__ . '/../..' . '/includes/Core/Admin/Menu.php', 'DiviSquad\Core\Admin\Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notice.php', 'DiviSquad\Core\Admin\Notices\Notice_Base' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Notice_Base.php', 'DiviSquad\Core\Admin\Notices\Notice_Interface' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Notice_Interface.php', 'DiviSquad\Core\Admin\Notices\Pro_Activation_Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Pro_Activation_Notice.php', 'DiviSquad\Core\Admin\Notices\Purchase_Discount_Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Purchase_Discount_Notice.php', 'DiviSquad\Core\Admin\Notices\Review_Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Review_Notice.php', 'DiviSquad\Core\Assets' => __DIR__ . '/../..' . '/includes/Core/Assets.php', 'DiviSquad\Core\Cache' => __DIR__ . '/../..' . '/includes/Core/Cache.php', 'DiviSquad\Core\Contracts\Hookable' => __DIR__ . '/../..' . '/includes/Core/Contracts/Hookable.php', 'DiviSquad\Core\Distribution' => __DIR__ . '/../..' . '/includes/Core/Distribution.php', 'DiviSquad\Core\Error\Email_Sender' => __DIR__ . '/../..' . '/includes/Core/Error/Email_Sender.php', 'DiviSquad\Core\Error\Environment_Collector' => __DIR__ . '/../..' . '/includes/Core/Error/Environment_Collector.php', 'DiviSquad\Core\Error\Log_Reader' => __DIR__ . '/../..' . '/includes/Core/Error/Log_Reader.php', 'DiviSquad\Core\Error\Rate_Limiter' => __DIR__ . '/../..' . '/includes/Core/Error/Rate_Limiter.php', 'DiviSquad\Core\Error\Reporter' => __DIR__ . '/../..' . '/includes/Core/Error/Reporter.php', 'DiviSquad\Core\Extensions' => __DIR__ . '/../..' . '/includes/Core/Extensions.php', 'DiviSquad\Core\Memory' => __DIR__ . '/../..' . '/includes/Core/Memory.php', 'DiviSquad\Core\Modules' => __DIR__ . '/../..' . '/includes/Core/Modules.php', 'DiviSquad\Core\Requirements' => __DIR__ . '/../..' . '/includes/Core/Requirements.php', 'DiviSquad\Core\Rest_Routes' => __DIR__ . '/../..' . '/includes/Core/Rest_Routes.php', 'DiviSquad\Core\Supports\Links' => __DIR__ . '/../..' . '/includes/Core/Supports/Links.php', 'DiviSquad\Core\Supports\Media\Image' => __DIR__ . '/../..' . '/includes/Core/Supports/Media/Image.php', 'DiviSquad\Core\Supports\Polyfills\Arr' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Arr.php', 'DiviSquad\Core\Supports\Polyfills\Constant' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Constant.php', 'DiviSquad\Core\Supports\Polyfills\Str' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Str.php', 'DiviSquad\Core\Supports\Site_Health' => __DIR__ . '/../..' . '/includes/Core/Supports/Site_Health.php', 'DiviSquad\Core\Supports\Utils\Date_Time' => __DIR__ . '/../..' . '/includes/Core/Supports/Utils/Date_Time.php', 'DiviSquad\Core\Traits\Assets\Assets_Core' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Assets_Core.php', 'DiviSquad\Core\Traits\Assets\Body_Classes' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Body_Classes.php', 'DiviSquad\Core\Traits\Assets\Brand_Assets' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Brand_Assets.php', 'DiviSquad\Core\Traits\Assets\Localization' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Localization.php', 'DiviSquad\Core\Traits\Assets\Management' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Management.php', 'DiviSquad\Core\Traits\Assets\Registration' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Registration.php', 'DiviSquad\Core\Traits\Chainable_Container' => __DIR__ . '/../..' . '/includes/Core/Traits/Chainable_Container.php', 'DiviSquad\Core\Traits\Deprecations\Deprecated_Class_Loader' => __DIR__ . '/../..' . '/includes/Core/Traits/Deprecations/Deprecated_Class_Loader.php', 'DiviSquad\Core\Traits\Plugin\Detect_Plugin_Life' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Detect_Plugin_Life.php', 'DiviSquad\Core\Traits\Plugin\Logger' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Logger.php', 'DiviSquad\Core\Traits\Plugin\Pluggable' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Pluggable.php', 'DiviSquad\Core\Traits\Singleton' => __DIR__ . '/../..' . '/includes/Core/Traits/Singleton.php', 'DiviSquad\Core\Traits\WP\Use_WP_Filesystem' => __DIR__ . '/../..' . '/includes/Core/Traits/WP/Use_WP_Filesystem.php', 'DiviSquad\Extensions\Abstracts\Base_Extension' => __DIR__ . '/../..' . '/includes/Extensions/Abstracts/Base_Extension.php', 'DiviSquad\Extensions\Contracts\Extension_Interface' => __DIR__ . '/../..' . '/includes/Extensions/Contracts/Extension_Interface.php', 'DiviSquad\Extensions\Visual_Builder\Font_Upload' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/Font_Upload.php', 'DiviSquad\Extensions\Visual_Builder\JSON' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/JSON.php', 'DiviSquad\Extensions\Visual_Builder\Layout_Shortcode' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/Layout_Shortcode.php', 'DiviSquad\Extensions\Visual_Builder\SVG' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/SVG.php', 'DiviSquad\Extensions\WordPress\Copy' => __DIR__ . '/../..' . '/includes/Extensions/WordPress/Copy.php', 'DiviSquad\Integrations\Builder' => __DIR__ . '/../..' . '/includes/Integrations/Builder.php', 'DiviSquad\Integrations\Builder_Placeholders' => __DIR__ . '/../..' . '/includes/Integrations/Builder_Placeholders.php', 'DiviSquad\Integrations\Extensions' => __DIR__ . '/../..' . '/includes/Integrations/Extensions.php', 'DiviSquad\Rest_API_Routes\Base_Route' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Base_Route.php', 'DiviSquad\Rest_API_Routes\Version1\Extensions' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Extensions.php', 'DiviSquad\Rest_API_Routes\Version1\Extensions\Copy' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Extensions/Copy.php', 'DiviSquad\Rest_API_Routes\Version1\Modules' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Modules.php', 'DiviSquad\Rest_API_Routes\Version1\Modules\Post_Grid' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Modules/Post_Grid.php', 'DiviSquad\Rest_API_Routes\Version1\Notices\Admin_Notices' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Notices/Admin_Notices.php', 'DiviSquad\Rest_API_Routes\Version1\Whats_New\Changelog' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Whats_New/Changelog.php', 'DiviSquad\Rest_API_Routes\Version2\Extensions' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version2/Extensions.php', 'DiviSquad\Rest_API_Routes\Version2\Modules' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version2/Modules.php', 'DiviSquad\Settings\Migration' => __DIR__ . '/../..' . '/includes/Settings/Migration.php', 'DiviSquad\Settings\Migration\Post_Element' => __DIR__ . '/../..' . '/includes/Settings/Migration/Post_Element.php', 'DiviSquad\Settings\Migration_Interface' => __DIR__ . '/../..' . '/includes/Settings/Migration_Interface.php', 'DiviSquad\SquadModules' => __DIR__ . '/../..' . '/includes/SquadModules.php', 'DiviSquad\Utils\Divi' => __DIR__ . '/../..' . '/includes/Utils/Divi.php', 'DiviSquad\Utils\Helper' => __DIR__ . '/../..' . '/includes/Utils/Helper.php', 'DiviSquad\Utils\Http' => __DIR__ . '/../..' . '/includes/Utils/Http.php', 'DiviSquad\Utils\LRCart' => __DIR__ . '/../..' . '/includes/Utils/LRCart.php', 'DiviSquad\Utils\Sanitization' => __DIR__ . '/../..' . '/includes/Utils/Sanitization.php', 'DiviSquad\Utils\WP' => __DIR__ . '/../..' . '/includes/Utils/WP.php');
+        public static $classMap = array('Composer\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php', 'DiviSquad\Builder\Assets' => __DIR__ . '/../..' . '/includes/Builder/Assets.php', 'DiviSquad\Builder\Utils\Database\Database_Utils' => __DIR__ . '/../..' . '/includes/Builder/Utils/Database/Database_Utils.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Collection' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collection.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\CollectionInterface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/CollectionInterface.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Collections\Advanced' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collections/Advanced.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Collections\WordPress' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collections/WordPress.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Definition' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definition.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\DefinitionInterface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/DefinitionInterface.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Definitions\Advanced' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definitions/Advanced.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Definitions\WordPress' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definitions/WordPress.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Manager' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Manager.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\ManagerInterface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/ManagerInterface.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Managers\Fields' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Managers/Fields.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Managers\Upgrades' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Managers/Upgrades.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Traits\Table_Population_Trait' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Traits/Table_Population_Trait.php', 'DiviSquad\Builder\Utils\Elements\Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collection' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collection.php', 'DiviSquad\Builder\Utils\Elements\Forms\CollectionInterface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/CollectionInterface.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Contact_Form_7' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Contact_Form_7.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Fluent_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Fluent_Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Formidable' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Formidable.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Forminator' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Forminator.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Gravity_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Gravity_Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Ninja_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Ninja_Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\WP_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/WP_Forms.php', 'DiviSquad\Builder\Version4\Abstracts\Module' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module.php', 'DiviSquad\Builder\Version4\Abstracts\Module\Child_Module' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module/Child_Module.php', 'DiviSquad\Builder\Version4\Abstracts\Module\Form_Styler' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module/Form_Styler.php', 'DiviSquad\Builder\Version4\Abstracts\Module_Utility' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module_Utility.php', 'DiviSquad\Builder\Version4\Abstracts\Placeholder' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Placeholder.php', 'DiviSquad\Builder\Version4\Contracts\Module_Interface' => __DIR__ . '/../..' . '/includes/Builder/Version4/Contracts/Module_Interface.php', 'DiviSquad\Builder\Version4\Contracts\Placeholder_Interface' => __DIR__ . '/../..' . '/includes/Builder/Version4/Contracts/Placeholder_Interface.php', 'DiviSquad\Builder\Version4\Modules\Content\Business_Hours' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Business_Hours.php', 'DiviSquad\Builder\Version4\Modules\Content\Business_Hours_Child' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Business_Hours_Child.php', 'DiviSquad\Builder\Version4\Modules\Content\Flip_Box' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Flip_Box.php', 'DiviSquad\Builder\Version4\Modules\Creative\Breadcrumbs' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Breadcrumbs.php', 'DiviSquad\Builder\Version4\Modules\Creative\Divider' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Divider.php', 'DiviSquad\Builder\Version4\Modules\Creative\Drop_Cap_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Drop_Cap_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Dual_Button' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Dual_Button.php', 'DiviSquad\Builder\Version4\Modules\Creative\Glitch_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Glitch_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Gradient_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Gradient_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Scrolling_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Scrolling_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Star_Rating' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Star_Rating.php', 'DiviSquad\Builder\Version4\Modules\Creative\Typing_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Typing_Text.php', 'DiviSquad\Builder\Version4\Modules\Forms\Contact_Form_7' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Contact_Form_7.php', 'DiviSquad\Builder\Version4\Modules\Forms\Fluent_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Fluent_Forms.php', 'DiviSquad\Builder\Version4\Modules\Forms\Forminator' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Forminator.php', 'DiviSquad\Builder\Version4\Modules\Forms\Gravity_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Gravity_Forms.php', 'DiviSquad\Builder\Version4\Modules\Forms\Ninja_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Ninja_Forms.php', 'DiviSquad\Builder\Version4\Modules\Forms\WP_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/WP_Forms.php', 'DiviSquad\Builder\Version4\Modules\Maps\Google_Map' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Maps/Google_Map.php', 'DiviSquad\Builder\Version4\Modules\Media\Before_After_Image_Slider' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Before_After_Image_Slider.php', 'DiviSquad\Builder\Version4\Modules\Media\Image_Gallery' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Image_Gallery.php', 'DiviSquad\Builder\Version4\Modules\Media\Image_Mask' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Image_Mask.php', 'DiviSquad\Builder\Version4\Modules\Media\Lottie' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Lottie.php', 'DiviSquad\Builder\Version4\Modules\Media\Video_Popup' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Video_Popup.php', 'DiviSquad\Builder\Version4\Modules\Post_Grid' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Post_Grid.php', 'DiviSquad\Builder\Version4\Modules\Post_Grid_Child' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Post_Grid_Child.php', 'DiviSquad\Builder\Version4\Modules\Post_Reading_Time' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Post_Reading_Time.php', 'DiviSquad\Builder\Version4\Supports\Collection' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Collection.php', 'DiviSquad\Builder\Version4\Supports\Module_Helper' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helper.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Common_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Common_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Deprecations_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Deprecations_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Fields\Compatibility_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Fields/Compatibility_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Fields\Definition_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Fields/Definition_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Fields_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Fields_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Breadcrumbs' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Breadcrumbs.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Divider' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Divider.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Fields\CSS_Generations' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Fields/CSS_Generations.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Fields\Definitions' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Fields/Definitions.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Mask_Shape' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Mask_Shape.php', 'DiviSquad\Builder\Version4\Supports\Module_Utility' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utility.php', 'DiviSquad\Core\Admin\Assets' => __DIR__ . '/../..' . '/includes/Core/Admin/Assets.php', 'DiviSquad\Core\Admin\Branding' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding.php', 'DiviSquad\Core\Admin\Branding\Brand_Asset_Base' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Brand_Asset_Base.php', 'DiviSquad\Core\Admin\Branding\Brand_Asset_Interface' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Brand_Asset_Interface.php', 'DiviSquad\Core\Admin\Branding\Plugin_Action_Links' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Plugin_Action_Links.php', 'DiviSquad\Core\Admin\Branding\Plugin_Admin_Footer_Text' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Plugin_Admin_Footer_Text.php', 'DiviSquad\Core\Admin\Branding\Plugin_Row_Meta' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Plugin_Row_Meta.php', 'DiviSquad\Core\Admin\Menu' => __DIR__ . '/../..' . '/includes/Core/Admin/Menu.php', 'DiviSquad\Core\Admin\Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notice.php', 'DiviSquad\Core\Admin\Notices\Notice_Base' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Notice_Base.php', 'DiviSquad\Core\Admin\Notices\Notice_Interface' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Notice_Interface.php', 'DiviSquad\Core\Admin\Notices\Pro_Activation_Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Pro_Activation_Notice.php', 'DiviSquad\Core\Admin\Notices\Purchase_Discount_Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Purchase_Discount_Notice.php', 'DiviSquad\Core\Admin\Notices\Review_Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Review_Notice.php', 'DiviSquad\Core\Assets' => __DIR__ . '/../..' . '/includes/Core/Assets.php', 'DiviSquad\Core\Cache' => __DIR__ . '/../..' . '/includes/Core/Cache.php', 'DiviSquad\Core\Contracts\Hookable' => __DIR__ . '/../..' . '/includes/Core/Contracts/Hookable.php', 'DiviSquad\Core\Distribution' => __DIR__ . '/../..' . '/includes/Core/Distribution.php', 'DiviSquad\Core\Error\Duplicate_Filter' => __DIR__ . '/../..' . '/includes/Core/Error/Duplicate_Filter.php', 'DiviSquad\Core\Error\Error_Mailer' => __DIR__ . '/../..' . '/includes/Core/Error/Error_Mailer.php', 'DiviSquad\Core\Error\Error_Reporter' => __DIR__ . '/../..' . '/includes/Core/Error/Error_Reporter.php', 'DiviSquad\Core\Error\Log_File' => __DIR__ . '/../..' . '/includes/Core/Error/Log_File.php', 'DiviSquad\Core\Error\Rate_Limiter' => __DIR__ . '/../..' . '/includes/Core/Error/Rate_Limiter.php', 'DiviSquad\Core\Error\System_Info' => __DIR__ . '/../..' . '/includes/Core/Error/System_Info.php', 'DiviSquad\Core\Extensions' => __DIR__ . '/../..' . '/includes/Core/Extensions.php', 'DiviSquad\Core\Memory' => __DIR__ . '/../..' . '/includes/Core/Memory.php', 'DiviSquad\Core\Modules' => __DIR__ . '/../..' . '/includes/Core/Modules.php', 'DiviSquad\Core\Requirements' => __DIR__ . '/../..' . '/includes/Core/Requirements.php', 'DiviSquad\Core\Rest_Routes' => __DIR__ . '/../..' . '/includes/Core/Rest_Routes.php', 'DiviSquad\Core\Supports\Links' => __DIR__ . '/../..' . '/includes/Core/Supports/Links.php', 'DiviSquad\Core\Supports\Media\Image' => __DIR__ . '/../..' . '/includes/Core/Supports/Media/Image.php', 'DiviSquad\Core\Supports\Polyfills\Arr' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Arr.php', 'DiviSquad\Core\Supports\Polyfills\Constant' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Constant.php', 'DiviSquad\Core\Supports\Polyfills\Str' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Str.php', 'DiviSquad\Core\Supports\Site_Health' => __DIR__ . '/../..' . '/includes/Core/Supports/Site_Health.php', 'DiviSquad\Core\Supports\Utils\Date_Time' => __DIR__ . '/../..' . '/includes/Core/Supports/Utils/Date_Time.php', 'DiviSquad\Core\Traits\Assets\Assets_Core' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Assets_Core.php', 'DiviSquad\Core\Traits\Assets\Body_Classes' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Body_Classes.php', 'DiviSquad\Core\Traits\Assets\Brand_Assets' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Brand_Assets.php', 'DiviSquad\Core\Traits\Assets\Localization' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Localization.php', 'DiviSquad\Core\Traits\Assets\Management' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Management.php', 'DiviSquad\Core\Traits\Assets\Registration' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Registration.php', 'DiviSquad\Core\Traits\Chainable_Container' => __DIR__ . '/../..' . '/includes/Core/Traits/Chainable_Container.php', 'DiviSquad\Core\Traits\Deprecations\Deprecated_Class_Loader' => __DIR__ . '/../..' . '/includes/Core/Traits/Deprecations/Deprecated_Class_Loader.php', 'DiviSquad\Core\Traits\Plugin\Detect_Plugin_Life' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Detect_Plugin_Life.php', 'DiviSquad\Core\Traits\Plugin\Logger' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Logger.php', 'DiviSquad\Core\Traits\Plugin\Pluggable' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Pluggable.php', 'DiviSquad\Core\Traits\Singleton' => __DIR__ . '/../..' . '/includes/Core/Traits/Singleton.php', 'DiviSquad\Core\Traits\WP\Use_WP_Filesystem' => __DIR__ . '/../..' . '/includes/Core/Traits/WP/Use_WP_Filesystem.php', 'DiviSquad\Extensions\Abstracts\Base_Extension' => __DIR__ . '/../..' . '/includes/Extensions/Abstracts/Base_Extension.php', 'DiviSquad\Extensions\Contracts\Extension_Interface' => __DIR__ . '/../..' . '/includes/Extensions/Contracts/Extension_Interface.php', 'DiviSquad\Extensions\Visual_Builder\Font_Upload' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/Font_Upload.php', 'DiviSquad\Extensions\Visual_Builder\JSON' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/JSON.php', 'DiviSquad\Extensions\Visual_Builder\Layout_Shortcode' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/Layout_Shortcode.php', 'DiviSquad\Extensions\Visual_Builder\SVG' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/SVG.php', 'DiviSquad\Extensions\WordPress\Copy' => __DIR__ . '/../..' . '/includes/Extensions/WordPress/Copy.php', 'DiviSquad\Integrations\Builder' => __DIR__ . '/../..' . '/includes/Integrations/Builder.php', 'DiviSquad\Integrations\Builder_Placeholders' => __DIR__ . '/../..' . '/includes/Integrations/Builder_Placeholders.php', 'DiviSquad\Integrations\Extensions' => __DIR__ . '/../..' . '/includes/Integrations/Extensions.php', 'DiviSquad\Rest_API_Routes\Base_Route' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Base_Route.php', 'DiviSquad\Rest_API_Routes\Version1\Extensions' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Extensions.php', 'DiviSquad\Rest_API_Routes\Version1\Extensions\Copy' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Extensions/Copy.php', 'DiviSquad\Rest_API_Routes\Version1\Modules' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Modules.php', 'DiviSquad\Rest_API_Routes\Version1\Modules\Post_Grid' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Modules/Post_Grid.php', 'DiviSquad\Rest_API_Routes\Version1\Notices\Admin_Notices' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Notices/Admin_Notices.php', 'DiviSquad\Rest_API_Routes\Version1\Whats_New\Changelog' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Whats_New/Changelog.php', 'DiviSquad\Rest_API_Routes\Version2\Extensions' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version2/Extensions.php', 'DiviSquad\Rest_API_Routes\Version2\Modules' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version2/Modules.php', 'DiviSquad\Settings\Migration' => __DIR__ . '/../..' . '/includes/Settings/Migration.php', 'DiviSquad\Settings\Migration\Post_Element' => __DIR__ . '/../..' . '/includes/Settings/Migration/Post_Element.php', 'DiviSquad\Settings\Migration_Interface' => __DIR__ . '/../..' . '/includes/Settings/Migration_Interface.php', 'DiviSquad\SquadModules' => __DIR__ . '/../..' . '/includes/SquadModules.php', 'DiviSquad\Utils\Divi' => __DIR__ . '/../..' . '/includes/Utils/Divi.php', 'DiviSquad\Utils\Helper' => __DIR__ . '/../..' . '/includes/Utils/Helper.php', 'DiviSquad\Utils\Http' => __DIR__ . '/../..' . '/includes/Utils/Http.php', 'DiviSquad\Utils\LRCart' => __DIR__ . '/../..' . '/includes/Utils/LRCart.php', 'DiviSquad\Utils\Sanitization' => __DIR__ . '/../..' . '/includes/Utils/Sanitization.php', 'DiviSquad\Utils\WP' => __DIR__ . '/../..' . '/includes/Utils/WP.php');
         public static function getInitializer(\Composer\Autoload\ClassLoader $loader)
         {
         }
@@ -24378,7 +24484,7 @@ namespace {
      * otherwise, an Exception is thrown.
      *
      * @since 1.0.0
-     * @since 3.3.0 Updated to use get_publisher() which now returns the instance from the container
+     * @since 3.3.0 Updated to use get_distributor() which now returns the instance from the container
      *
      * @return Freemius The Freemius SDK instance for handling licensing and analytics.
      * @throws Exception If the Freemius SDK is not available.
