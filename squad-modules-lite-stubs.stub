@@ -8275,45 +8275,44 @@ namespace DiviSquad\Builder\Utils\Elements\Custom_Fields\Traits {
          * @since 3.1.0
          * @var   int
          */
-        protected int $batch_size = 5000;
+        public int $batch_size = 5000;
         /**
          * Maximum execution time for each batch (seconds).
          *
          * @since 3.1.0
          * @var   int
          */
-        protected int $max_batch_time = 20;
+        public int $max_batch_time = 20;
         /**
          * Tracked post types for custom fields.
          *
          * @var bool
          */
-        protected bool $is_table_exists = false;
+        public bool $is_table_exists = false;
         /**
          * Populate the summary table efficiently.
          *
          * @since  3.1.0
          * @return void
          */
-        public function populate_summary_table()
+        public function populate_summary_table(): void
         {
         }
         /**
          * Verify if the custom fields table exists.
          *
          * @since  3.2.0
-         *
          * @return bool True if table exists.
          */
-        protected function is_table_exists(): bool
+        public function is_table_exists(): bool
         {
         }
         /**
-         * Process a batch of records.
+         * Process a batch of records using WP_Meta_Query.
          *
          * @since  3.1.0
          *
-         * @param int $last_id Last processed ID.
+         * @param int $last_id Last processed meta ID.
          *
          * @return int Next last ID or 0 if complete.
          */
@@ -8339,18 +8338,16 @@ namespace DiviSquad\Builder\Utils\Elements\Custom_Fields\Traits {
         {
         }
         /**
-         * Get meta keys that exist in postmeta but not in the collection table.
-         * Optimized query using INNER JOIN and NOT IN clause.
+         * Get meta keys that exist in postmeta but not in the collection table using WP_Meta_Query.
          *
          * @since  3.1.0
-         * @return array Array of missing meta keys with their post types.
+         * @return array Array of missing meta keys with their post types and occurrence counts.
          */
         public function get_missing_meta_keys(): array
         {
         }
         /**
-         * Get meta keys count by post type.
-         * Helper method to analyze meta keys distribution.
+         * Get meta keys count by post type using WP_Meta_Query.
          *
          * @since  3.1.0
          * @return array Array of meta key counts by post type.
@@ -15260,28 +15257,6 @@ namespace DiviSquad\Core\Admin {
         {
         }
         /**
-         * Get all registered branding assets.
-         *
-         * @since 3.3.3
-         *
-         * @return array<string, array<Brand_Asset_Interface>> The registered branding assets.
-         */
-        public function get_assets(): array
-        {
-        }
-        /**
-         * Get registered branding assets by type.
-         *
-         * @since 3.3.3
-         *
-         * @param string $type The asset type.
-         *
-         * @return array<Brand_Asset_Interface> The registered branding assets for the specified type.
-         */
-        public function get_assets_by_type(string $type): array
-        {
-        }
-        /**
          * Add plugin row meta links.
          *
          * This method filters the row meta links displayed for plugins in the WordPress
@@ -15309,7 +15284,7 @@ namespace DiviSquad\Core\Admin {
          *
          * @return string Modified admin footer text.
          */
-        public function filter_admin_footer_text(string $text): string
+        public function filter_admin_footer_text($text): string
         {
         }
         /**
@@ -15324,7 +15299,7 @@ namespace DiviSquad\Core\Admin {
          *
          * @return string Modified update footer text.
          */
-        public function filter_update_footer_text(string $text): string
+        public function filter_update_footer_text($text): string
         {
         }
         /**
@@ -15338,6 +15313,28 @@ namespace DiviSquad\Core\Admin {
          * @return void
          */
         public function output_custom_css(): void
+        {
+        }
+        /**
+         * Get all registered branding assets.
+         *
+         * @since 3.3.3
+         *
+         * @return array<string, array<Brand_Asset_Interface>> The registered branding assets.
+         */
+        public function get_assets(): array
+        {
+        }
+        /**
+         * Get registered branding assets by type.
+         *
+         * @since 3.3.3
+         *
+         * @param string $type The asset type.
+         *
+         * @return array<Brand_Asset_Interface> The registered branding assets for the specified type.
+         */
+        public function get_assets_by_type(string $type): array
         {
         }
     }
