@@ -1,11 +1,13 @@
 <?php
 
-return \StubsGenerator\Finder::create()
+use StubsGenerator\Finder;
+
+return Finder::create()
     ->in( array(
         'source/squad-modules-for-divi',
     ) )
     ->append(
-        \StubsGenerator\Finder::create()
+        Finder::create()
             ->in(['source/squad-modules-for-divi'])
             ->files()
             ->depth('< 1')

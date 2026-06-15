@@ -24,7 +24,7 @@ HEADER=$'/**\n * Generated stub declarations for Squad Modules for Divi.\n * @se
 FILE="$ROOT_DIR/squad-modules-lite-stubs.stub"
 FILE_CONSTANTS="$ROOT_DIR/squad-modules-lite-constants-stubs.stub"
 GENERATOR_BIN="$ROOT_DIR/vendor/bin/generate-stubs"
-FINDER_FILE="$ROOT_DIR/finder.php"
+FINDER_FILE="$ROOT_DIR/configs/finder.php"
 
 # Validate requirements
 echo "Validating requirements..."
