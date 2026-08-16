@@ -12243,6 +12243,34 @@ namespace DiviSquad\Builder\Version4\Abstracts\Module {
          */
         protected string $field_selector;
         /**
+         * CSS selector for the field grid that owns the space between fields.
+         *
+         * Form plugins increasingly lay fields out with CSS grid, so the gap between them
+         * belongs to this container rather than to the fields themselves. Without it a
+         * "field margin" setting cannot move them apart.
+         *
+         * @since 4.6.2
+         * @var string
+         */
+        protected string $fields_wrapper_selector = '';
+        /**
+         * CSS selector for the form footer that holds the submit button.
+         *
+         * @since 4.6.2
+         * @var string
+         */
+        protected string $form_footer_selector = '';
+        /**
+         * CSS selector for select (dropdown) fields specifically.
+         *
+         * Selects need their own spacing: a dropdown carries an indicator glyph, so the
+         * padding that suits a text input usually crowds or offsets it.
+         *
+         * @since 4.6.2
+         * @var string
+         */
+        protected string $select_field_selector = '';
+        /**
          * CSS selector for the submit button
          *
          * @since 3.2.0
@@ -12852,7 +12880,7 @@ namespace DiviSquad\Builder\Version4\Abstracts\Module {
          *
          * @return void
          */
-        protected function squad_add_button_width_stylesheet_option(array &$options, array $attrs): void
+        protected function squad_add_field_grid_variable_stylesheet_option(array &$options, array $attrs): void
         {
         }
         /**
@@ -17060,6 +17088,28 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
         {
         }
         /**
+         * Get background option fields for various form elements.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, string> An associative array of form elements and their corresponding CSS selectors.
+         */
+        protected function squad_get_background_stylesheet_option_fields(): array
+        {
+        }
+        /**
+         * Get margin and padding option fields for various form elements.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, string> An associative array of form elements and their corresponding CSS selectors.
+         */
+        protected function squad_get_margin_padding_stylesheet_option_fields(): array
+        {
+        }
+        /**
          * Get general fields for the module.
          *
          * @since  3.2.0
@@ -17082,6 +17132,30 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
         {
         }
         /**
+         * Get design fields for the module.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, mixed> Array of design fields.
+         */
+        protected function squad_get_design_fields(): array
+        {
+        }
+        /**
+         * Get validation message fields for the module.
+         *
+         * Defines the fields related to the validation message styling.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, mixed> An array of validation message field definitions.
+         */
+        protected function squad_get_validation_message_fields(): array
+        {
+        }
+        /**
          * Add transition fields to the provided fields array.
          *
          * @since  1.0.0
@@ -17092,6 +17166,21 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
          * @return void
          */
         protected function squad_add_transition_fields(array &$fields): void
+        {
+        }
+        /**
+         * Add validation message transition fields.
+         *
+         * Adds transition fields for the validation message styling options.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @param array<string, mixed> $fields Array of fields to add validation message transition fields to.
+         *
+         * @return void
+         */
+        protected function squad_add_validation_message_transition_fields(array &$fields): void
         {
         }
         /**
@@ -17238,6 +17327,28 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
         {
         }
         /**
+         * Get background option fields for various form elements.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, string> An associative array of form elements and their corresponding CSS selectors.
+         */
+        protected function squad_get_background_stylesheet_option_fields(): array
+        {
+        }
+        /**
+         * Get margin and padding option fields for various form elements.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, string> An associative array of form elements and their corresponding CSS selectors.
+         */
+        protected function squad_get_margin_padding_stylesheet_option_fields(): array
+        {
+        }
+        /**
          * Get general fields for the module.
          *
          * @since  3.2.0
@@ -17257,6 +17368,58 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
          * @return array<int, string> Array of removable fields.
          */
         protected function squad_get_removable_fields(): array
+        {
+        }
+        /**
+         * Get design fields for the module.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, mixed> Array of design fields.
+         */
+        protected function squad_get_design_fields(): array
+        {
+        }
+        /**
+         * Get validation message fields for the module.
+         *
+         * Defines the fields related to the validation message styling.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, mixed> An array of validation message field definitions.
+         */
+        protected function squad_get_validation_message_fields(): array
+        {
+        }
+        /**
+         * Add transition fields to the provided fields array.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @param array<string, mixed> $fields Array of fields to add transition fields to.
+         *
+         * @return void
+         */
+        protected function squad_add_transition_fields(array &$fields): void
+        {
+        }
+        /**
+         * Add validation message transition fields.
+         *
+         * Adds transition fields for the validation message styling options.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @param array<string, mixed> $fields Array of fields to add validation message transition fields to.
+         *
+         * @return void
+         */
+        protected function squad_add_validation_message_transition_fields(array &$fields): void
         {
         }
         /**
@@ -17417,6 +17580,28 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
         {
         }
         /**
+         * Get background option fields for various form elements.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, string> An associative array of form elements and their corresponding CSS selectors.
+         */
+        protected function squad_get_background_stylesheet_option_fields(): array
+        {
+        }
+        /**
+         * Get margin and padding option fields for various form elements.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, string> An associative array of form elements and their corresponding CSS selectors.
+         */
+        protected function squad_get_margin_padding_stylesheet_option_fields(): array
+        {
+        }
+        /**
          * Get general fields for the module.
          *
          * @since  3.2.0
@@ -17436,6 +17621,58 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
          * @return array<int, string> Array of removable fields.
          */
         protected function squad_get_removable_fields(): array
+        {
+        }
+        /**
+         * Get design fields for the module.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, mixed> Array of design fields.
+         */
+        protected function squad_get_design_fields(): array
+        {
+        }
+        /**
+         * Get validation message fields for the module.
+         *
+         * Defines the fields related to the validation message styling.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, mixed> An array of validation message field definitions.
+         */
+        protected function squad_get_validation_message_fields(): array
+        {
+        }
+        /**
+         * Add transition fields to the provided fields array.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @param array<string, mixed> $fields Array of fields to add transition fields to.
+         *
+         * @return void
+         */
+        protected function squad_add_transition_fields(array &$fields): void
+        {
+        }
+        /**
+         * Add validation message transition fields.
+         *
+         * Adds transition fields for the validation message styling options.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @param array<string, mixed> $fields Array of fields to add validation message transition fields to.
+         *
+         * @return void
+         */
+        protected function squad_add_validation_message_transition_fields(array &$fields): void
         {
         }
         /**
@@ -17747,7 +17984,28 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
          * for styling various elements of Gravity Forms. The selectors are organized into
          * categories such as form, typography, fields, messages, etc.
          *
+         * Every selector is anchored on `.gform_wrapper` alone, deliberately, and must stay
+         * that way. Gravity Forms puts a different set of theme classes on that wrapper for
+         * each of its three form themes — see GFFormDisplay::get_form_theme_slug() and
+         * includes/form-display/block-styles/views/class-form-view.php:
+         *
+         *   orbital        gform_wrapper gform-theme gform-theme--foundation
+         *                  gform-theme--framework gform-theme--orbital
+         *   gravity-theme  gform_wrapper gravity-theme gform-theme--no-framework
+         *   legacy         gform_wrapper gform_legacy_markup_wrapper gform-theme--no-framework
+         *
+         * These selectors used to require `.gform-theme.gform-theme--framework`, which only
+         * the orbital theme carries. On the other two every design control in this module
+         * silently did nothing — not the button colour, not typography, not spacing — and
+         * `gravity-theme` is the `default` branch in that switch, so it covers any form
+         * whose theme was never chosen explicitly. Users were left writing `!important`
+         * overrides by hand to style a form the module was supposed to style for them.
+         *
+         * Specificity is still ample without those classes: the module prefix contributes
+         * the wrapper, order and module classes, which outweighs Gravity Forms' own rules.
+         *
          * @since  3.2.0
+         * @since  4.6.2 Anchored on `.gform_wrapper` so all three form themes are styled.
          * @access protected
          *
          * @return array<string, array<string, string>> An associative array of CSS selectors.
@@ -17802,6 +18060,17 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
         {
         }
         /**
+         * Get advanced fields for the module.
+         *
+         * @since  1.2.0
+         * @access protected
+         *
+         * @return array<string, mixed> Array of advanced fields.
+         */
+        protected function squad_get_additional_design_fields(): array
+        {
+        }
+        /**
          * Get form title fields for the module.
          *
          * Defines the fields related to the form title styling.
@@ -17838,6 +18107,35 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
          * @return array<string, mixed> An array of validation message field definitions.
          */
         protected function squad_get_validation_message_fields(): array
+        {
+        }
+        /**
+         * Get field validation message design fields for the module.
+         *
+         * Defines background and margin/padding styling for the per-field validation
+         * message, which Gravity Forms renders separately from the form-level summary.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, mixed> An array of field validation message design field definitions.
+         */
+        protected function squad_get_field_validation_message_fields(): array
+        {
+        }
+        /**
+         * Get form buttons design fields for the module.
+         *
+         * Defines background and margin/padding styling for the next, previous,
+         * save & continue and file-upload buttons used by multi-page, save-enabled
+         * and file-upload forms.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, mixed> An array of form buttons design field definitions.
+         */
+        protected function squad_get_form_buttons_design_fields(): array
         {
         }
         /**
@@ -17951,6 +18249,33 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
          * @return array<string, string> An associative array of form elements and their corresponding CSS selectors.
          */
         protected function squad_get_margin_padding_stylesheet_option_fields(): array
+        {
+        }
+        /**
+         * Get module stylesheet selectors.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @param array<string, mixed> $attrs List of attributes.
+         *
+         * @return array<string, mixed> Array of stylesheet selectors.
+         */
+        protected function squad_get_module_stylesheet_selectors(array $attrs): array
+        {
+        }
+        /**
+         * Add form variable options to the stylesheet selectors.
+         *
+         * @since  3.2.0
+         * @access protected
+         *
+         * @param array<string, mixed> $options Array of options to add button width option to.
+         * @param array<string, mixed> $attrs   List of attributes.
+         *
+         * @return void
+         */
+        protected function squad_add_form_variable_stylesheet_option(array &$options, array $attrs): void
         {
         }
         /**
@@ -18069,6 +18394,28 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
         {
         }
         /**
+         * Get background option fields for various form elements.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, string> An associative array of form elements and their corresponding CSS selectors.
+         */
+        protected function squad_get_background_stylesheet_option_fields(): array
+        {
+        }
+        /**
+         * Get margin and padding option fields for various form elements.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, string> An associative array of form elements and their corresponding CSS selectors.
+         */
+        protected function squad_get_margin_padding_stylesheet_option_fields(): array
+        {
+        }
+        /**
          * Get general fields for the module.
          *
          * @since  3.2.0
@@ -18088,6 +18435,58 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
          * @return array<int, string> Array of removable fields.
          */
         protected function squad_get_removable_fields(): array
+        {
+        }
+        /**
+         * Get design fields for the module.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, mixed> Array of design fields.
+         */
+        protected function squad_get_design_fields(): array
+        {
+        }
+        /**
+         * Get validation message fields for the module.
+         *
+         * Defines the fields related to the validation message styling.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, mixed> An array of validation message field definitions.
+         */
+        protected function squad_get_validation_message_fields(): array
+        {
+        }
+        /**
+         * Add transition fields to the provided fields array.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @param array<string, mixed> $fields Array of fields to add transition fields to.
+         *
+         * @return void
+         */
+        protected function squad_add_transition_fields(array &$fields): void
+        {
+        }
+        /**
+         * Add validation message transition fields.
+         *
+         * Adds transition fields for the validation message styling options.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @param array<string, mixed> $fields Array of fields to add validation message transition fields to.
+         *
+         * @return void
+         */
+        protected function squad_add_validation_message_transition_fields(array &$fields): void
         {
         }
         /**
@@ -18541,6 +18940,28 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
         {
         }
         /**
+         * Get background option fields for various form elements.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, string> An associative array of form elements and their corresponding CSS selectors.
+         */
+        protected function squad_get_background_stylesheet_option_fields(): array
+        {
+        }
+        /**
+         * Get margin and padding option fields for various form elements.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, string> An associative array of form elements and their corresponding CSS selectors.
+         */
+        protected function squad_get_margin_padding_stylesheet_option_fields(): array
+        {
+        }
+        /**
          * Get general fields for the module.
          *
          * @since  3.2.0
@@ -18560,6 +18981,58 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
          * @return array<int, string> Array of removable fields.
          */
         protected function squad_get_removable_fields(): array
+        {
+        }
+        /**
+         * Get design fields for the module.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, mixed> Array of design fields.
+         */
+        protected function squad_get_design_fields(): array
+        {
+        }
+        /**
+         * Get validation message fields for the module.
+         *
+         * Defines the fields related to the validation message styling.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, mixed> An array of validation message field definitions.
+         */
+        protected function squad_get_validation_message_fields(): array
+        {
+        }
+        /**
+         * Add transition fields to the provided fields array.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @param array<string, mixed> $fields Array of fields to add transition fields to.
+         *
+         * @return void
+         */
+        protected function squad_add_transition_fields(array &$fields): void
+        {
+        }
+        /**
+         * Add validation message transition fields.
+         *
+         * Adds transition fields for the validation message styling options.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @param array<string, mixed> $fields Array of fields to add validation message transition fields to.
+         *
+         * @return void
+         */
+        protected function squad_add_validation_message_transition_fields(array &$fields): void
         {
         }
         /**
@@ -18729,6 +19202,58 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
         {
         }
         /**
+         * Get design fields for the module.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, mixed> Array of design fields.
+         */
+        protected function squad_get_design_fields(): array
+        {
+        }
+        /**
+         * Get validation message fields for the module.
+         *
+         * Defines the fields related to the validation message styling.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, mixed> An array of validation message field definitions.
+         */
+        protected function squad_get_validation_message_fields(): array
+        {
+        }
+        /**
+         * Add transition fields to the provided fields array.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @param array<string, mixed> $fields Array of fields to add transition fields to.
+         *
+         * @return void
+         */
+        protected function squad_add_transition_fields(array &$fields): void
+        {
+        }
+        /**
+         * Add validation message transition fields.
+         *
+         * Adds transition fields for the validation message styling options.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @param array<string, mixed> $fields Array of fields to add validation message transition fields to.
+         *
+         * @return void
+         */
+        protected function squad_add_validation_message_transition_fields(array &$fields): void
+        {
+        }
+        /**
          * Get font field configurations
          *
          * @since 3.2.0
@@ -18769,6 +19294,28 @@ namespace DiviSquad\Builder\Version4\Modules\Forms {
          * @return array<string, mixed> Array of stylesheet selectors.
          */
         protected function squad_get_module_stylesheet_selectors(array $attrs): array
+        {
+        }
+        /**
+         * Get background option fields for various form elements.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, string> An associative array of form elements and their corresponding CSS selectors.
+         */
+        protected function squad_get_background_stylesheet_option_fields(): array
+        {
+        }
+        /**
+         * Get margin and padding option fields for various form elements.
+         *
+         * @since  4.6.2
+         * @access protected
+         *
+         * @return array<string, string> An associative array of form elements and their corresponding CSS selectors.
+         */
+        protected function squad_get_margin_padding_stylesheet_option_fields(): array
         {
         }
         /**
@@ -22091,16 +22638,31 @@ namespace DiviSquad\Builder\Version5\Abstracts {
         {
         }
         /**
-         * Render dummy error + success message blocks for the VB preview.
+         * Render the plugin's validation (error) preview markup for the VB.
          *
-         * Concrete modules can override to emit their plugin's exact message markup so the
-         * Error/Success style groups apply. The default emits generic blocks.
+         * Emits the plugin's actual validation/error message markup so the validation style
+         * group applies to real markup in the builder preview. Concrete modules override this
+         * with their plugin's markup; the default returns nothing.
          *
-         * @since 3.4.0
+         * @since 4.6.2
          *
-         * @return string
+         * @return string Validation preview markup, or empty string.
          */
-        protected static function render_dummy_messages(): string
+        protected static function render_preview_validation_messages(): string
+        {
+        }
+        /**
+         * Render the plugin's confirmation (success) preview markup for the VB.
+         *
+         * Emits the plugin's actual confirmation/success message markup so the success style
+         * group applies to real markup in the builder preview. Concrete modules override this
+         * with their plugin's markup; the default returns nothing.
+         *
+         * @since 4.6.2
+         *
+         * @return string Confirmation preview markup, or empty string.
+         */
+        protected static function render_preview_confirmation_message(): string
         {
         }
     }
@@ -27876,6 +28438,26 @@ namespace DiviSquad\Builder\Version5\Modules\Forms {
         protected static function get_form_html(string $form_id, array $inner): string
         {
         }
+        /**
+         * Render CF7 validation (error) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Validation preview markup.
+         */
+        protected static function render_preview_validation_messages(): string
+        {
+        }
+        /**
+         * Render CF7 confirmation (success) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Confirmation preview markup.
+         */
+        protected static function render_preview_confirmation_message(): string
+        {
+        }
     }
     /**
      * Fluent Forms Styler module class.
@@ -27935,6 +28517,26 @@ namespace DiviSquad\Builder\Version5\Modules\Forms {
          * @return string
          */
         protected static function get_form_html(string $form_id, array $inner): string
+        {
+        }
+        /**
+         * Render Fluent Forms validation (error) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Validation preview markup.
+         */
+        protected static function render_preview_validation_messages(): string
+        {
+        }
+        /**
+         * Render Fluent Forms confirmation (success) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Confirmation preview markup.
+         */
+        protected static function render_preview_confirmation_message(): string
         {
         }
     }
@@ -27998,6 +28600,26 @@ namespace DiviSquad\Builder\Version5\Modules\Forms {
         protected static function get_form_html(string $form_id, array $inner): string
         {
         }
+        /**
+         * Render Formidable Forms validation (error) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Validation preview markup.
+         */
+        protected static function render_preview_validation_messages(): string
+        {
+        }
+        /**
+         * Render Formidable Forms confirmation (success) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Confirmation preview markup.
+         */
+        protected static function render_preview_confirmation_message(): string
+        {
+        }
     }
     /**
      * Forminator Styler module class.
@@ -28057,6 +28679,26 @@ namespace DiviSquad\Builder\Version5\Modules\Forms {
          * @return string
          */
         protected static function get_form_html(string $form_id, array $inner): string
+        {
+        }
+        /**
+         * Render Forminator validation (error) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Validation preview markup.
+         */
+        protected static function render_preview_validation_messages(): string
+        {
+        }
+        /**
+         * Render Forminator confirmation (success) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Confirmation preview markup.
+         */
+        protected static function render_preview_confirmation_message(): string
         {
         }
     }
@@ -28123,6 +28765,26 @@ namespace DiviSquad\Builder\Version5\Modules\Forms {
         protected static function get_form_html(string $form_id, array $inner): string
         {
         }
+        /**
+         * Render Gravity Forms validation (error) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Validation preview markup.
+         */
+        protected static function render_preview_validation_messages(): string
+        {
+        }
+        /**
+         * Render Gravity Forms confirmation (success) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Confirmation preview markup.
+         */
+        protected static function render_preview_confirmation_message(): string
+        {
+        }
     }
     /**
      * MetForm Styler module class.
@@ -28182,6 +28844,26 @@ namespace DiviSquad\Builder\Version5\Modules\Forms {
          * @return string
          */
         protected static function get_form_html(string $form_id, array $inner): string
+        {
+        }
+        /**
+         * Render MetForm validation (error) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Validation preview markup.
+         */
+        protected static function render_preview_validation_messages(): string
+        {
+        }
+        /**
+         * Render MetForm confirmation (success) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Confirmation preview markup.
+         */
+        protected static function render_preview_confirmation_message(): string
         {
         }
     }
@@ -28245,6 +28927,26 @@ namespace DiviSquad\Builder\Version5\Modules\Forms {
         protected static function get_form_html(string $form_id, array $inner): string
         {
         }
+        /**
+         * Render Ninja Forms validation (error) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Validation preview markup.
+         */
+        protected static function render_preview_validation_messages(): string
+        {
+        }
+        /**
+         * Render Ninja Forms confirmation (success) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Confirmation preview markup.
+         */
+        protected static function render_preview_confirmation_message(): string
+        {
+        }
     }
     /**
      * SureForms Styler module class.
@@ -28306,6 +29008,26 @@ namespace DiviSquad\Builder\Version5\Modules\Forms {
         protected static function get_form_html(string $form_id, array $inner): string
         {
         }
+        /**
+         * Render SureForms validation (error) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Validation preview markup.
+         */
+        protected static function render_preview_validation_messages(): string
+        {
+        }
+        /**
+         * Render SureForms confirmation (success) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Confirmation preview markup.
+         */
+        protected static function render_preview_confirmation_message(): string
+        {
+        }
     }
     /**
      * WP Forms Styler module class.
@@ -28365,6 +29087,26 @@ namespace DiviSquad\Builder\Version5\Modules\Forms {
          * @return string
          */
         protected static function get_form_html(string $form_id, array $inner): string
+        {
+        }
+        /**
+         * Render WP Forms validation (error) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Validation preview markup.
+         */
+        protected static function render_preview_validation_messages(): string
+        {
+        }
+        /**
+         * Render WP Forms confirmation (success) preview markup for the Visual Builder.
+         *
+         * @since 4.6.2
+         *
+         * @return string Confirmation preview markup.
+         */
+        protected static function render_preview_confirmation_message(): string
         {
         }
     }
@@ -37214,6 +37956,50 @@ namespace DiviSquad\Integrations {
          * populate its form-picker dropdown. The shape per type is `{ <formKey>: { label } }`,
          * matching the option shape Divi's own `divi/select-*` field components consume. Only
          * form plugins that are active contribute entries.
+         *
+         * Registered with a usage of `app_load` so the value is in the store before the builder
+         * renders its fields, which is what Divi does for its own `contactForm7` item.
+         *
+         * @since 4.6.2
+         *
+         * @return void
+         */
+        public function register_form_styler_settings_item(): void
+        {
+        }
+        /**
+         * Which form plugins are active.
+         *
+         * Single source of truth for the detection checks — the settings-data value and the
+         * legacy filter both read it, so a tenth form plugin is added in one place.
+         *
+         * @since 4.6.2
+         *
+         * @return array<string, bool> Form type key => whether its plugin is active.
+         */
+        protected function get_active_form_plugin_types(): array
+        {
+        }
+        /**
+         * The available forms per plugin, in the shape Divi's select fields consume.
+         *
+         * Each form-styler module reads `divi/settings` -> `getSetting('squadForms')[<type>]` to
+         * populate its form-picker dropdown. The shape per type is `{ <formKey>: { label } }`,
+         * matching the option shape Divi's own `divi/select-*` field components consume. Only
+         * form plugins that are active contribute entries.
+         *
+         * @since 4.6.2
+         *
+         * @return array<string, array<string, array<string, string>>>
+         */
+        public function get_form_styler_settings_value(): array
+        {
+        }
+        /**
+         * Inject the available forms into the Divi 5 VB settings data.
+         *
+         * Retained for anything filtering this payload; the store value itself now comes from
+         * the registered settings item above.
          *
          * @since 3.4.0
          *
