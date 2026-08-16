@@ -4932,7 +4932,7 @@ namespace DiviSquad\Core {
          * Stored option data.
          *
          * @since 2.0.0
-         * @var array
+         * @var array<string, mixed>
          */
         private array $data = array();
         /**
@@ -4960,7 +4960,7 @@ namespace DiviSquad\Core {
          * Batch operations queue.
          *
          * @since 2.0.0
-         * @var array
+         * @var array<int, array{operation: string, field: string, value: mixed}>
          */
         private array $batch_queue = array();
         /**
@@ -4999,7 +4999,7 @@ namespace DiviSquad\Core {
          *
          * @since 2.0.0
          *
-         * @return array
+         * @return array<string, mixed>
          */
         public function all(): array
         {
@@ -5085,7 +5085,7 @@ namespace DiviSquad\Core {
          *
          * @since 2.0.0
          *
-         * @param array $fields Key-value pairs of fields to set.
+         * @param array<string, mixed> $fields Key-value pairs of fields to set.
          *
          * @return bool
          */
@@ -6675,6 +6675,21 @@ namespace DiviSquad\Builder {
         {
         }
         /**
+         * Read a Ninja Forms global setting as a string.
+         *
+         * Ninja_Forms::get_setting() returns the stored setting value (for example the
+         * 'opinionated_styles' value such as 'light', 'dark' or 'structure'), even though
+         * the bundled stubs type it as a boolean. This wrapper normalizes the value to a
+         * string so callers can compare it against the real string options.
+         *
+         * @param string $key Setting key.
+         *
+         * @return string The setting value as a string.
+         */
+        private function get_ninja_setting(string $key): string
+        {
+        }
+        /**
          * Register Fluent Forms styles
          */
         private function register_fluent_styles(): void
@@ -8221,6 +8236,52 @@ namespace DiviSquad\Builder\Shared\Supports\Module_Utilities\Masking {
          * @return string The SVG content for shape-20.
          */
         public function get_shape_20(string $enable_secondary_shape = 'off'): string
+        {
+        }
+    }
+}
+namespace DiviSquad\Builder\Utils {
+    /**
+     * Auth form helper.
+     *
+     * @since 4.2.0
+     */
+    class Auth_Form_Helper
+    {
+        /**
+         * Whether the auth form should render for the current request.
+         *
+         * The form is hidden from visitors who are already logged in on the
+         * front-end, but stays visible inside the Divi Visual Builder so admins
+         * can still style it while editing.
+         *
+         * @since 4.2.0
+         *
+         * @return bool True when the form should render, false when the logged-in
+         *              notice should be shown instead.
+         */
+        public static function should_render_form(): bool
+        {
+        }
+        /**
+         * "You are already logged in" notice with a logout link.
+         *
+         * Returns an empty string when the form should render normally, so callers
+         * can use it as an early-return guard:
+         *
+         *     $notice = Auth_Form_Helper::logged_in_notice();
+         *     if ( '' !== $notice ) {
+         *         return $notice;
+         *     }
+         *
+         * The markup reuses the `.disq-login-form` wrapper so it inherits the same
+         * panel styling as the forms themselves.
+         *
+         * @since 4.2.0
+         *
+         * @return string Notice HTML, or empty string when the form should render.
+         */
+        public static function logged_in_notice(): string
         {
         }
     }
@@ -12285,6 +12346,88 @@ namespace DiviSquad\Builder\Version4\Modules\Auth {
 }
 namespace DiviSquad\Builder\Version4\Modules\Content {
     /**
+     * Advanced Tabs Module Class.
+     *
+     * @since 4.2.0
+     */
+    class Advanced_Tabs extends \DiviSquad\Builder\Version4\Abstracts\Module
+    {
+        public function init(): void
+        {
+        }
+        /**
+         * Declare general fields for the module.
+         *
+         * @since 4.2.0
+         *
+         * @return array<string, array<string, mixed>>
+         */
+        public function get_fields(): array
+        {
+        }
+        /**
+         * Render module output.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $attrs       List of attributes.
+         * @param string               $content     Content being processed (child panels).
+         * @param string               $render_slug Slug of module that is used for rendering output.
+         *
+         * @return string
+         */
+        public function render($attrs, $content, $render_slug): string
+        {
+        }
+        /**
+         * Emit active-tab and inactive-tab colour CSS.
+         *
+         * @since 4.2.0
+         *
+         * @param string $render_slug Slug of module that is used for rendering output.
+         *
+         * @return void
+         */
+        public function apply_tabs_css(string $render_slug): void
+        {
+        }
+    }
+    /**
+     * Advanced Tabs Item (child) Module Class.
+     *
+     * @since 4.2.0
+     */
+    class Advanced_Tabs_Item extends \DiviSquad\Builder\Version4\Abstracts\Module\Child_Module
+    {
+        public function init(): void
+        {
+        }
+        /**
+         * Declare general fields for the module.
+         *
+         * @since 4.2.0
+         *
+         * @return array<string, array<string, mixed>>
+         */
+        public function get_fields(): array
+        {
+        }
+        /**
+         * Render module output.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $attrs       List of unprocessed attributes.
+         * @param string               $content     Content being processed.
+         * @param string               $render_slug Slug of module that is used for rendering output.
+         *
+         * @return string
+         */
+        public function render($attrs, $content, $render_slug): string
+        {
+        }
+    }
+    /**
      * Author Box Module Class.
      *
      * @since 4.0.0
@@ -12810,6 +12953,181 @@ namespace DiviSquad\Builder\Version4\Modules\Content {
         }
     }
     /**
+     * Icon Box Module Class.
+     *
+     * @since 4.2.0
+     */
+    class Icon_Box extends \DiviSquad\Builder\Version4\Abstracts\Module
+    {
+        public function init(): void
+        {
+        }
+        /**
+         * Declare general fields for the module.
+         *
+         * @since 4.2.0
+         *
+         * @return array<string, array<string, mixed>>
+         */
+        public function get_fields(): array
+        {
+        }
+        /**
+         * Render module output.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $attrs       List of unprocessed attributes.
+         * @param string               $content     Content being processed.
+         * @param string               $render_slug Slug of module that is used for rendering output.
+         *
+         * @return string
+         */
+        public function render($attrs, $content, $render_slug): string
+        {
+        }
+        /**
+         * Build the icon / image / lottie element markup.
+         *
+         * @since 4.2.0
+         *
+         * @param string $render_slug Slug of module that is used for rendering output.
+         *
+         * @return string
+         */
+        protected function build_element(string $render_slug): string
+        {
+        }
+        /**
+         * Build the badge markup.
+         *
+         * @since 4.2.0
+         *
+         * @return string
+         */
+        protected function build_badge(): string
+        {
+        }
+        /**
+         * Emit icon color/size/background and placement CSS.
+         *
+         * @since 4.2.0
+         *
+         * @param string $render_slug Slug of module that is used for rendering output.
+         *
+         * @return void
+         */
+        public function apply_box_css(string $render_slug): void
+        {
+        }
+    }
+    /**
+     * Pricing Table Module Class.
+     *
+     * @since 4.2.0
+     */
+    class Pricing_Table extends \DiviSquad\Builder\Version4\Abstracts\Module
+    {
+        public function init(): void
+        {
+        }
+        /**
+         * Declare general fields for the module.
+         *
+         * @since 4.2.0
+         *
+         * @return array<string, array<string, mixed>>
+         */
+        public function get_fields(): array
+        {
+        }
+        /**
+         * Render module output.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $attrs       List of attributes.
+         * @param string               $content     Content being processed (child cards).
+         * @param string               $render_slug Slug of module that is used for rendering output.
+         *
+         * @return string
+         */
+        public function render($attrs, $content, $render_slug): string
+        {
+        }
+        /**
+         * Emit responsive grid CSS for the columns and gaps.
+         *
+         * @since 4.2.0
+         *
+         * @param string $render_slug Slug of module that is used for rendering output.
+         *
+         * @return void
+         */
+        public function apply_grid_css(string $render_slug): void
+        {
+        }
+    }
+    /**
+     * Pricing Table Item (child) Module Class.
+     *
+     * @since 4.2.0
+     */
+    class Pricing_Table_Item extends \DiviSquad\Builder\Version4\Abstracts\Module\Child_Module
+    {
+        public function init(): void
+        {
+        }
+        /**
+         * Declare general fields for the module.
+         *
+         * @since 4.2.0
+         *
+         * @return array<string, array<string, mixed>>
+         */
+        public function get_fields(): array
+        {
+        }
+        /**
+         * Render module output.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $attrs       List of unprocessed attributes.
+         * @param string               $content     Content being processed.
+         * @param string               $render_slug Slug of module that is used for rendering output.
+         *
+         * @return string
+         */
+        public function render($attrs, $content, $render_slug): string
+        {
+        }
+        /**
+         * Build the feature list. Lines starting with "-" render as not-included.
+         *
+         * @since 4.2.0
+         *
+         * @param string $features Raw newline-separated feature list.
+         *
+         * @return string
+         */
+        private function render_features(string $features): string
+        {
+        }
+        /**
+         * Emit accent + featured CSS for the card.
+         *
+         * @since 4.2.0
+         *
+         * @param string $render_slug Slug of module that is used for rendering output.
+         *
+         * @return void
+         */
+        public function apply_card_css(string $render_slug): void
+        {
+        }
+    }
+    /**
      * Skill Bar Module Class.
      *
      * @since 4.0.0
@@ -12980,6 +13298,224 @@ namespace DiviSquad\Builder\Version4\Modules\Content {
          * @return array<string, string>
          */
         private static function network_options(): array
+        {
+        }
+    }
+    /**
+     * Team Member Module Class.
+     *
+     * @since 4.2.0
+     */
+    class Team_Member extends \DiviSquad\Builder\Version4\Abstracts\Module
+    {
+        public function init(): void
+        {
+        }
+        /**
+         * Declare general fields for the module.
+         *
+         * @since 4.2.0
+         *
+         * @return array<string, array<string, mixed>>
+         */
+        public function get_fields(): array
+        {
+        }
+        /**
+         * Render module output.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $attrs       List of attributes.
+         * @param string               $content     Content being processed (child cards).
+         * @param string               $render_slug Slug of module that is used for rendering output.
+         *
+         * @return string
+         */
+        public function render($attrs, $content, $render_slug): string
+        {
+        }
+        /**
+         * Emit responsive grid CSS for the columns and gaps.
+         *
+         * @since 4.2.0
+         *
+         * @param string $render_slug Slug of module that is used for rendering output.
+         *
+         * @return void
+         */
+        public function apply_grid_css(string $render_slug): void
+        {
+        }
+    }
+    /**
+     * Team Member Item (child) Module Class.
+     *
+     * @since 4.2.0
+     */
+    class Team_Member_Item extends \DiviSquad\Builder\Version4\Abstracts\Module\Child_Module
+    {
+        /**
+         * Supported social networks: field key => human label.
+         *
+         * @since 4.2.0
+         *
+         * @var array<string, string>
+         */
+        private const SOCIAL_NETWORKS = array('facebook' => 'Facebook', 'x_twitter' => 'X (Twitter)', 'linkedin' => 'LinkedIn', 'instagram' => 'Instagram', 'youtube' => 'YouTube', 'website' => 'Website');
+        public function init(): void
+        {
+        }
+        /**
+         * Declare general fields for the module.
+         *
+         * @since 4.2.0
+         *
+         * @return array<string, array<string, mixed>>
+         */
+        public function get_fields(): array
+        {
+        }
+        /**
+         * Render module output.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $attrs       List of unprocessed attributes.
+         * @param string               $content     Content being processed.
+         * @param string               $render_slug Slug of module that is used for rendering output.
+         *
+         * @return string
+         */
+        public function render($attrs, $content, $render_slug): string
+        {
+        }
+        /**
+         * Build the social-links list from the configured URLs.
+         *
+         * @since 4.2.0
+         *
+         * @return string
+         */
+        private function render_social_links(): string
+        {
+        }
+        /**
+         * Emit alignment CSS for the card content.
+         *
+         * @since 4.2.0
+         *
+         * @param string $render_slug Slug of module that is used for rendering output.
+         *
+         * @return void
+         */
+        public function apply_alignment_css(string $render_slug): void
+        {
+        }
+    }
+    /**
+     * Testimonial Module Class.
+     *
+     * @since 4.2.0
+     */
+    class Testimonial extends \DiviSquad\Builder\Version4\Abstracts\Module
+    {
+        public function init(): void
+        {
+        }
+        /**
+         * Declare general fields for the module.
+         *
+         * @since 4.2.0
+         *
+         * @return array<string, array<string, mixed>>
+         */
+        public function get_fields(): array
+        {
+        }
+        /**
+         * Render module output.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $attrs       List of attributes.
+         * @param string               $content     Content being processed (child cards).
+         * @param string               $render_slug Slug of module that is used for rendering output.
+         *
+         * @return string
+         */
+        public function render($attrs, $content, $render_slug): string
+        {
+        }
+        /**
+         * Emit responsive grid CSS for the columns and gaps.
+         *
+         * @since 4.2.0
+         *
+         * @param string $render_slug Slug of module that is used for rendering output.
+         *
+         * @return void
+         */
+        public function apply_grid_css(string $render_slug): void
+        {
+        }
+    }
+    /**
+     * Testimonial Item (child) Module Class.
+     *
+     * @since 4.2.0
+     */
+    class Testimonial_Item extends \DiviSquad\Builder\Version4\Abstracts\Module\Child_Module
+    {
+        public function init(): void
+        {
+        }
+        /**
+         * Declare general fields for the module.
+         *
+         * @since 4.2.0
+         *
+         * @return array<string, array<string, mixed>>
+         */
+        public function get_fields(): array
+        {
+        }
+        /**
+         * Render module output.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $attrs       List of unprocessed attributes.
+         * @param string               $content     Content being processed.
+         * @param string               $render_slug Slug of module that is used for rendering output.
+         *
+         * @return string
+         */
+        public function render($attrs, $content, $render_slug): string
+        {
+        }
+        /**
+         * Build the star-rating markup with schema.org Rating.
+         *
+         * @since 4.2.0
+         *
+         * @param int $rating Star count (0–5).
+         *
+         * @return string
+         */
+        private function render_rating(int $rating): string
+        {
+        }
+        /**
+         * Emit alignment + star-color CSS for the card.
+         *
+         * @since 4.2.0
+         *
+         * @param string $render_slug Slug of module that is used for rendering output.
+         *
+         * @return void
+         */
+        public function apply_card_css(string $render_slug): void
         {
         }
     }
@@ -19238,6 +19774,130 @@ namespace DiviSquad\Builder\Version5\Modules\Auth {
 }
 namespace DiviSquad\Builder\Version5\Modules\Content {
     /**
+     * Advanced Tabs parent module class.
+     *
+     * @since 4.2.0
+     */
+    class Advanced_Tabs extends \DiviSquad\Builder\Version5\Abstracts\Module
+    {
+        protected static function get_metadata_folder_path(): string
+        {
+        }
+        /**
+         * Add module-specific classnames.
+         *
+         * @param array<string, mixed> $args Classnames arguments.
+         *
+         * @return void
+         */
+        public static function module_classnames(array $args): void
+        {
+        }
+        /**
+         * Set module script data.
+         *
+         * @param array<string, mixed> $args Script data arguments.
+         *
+         * @return void
+         */
+        public static function module_script_data(array $args): void
+        {
+        }
+        /**
+         * Add module styles.
+         *
+         * @param array<string, mixed> $args Style arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_styles(array $args): void
+        {
+        }
+        /**
+         * Render the Advanced Tabs module on the frontend.
+         *
+         * @param array<string, mixed> $attrs                 Block attributes.
+         * @param string               $child_modules_content Inner (child) block content.
+         * @param WP_Block             $block                 Parsed block instance.
+         * @param ModuleElements       $elements              ModuleElements instance.
+         *
+         * @return string Rendered HTML.
+         */
+        public static function render_callback(array $attrs, string $child_modules_content, \WP_Block $block, $elements): string
+        {
+        }
+        protected static function get_instance_uid(\WP_Block $block): string
+        {
+        }
+        /**
+         * Build the scoped active/inactive tab colour CSS.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $inner The module's content inner values.
+         * @param string               $uid   Unique instance identifier used as the CSS scope.
+         *
+         * @return string The generated CSS, or an empty string when nothing is set.
+         */
+        protected static function get_tabs_css(array $inner, string $uid): string
+        {
+        }
+    }
+    /**
+     * Advanced Tabs Item (child) module class.
+     *
+     * @since 4.2.0
+     */
+    class Advanced_Tabs_Item extends \DiviSquad\Builder\Version5\Abstracts\Module
+    {
+        protected static function get_metadata_folder_path(): string
+        {
+        }
+        /**
+         * Add CSS classnames to the module wrapper.
+         *
+         * @param array<string, mixed> $args Classnames arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_classnames(array $args): void
+        {
+        }
+        /**
+         * Register the module's script data.
+         *
+         * @param array<string, mixed> $args Script data arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_script_data(array $args): void
+        {
+        }
+        /**
+         * Register the module's styles.
+         *
+         * @param array<string, mixed> $args Style arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_styles(array $args): void
+        {
+        }
+        /**
+         * Render the Tab panel on the frontend.
+         *
+         * @param array<string, mixed> $attrs    Block attributes.
+         * @param string               $content  Inner content (unused).
+         * @param WP_Block             $block    Parsed block instance.
+         * @param ModuleElements       $elements ModuleElements instance.
+         *
+         * @return string Rendered HTML.
+         */
+        public static function render_callback(array $attrs, string $content, \WP_Block $block, $elements): string
+        {
+        }
+    }
+    /**
      * Author Box module class.
      *
      * @since 4.0.0
@@ -19734,6 +20394,238 @@ namespace DiviSquad\Builder\Version5\Modules\Content {
         }
     }
     /**
+     * Icon Box module class.
+     *
+     * @since 4.2.0
+     */
+    class Icon_Box extends \DiviSquad\Builder\Version5\Abstracts\Module
+    {
+        protected static function get_metadata_folder_path(): string
+        {
+        }
+        /**
+         * Add module-specific classnames.
+         *
+         * @param array<string, mixed> $args Classnames arguments.
+         *
+         * @return void
+         */
+        public static function module_classnames(array $args): void
+        {
+        }
+        /**
+         * Set module script data.
+         *
+         * @param array<string, mixed> $args Script data arguments.
+         *
+         * @return void
+         */
+        public static function module_script_data(array $args): void
+        {
+        }
+        /**
+         * Add module styles.
+         *
+         * @param array<string, mixed> $args Style arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_styles(array $args): void
+        {
+        }
+        /**
+         * Render the Icon Box module on the frontend.
+         *
+         * @param array<string, mixed> $attrs    Block attributes.
+         * @param string               $content  Inner content (unused).
+         * @param WP_Block             $block    Parsed block instance.
+         * @param ModuleElements       $elements ModuleElements instance.
+         *
+         * @return string Rendered HTML.
+         */
+        public static function render_callback(array $attrs, string $content, \WP_Block $block, $elements): string
+        {
+        }
+        /**
+         * Build the icon / image / lottie element markup.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $inner The module's inner content values.
+         *
+         * @return string
+         */
+        protected static function build_element(array $inner): string
+        {
+        }
+        protected static function get_instance_uid(\WP_Block $block): string
+        {
+        }
+        /**
+         * Build the scoped icon color/size/background CSS.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $inner Icon box inner values.
+         * @param string               $uid   Unique scoping class for this instance.
+         *
+         * @return string Scoped CSS (may be empty).
+         */
+        protected static function get_box_css(array $inner, string $uid): string
+        {
+        }
+    }
+    /**
+     * Pricing Table parent module class.
+     *
+     * @since 4.2.0
+     */
+    class Pricing_Table extends \DiviSquad\Builder\Version5\Abstracts\Module
+    {
+        protected static function get_metadata_folder_path(): string
+        {
+        }
+        /**
+         * Add module-specific classnames.
+         *
+         * @param array<string, mixed> $args Classnames arguments.
+         *
+         * @return void
+         */
+        public static function module_classnames(array $args): void
+        {
+        }
+        /**
+         * Set module script data.
+         *
+         * @param array<string, mixed> $args Script data arguments.
+         *
+         * @return void
+         */
+        public static function module_script_data(array $args): void
+        {
+        }
+        /**
+         * Add module styles.
+         *
+         * @param array<string, mixed> $args Style arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_styles(array $args): void
+        {
+        }
+        /**
+         * Render the Pricing Table module on the frontend.
+         *
+         * @param array<string, mixed> $attrs                 Block attributes.
+         * @param string               $child_modules_content Inner (child) block content.
+         * @param WP_Block             $block                 Parsed block instance.
+         * @param ModuleElements       $elements              ModuleElements instance.
+         *
+         * @return string Rendered HTML.
+         */
+        public static function render_callback(array $attrs, string $child_modules_content, \WP_Block $block, $elements): string
+        {
+        }
+        protected static function get_instance_uid(\WP_Block $block): string
+        {
+        }
+        /**
+         * Build the responsive grid CSS for the plans wrapper.
+         *
+         * @param array<string, mixed> $inner The module's content inner values.
+         * @param string               $uid   Unique instance identifier used as the CSS scope.
+         *
+         * @return string The generated CSS, or an empty string when nothing is set.
+         */
+        protected static function get_grid_css(array $inner, string $uid): string
+        {
+        }
+    }
+    /**
+     * Pricing Table Item (child) module class.
+     *
+     * @since 4.2.0
+     */
+    class Pricing_Table_Item extends \DiviSquad\Builder\Version5\Abstracts\Module
+    {
+        protected static function get_metadata_folder_path(): string
+        {
+        }
+        /**
+         * Add CSS classnames to the module wrapper.
+         *
+         * @param array<string, mixed> $args Classnames arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_classnames(array $args): void
+        {
+        }
+        /**
+         * Register the module's script data.
+         *
+         * @param array<string, mixed> $args Script data arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_script_data(array $args): void
+        {
+        }
+        /**
+         * Register the module's styles.
+         *
+         * @param array<string, mixed> $args Style arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_styles(array $args): void
+        {
+        }
+        /**
+         * Render the Pricing Plan card on the frontend.
+         *
+         * @param array<string, mixed> $attrs    Block attributes.
+         * @param string               $content  Inner content (unused).
+         * @param WP_Block             $block    Parsed block instance.
+         * @param ModuleElements       $elements ModuleElements instance.
+         *
+         * @return string Rendered HTML.
+         */
+        public static function render_callback(array $attrs, string $content, \WP_Block $block, $elements): string
+        {
+        }
+        protected static function get_instance_uid(\WP_Block $block): string
+        {
+        }
+        /**
+         * Build the feature list. Lines starting with "-" render as not-included.
+         *
+         * @since 4.2.0
+         *
+         * @param string $features Raw newline-separated feature list.
+         *
+         * @return string
+         */
+        protected static function render_features(string $features): string
+        {
+        }
+        /**
+         * Build the scoped accent CSS for a single plan card.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $item Plan item values.
+         * @param string               $uid  Unique scoping class for this instance.
+         *
+         * @return string Scoped CSS (may be empty).
+         */
+        protected static function get_card_css(array $item, string $uid): string
+        {
+        }
+    }
+    /**
      * Skill Bar parent module class.
      *
      * @since 4.0.0
@@ -20021,6 +20913,298 @@ namespace DiviSquad\Builder\Version5\Modules\Content {
          * @return string Inline CSS rule (may be empty).
          */
         protected static function get_color_css(array $item, string $brand_color, string $uid): string
+        {
+        }
+    }
+    /**
+     * Team Member parent module class.
+     *
+     * @since 4.2.0
+     */
+    class Team_Member extends \DiviSquad\Builder\Version5\Abstracts\Module
+    {
+        protected static function get_metadata_folder_path(): string
+        {
+        }
+        /**
+         * Add module-specific classnames.
+         *
+         * @param array<string, mixed> $args Classnames arguments.
+         *
+         * @return void
+         */
+        public static function module_classnames(array $args): void
+        {
+        }
+        /**
+         * Set module script data.
+         *
+         * @param array<string, mixed> $args Script data arguments.
+         *
+         * @return void
+         */
+        public static function module_script_data(array $args): void
+        {
+        }
+        /**
+         * Add module styles.
+         *
+         * @param array<string, mixed> $args Style arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_styles(array $args): void
+        {
+        }
+        /**
+         * Render the Team Member module on the frontend.
+         *
+         * @param array<string, mixed> $attrs                 Block attributes.
+         * @param string               $child_modules_content Inner (child) block content.
+         * @param WP_Block             $block                 Parsed block instance.
+         * @param ModuleElements       $elements              ModuleElements instance.
+         *
+         * @return string Rendered HTML.
+         */
+        public static function render_callback(array $attrs, string $child_modules_content, \WP_Block $block, $elements): string
+        {
+        }
+        protected static function get_instance_uid(\WP_Block $block): string
+        {
+        }
+        /**
+         * Build the responsive grid CSS for the members wrapper.
+         *
+         * @param array<string, mixed> $inner The module's content inner values.
+         * @param string               $uid   Unique instance identifier used as the CSS scope.
+         *
+         * @return string The generated CSS, or an empty string when nothing is set.
+         */
+        protected static function get_grid_css(array $inner, string $uid): string
+        {
+        }
+    }
+    /**
+     * Team Member Item (child) module class.
+     *
+     * @since 4.2.0
+     */
+    class Team_Member_Item extends \DiviSquad\Builder\Version5\Abstracts\Module
+    {
+        /**
+         * Supported social networks: attribute suffix => human label.
+         *
+         * @since 4.2.0
+         *
+         * @var array<string, string>
+         */
+        private const SOCIAL_NETWORKS = array('Facebook' => 'Facebook', 'XTwitter' => 'X (Twitter)', 'Linkedin' => 'LinkedIn', 'Instagram' => 'Instagram', 'Youtube' => 'YouTube', 'Website' => 'Website');
+        protected static function get_metadata_folder_path(): string
+        {
+        }
+        /**
+         * Add CSS classnames to the module wrapper.
+         *
+         * @param array<string, mixed> $args Classnames arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_classnames(array $args): void
+        {
+        }
+        /**
+         * Register the module's script data.
+         *
+         * @param array<string, mixed> $args Script data arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_script_data(array $args): void
+        {
+        }
+        /**
+         * Register the module's styles.
+         *
+         * @param array<string, mixed> $args Style arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_styles(array $args): void
+        {
+        }
+        /**
+         * Render the Team Member card on the frontend.
+         *
+         * @param array<string, mixed> $attrs    Block attributes.
+         * @param string               $content  Inner content (unused).
+         * @param WP_Block             $block    Parsed block instance.
+         * @param ModuleElements       $elements ModuleElements instance.
+         *
+         * @return string Rendered HTML.
+         */
+        public static function render_callback(array $attrs, string $content, \WP_Block $block, $elements): string
+        {
+        }
+        /**
+         * Build the social-links list from the configured URLs.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $item The member's inner content values.
+         *
+         * @return string
+         */
+        protected static function render_social_links(array $item): string
+        {
+        }
+    }
+    /**
+     * Testimonial parent module class.
+     *
+     * @since 4.2.0
+     */
+    class Testimonial extends \DiviSquad\Builder\Version5\Abstracts\Module
+    {
+        protected static function get_metadata_folder_path(): string
+        {
+        }
+        /**
+         * Add module-specific classnames.
+         *
+         * @param array<string, mixed> $args Classnames arguments.
+         *
+         * @return void
+         */
+        public static function module_classnames(array $args): void
+        {
+        }
+        /**
+         * Set module script data.
+         *
+         * @param array<string, mixed> $args Script data arguments.
+         *
+         * @return void
+         */
+        public static function module_script_data(array $args): void
+        {
+        }
+        /**
+         * Add module styles.
+         *
+         * @param array<string, mixed> $args Style arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_styles(array $args): void
+        {
+        }
+        /**
+         * Render the Testimonial module on the frontend.
+         *
+         * @param array<string, mixed> $attrs                 Block attributes.
+         * @param string               $child_modules_content Inner (child) block content.
+         * @param WP_Block             $block                 Parsed block instance.
+         * @param ModuleElements       $elements              ModuleElements instance.
+         *
+         * @return string Rendered HTML.
+         */
+        public static function render_callback(array $attrs, string $child_modules_content, \WP_Block $block, $elements): string
+        {
+        }
+        protected static function get_instance_uid(\WP_Block $block): string
+        {
+        }
+        /**
+         * Build the responsive grid CSS for the testimonials wrapper.
+         *
+         * @param array<string, mixed> $inner The module's content inner values.
+         * @param string               $uid   Unique instance identifier used as the CSS scope.
+         *
+         * @return string The generated CSS, or an empty string when nothing is set.
+         */
+        protected static function get_grid_css(array $inner, string $uid): string
+        {
+        }
+    }
+    /**
+     * Testimonial Item (child) module class.
+     *
+     * @since 4.2.0
+     */
+    class Testimonial_Item extends \DiviSquad\Builder\Version5\Abstracts\Module
+    {
+        protected static function get_metadata_folder_path(): string
+        {
+        }
+        /**
+         * Add CSS classnames to the module wrapper.
+         *
+         * @param array<string, mixed> $args Classnames arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_classnames(array $args): void
+        {
+        }
+        /**
+         * Register the module's script data.
+         *
+         * @param array<string, mixed> $args Script data arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_script_data(array $args): void
+        {
+        }
+        /**
+         * Register the module's styles.
+         *
+         * @param array<string, mixed> $args Style arguments provided by Divi.
+         *
+         * @return void
+         */
+        public static function module_styles(array $args): void
+        {
+        }
+        /**
+         * Render the Testimonial card on the frontend.
+         *
+         * @param array<string, mixed> $attrs    Block attributes.
+         * @param string               $content  Inner content (unused).
+         * @param WP_Block             $block    Parsed block instance.
+         * @param ModuleElements       $elements ModuleElements instance.
+         *
+         * @return string Rendered HTML.
+         */
+        public static function render_callback(array $attrs, string $content, \WP_Block $block, $elements): string
+        {
+        }
+        protected static function get_instance_uid(\WP_Block $block): string
+        {
+        }
+        /**
+         * Build the star-rating markup with schema.org Rating.
+         *
+         * @since 4.2.0
+         *
+         * @param int $rating Star count (0–5).
+         *
+         * @return string
+         */
+        protected static function render_rating(int $rating): string
+        {
+        }
+        /**
+         * Build the scoped star-color CSS for a single testimonial.
+         *
+         * @since 4.2.0
+         *
+         * @param array<string, mixed> $item Testimonial item values.
+         * @param string               $uid  Unique scoping class for this instance.
+         *
+         * @return string Scoped CSS (may be empty).
+         */
+        protected static function get_card_css(array $item, string $uid): string
         {
         }
     }
@@ -24214,14 +25398,6 @@ namespace DiviSquad\Core\Admin {
         {
         }
         /**
-         * Get registered admin menus
-         *
-         * @return array<string, mixed>
-         */
-        private function get_admin_menus(): array
-        {
-        }
-        /**
          * Get premium status information
          *
          * @return array<string, mixed>
@@ -24248,58 +25424,7 @@ namespace DiviSquad\Core\Admin {
         {
         }
         /**
-         * Affiliate program data for the Affiliation screen.
-         *
-         * The Freemius SDK only exposes the program TERMS (commission, cookie window,
-         * recurring flag) and the current user's application STATUS — it has no
-         * affiliate performance metrics (clicks/referrals/earnings live solely in the
-         * external Freemius affiliate dashboard), so none are localized here.
-         *
-         * Terms are public program data but the SDK only auto-fetches them on its own
-         * affiliation page; we fetch once via the plugin/bundle API scope (mirroring
-         * Freemius's private fetch_affiliate_terms) and cache the result for a day.
-         *
-         * @return array<string, mixed>
-         */
-        private function get_affiliate_data(): array
-        {
-        }
-        /**
-         * Resolve the current user's affiliate record (with status), cached for an
-         * hour. Mirrors the SDK's private fetch_affiliate_and_custom_terms user-scope
-         * call so the status is available outside the Freemius affiliation page. Only
-         * runs for registered (opted-in) users; anonymous installs have no record.
-         *
-         * @param mixed                   $fs    The Freemius instance.
-         * @param \FS_AffiliateTerms|null $terms The resolved affiliate terms.
-         *
-         * @return \FS_Affiliate|null
-         */
-        private function get_affiliate_record($fs, $terms)
-        {
-        }
-        /**
-         * Resolve the affiliate terms entity (cached), mirroring the SDK's private
-         * fetch_affiliate_terms so the data is available outside the Freemius
-         * affiliation page.
-         *
-         * @param mixed $fs The Freemius instance.
-         *
-         * @return \FS_AffiliateTerms|null
-         */
-        private function get_affiliate_terms($fs)
-        {
-        }
-        /**
-         * Anonymous usage tracking state for the Account screen opt-in toggle.
-         *
-         * @return array<string, bool>
-         */
-        private function get_tracking_data(): array
-        {
-        }
-        /**
-         * Get plugin + detected Divi version for the app bar / hero.
+         * Get the plugin version for the app bar / hero.
          *
          * @return array<string, string>
          */
@@ -24316,14 +25441,6 @@ namespace DiviSquad\Core\Admin {
          * @return array<string, mixed>
          */
         private function get_checkout_config(): array
-        {
-        }
-        /**
-         * Get localized strings
-         *
-         * @return array<string, string>
-         */
-        private function get_localized_strings(): array
         {
         }
     }
@@ -25620,7 +26737,7 @@ namespace DiviSquad\Core\Traits\Assets {
          * @param array<string, mixed> $config       Asset configuration.
          * @param array<string>        $default_deps Default dependencies.
          *
-         * @return array{ path: string, version: string, dependencies: array<string> } Processed asset data
+         * @return array{ url: string, path: string, version: string, dependencies: array<string> } Processed asset data
          * @throws RuntimeException If asset configuration is invalid.
          */
         public function process_asset_config(array $config, array $default_deps = array()): array
@@ -26060,13 +27177,13 @@ namespace DiviSquad\Core\Traits\Assets {
         /**
          * List of registered scripts
          *
-         * @var array<string, array{handle: string, data: array{path: string, version: string, dependencies: array<string>}}>
+         * @var array<string, array{handle: string, data: array{url: string, path: string, version: string, dependencies: array<string>}}>
          */
         private array $registered_scripts = array();
         /**
          * List of registered styles
          *
-         * @var array<string, array{handle: string, data: array{path: string, version: string, dependencies: array<string>}, media: string}>
+         * @var array<string, array{handle: string, data: array{url: string, path: string, version: string, dependencies: array<string>}, media: string}>
          */
         private array $registered_styles = array();
         /**
@@ -26095,6 +27212,21 @@ namespace DiviSquad\Core\Traits\Assets {
          * @param string $handle Asset handle.
          */
         protected function get_prefixed_handle(string $handle): string
+        {
+        }
+        /**
+         * Normalize (possibly filtered) asset data into the guaranteed asset-data shape.
+         *
+         * The `divi_squad_processed_*_asset_data` filters may return arbitrary values;
+         * this restores the precise shape used by the registered asset stores while
+         * preserving any values an extension provided.
+         *
+         * @param mixed                                                                        $filtered The filtered asset data.
+         * @param array{url: string, path: string, version: string, dependencies: array<string>} $fallback The pre-filter asset data.
+         *
+         * @return array{url: string, path: string, version: string, dependencies: array<string>}
+         */
+        private function normalize_asset_data($filtered, array $fallback): array
         {
         }
     }
@@ -28660,9 +29792,9 @@ namespace DiviSquad\Core\Requirements {
          *
          * @since 3.5.0
          *
-         * @param array $status_data Existing system status data.
+         * @param array<string, mixed> $status_data Existing system status data.
          *
-         * @return array Updated system status data.
+         * @return array<string, mixed> Updated system status data.
          */
         public function add_requirements_status(array $status_data): array
         {
@@ -28672,9 +29804,9 @@ namespace DiviSquad\Core\Requirements {
          *
          * @since 3.5.0
          *
-         * @param array $info_data Existing system info data.
+         * @param array<string, mixed> $info_data Existing system info data.
          *
-         * @return array Updated system info data.
+         * @return array<string, mixed> Updated system info data.
          */
         public function add_requirements_info(array $info_data): array
         {
@@ -29338,7 +30470,7 @@ namespace DiviSquad\Core\Supports\Polyfills {
          *
          * @since 1.2.3
          *
-         * @param array $a The array to check.
+         * @param array<int|string, mixed> $a The array to check.
          *
          * @return bool True if the array is a list, false otherwise.
          */
@@ -29353,11 +30485,11 @@ namespace DiviSquad\Core\Supports\Polyfills {
          *
          * @since 1.2.3
          *
-         * @param array  $array_data The input array to sort.
-         * @param string $on         The key to sort by.
-         * @param int    $order      Sort order: SORT_ASC (default) or SORT_DESC.
+         * @param array<int|string, mixed> $array_data The input array to sort.
+         * @param string                   $on         The key to sort by.
+         * @param int                      $order      Sort order: SORT_ASC (default) or SORT_DESC.
          *
-         * @return array The sorted array.
+         * @return array<int|string, mixed> The sorted array.
          */
         public static function sort(array $array_data, string $on, int $order = SORT_ASC): array
         {
@@ -29367,9 +30499,9 @@ namespace DiviSquad\Core\Supports\Polyfills {
          *
          * @since 3.0.0
          *
-         * @param array  $array   The array to extract from.
-         * @param string $key     The key to extract using dot notation (e.g., 'parent.child.key').
-         * @param mixed  $default The default value to return if the key doesn't exist.
+         * @param array<int|string, mixed> $array   The array to extract from.
+         * @param string                   $key     The key to extract using dot notation (e.g., 'parent.child.key').
+         * @param mixed                    $default The default value to return if the key doesn't exist.
          *
          * @return mixed The extracted value or default if not found.
          */
@@ -29381,8 +30513,8 @@ namespace DiviSquad\Core\Supports\Polyfills {
          *
          * @since 3.0.0
          *
-         * @param array  $array The array to check.
-         * @param string $key   The key to check using dot notation.
+         * @param array<int|string, mixed> $array The array to check.
+         * @param string                   $key   The key to check using dot notation.
          *
          * @return bool True if the key exists, false otherwise.
          */
@@ -29394,10 +30526,10 @@ namespace DiviSquad\Core\Supports\Polyfills {
          *
          * @since 3.0.0
          *
-         * @param array $array  The input array to filter.
-         * @param array $filter An array of key-value pairs to filter by.
+         * @param array<int|string, mixed> $array  The input array to filter.
+         * @param array<string, mixed>     $filter An array of key-value pairs to filter by.
          *
-         * @return array The filtered array.
+         * @return array<int|string, mixed> The filtered array.
          */
         public static function filter_by(array $array, array $filter): array
         {
@@ -29805,7 +30937,7 @@ namespace DiviSquad\Core\Traits\Deprecations {
          *
          * @param array<string,mixed> $config Raw configuration.
          *
-         * @return array<string,mixed> Normalized configuration
+         * @return array{priority: int, condition: (callable(): mixed)|null, callbacks: array{before: (callable(): mixed)|null, after: (callable(): mixed)|null}, action?: array{name: string, priority?: int}} Normalized configuration
          */
         private function normalize_config(array $config): array
         {
@@ -30759,6 +31891,36 @@ namespace DiviSquad\Extensions\Visual_Builder {
         protected function get_available_mime_types(): array
         {
         }
+        /**
+         * Verify an uploaded font by its file signature.
+         *
+         * The MIME allow-list accepts `application/octet-stream` (many servers report
+         * fonts that way), which on its own would let any binary through under a font
+         * extension. This reads the file's magic bytes and rejects anything that is
+         * not a real font, so a disguised payload renamed `.ttf`/`.otf`/… is blocked.
+         *
+         * @since 3.4.2
+         *
+         * @param array<string, mixed> $file The `$_FILES` entry being uploaded.
+         *
+         * @return array<string, mixed> The (possibly error-flagged) file entry.
+         */
+        public function validate_font_upload(array $file): array
+        {
+        }
+        /**
+         * Whether the first bytes match a known font signature for the extension.
+         *
+         * @since 3.4.2
+         *
+         * @param string $ext   Lower-case file extension.
+         * @param string $magic First four bytes of the file.
+         *
+         * @return bool
+         */
+        protected function is_valid_font_signature(string $ext, string $magic): bool
+        {
+        }
     }
     /**
      * The JSON class.
@@ -30814,6 +31976,23 @@ namespace DiviSquad\Extensions\Visual_Builder {
          * @return array<string, bool|string> Values for the extension, mime type, and corrected filename.
          */
         public function hook_wp_check_filetype_and_ext(array $wp_checked, string $file, string $filename): array
+        {
+        }
+        /**
+         * Validate the actual contents of an uploaded .json / .lottie file.
+         *
+         * The extension allow-lists `.json` (application/json) and `.lottie`
+         * (application/zip) by extension. Without a content check, any file renamed
+         * to those extensions would be accepted. This verifies the real payload:
+         * `.json` must parse as JSON, `.lottie` must be a real ZIP archive.
+         *
+         * @since 3.4.2
+         *
+         * @param array<string, mixed> $file The `$_FILES` entry being uploaded.
+         *
+         * @return array<string, mixed> The (possibly error-flagged) file entry.
+         */
+        public function validate_on_upload(array $file): array
         {
         }
     }
@@ -30964,6 +32143,47 @@ namespace DiviSquad\Extensions\Visual_Builder {
          * @return array<string, bool|string> Values for the extension, mime type, and corrected filename.
          */
         public function enable_upload(array $wp_check, string $file, string $filename, $mimes = null): array
+        {
+        }
+        /**
+         * Sanitize an uploaded SVG before it is stored.
+         *
+         * Runs on `wp_handle_upload_prefilter`. Strips scripts, event handlers,
+         * `javascript:`/`data:` URLs, `<foreignObject>` and animation-based vectors,
+         * and external entity declarations (XXE) from the SVG markup. Rejects the
+         * upload if the file cannot be parsed as SVG.
+         *
+         * @since 3.4.2
+         *
+         * @param array<string, mixed> $file The `$_FILES` entry being uploaded.
+         *
+         * @return array<string, mixed> The (possibly error-flagged) file entry.
+         */
+        public function sanitize_on_upload(array $file): array
+        {
+        }
+        /**
+         * Sanitize raw SVG markup with a DOM pass.
+         *
+         * @since 3.4.2
+         *
+         * @param string $markup Raw SVG file contents.
+         *
+         * @return string|null Sanitized SVG, or null when it cannot be parsed as SVG.
+         */
+        protected function sanitize_svg_markup(string $markup): ?string
+        {
+        }
+        /**
+         * Recursively strip dangerous elements and attributes from an SVG node.
+         *
+         * @since 3.4.2
+         *
+         * @param DOMElement $node The element to scrub (mutated in place).
+         *
+         * @return void
+         */
+        protected function scrub_svg_node(\DOMElement $node): void
         {
         }
     }
@@ -33334,7 +34554,7 @@ namespace DiviSquad\Settings {
         /**
          * Array of already migrated data.
          *
-         * @var array{field_name_changes: non-empty-array<string, array<string, array{new_name: string, version: string}>>, name_changes: array<string, string>, value_changes: array<string, string>, value_changes: array<string, array<string, string>>}
+         * @var array{field_name_changes: non-empty-array<string, array<string, array{new_name: string, version: string}>>, name_changes: array<string, array<string, string>>, value_changes: array<string, array<string, string>>}
          */
         public static array $migrated = array(
             // @phpstan-ignore-line property.defaultValue
@@ -34149,6 +35369,20 @@ namespace DiviSquad\Utils {
         {
         }
         /**
+         * Resolve the Divi dynamic-assets path prefix.
+         *
+         * Prefers the Divi 5 `DynamicAssetsUtils` API. On Divi 4 — where that class
+         * does not exist — it falls back to `et_get_dynamic_assets_path()`, which is
+         * the supported (non-deprecated) function on that branch.
+         *
+         * @since 3.4.2
+         *
+         * @return string|null Assets path prefix, or null when Divi exposes neither API.
+         */
+        private static function get_dynamic_assets_path(): ?string
+        {
+        }
+        /**
          * Add Font Awesome CSS into the divi asset list when the Dynamic CSS option is turn on in current installation
          *
          * @since  1.0.0
@@ -34177,6 +35411,21 @@ namespace DiviSquad\Utils {
          * @uses   add_filter() Hooks into asset list filters to add necessary icon assets.
          */
         public static function inject_fa_icons(string $icon_data): void
+        {
+        }
+        /**
+         * Whether Divi's dynamic-icons option is enabled.
+         *
+         * Prefers the Divi 5 `DynamicAssetsUtils` API. On Divi 4 — where that class
+         * does not exist — it falls back to `et_use_dynamic_icons()`, which is the
+         * supported (non-deprecated) function on that branch. Both return the raw
+         * option value (e.g. `'on'` / `'off'`).
+         *
+         * @since 3.4.2
+         *
+         * @return string The dynamic-icons option value, or `'off'` when unavailable.
+         */
+        private static function use_dynamic_icons(): string
         {
         }
         /**
@@ -34841,7 +36090,7 @@ namespace DiviSquad\Utils {
 }
 namespace {
     // autoload_real.php @generated by Composer
-    class ComposerAutoloaderInit426b492c9505cb49081a37e85c939744
+    class ComposerAutoloaderInit3e1c03e356c7e8163d20e9389f290dd8
     {
         private static $loader;
         public static function loadClassLoader($class)
@@ -34856,11 +36105,11 @@ namespace {
     }
 }
 namespace Composer\Autoload {
-    class ComposerStaticInit426b492c9505cb49081a37e85c939744
+    class ComposerStaticInit3e1c03e356c7e8163d20e9389f290dd8
     {
         public static $prefixLengthsPsr4 = array('D' => array('DiviSquad\\' => 10));
         public static $prefixDirsPsr4 = array('DiviSquad\\' => array(0 => __DIR__ . '/../..' . '/includes'));
-        public static $classMap = array('Composer\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php', 'DiviSquad\Builder\Assets' => __DIR__ . '/../..' . '/includes/Builder/Assets.php', 'DiviSquad\Builder\Shared\Modules\Content\Hover_Box\Hoverbox_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Content/Hover_Box/Hoverbox_Helper.php', 'DiviSquad\Builder\Shared\Modules\Content\Social_Share\Networks' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Content/Social_Share/Networks.php', 'DiviSquad\Builder\Shared\Modules\Creative\Advanced_Button\Button_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Advanced_Button/Button_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Advanced_Video\Video_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Advanced_Video/Video_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Animated_Heading\Heading_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Animated_Heading/Heading_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Floating_Images\Float_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Floating_Images/Float_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Image_Reveal\Reveal_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Image_Reveal/Reveal_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Inline_Content\Inline_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Inline_Content/Inline_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Number_Counter\Counter_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Number_Counter/Counter_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Table_Of_Contents\Toc_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Table_Of_Contents/Toc_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Text_Highlighter\Highlight_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Text_Highlighter/Highlight_Helper.php', 'DiviSquad\Builder\Shared\Supports\Module_Utilities\Breadcrumbs' => __DIR__ . '/../..' . '/includes/Builder/Shared/Supports/Module_Utilities/Breadcrumbs.php', 'DiviSquad\Builder\Shared\Supports\Module_Utilities\Masking\Decorations' => __DIR__ . '/../..' . '/includes/Builder/Shared/Supports/Module_Utilities/Masking/Decorations.php', 'DiviSquad\Builder\Shared\Supports\Module_Utilities\Masking\Shapes' => __DIR__ . '/../..' . '/includes/Builder/Shared/Supports/Module_Utilities/Masking/Shapes.php', 'DiviSquad\Builder\Utils\Database\Database_Utils' => __DIR__ . '/../..' . '/includes/Builder/Utils/Database/Database_Utils.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Collection' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collection.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Collection_Interface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collection_Interface.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Collections\Advanced' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collections/Advanced.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Collections\WordPress' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collections/WordPress.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Definition' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definition.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Definition_Interface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definition_Interface.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Definitions\Advanced' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definitions/Advanced.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Definitions\WordPress' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definitions/WordPress.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Manager' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Manager.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Manager_Interface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Manager_Interface.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Managers\Fields' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Managers/Fields.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Managers\Upgrades' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Managers/Upgrades.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Traits\Table_Population_Trait' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Traits/Table_Population_Trait.php', 'DiviSquad\Builder\Utils\Elements\Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collection' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collection.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collection_Interface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collection_Interface.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Contact_Form_7' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Contact_Form_7.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Fluent_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Fluent_Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Formidable' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Formidable.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Forminator' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Forminator.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Gravity_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Gravity_Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Met_Form' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Met_Form.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Ninja_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Ninja_Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Sure_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Sure_Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\WP_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/WP_Forms.php', 'DiviSquad\Builder\Version4\Abstracts\Module' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module.php', 'DiviSquad\Builder\Version4\Abstracts\Module\Child_Module' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module/Child_Module.php', 'DiviSquad\Builder\Version4\Abstracts\Module\Form_Styler' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module/Form_Styler.php', 'DiviSquad\Builder\Version4\Abstracts\Module_Utility' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module_Utility.php', 'DiviSquad\Builder\Version4\Abstracts\Placeholder' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Placeholder.php', 'DiviSquad\Builder\Version4\Contracts\Module_Interface' => __DIR__ . '/../..' . '/includes/Builder/Version4/Contracts/Module_Interface.php', 'DiviSquad\Builder\Version4\Contracts\Placeholder_Interface' => __DIR__ . '/../..' . '/includes/Builder/Version4/Contracts/Placeholder_Interface.php', 'DiviSquad\Builder\Version4\Modules\Auth\Login_Form' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Auth/Login_Form.php', 'DiviSquad\Builder\Version4\Modules\Auth\Lost_Password_Form' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Auth/Lost_Password_Form.php', 'DiviSquad\Builder\Version4\Modules\Auth\Register_Form' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Auth/Register_Form.php', 'DiviSquad\Builder\Version4\Modules\Auth\Reset_Password_Form' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Auth/Reset_Password_Form.php', 'DiviSquad\Builder\Version4\Modules\Content\Author_Box' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Author_Box.php', 'DiviSquad\Builder\Version4\Modules\Content\Business_Hours' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Business_Hours.php', 'DiviSquad\Builder\Version4\Modules\Content\Business_Hours_Child' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Business_Hours_Child.php', 'DiviSquad\Builder\Version4\Modules\Content\Flip_Box' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Flip_Box.php', 'DiviSquad\Builder\Version4\Modules\Content\Hover_Box' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Hover_Box.php', 'DiviSquad\Builder\Version4\Modules\Content\Skill_Bar' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Skill_Bar.php', 'DiviSquad\Builder\Version4\Modules\Content\Skill_Bar_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Skill_Bar_Item.php', 'DiviSquad\Builder\Version4\Modules\Content\Social_Share' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Social_Share.php', 'DiviSquad\Builder\Version4\Modules\Content\Social_Share_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Social_Share_Item.php', 'DiviSquad\Builder\Version4\Modules\Creative\Advanced_Button' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Advanced_Button.php', 'DiviSquad\Builder\Version4\Modules\Creative\Advanced_Video' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Advanced_Video.php', 'DiviSquad\Builder\Version4\Modules\Creative\Animated_Heading' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Animated_Heading.php', 'DiviSquad\Builder\Version4\Modules\Creative\Breadcrumbs' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Breadcrumbs.php', 'DiviSquad\Builder\Version4\Modules\Creative\Divider' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Divider.php', 'DiviSquad\Builder\Version4\Modules\Creative\Drop_Cap_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Drop_Cap_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Dual_Button' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Dual_Button.php', 'DiviSquad\Builder\Version4\Modules\Creative\Floating_Image' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Floating_Image.php', 'DiviSquad\Builder\Version4\Modules\Creative\Floating_Images' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Floating_Images.php', 'DiviSquad\Builder\Version4\Modules\Creative\Glitch_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Glitch_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Gradient_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Gradient_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Image_Reveal' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Image_Reveal.php', 'DiviSquad\Builder\Version4\Modules\Creative\Inline_Content' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Inline_Content.php', 'DiviSquad\Builder\Version4\Modules\Creative\Inline_Content_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Inline_Content_Item.php', 'DiviSquad\Builder\Version4\Modules\Creative\Number_Counter' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Number_Counter.php', 'DiviSquad\Builder\Version4\Modules\Creative\Scrolling_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Scrolling_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Star_Rating' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Star_Rating.php', 'DiviSquad\Builder\Version4\Modules\Creative\Table_Of_Contents' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Table_Of_Contents.php', 'DiviSquad\Builder\Version4\Modules\Creative\Text_Highlighter' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Text_Highlighter.php', 'DiviSquad\Builder\Version4\Modules\Creative\Typing_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Typing_Text.php', 'DiviSquad\Builder\Version4\Modules\Forms\Contact_Form_7' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Contact_Form_7.php', 'DiviSquad\Builder\Version4\Modules\Forms\Fluent_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Fluent_Forms.php', 'DiviSquad\Builder\Version4\Modules\Forms\Formidable' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Formidable.php', 'DiviSquad\Builder\Version4\Modules\Forms\Forminator' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Forminator.php', 'DiviSquad\Builder\Version4\Modules\Forms\Gravity_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Gravity_Forms.php', 'DiviSquad\Builder\Version4\Modules\Forms\Met_Form' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Met_Form.php', 'DiviSquad\Builder\Version4\Modules\Forms\Ninja_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Ninja_Forms.php', 'DiviSquad\Builder\Version4\Modules\Forms\Sure_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Sure_Forms.php', 'DiviSquad\Builder\Version4\Modules\Forms\WP_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/WP_Forms.php', 'DiviSquad\Builder\Version4\Modules\Maps\Google_Map' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Maps/Google_Map.php', 'DiviSquad\Builder\Version4\Modules\Media\Before_After_Image_Slider' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Before_After_Image_Slider.php', 'DiviSquad\Builder\Version4\Modules\Media\Image_Carousel' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Image_Carousel.php', 'DiviSquad\Builder\Version4\Modules\Media\Image_Carousel_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Image_Carousel_Item.php', 'DiviSquad\Builder\Version4\Modules\Media\Image_Gallery' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Image_Gallery.php', 'DiviSquad\Builder\Version4\Modules\Media\Image_Mask' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Image_Mask.php', 'DiviSquad\Builder\Version4\Modules\Media\Logo_Carousel' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Logo_Carousel.php', 'DiviSquad\Builder\Version4\Modules\Media\Logo_Carousel_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Logo_Carousel_Item.php', 'DiviSquad\Builder\Version4\Modules\Media\Logo_Grid' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Logo_Grid.php', 'DiviSquad\Builder\Version4\Modules\Media\Logo_Grid_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Logo_Grid_Item.php', 'DiviSquad\Builder\Version4\Modules\Media\Lottie' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Lottie.php', 'DiviSquad\Builder\Version4\Modules\Media\Video_Popup' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Video_Popup.php', 'DiviSquad\Builder\Version4\Modules\Post_Grid' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Post_Grid.php', 'DiviSquad\Builder\Version4\Modules\Post_Grid_Child' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Post_Grid_Child.php', 'DiviSquad\Builder\Version4\Modules\Post_Reading_Time' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Post_Reading_Time.php', 'DiviSquad\Builder\Version4\Supports\Module_Helper' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helper.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Common_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Common_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Deprecations_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Deprecations_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Fields\Compatibility_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Fields/Compatibility_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Fields\Definition_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Fields/Definition_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Fields_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Fields_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Divider' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Divider.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Fields\CSS_Generations' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Fields/CSS_Generations.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Fields\Definitions' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Fields/Definitions.php', 'DiviSquad\Builder\Version4\Supports\Module_Utility' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utility.php', 'DiviSquad\Builder\Version5\Abstracts\Form_Styler' => __DIR__ . '/../..' . '/includes/Builder/Version5/Abstracts/Form_Styler.php', 'DiviSquad\Builder\Version5\Abstracts\Module' => __DIR__ . '/../..' . '/includes/Builder/Version5/Abstracts/Module.php', 'DiviSquad\Builder\Version5\Modules\Auth\Login_Form' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Auth/Login_Form.php', 'DiviSquad\Builder\Version5\Modules\Auth\Lost_Password_Form' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Auth/Lost_Password_Form.php', 'DiviSquad\Builder\Version5\Modules\Auth\Register_Form' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Auth/Register_Form.php', 'DiviSquad\Builder\Version5\Modules\Auth\Reset_Password_Form' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Auth/Reset_Password_Form.php', 'DiviSquad\Builder\Version5\Modules\Content\Author_Box' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Author_Box.php', 'DiviSquad\Builder\Version5\Modules\Content\Business_Hours' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Business_Hours.php', 'DiviSquad\Builder\Version5\Modules\Content\Business_Hours_Child' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Business_Hours_Child.php', 'DiviSquad\Builder\Version5\Modules\Content\Flip_Box' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Flip_Box.php', 'DiviSquad\Builder\Version5\Modules\Content\Hover_Box' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Hover_Box.php', 'DiviSquad\Builder\Version5\Modules\Content\Skill_Bar' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Skill_Bar.php', 'DiviSquad\Builder\Version5\Modules\Content\Skill_Bar_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Skill_Bar_Item.php', 'DiviSquad\Builder\Version5\Modules\Content\Social_Share' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Social_Share.php', 'DiviSquad\Builder\Version5\Modules\Content\Social_Share_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Social_Share_Item.php', 'DiviSquad\Builder\Version5\Modules\Creative\Advanced_Button' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Advanced_Button.php', 'DiviSquad\Builder\Version5\Modules\Creative\Advanced_Video' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Advanced_Video.php', 'DiviSquad\Builder\Version5\Modules\Creative\Animated_Heading' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Animated_Heading.php', 'DiviSquad\Builder\Version5\Modules\Creative\Breadcrumbs' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Breadcrumbs.php', 'DiviSquad\Builder\Version5\Modules\Creative\Divider' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Divider.php', 'DiviSquad\Builder\Version5\Modules\Creative\Drop_Cap_Text' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Drop_Cap_Text.php', 'DiviSquad\Builder\Version5\Modules\Creative\Dual_Button' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Dual_Button.php', 'DiviSquad\Builder\Version5\Modules\Creative\Floating_Image' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Floating_Image.php', 'DiviSquad\Builder\Version5\Modules\Creative\Floating_Images' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Floating_Images.php', 'DiviSquad\Builder\Version5\Modules\Creative\Glitch_Text' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Glitch_Text.php', 'DiviSquad\Builder\Version5\Modules\Creative\Gradient_Text' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Gradient_Text.php', 'DiviSquad\Builder\Version5\Modules\Creative\Image_Reveal' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Image_Reveal.php', 'DiviSquad\Builder\Version5\Modules\Creative\Inline_Content' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Inline_Content.php', 'DiviSquad\Builder\Version5\Modules\Creative\Inline_Content_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Inline_Content_Item.php', 'DiviSquad\Builder\Version5\Modules\Creative\Number_Counter' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Number_Counter.php', 'DiviSquad\Builder\Version5\Modules\Creative\Scrolling_Text' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Scrolling_Text.php', 'DiviSquad\Builder\Version5\Modules\Creative\Star_Rating' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Star_Rating.php', 'DiviSquad\Builder\Version5\Modules\Creative\Table_Of_Contents' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Table_Of_Contents.php', 'DiviSquad\Builder\Version5\Modules\Creative\Text_Highlighter' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Text_Highlighter.php', 'DiviSquad\Builder\Version5\Modules\Creative\Typing_Text' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Typing_Text.php', 'DiviSquad\Builder\Version5\Modules\Dynamic_Content\Post_Carousel' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Dynamic_Content/Post_Carousel.php', 'DiviSquad\Builder\Version5\Modules\Dynamic_Content\Post_Grid' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Dynamic_Content/Post_Grid.php', 'DiviSquad\Builder\Version5\Modules\Dynamic_Content\Post_Grid_Child' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Dynamic_Content/Post_Grid_Child.php', 'DiviSquad\Builder\Version5\Modules\Dynamic_Content\Post_Reading_Time' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Dynamic_Content/Post_Reading_Time.php', 'DiviSquad\Builder\Version5\Modules\Forms\Contact_Form_7' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Contact_Form_7.php', 'DiviSquad\Builder\Version5\Modules\Forms\Fluent_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Fluent_Forms.php', 'DiviSquad\Builder\Version5\Modules\Forms\Formidable' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Formidable.php', 'DiviSquad\Builder\Version5\Modules\Forms\Forminator' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Forminator.php', 'DiviSquad\Builder\Version5\Modules\Forms\Gravity_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Gravity_Forms.php', 'DiviSquad\Builder\Version5\Modules\Forms\Met_Form' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Met_Form.php', 'DiviSquad\Builder\Version5\Modules\Forms\Ninja_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Ninja_Forms.php', 'DiviSquad\Builder\Version5\Modules\Forms\Sure_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Sure_Forms.php', 'DiviSquad\Builder\Version5\Modules\Forms\WP_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/WP_Forms.php', 'DiviSquad\Builder\Version5\Modules\Maps\Google_Map' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Maps/Google_Map.php', 'DiviSquad\Builder\Version5\Modules\Media\Before_After_Image_Slider' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Before_After_Image_Slider.php', 'DiviSquad\Builder\Version5\Modules\Media\Image_Carousel' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Image_Carousel.php', 'DiviSquad\Builder\Version5\Modules\Media\Image_Carousel_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Image_Carousel_Item.php', 'DiviSquad\Builder\Version5\Modules\Media\Image_Gallery' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Image_Gallery.php', 'DiviSquad\Builder\Version5\Modules\Media\Image_Mask' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Image_Mask.php', 'DiviSquad\Builder\Version5\Modules\Media\Logo_Carousel' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Logo_Carousel.php', 'DiviSquad\Builder\Version5\Modules\Media\Logo_Carousel_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Logo_Carousel_Item.php', 'DiviSquad\Builder\Version5\Modules\Media\Logo_Grid' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Logo_Grid.php', 'DiviSquad\Builder\Version5\Modules\Media\Logo_Grid_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Logo_Grid_Item.php', 'DiviSquad\Builder\Version5\Modules\Media\Lottie' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Lottie.php', 'DiviSquad\Builder\Version5\Modules\Media\Video_Popup' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Video_Popup.php', 'DiviSquad\Core\Admin\Assets' => __DIR__ . '/../..' . '/includes/Core/Admin/Assets.php', 'DiviSquad\Core\Admin\Branding' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding.php', 'DiviSquad\Core\Admin\Branding\Brand_Asset_Base' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Brand_Asset_Base.php', 'DiviSquad\Core\Admin\Branding\Brand_Asset_Interface' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Brand_Asset_Interface.php', 'DiviSquad\Core\Admin\Branding\Plugin_Action_Links' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Plugin_Action_Links.php', 'DiviSquad\Core\Admin\Branding\Plugin_Admin_Footer_Text' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Plugin_Admin_Footer_Text.php', 'DiviSquad\Core\Admin\Branding\Plugin_Row_Meta' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Plugin_Row_Meta.php', 'DiviSquad\Core\Admin\Menu' => __DIR__ . '/../..' . '/includes/Core/Admin/Menu.php', 'DiviSquad\Core\Admin\Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notice.php', 'DiviSquad\Core\Admin\Notices\Notice_Base' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Notice_Base.php', 'DiviSquad\Core\Admin\Notices\Notice_Interface' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Notice_Interface.php', 'DiviSquad\Core\Admin\Notices\Pro_Activation_Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Pro_Activation_Notice.php', 'DiviSquad\Core\Admin\Notices\Purchase_Discount_Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Purchase_Discount_Notice.php', 'DiviSquad\Core\Admin\Notices\Review_Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Review_Notice.php', 'DiviSquad\Core\Assets' => __DIR__ . '/../..' . '/includes/Core/Assets.php', 'DiviSquad\Core\Cache' => __DIR__ . '/../..' . '/includes/Core/Cache.php', 'DiviSquad\Core\Contracts\Hookable' => __DIR__ . '/../..' . '/includes/Core/Contracts/Hookable.php', 'DiviSquad\Core\Error\Duplicate_Filter' => __DIR__ . '/../..' . '/includes/Core/Error/Duplicate_Filter.php', 'DiviSquad\Core\Error\Email_Sender' => __DIR__ . '/../..' . '/includes/Core/Error/Email_Sender.php', 'DiviSquad\Core\Error\Environment_Collector' => __DIR__ . '/../..' . '/includes/Core/Error/Environment_Collector.php', 'DiviSquad\Core\Error\Rate_Limiter' => __DIR__ . '/../..' . '/includes/Core/Error/Rate_Limiter.php', 'DiviSquad\Core\Error\Reporter' => __DIR__ . '/../..' . '/includes/Core/Error/Reporter.php', 'DiviSquad\Core\Extensions' => __DIR__ . '/../..' . '/includes/Core/Extensions.php', 'DiviSquad\Core\Memory' => __DIR__ . '/../..' . '/includes/Core/Memory.php', 'DiviSquad\Core\Modules' => __DIR__ . '/../..' . '/includes/Core/Modules.php', 'DiviSquad\Core\Requirements\Admin_Page' => __DIR__ . '/../..' . '/includes/Core/Requirements/Admin_Page.php', 'DiviSquad\Core\Requirements\Assets' => __DIR__ . '/../..' . '/includes/Core/Requirements/Assets.php', 'DiviSquad\Core\Requirements\Error_Logger' => __DIR__ . '/../..' . '/includes/Core/Requirements/Error_Logger.php', 'DiviSquad\Core\Requirements\Requirements' => __DIR__ . '/../..' . '/includes/Core/Requirements/Requirements.php', 'DiviSquad\Core\Requirements\Status_Checker' => __DIR__ . '/../..' . '/includes/Core/Requirements/Status_Checker.php', 'DiviSquad\Core\Requirements\Status_Reporter' => __DIR__ . '/../..' . '/includes/Core/Requirements/Status_Reporter.php', 'DiviSquad\Core\Rest_Routes' => __DIR__ . '/../..' . '/includes/Core/Rest_Routes.php', 'DiviSquad\Core\Supports\Ai' => __DIR__ . '/../..' . '/includes/Core/Supports/Ai.php', 'DiviSquad\Core\Supports\Links' => __DIR__ . '/../..' . '/includes/Core/Supports/Links.php', 'DiviSquad\Core\Supports\Media\Image' => __DIR__ . '/../..' . '/includes/Core/Supports/Media/Image.php', 'DiviSquad\Core\Supports\Polyfills\Arr' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Arr.php', 'DiviSquad\Core\Supports\Polyfills\Constant' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Constant.php', 'DiviSquad\Core\Supports\Polyfills\Str' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Str.php', 'DiviSquad\Core\Supports\Site_Health' => __DIR__ . '/../..' . '/includes/Core/Supports/Site_Health.php', 'DiviSquad\Core\Supports\Utils\Date_Time' => __DIR__ . '/../..' . '/includes/Core/Supports/Utils/Date_Time.php', 'DiviSquad\Core\Traits\Assets\Assets_Core' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Assets_Core.php', 'DiviSquad\Core\Traits\Assets\Body_Classes' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Body_Classes.php', 'DiviSquad\Core\Traits\Assets\Brand_Assets' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Brand_Assets.php', 'DiviSquad\Core\Traits\Assets\Localization' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Localization.php', 'DiviSquad\Core\Traits\Assets\Management' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Management.php', 'DiviSquad\Core\Traits\Assets\Registration' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Registration.php', 'DiviSquad\Core\Traits\Chainable_Container' => __DIR__ . '/../..' . '/includes/Core/Traits/Chainable_Container.php', 'DiviSquad\Core\Traits\Collection_Filter' => __DIR__ . '/../..' . '/includes/Core/Traits/Collection_Filter.php', 'DiviSquad\Core\Traits\Deprecations\Deprecated_Class_Loader' => __DIR__ . '/../..' . '/includes/Core/Traits/Deprecations/Deprecated_Class_Loader.php', 'DiviSquad\Core\Traits\Plugin\Detect_Plugin_Life' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Detect_Plugin_Life.php', 'DiviSquad\Core\Traits\Plugin\Logger' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Logger.php', 'DiviSquad\Core\Traits\Plugin\Pluggable' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Pluggable.php', 'DiviSquad\Core\Traits\Requirements_Checker' => __DIR__ . '/../..' . '/includes/Core/Traits/Requirements_Checker.php', 'DiviSquad\Core\Traits\Singleton' => __DIR__ . '/../..' . '/includes/Core/Traits/Singleton.php', 'DiviSquad\Core\Traits\WP\Use_WP_Filesystem' => __DIR__ . '/../..' . '/includes/Core/Traits/WP/Use_WP_Filesystem.php', 'DiviSquad\Extensions\Abstracts\Base_Extension' => __DIR__ . '/../..' . '/includes/Extensions/Abstracts/Base_Extension.php', 'DiviSquad\Extensions\Contracts\Extension_Interface' => __DIR__ . '/../..' . '/includes/Extensions/Contracts/Extension_Interface.php', 'DiviSquad\Extensions\Visual_Builder\Font_Upload' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/Font_Upload.php', 'DiviSquad\Extensions\Visual_Builder\JSON' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/JSON.php', 'DiviSquad\Extensions\Visual_Builder\Layout_Shortcode' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/Layout_Shortcode.php', 'DiviSquad\Extensions\Visual_Builder\SVG' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/SVG.php', 'DiviSquad\Extensions\WordPress\Copy' => __DIR__ . '/../..' . '/includes/Extensions/WordPress/Copy.php', 'DiviSquad\Extensions\WordPress\Login_Experience' => __DIR__ . '/../..' . '/includes/Extensions/WordPress/Login_Experience.php', 'DiviSquad\Integrations\Builder' => __DIR__ . '/../..' . '/includes/Integrations/Builder.php', 'DiviSquad\Integrations\Builder_Placeholders' => __DIR__ . '/../..' . '/includes/Integrations/Builder_Placeholders.php', 'DiviSquad\Integrations\Extensions' => __DIR__ . '/../..' . '/includes/Integrations/Extensions.php', 'DiviSquad\Integrations\Freemius\Distribution' => __DIR__ . '/../..' . '/includes/Integrations/Freemius/Distribution.php', 'DiviSquad\Rest_API_Routes\Base_Route' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Base_Route.php', 'DiviSquad\Rest_API_Routes\Version1\Extensions' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Extensions.php', 'DiviSquad\Rest_API_Routes\Version1\Extensions\Copy' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Extensions/Copy.php', 'DiviSquad\Rest_API_Routes\Version1\Extensions\Login_Experience' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Extensions/Login_Experience.php', 'DiviSquad\Rest_API_Routes\Version1\Modules' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Modules.php', 'DiviSquad\Rest_API_Routes\Version1\Modules\Post_Grid' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Modules/Post_Grid.php', 'DiviSquad\Rest_API_Routes\Version1\Notices\Admin_Notices' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Notices/Admin_Notices.php', 'DiviSquad\Rest_API_Routes\Version1\Whats_New\Changelog' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Whats_New/Changelog.php', 'DiviSquad\Rest_API_Routes\Version2\Dashboard' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version2/Dashboard.php', 'DiviSquad\Rest_API_Routes\Version2\Extensions' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version2/Extensions.php', 'DiviSquad\Rest_API_Routes\Version2\Modules' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version2/Modules.php', 'DiviSquad\Settings\Migration' => __DIR__ . '/../..' . '/includes/Settings/Migration.php', 'DiviSquad\Settings\Migration\Post_Element' => __DIR__ . '/../..' . '/includes/Settings/Migration/Post_Element.php', 'DiviSquad\Settings\Migration_Interface' => __DIR__ . '/../..' . '/includes/Settings/Migration_Interface.php', 'DiviSquad\SquadModules' => __DIR__ . '/../..' . '/includes/SquadModules.php', 'DiviSquad\Utils\Divi' => __DIR__ . '/../..' . '/includes/Utils/Divi.php', 'DiviSquad\Utils\Helper' => __DIR__ . '/../..' . '/includes/Utils/Helper.php', 'DiviSquad\Utils\Http' => __DIR__ . '/../..' . '/includes/Utils/Http.php', 'DiviSquad\Utils\LRCart' => __DIR__ . '/../..' . '/includes/Utils/LRCart.php', 'DiviSquad\Utils\Sanitization' => __DIR__ . '/../..' . '/includes/Utils/Sanitization.php', 'DiviSquad\Utils\WP' => __DIR__ . '/../..' . '/includes/Utils/WP.php');
+        public static $classMap = array('Composer\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php', 'DiviSquad\Builder\Assets' => __DIR__ . '/../..' . '/includes/Builder/Assets.php', 'DiviSquad\Builder\Shared\Modules\Content\Hover_Box\Hoverbox_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Content/Hover_Box/Hoverbox_Helper.php', 'DiviSquad\Builder\Shared\Modules\Content\Social_Share\Networks' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Content/Social_Share/Networks.php', 'DiviSquad\Builder\Shared\Modules\Creative\Advanced_Button\Button_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Advanced_Button/Button_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Advanced_Video\Video_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Advanced_Video/Video_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Animated_Heading\Heading_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Animated_Heading/Heading_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Floating_Images\Float_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Floating_Images/Float_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Image_Reveal\Reveal_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Image_Reveal/Reveal_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Inline_Content\Inline_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Inline_Content/Inline_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Number_Counter\Counter_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Number_Counter/Counter_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Table_Of_Contents\Toc_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Table_Of_Contents/Toc_Helper.php', 'DiviSquad\Builder\Shared\Modules\Creative\Text_Highlighter\Highlight_Helper' => __DIR__ . '/../..' . '/includes/Builder/Shared/Modules/Creative/Text_Highlighter/Highlight_Helper.php', 'DiviSquad\Builder\Shared\Supports\Module_Utilities\Breadcrumbs' => __DIR__ . '/../..' . '/includes/Builder/Shared/Supports/Module_Utilities/Breadcrumbs.php', 'DiviSquad\Builder\Shared\Supports\Module_Utilities\Masking\Decorations' => __DIR__ . '/../..' . '/includes/Builder/Shared/Supports/Module_Utilities/Masking/Decorations.php', 'DiviSquad\Builder\Shared\Supports\Module_Utilities\Masking\Shapes' => __DIR__ . '/../..' . '/includes/Builder/Shared/Supports/Module_Utilities/Masking/Shapes.php', 'DiviSquad\Builder\Utils\Auth_Form_Helper' => __DIR__ . '/../..' . '/includes/Builder/Utils/Auth_Form_Helper.php', 'DiviSquad\Builder\Utils\Database\Database_Utils' => __DIR__ . '/../..' . '/includes/Builder/Utils/Database/Database_Utils.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Collection' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collection.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Collection_Interface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collection_Interface.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Collections\Advanced' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collections/Advanced.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Collections\WordPress' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Collections/WordPress.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Definition' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definition.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Definition_Interface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definition_Interface.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Definitions\Advanced' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definitions/Advanced.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Definitions\WordPress' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Definitions/WordPress.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Manager' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Manager.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Manager_Interface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Manager_Interface.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Managers\Fields' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Managers/Fields.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Managers\Upgrades' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Managers/Upgrades.php', 'DiviSquad\Builder\Utils\Elements\Custom_Fields\Traits\Table_Population_Trait' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Custom_Fields/Traits/Table_Population_Trait.php', 'DiviSquad\Builder\Utils\Elements\Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collection' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collection.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collection_Interface' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collection_Interface.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Contact_Form_7' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Contact_Form_7.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Fluent_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Fluent_Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Formidable' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Formidable.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Forminator' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Forminator.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Gravity_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Gravity_Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Met_Form' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Met_Form.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Ninja_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Ninja_Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\Sure_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/Sure_Forms.php', 'DiviSquad\Builder\Utils\Elements\Forms\Collections\WP_Forms' => __DIR__ . '/../..' . '/includes/Builder/Utils/Elements/Forms/Collections/WP_Forms.php', 'DiviSquad\Builder\Version4\Abstracts\Module' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module.php', 'DiviSquad\Builder\Version4\Abstracts\Module\Child_Module' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module/Child_Module.php', 'DiviSquad\Builder\Version4\Abstracts\Module\Form_Styler' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module/Form_Styler.php', 'DiviSquad\Builder\Version4\Abstracts\Module_Utility' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Module_Utility.php', 'DiviSquad\Builder\Version4\Abstracts\Placeholder' => __DIR__ . '/../..' . '/includes/Builder/Version4/Abstracts/Placeholder.php', 'DiviSquad\Builder\Version4\Contracts\Module_Interface' => __DIR__ . '/../..' . '/includes/Builder/Version4/Contracts/Module_Interface.php', 'DiviSquad\Builder\Version4\Contracts\Placeholder_Interface' => __DIR__ . '/../..' . '/includes/Builder/Version4/Contracts/Placeholder_Interface.php', 'DiviSquad\Builder\Version4\Modules\Auth\Login_Form' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Auth/Login_Form.php', 'DiviSquad\Builder\Version4\Modules\Auth\Lost_Password_Form' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Auth/Lost_Password_Form.php', 'DiviSquad\Builder\Version4\Modules\Auth\Register_Form' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Auth/Register_Form.php', 'DiviSquad\Builder\Version4\Modules\Auth\Reset_Password_Form' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Auth/Reset_Password_Form.php', 'DiviSquad\Builder\Version4\Modules\Content\Advanced_Tabs' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Advanced_Tabs.php', 'DiviSquad\Builder\Version4\Modules\Content\Advanced_Tabs_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Advanced_Tabs_Item.php', 'DiviSquad\Builder\Version4\Modules\Content\Author_Box' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Author_Box.php', 'DiviSquad\Builder\Version4\Modules\Content\Business_Hours' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Business_Hours.php', 'DiviSquad\Builder\Version4\Modules\Content\Business_Hours_Child' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Business_Hours_Child.php', 'DiviSquad\Builder\Version4\Modules\Content\Flip_Box' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Flip_Box.php', 'DiviSquad\Builder\Version4\Modules\Content\Hover_Box' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Hover_Box.php', 'DiviSquad\Builder\Version4\Modules\Content\Icon_Box' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Icon_Box.php', 'DiviSquad\Builder\Version4\Modules\Content\Pricing_Table' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Pricing_Table.php', 'DiviSquad\Builder\Version4\Modules\Content\Pricing_Table_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Pricing_Table_Item.php', 'DiviSquad\Builder\Version4\Modules\Content\Skill_Bar' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Skill_Bar.php', 'DiviSquad\Builder\Version4\Modules\Content\Skill_Bar_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Skill_Bar_Item.php', 'DiviSquad\Builder\Version4\Modules\Content\Social_Share' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Social_Share.php', 'DiviSquad\Builder\Version4\Modules\Content\Social_Share_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Social_Share_Item.php', 'DiviSquad\Builder\Version4\Modules\Content\Team_Member' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Team_Member.php', 'DiviSquad\Builder\Version4\Modules\Content\Team_Member_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Team_Member_Item.php', 'DiviSquad\Builder\Version4\Modules\Content\Testimonial' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Testimonial.php', 'DiviSquad\Builder\Version4\Modules\Content\Testimonial_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Content/Testimonial_Item.php', 'DiviSquad\Builder\Version4\Modules\Creative\Advanced_Button' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Advanced_Button.php', 'DiviSquad\Builder\Version4\Modules\Creative\Advanced_Video' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Advanced_Video.php', 'DiviSquad\Builder\Version4\Modules\Creative\Animated_Heading' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Animated_Heading.php', 'DiviSquad\Builder\Version4\Modules\Creative\Breadcrumbs' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Breadcrumbs.php', 'DiviSquad\Builder\Version4\Modules\Creative\Divider' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Divider.php', 'DiviSquad\Builder\Version4\Modules\Creative\Drop_Cap_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Drop_Cap_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Dual_Button' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Dual_Button.php', 'DiviSquad\Builder\Version4\Modules\Creative\Floating_Image' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Floating_Image.php', 'DiviSquad\Builder\Version4\Modules\Creative\Floating_Images' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Floating_Images.php', 'DiviSquad\Builder\Version4\Modules\Creative\Glitch_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Glitch_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Gradient_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Gradient_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Image_Reveal' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Image_Reveal.php', 'DiviSquad\Builder\Version4\Modules\Creative\Inline_Content' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Inline_Content.php', 'DiviSquad\Builder\Version4\Modules\Creative\Inline_Content_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Inline_Content_Item.php', 'DiviSquad\Builder\Version4\Modules\Creative\Number_Counter' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Number_Counter.php', 'DiviSquad\Builder\Version4\Modules\Creative\Scrolling_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Scrolling_Text.php', 'DiviSquad\Builder\Version4\Modules\Creative\Star_Rating' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Star_Rating.php', 'DiviSquad\Builder\Version4\Modules\Creative\Table_Of_Contents' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Table_Of_Contents.php', 'DiviSquad\Builder\Version4\Modules\Creative\Text_Highlighter' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Text_Highlighter.php', 'DiviSquad\Builder\Version4\Modules\Creative\Typing_Text' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Creative/Typing_Text.php', 'DiviSquad\Builder\Version4\Modules\Forms\Contact_Form_7' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Contact_Form_7.php', 'DiviSquad\Builder\Version4\Modules\Forms\Fluent_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Fluent_Forms.php', 'DiviSquad\Builder\Version4\Modules\Forms\Formidable' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Formidable.php', 'DiviSquad\Builder\Version4\Modules\Forms\Forminator' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Forminator.php', 'DiviSquad\Builder\Version4\Modules\Forms\Gravity_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Gravity_Forms.php', 'DiviSquad\Builder\Version4\Modules\Forms\Met_Form' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Met_Form.php', 'DiviSquad\Builder\Version4\Modules\Forms\Ninja_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Ninja_Forms.php', 'DiviSquad\Builder\Version4\Modules\Forms\Sure_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/Sure_Forms.php', 'DiviSquad\Builder\Version4\Modules\Forms\WP_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Forms/WP_Forms.php', 'DiviSquad\Builder\Version4\Modules\Maps\Google_Map' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Maps/Google_Map.php', 'DiviSquad\Builder\Version4\Modules\Media\Before_After_Image_Slider' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Before_After_Image_Slider.php', 'DiviSquad\Builder\Version4\Modules\Media\Image_Carousel' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Image_Carousel.php', 'DiviSquad\Builder\Version4\Modules\Media\Image_Carousel_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Image_Carousel_Item.php', 'DiviSquad\Builder\Version4\Modules\Media\Image_Gallery' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Image_Gallery.php', 'DiviSquad\Builder\Version4\Modules\Media\Image_Mask' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Image_Mask.php', 'DiviSquad\Builder\Version4\Modules\Media\Logo_Carousel' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Logo_Carousel.php', 'DiviSquad\Builder\Version4\Modules\Media\Logo_Carousel_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Logo_Carousel_Item.php', 'DiviSquad\Builder\Version4\Modules\Media\Logo_Grid' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Logo_Grid.php', 'DiviSquad\Builder\Version4\Modules\Media\Logo_Grid_Item' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Logo_Grid_Item.php', 'DiviSquad\Builder\Version4\Modules\Media\Lottie' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Lottie.php', 'DiviSquad\Builder\Version4\Modules\Media\Video_Popup' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Media/Video_Popup.php', 'DiviSquad\Builder\Version4\Modules\Post_Grid' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Post_Grid.php', 'DiviSquad\Builder\Version4\Modules\Post_Grid_Child' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Post_Grid_Child.php', 'DiviSquad\Builder\Version4\Modules\Post_Reading_Time' => __DIR__ . '/../..' . '/includes/Builder/Version4/Modules/Post_Reading_Time.php', 'DiviSquad\Builder\Version4\Supports\Module_Helper' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helper.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Common_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Common_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Deprecations_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Deprecations_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Fields\Compatibility_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Fields/Compatibility_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Fields\Definition_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Fields/Definition_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Helpers\Fields_Trait' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Helpers/Fields_Trait.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Divider' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Divider.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Fields\CSS_Generations' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Fields/CSS_Generations.php', 'DiviSquad\Builder\Version4\Supports\Module_Utilities\Fields\Definitions' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utilities/Fields/Definitions.php', 'DiviSquad\Builder\Version4\Supports\Module_Utility' => __DIR__ . '/../..' . '/includes/Builder/Version4/Supports/Module_Utility.php', 'DiviSquad\Builder\Version5\Abstracts\Form_Styler' => __DIR__ . '/../..' . '/includes/Builder/Version5/Abstracts/Form_Styler.php', 'DiviSquad\Builder\Version5\Abstracts\Module' => __DIR__ . '/../..' . '/includes/Builder/Version5/Abstracts/Module.php', 'DiviSquad\Builder\Version5\Modules\Auth\Login_Form' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Auth/Login_Form.php', 'DiviSquad\Builder\Version5\Modules\Auth\Lost_Password_Form' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Auth/Lost_Password_Form.php', 'DiviSquad\Builder\Version5\Modules\Auth\Register_Form' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Auth/Register_Form.php', 'DiviSquad\Builder\Version5\Modules\Auth\Reset_Password_Form' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Auth/Reset_Password_Form.php', 'DiviSquad\Builder\Version5\Modules\Content\Advanced_Tabs' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Advanced_Tabs.php', 'DiviSquad\Builder\Version5\Modules\Content\Advanced_Tabs_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Advanced_Tabs_Item.php', 'DiviSquad\Builder\Version5\Modules\Content\Author_Box' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Author_Box.php', 'DiviSquad\Builder\Version5\Modules\Content\Business_Hours' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Business_Hours.php', 'DiviSquad\Builder\Version5\Modules\Content\Business_Hours_Child' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Business_Hours_Child.php', 'DiviSquad\Builder\Version5\Modules\Content\Flip_Box' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Flip_Box.php', 'DiviSquad\Builder\Version5\Modules\Content\Hover_Box' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Hover_Box.php', 'DiviSquad\Builder\Version5\Modules\Content\Icon_Box' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Icon_Box.php', 'DiviSquad\Builder\Version5\Modules\Content\Pricing_Table' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Pricing_Table.php', 'DiviSquad\Builder\Version5\Modules\Content\Pricing_Table_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Pricing_Table_Item.php', 'DiviSquad\Builder\Version5\Modules\Content\Skill_Bar' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Skill_Bar.php', 'DiviSquad\Builder\Version5\Modules\Content\Skill_Bar_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Skill_Bar_Item.php', 'DiviSquad\Builder\Version5\Modules\Content\Social_Share' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Social_Share.php', 'DiviSquad\Builder\Version5\Modules\Content\Social_Share_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Social_Share_Item.php', 'DiviSquad\Builder\Version5\Modules\Content\Team_Member' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Team_Member.php', 'DiviSquad\Builder\Version5\Modules\Content\Team_Member_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Team_Member_Item.php', 'DiviSquad\Builder\Version5\Modules\Content\Testimonial' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Testimonial.php', 'DiviSquad\Builder\Version5\Modules\Content\Testimonial_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Content/Testimonial_Item.php', 'DiviSquad\Builder\Version5\Modules\Creative\Advanced_Button' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Advanced_Button.php', 'DiviSquad\Builder\Version5\Modules\Creative\Advanced_Video' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Advanced_Video.php', 'DiviSquad\Builder\Version5\Modules\Creative\Animated_Heading' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Animated_Heading.php', 'DiviSquad\Builder\Version5\Modules\Creative\Breadcrumbs' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Breadcrumbs.php', 'DiviSquad\Builder\Version5\Modules\Creative\Divider' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Divider.php', 'DiviSquad\Builder\Version5\Modules\Creative\Drop_Cap_Text' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Drop_Cap_Text.php', 'DiviSquad\Builder\Version5\Modules\Creative\Dual_Button' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Dual_Button.php', 'DiviSquad\Builder\Version5\Modules\Creative\Floating_Image' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Floating_Image.php', 'DiviSquad\Builder\Version5\Modules\Creative\Floating_Images' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Floating_Images.php', 'DiviSquad\Builder\Version5\Modules\Creative\Glitch_Text' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Glitch_Text.php', 'DiviSquad\Builder\Version5\Modules\Creative\Gradient_Text' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Gradient_Text.php', 'DiviSquad\Builder\Version5\Modules\Creative\Image_Reveal' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Image_Reveal.php', 'DiviSquad\Builder\Version5\Modules\Creative\Inline_Content' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Inline_Content.php', 'DiviSquad\Builder\Version5\Modules\Creative\Inline_Content_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Inline_Content_Item.php', 'DiviSquad\Builder\Version5\Modules\Creative\Number_Counter' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Number_Counter.php', 'DiviSquad\Builder\Version5\Modules\Creative\Scrolling_Text' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Scrolling_Text.php', 'DiviSquad\Builder\Version5\Modules\Creative\Star_Rating' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Star_Rating.php', 'DiviSquad\Builder\Version5\Modules\Creative\Table_Of_Contents' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Table_Of_Contents.php', 'DiviSquad\Builder\Version5\Modules\Creative\Text_Highlighter' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Text_Highlighter.php', 'DiviSquad\Builder\Version5\Modules\Creative\Typing_Text' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Creative/Typing_Text.php', 'DiviSquad\Builder\Version5\Modules\Dynamic_Content\Post_Carousel' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Dynamic_Content/Post_Carousel.php', 'DiviSquad\Builder\Version5\Modules\Dynamic_Content\Post_Grid' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Dynamic_Content/Post_Grid.php', 'DiviSquad\Builder\Version5\Modules\Dynamic_Content\Post_Grid_Child' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Dynamic_Content/Post_Grid_Child.php', 'DiviSquad\Builder\Version5\Modules\Dynamic_Content\Post_Reading_Time' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Dynamic_Content/Post_Reading_Time.php', 'DiviSquad\Builder\Version5\Modules\Forms\Contact_Form_7' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Contact_Form_7.php', 'DiviSquad\Builder\Version5\Modules\Forms\Fluent_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Fluent_Forms.php', 'DiviSquad\Builder\Version5\Modules\Forms\Formidable' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Formidable.php', 'DiviSquad\Builder\Version5\Modules\Forms\Forminator' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Forminator.php', 'DiviSquad\Builder\Version5\Modules\Forms\Gravity_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Gravity_Forms.php', 'DiviSquad\Builder\Version5\Modules\Forms\Met_Form' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Met_Form.php', 'DiviSquad\Builder\Version5\Modules\Forms\Ninja_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Ninja_Forms.php', 'DiviSquad\Builder\Version5\Modules\Forms\Sure_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/Sure_Forms.php', 'DiviSquad\Builder\Version5\Modules\Forms\WP_Forms' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Forms/WP_Forms.php', 'DiviSquad\Builder\Version5\Modules\Maps\Google_Map' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Maps/Google_Map.php', 'DiviSquad\Builder\Version5\Modules\Media\Before_After_Image_Slider' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Before_After_Image_Slider.php', 'DiviSquad\Builder\Version5\Modules\Media\Image_Carousel' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Image_Carousel.php', 'DiviSquad\Builder\Version5\Modules\Media\Image_Carousel_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Image_Carousel_Item.php', 'DiviSquad\Builder\Version5\Modules\Media\Image_Gallery' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Image_Gallery.php', 'DiviSquad\Builder\Version5\Modules\Media\Image_Mask' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Image_Mask.php', 'DiviSquad\Builder\Version5\Modules\Media\Logo_Carousel' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Logo_Carousel.php', 'DiviSquad\Builder\Version5\Modules\Media\Logo_Carousel_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Logo_Carousel_Item.php', 'DiviSquad\Builder\Version5\Modules\Media\Logo_Grid' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Logo_Grid.php', 'DiviSquad\Builder\Version5\Modules\Media\Logo_Grid_Item' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Logo_Grid_Item.php', 'DiviSquad\Builder\Version5\Modules\Media\Lottie' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Lottie.php', 'DiviSquad\Builder\Version5\Modules\Media\Video_Popup' => __DIR__ . '/../..' . '/includes/Builder/Version5/Modules/Media/Video_Popup.php', 'DiviSquad\Core\Admin\Assets' => __DIR__ . '/../..' . '/includes/Core/Admin/Assets.php', 'DiviSquad\Core\Admin\Branding' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding.php', 'DiviSquad\Core\Admin\Branding\Brand_Asset_Base' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Brand_Asset_Base.php', 'DiviSquad\Core\Admin\Branding\Brand_Asset_Interface' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Brand_Asset_Interface.php', 'DiviSquad\Core\Admin\Branding\Plugin_Action_Links' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Plugin_Action_Links.php', 'DiviSquad\Core\Admin\Branding\Plugin_Admin_Footer_Text' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Plugin_Admin_Footer_Text.php', 'DiviSquad\Core\Admin\Branding\Plugin_Row_Meta' => __DIR__ . '/../..' . '/includes/Core/Admin/Branding/Plugin_Row_Meta.php', 'DiviSquad\Core\Admin\Menu' => __DIR__ . '/../..' . '/includes/Core/Admin/Menu.php', 'DiviSquad\Core\Admin\Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notice.php', 'DiviSquad\Core\Admin\Notices\Notice_Base' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Notice_Base.php', 'DiviSquad\Core\Admin\Notices\Notice_Interface' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Notice_Interface.php', 'DiviSquad\Core\Admin\Notices\Pro_Activation_Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Pro_Activation_Notice.php', 'DiviSquad\Core\Admin\Notices\Purchase_Discount_Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Purchase_Discount_Notice.php', 'DiviSquad\Core\Admin\Notices\Review_Notice' => __DIR__ . '/../..' . '/includes/Core/Admin/Notices/Review_Notice.php', 'DiviSquad\Core\Assets' => __DIR__ . '/../..' . '/includes/Core/Assets.php', 'DiviSquad\Core\Cache' => __DIR__ . '/../..' . '/includes/Core/Cache.php', 'DiviSquad\Core\Contracts\Hookable' => __DIR__ . '/../..' . '/includes/Core/Contracts/Hookable.php', 'DiviSquad\Core\Error\Duplicate_Filter' => __DIR__ . '/../..' . '/includes/Core/Error/Duplicate_Filter.php', 'DiviSquad\Core\Error\Email_Sender' => __DIR__ . '/../..' . '/includes/Core/Error/Email_Sender.php', 'DiviSquad\Core\Error\Environment_Collector' => __DIR__ . '/../..' . '/includes/Core/Error/Environment_Collector.php', 'DiviSquad\Core\Error\Rate_Limiter' => __DIR__ . '/../..' . '/includes/Core/Error/Rate_Limiter.php', 'DiviSquad\Core\Error\Reporter' => __DIR__ . '/../..' . '/includes/Core/Error/Reporter.php', 'DiviSquad\Core\Extensions' => __DIR__ . '/../..' . '/includes/Core/Extensions.php', 'DiviSquad\Core\Memory' => __DIR__ . '/../..' . '/includes/Core/Memory.php', 'DiviSquad\Core\Modules' => __DIR__ . '/../..' . '/includes/Core/Modules.php', 'DiviSquad\Core\Requirements\Admin_Page' => __DIR__ . '/../..' . '/includes/Core/Requirements/Admin_Page.php', 'DiviSquad\Core\Requirements\Assets' => __DIR__ . '/../..' . '/includes/Core/Requirements/Assets.php', 'DiviSquad\Core\Requirements\Error_Logger' => __DIR__ . '/../..' . '/includes/Core/Requirements/Error_Logger.php', 'DiviSquad\Core\Requirements\Requirements' => __DIR__ . '/../..' . '/includes/Core/Requirements/Requirements.php', 'DiviSquad\Core\Requirements\Status_Checker' => __DIR__ . '/../..' . '/includes/Core/Requirements/Status_Checker.php', 'DiviSquad\Core\Requirements\Status_Reporter' => __DIR__ . '/../..' . '/includes/Core/Requirements/Status_Reporter.php', 'DiviSquad\Core\Rest_Routes' => __DIR__ . '/../..' . '/includes/Core/Rest_Routes.php', 'DiviSquad\Core\Supports\Ai' => __DIR__ . '/../..' . '/includes/Core/Supports/Ai.php', 'DiviSquad\Core\Supports\Links' => __DIR__ . '/../..' . '/includes/Core/Supports/Links.php', 'DiviSquad\Core\Supports\Media\Image' => __DIR__ . '/../..' . '/includes/Core/Supports/Media/Image.php', 'DiviSquad\Core\Supports\Polyfills\Arr' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Arr.php', 'DiviSquad\Core\Supports\Polyfills\Constant' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Constant.php', 'DiviSquad\Core\Supports\Polyfills\Str' => __DIR__ . '/../..' . '/includes/Core/Supports/Polyfills/Str.php', 'DiviSquad\Core\Supports\Site_Health' => __DIR__ . '/../..' . '/includes/Core/Supports/Site_Health.php', 'DiviSquad\Core\Supports\Utils\Date_Time' => __DIR__ . '/../..' . '/includes/Core/Supports/Utils/Date_Time.php', 'DiviSquad\Core\Traits\Assets\Assets_Core' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Assets_Core.php', 'DiviSquad\Core\Traits\Assets\Body_Classes' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Body_Classes.php', 'DiviSquad\Core\Traits\Assets\Brand_Assets' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Brand_Assets.php', 'DiviSquad\Core\Traits\Assets\Localization' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Localization.php', 'DiviSquad\Core\Traits\Assets\Management' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Management.php', 'DiviSquad\Core\Traits\Assets\Registration' => __DIR__ . '/../..' . '/includes/Core/Traits/Assets/Registration.php', 'DiviSquad\Core\Traits\Chainable_Container' => __DIR__ . '/../..' . '/includes/Core/Traits/Chainable_Container.php', 'DiviSquad\Core\Traits\Collection_Filter' => __DIR__ . '/../..' . '/includes/Core/Traits/Collection_Filter.php', 'DiviSquad\Core\Traits\Deprecations\Deprecated_Class_Loader' => __DIR__ . '/../..' . '/includes/Core/Traits/Deprecations/Deprecated_Class_Loader.php', 'DiviSquad\Core\Traits\Plugin\Detect_Plugin_Life' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Detect_Plugin_Life.php', 'DiviSquad\Core\Traits\Plugin\Logger' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Logger.php', 'DiviSquad\Core\Traits\Plugin\Pluggable' => __DIR__ . '/../..' . '/includes/Core/Traits/Plugin/Pluggable.php', 'DiviSquad\Core\Traits\Requirements_Checker' => __DIR__ . '/../..' . '/includes/Core/Traits/Requirements_Checker.php', 'DiviSquad\Core\Traits\Singleton' => __DIR__ . '/../..' . '/includes/Core/Traits/Singleton.php', 'DiviSquad\Core\Traits\WP\Use_WP_Filesystem' => __DIR__ . '/../..' . '/includes/Core/Traits/WP/Use_WP_Filesystem.php', 'DiviSquad\Extensions\Abstracts\Base_Extension' => __DIR__ . '/../..' . '/includes/Extensions/Abstracts/Base_Extension.php', 'DiviSquad\Extensions\Contracts\Extension_Interface' => __DIR__ . '/../..' . '/includes/Extensions/Contracts/Extension_Interface.php', 'DiviSquad\Extensions\Visual_Builder\Font_Upload' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/Font_Upload.php', 'DiviSquad\Extensions\Visual_Builder\JSON' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/JSON.php', 'DiviSquad\Extensions\Visual_Builder\Layout_Shortcode' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/Layout_Shortcode.php', 'DiviSquad\Extensions\Visual_Builder\SVG' => __DIR__ . '/../..' . '/includes/Extensions/Visual_Builder/SVG.php', 'DiviSquad\Extensions\WordPress\Copy' => __DIR__ . '/../..' . '/includes/Extensions/WordPress/Copy.php', 'DiviSquad\Extensions\WordPress\Login_Experience' => __DIR__ . '/../..' . '/includes/Extensions/WordPress/Login_Experience.php', 'DiviSquad\Integrations\Builder' => __DIR__ . '/../..' . '/includes/Integrations/Builder.php', 'DiviSquad\Integrations\Builder_Placeholders' => __DIR__ . '/../..' . '/includes/Integrations/Builder_Placeholders.php', 'DiviSquad\Integrations\Extensions' => __DIR__ . '/../..' . '/includes/Integrations/Extensions.php', 'DiviSquad\Integrations\Freemius\Distribution' => __DIR__ . '/../..' . '/includes/Integrations/Freemius/Distribution.php', 'DiviSquad\Rest_API_Routes\Base_Route' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Base_Route.php', 'DiviSquad\Rest_API_Routes\Version1\Extensions' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Extensions.php', 'DiviSquad\Rest_API_Routes\Version1\Extensions\Copy' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Extensions/Copy.php', 'DiviSquad\Rest_API_Routes\Version1\Extensions\Login_Experience' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Extensions/Login_Experience.php', 'DiviSquad\Rest_API_Routes\Version1\Modules' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Modules.php', 'DiviSquad\Rest_API_Routes\Version1\Modules\Post_Grid' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Modules/Post_Grid.php', 'DiviSquad\Rest_API_Routes\Version1\Notices\Admin_Notices' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Notices/Admin_Notices.php', 'DiviSquad\Rest_API_Routes\Version1\Whats_New\Changelog' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version1/Whats_New/Changelog.php', 'DiviSquad\Rest_API_Routes\Version2\Dashboard' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version2/Dashboard.php', 'DiviSquad\Rest_API_Routes\Version2\Extensions' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version2/Extensions.php', 'DiviSquad\Rest_API_Routes\Version2\Modules' => __DIR__ . '/../..' . '/includes/Rest_API_Routes/Version2/Modules.php', 'DiviSquad\Settings\Migration' => __DIR__ . '/../..' . '/includes/Settings/Migration.php', 'DiviSquad\Settings\Migration\Post_Element' => __DIR__ . '/../..' . '/includes/Settings/Migration/Post_Element.php', 'DiviSquad\Settings\Migration_Interface' => __DIR__ . '/../..' . '/includes/Settings/Migration_Interface.php', 'DiviSquad\SquadModules' => __DIR__ . '/../..' . '/includes/SquadModules.php', 'DiviSquad\Utils\Divi' => __DIR__ . '/../..' . '/includes/Utils/Divi.php', 'DiviSquad\Utils\Helper' => __DIR__ . '/../..' . '/includes/Utils/Helper.php', 'DiviSquad\Utils\Http' => __DIR__ . '/../..' . '/includes/Utils/Http.php', 'DiviSquad\Utils\LRCart' => __DIR__ . '/../..' . '/includes/Utils/LRCart.php', 'DiviSquad\Utils\Sanitization' => __DIR__ . '/../..' . '/includes/Utils/Sanitization.php', 'DiviSquad\Utils\WP' => __DIR__ . '/../..' . '/includes/Utils/WP.php');
         public static function getInitializer(\Composer\Autoload\ClassLoader $loader)
         {
         }
