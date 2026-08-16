@@ -27598,11 +27598,10 @@ namespace DiviSquad\Core\Admin {
         {
         }
         /**
-         * Get Freemius checkout configuration for FS.Checkout.
+         * Get the checkout configuration for the admin app.
          *
-         * Exposes only the publishable Freemius identifiers (plugin_id + public_key)
-         * plus graceful-degradation fallback URLs. Plan IDs and prices come from the
-         * Freemius dashboard product config and are intentionally left empty here.
+         * Checkout is hosted by Freemius; the admin app only needs the upgrade and
+         * pricing page URLs. No prices live in this plugin.
          *
          * @return array<string, mixed>
          */
@@ -31302,7 +31301,7 @@ namespace DiviSquad\Core\Requirements {
      * Manages the admin page for requirements.
      *
      * @since   3.5.0
-     * @package DiviSquad\Core\Requirements
+     * @package DiviSquad
      */
     class Admin_Page implements \DiviSquad\Core\Contracts\Hookable
     {
@@ -31551,7 +31550,7 @@ namespace DiviSquad\Core\Requirements {
      * Manages assets for the requirements page.
      *
      * @since   3.5.0
-     * @package DiviSquad\Core\Requirements
+     * @package DiviSquad
      */
     class Assets implements \DiviSquad\Core\Contracts\Hookable
     {
@@ -31593,7 +31592,7 @@ namespace DiviSquad\Core\Requirements {
      * Manages error logging for requirements.
      *
      * @since   3.5.0
-     * @package DiviSquad\Core\Requirements
+     * @package DiviSquad
      */
     class Error_Logger
     {
@@ -31637,7 +31636,7 @@ namespace DiviSquad\Core\Requirements {
      * notifications when requirements are not met.
      *
      * @since   3.2.0
-     * @package DiviSquad\Core\Requirements
+     * @package DiviSquad
      */
     class Requirements implements \DiviSquad\Core\Contracts\Hookable
     {
@@ -31795,7 +31794,7 @@ namespace DiviSquad\Core\Requirements {
      * Checks if Divi requirements are met.
      *
      * @since   3.5.0
-     * @package DiviSquad\Core\Requirements
+     * @package DiviSquad
      */
     class Status_Checker
     {
@@ -31952,7 +31951,7 @@ namespace DiviSquad\Core\Requirements {
      * Manages reporting of requirements status.
      *
      * @since   3.5.0
-     * @package DiviSquad\Core\Requirements
+     * @package DiviSquad
      */
     class Status_Reporter implements \DiviSquad\Core\Contracts\Hookable
     {
